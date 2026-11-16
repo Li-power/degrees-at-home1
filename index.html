@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#2E2A26" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="description" content="輸入電費帳單度數，看懂累進電價、找出家裡最耗電的電器，算出改一個設定能省多少。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="家裡幾度 C，是「省」了沒？｜電費解碼器">
+<meta property="og:description" content="輸入電費帳單度數，看懂你家在第幾階、哪台電器最耗電，改一個設定能省多少。">
+<meta name="twitter:card" content="summary">
+<meta name="author" content="り">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2317133D'/%3E%3Crect x='14' y='18' width='36' height='32' rx='12' fill='%23FF5D73'/%3E%3Ccircle cx='26' cy='32' r='5' fill='%23fff'/%3E%3Ccircle cx='38' cy='32' r='5' fill='%23fff'/%3E%3Ccircle cx='27' cy='33' r='2.4' fill='%2317133D'/%3E%3Ccircle cx='39' cy='33' r='2.4' fill='%2317133D'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>電費解碼器｜家裡幾度 C，是「省」了沒？</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=DotGothic16&display=swap">
+<style>
+/* =========================================================
+   1. Tokens
+   ========================================================= */
+:root{
+  --night:#2E2A26; --night2:#3A352F; --wall:#45403A; --line:#5E564B;
+  --volt:#E2A33B; --mint:#8DB487; --hot:#C8504A; --lav:#D9D0BF; --ink:#F6F1E7; --dim:#B5AB9A;
+  --sheet:#F6F1E7; --sheet-ink:#2E2A26; --sheet-soft:#5B5248;
+  /* theme (dark default) */
+  --bg:#1F1D1A; --surface:#2A2723; --surface-hi:#3A352F;
+  --text:#F1EBDD; --soft:#CFC6B5; --faint:#A79E8E;
+  --accent-t:#E7B65C; --mint-t:#A8C9A0; --hot-t:#E58B80; --focus:#E7B65C;
+  --inv-bg:#F1EBDD; --inv-fg:#2E2A26; --inv-soft:#5B5248;
+  --dock-fade:rgba(46,42,38,0);
+  --glass:rgba(46,42,38,.58); --glass-strong:rgba(46,42,38,.78); --glass-edge:rgba(255,255,255,.14); --glass-hi:rgba(255,255,255,.10);
+  --glass-inv:rgba(246,241,231,.80); --glass-sheet:rgba(246,241,231,.86);
+  --lift:0 18px 40px -18px rgba(30,25,20,.65); --ease:cubic-bezier(.2,.8,.2,1);
+  --blob1:rgba(127,167,122,.16); --blob2:rgba(226,163,59,.10); --blob3:rgba(62,92,138,.22);
+
+  --f-body:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Heiti TC',system-ui,sans-serif;
+  --f-serif:'Noto Serif TC','Songti TC','PMingLiU',serif;
+  --f-head:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Heiti TC',system-ui,sans-serif;
+  --f-num:var(--f-serif);   /* 重點數字與重點字：一律明朝體 */
+  --f-em:var(--f-serif);
+  --f-digit:'DotGothic16',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+
+  /* fluid type: 320px → 1280px */
+  --fs-xs:clamp(12px,.25vw + 11px,13px);
+  --fs-s:clamp(14px,.3vw + 13px,15px);
+  --fs-m:clamp(15px,.4vw + 14px,17px);
+  --fs-h2:clamp(22px,1.6vw + 17px,30px);
+  --fs-h1:clamp(25px,3vw + 15px,42px);
+
+  --gap:clamp(14px,2.5vw,24px);
+  --radius-l:20px; --radius-m:14px; --radius-s:10px;
+  --tap:44px;                      /* minimum touch target */
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-l:env(safe-area-inset-left,0px);
+  --safe-r:env(safe-area-inset-right,0px);
+  --dock-h:76px;
+}
+
+:root[data-theme="light"]{--bg:#F4EFE6; --surface:#EAE3D6; --surface-hi:#DDD3C2; --line:#CBBFA9;
+  --text:#2E2A26; --soft:#5B5248; --faint:#7A7064; --lav:#5B5248; --dim:#7A7064; --ink:#2E2A26;
+  --accent-t:#9A5B12; --mint-t:#4E7A4A; --hot-t:#A63A35; --focus:#3E5C8A;
+  --inv-bg:#2E2A26; --inv-fg:#F6F1E7; --inv-soft:#D9D0BF; --dock-fade:rgba(244,239,230,0); --glass:rgba(244,239,230,.66); --glass-strong:rgba(244,239,230,.86); --glass-edge:rgba(255,255,255,.7); --glass-hi:rgba(255,255,255,.55); --glass-inv:rgba(46,42,38,.82); --lift:0 18px 40px -22px rgba(70,55,35,.35); --blob1:rgba(127,167,122,.16); --blob2:rgba(226,163,59,.14); --blob3:rgba(62,92,138,.10);}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#F4EFE6; --surface:#EAE3D6; --surface-hi:#DDD3C2; --line:#CBBFA9;
+  --text:#2E2A26; --soft:#5B5248; --faint:#7A7064; --lav:#5B5248; --dim:#7A7064; --ink:#2E2A26;
+  --accent-t:#9A5B12; --mint-t:#4E7A4A; --hot-t:#A63A35; --focus:#3E5C8A;
+  --inv-bg:#2E2A26; --inv-fg:#F6F1E7; --inv-soft:#D9D0BF; --dock-fade:rgba(244,239,230,0); --glass:rgba(244,239,230,.66); --glass-strong:rgba(244,239,230,.86); --glass-edge:rgba(255,255,255,.7); --glass-hi:rgba(255,255,255,.55); --glass-inv:rgba(46,42,38,.82); --lift:0 18px 40px -22px rgba(70,55,35,.35); --blob1:rgba(127,167,122,.16); --blob2:rgba(226,163,59,.14); --blob3:rgba(62,92,138,.10);}}
+:root[data-theme="light"]{color-scheme:light} :root[data-theme="dark"]{color-scheme:dark}
+
+/* =========================================================
+   2. Base / reset
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg);-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+html.lock{overflow:hidden}
+body{margin:0;min-height:100vh;min-height:100dvh;background:transparent;color:var(--text);font-family:var(--f-body);font-size:var(--fs-m);line-height:1.65;
+  padding-bottom:calc(var(--dock-h) + 24px + var(--safe-b));overflow-x:hidden}
+img,svg,canvas{display:block;max-width:100%}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:8px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3{font-family:var(--f-serif);font-weight:900;line-height:1.25;margin:0;text-wrap:balance;letter-spacing:.01em}
+h3{font-weight:700}
+.sec h2,.h2{font-size:var(--fs-h2);margin-bottom:6px}
+body{font-weight:400;letter-spacing:.015em;font-feature-settings:'palt' 0}
+p{margin:0;text-wrap:pretty}
+
+/* =========================================================
+   3. Layout: 1 column phone, 2 columns ≥ 900px
+   ========================================================= */
+.page{width:100%;max-width:1180px;margin:0 auto;padding:0 max(18px,var(--safe-l)) 0 max(18px,var(--safe-r))}
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:0 clamp(24px,4vw,56px)}
+.col{min-width:0}
+.sec{padding:clamp(22px,4vw,36px) 0 6px}
+
+html{scroll-padding-top:72px}
+.lead{color:var(--lav);font-size:var(--fs-s);margin:6px 0 14px;max-width:38em}
+@media (min-width:900px){
+  .grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:start}
+  .col.side{position:sticky;top:calc(var(--bar-h) + 12px)}
+}
+
+/* =========================================================
+   4. Hero meter
+   ========================================================= */
+.hero{padding:clamp(20px,5vw,40px) 0 10px;text-align:center;position:relative}
+.page{position:relative}
+.theme{position:absolute;right:max(18px,var(--safe-r));top:12px;z-index:2;min-height:36px;display:flex;align-items:center;gap:6px;border:2px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:4px 12px 4px 8px;font-size:var(--fs-xs)}
+.theme svg{width:18px;height:18px}
+.hero{padding-top:clamp(12px,3vw,28px)}
+.hero h1{font-size:var(--fs-h1)}
+.hero h1 .q{color:var(--hot-t)}
+.hero .lead{margin:8px auto 18px}
+.meter{margin:0 auto;width:min(300px,86vw);background:#F3EEE4;border-radius:150px 150px 28px 28px;
+  padding:clamp(24px,8vw,34px) clamp(14px,5vw,22px) 16px;color:var(--night);box-shadow:0 0 0 8px var(--surface),0 20px 60px rgba(46,42,38,.3)}
+.meter .brand{font-size:var(--fs-xs);color:#6E6559;margin-bottom:8px}
+.odo{display:flex;justify-content:center;align-items:flex-end;gap:4px;background:var(--night);border-radius:10px;padding:8px 10px;
+  font-family:var(--f-digit);font-size:clamp(32px,10vw,44px);line-height:1.2;color:var(--volt);overflow:hidden}
+.odo .c{height:1.2em;width:.66em;overflow:hidden;position:relative;flex:none}
+.odo .s{position:absolute;inset:0 auto auto 0;width:100%;display:flex;flex-direction:column;transition:transform .55s cubic-bezier(.2,.9,.25,1.15);will-change:transform}
+.odo .s span{display:block;height:1.2em;line-height:1.2em;text-align:center;font-variant-numeric:tabular-nums}
+.odo .u{font-family:var(--f-head);font-size:16px;color:#D9D0BF;margin-left:6px;padding-bottom:4px}
+.disc{width:44px;height:44px;border-radius:50%;margin:12px auto 4px;background:conic-gradient(var(--hot) 0 8%,#D8CFBF 8% 100%);position:relative;transition:transform .8s ease-out}
+.disc::after{content:"";position:absolute;inset:9px;border-radius:50%;background:#F3EEE4}
+.meter .sub{font-size:var(--fs-s);color:#4E463C;line-height:1.5}.meter .sub b{color:var(--night);margin-left:4px}
+.dial{display:flex;align-items:center;gap:10px;margin:20px auto 4px;max-width:380px}
+.pm{width:var(--tap);height:var(--tap);flex:none;border-radius:50%;border:2px solid var(--line);background:var(--surface);font-size:24px;line-height:1}
+.pm:active{transform:scale(.92)}
+input[type=range]{flex:1;min-width:0;-webkit-appearance:none;appearance:none;height:var(--tap);background:transparent;margin:0;padding:0}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:5px;background:linear-gradient(90deg,var(--mint),var(--volt) 55%,var(--hot))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;margin-top:-13px;width:36px;height:36px;border-radius:50%;background:var(--volt);border:4px solid var(--night);box-shadow:0 0 0 3px var(--volt),0 0 22px var(--volt)}
+input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;background:var(--volt);border:4px solid var(--night)}
+input[type=range]::-moz-range-track{height:10px;border-radius:5px;background:linear-gradient(90deg,var(--mint),var(--volt) 55%,var(--hot))}
+.linkbtn{background:none;border:0;color:var(--accent-t);font-size:var(--fs-s);text-decoration:underline;text-underline-offset:3px;min-height:var(--tap);padding:0 8px}
+.exact{display:flex;gap:8px;justify-content:center;margin:2px 0 6px}
+.exact input{width:140px;font-size:18px;padding:8px 12px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--text);text-align:center;min-height:var(--tap)}
+.pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pill{min-height:var(--tap);border:2px solid var(--line);background:transparent;border-radius:999px;padding:6px 14px;font-size:var(--fs-s)}
+.pill[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+/* =========================================================
+   5. Stairs
+   ========================================================= */
+.stairs{position:relative;height:clamp(190px,40vw,240px);display:grid;grid-template-columns:repeat(6,1fr);align-items:end;gap:5px;margin-top:34px}
+.st{border-radius:10px 10px 0 0;background:var(--surface);border:2px solid var(--line);border-bottom:0;position:relative;transition:background-color .4s,border-color .4s}
+.st b{position:absolute;top:6px;left:0;right:0;text-align:center;font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:clamp(12px,3vw,15px);color:var(--lav)}
+.st.past{background:var(--surface-hi)}
+.st.on{background:var(--volt);border-color:var(--volt)} .st.on b{color:var(--night)}
+.st.top.on{background:var(--hot);border-color:var(--hot)}
+.stl{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-top:6px}
+.stl span{text-align:center;font-size:clamp(9px,2.4vw,12px);color:var(--dim);white-space:nowrap}
+.fam,.ghost{position:absolute;display:flex;gap:2px;transform:translateX(-50%);transition:left .7s cubic-bezier(.3,1.4,.5,1),bottom .7s cubic-bezier(.3,1.4,.5,1),opacity .4s;pointer-events:none}
+.fam i,.ghost i{width:clamp(9px,2.6vw,13px);height:clamp(16px,4.6vw,22px);border-radius:7px 7px 4px 4px;position:relative;display:block}
+.fam i::before{content:"";position:absolute;top:-11px;left:50%;transform:translateX(-50%);width:clamp(8px,2.4vw,11px);aspect-ratio:1;border-radius:50%;background:inherit}
+.ghost{opacity:0}
+.ghost i{border:2px dashed var(--mint)}
+.ghost em{position:absolute;bottom:calc(100% + 16px);left:50%;transform:translateX(-50%);font-style:normal;font-size:12px;background:var(--mint);color:var(--night);border-radius:999px;padding:1px 8px;white-space:nowrap}
+.shake{animation:shake .45s}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.say{margin-top:16px;background:var(--surface);border-radius:18px;padding:14px 16px;border-left:6px solid var(--volt)}
+.say em{font-style:normal;color:var(--accent-t)}
+.say small{display:block;color:var(--dim);font-size:var(--fs-xs);margin-top:4px}
+
+/* =========================================================
+   6. Myth switch
+   ========================================================= */
+.myth{background:var(--surface);border-radius:var(--radius-l);padding:16px;display:grid;grid-template-columns:clamp(72px,22vw,96px) minmax(0,1fr);gap:16px;align-items:center}
+.switch{width:100%;aspect-ratio:96/130;border-radius:18px;background:#F3EEE4;border:2px solid var(--line);position:relative;box-shadow:inset 0 -6px 0 #D8CFBF}
+.switch span{position:absolute;left:29%;width:42%;height:40%;border-radius:10px;background:var(--night);transition:top .15s}
+.switch[aria-pressed="false"] span{top:12%} .switch[aria-pressed="true"] span{top:48%}
+.switch:active{transform:scale(.97)}
+.myth .n{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:clamp(24px,7vw,30px);color:var(--accent-t);line-height:1.15}
+.myth .v{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:clamp(18px,5vw,22px)}
+.myth p{font-size:var(--fs-s);color:var(--lav);margin-top:4px}
+
+/* =========================================================
+   7. House
+   ========================================================= */
+.presets{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 12px;font-size:var(--fs-s);color:var(--soft)}
+.presets .pill{min-height:38px;padding:4px 12px}
+.guess{background:var(--surface);border:2px dashed var(--line);border-radius:var(--radius-l);padding:14px 16px;margin:4px 0 14px}
+.guess .chips{margin-top:8px}
+.guess .chip{background:transparent;color:var(--text);border-color:var(--line)}
+.guess .chip[aria-pressed="true"]{background:var(--volt);color:var(--night);border-color:var(--volt)}
+.gres{margin-top:8px;font-size:var(--fs-s);color:var(--lav)} .gres b{color:var(--accent-t)}
+.house.hide .kwlbl,.rank.hide{visibility:hidden}
+.houseHead{display:flex;justify-content:space-between;align-items:center;font-size:var(--fs-s);color:var(--lav)}
+.houseHead b{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;color:var(--mint-t);font-size:20px}
+.house{margin-top:8px;background:#2E2A26;border-radius:20px;padding:4px 2px}
+.house svg{width:100%;height:auto;aspect-ratio:360/300}
+.mon{cursor:pointer;transition:transform .6s cubic-bezier(.3,1.5,.5,1),opacity .4s}
+.mon .body{transition:fill .5s}
+.mon .glow{transition:opacity .5s}
+.mon:focus{outline:none}
+.mon:focus-visible .hit{stroke:var(--volt);stroke-width:3}
+.mon .hit{fill:transparent}
+.blink{animation:blink 4s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.wob{animation:wob 2.4s ease-in-out infinite}
+@keyframes wob{50%{transform:translateY(-2px)}}
+.zzz{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;fill:var(--mint);font-size:10px;animation:zz 2s infinite}
+@keyframes zz{0%{opacity:0;transform:translate(0,4px)}50%{opacity:1}100%{opacity:0;transform:translate(4px,-6px)}}
+.tip{font-size:var(--fs-xs);color:var(--dim);margin-top:6px}
+.rank{margin-top:14px;display:grid;gap:4px}
+.rk{display:grid;grid-template-columns:minmax(72px,6.5em) minmax(0,1fr) 3.4em;gap:10px;align-items:center;font-size:var(--fs-s);background:none;border:0;text-align:left;padding:6px 0;min-height:36px;width:100%}
+.rk .bar{height:14px;border-radius:7px;background:var(--hot);transition:width .6s cubic-bezier(.2,.9,.25,1),background-color .4s;max-width:100%}
+.rk.tamed .bar{background:var(--mint)}
+.rk .v{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;text-align:right;color:var(--lav)}
+.rk.other{cursor:default;color:var(--dim)} .rk.other .bar{background:var(--line)}
+
+/* =========================================================
+   8. Sheet / dialog
+   ========================================================= */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:20}
+.scrim.open{opacity:1;visibility:visible}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;margin:0 auto;width:100%;max-width:560px;max-height:88vh;max-height:88dvh;overflow:auto;overscroll-behavior:contain;
+  background:var(--sheet);color:var(--sheet-ink);border-radius:26px 26px 0 0;padding:20px 20px calc(24px + var(--safe-b));
+  transform:translateY(105%);visibility:hidden;transition:transform .42s cubic-bezier(.2,.9,.25,1),visibility .42s}
+.sheet.open{transform:none;visibility:visible}
+@media (min-width:900px){
+  .sheet{top:50%;bottom:auto;border-radius:26px;transform:translateY(-46%) scale(.96);opacity:0;transition:transform .3s,opacity .3s,visibility .3s;padding-bottom:24px}
+  .sheet.open{transform:translateY(-50%);opacity:1}
+}
+@media (orientation:landscape) and (max-height:500px){ .sheet{max-height:94dvh} }
+.sheet h3{font-size:clamp(20px,5vw,24px);padding-right:48px}
+.bubble{display:flex;gap:12px;align-items:flex-start;margin:10px 0 6px}
+.bubble svg{width:56px;height:56px;flex:none}
+.bubble p{background:#fff;border:2px solid #E7E0D2;border-radius:4px 18px 18px 18px;padding:10px 14px;line-height:1.5}
+.kw{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:clamp(28px,8vw,34px);color:#A63A35;margin:4px 0 2px}
+.kw.ok{color:#4E7A4A}
+.why{font-size:var(--fs-s);color:var(--sheet-soft);margin-bottom:6px}
+.opt{margin-top:12px}
+.opt .lab{font-size:var(--fs-s);color:var(--sheet-soft);margin-bottom:6px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{min-height:40px;border:2px solid #D6CCBA;background:#fff;border-radius:999px;padding:6px 13px;font-size:var(--fs-s);color:var(--sheet-ink)}
+.chip[aria-pressed="true"]{background:var(--sheet-ink);color:#fff;border-color:var(--sheet-ink)}
+.tame{width:100%;margin-top:18px;border:0;border-radius:18px;padding:14px 16px;background:var(--sheet-ink);color:var(--volt);display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;min-height:64px}
+.tame span{font-family:var(--f-em);font-weight:900;font-size:22px}
+.tame small{font-size:var(--fs-s)}
+.tame.on{background:var(--mint);color:var(--sheet-ink)}
+.close{position:absolute;right:14px;top:12px;border:0;background:#E7E0D2;width:var(--tap);height:var(--tap);border-radius:50%;font-size:18px;color:var(--sheet-ink)}
+.note{font-size:var(--fs-xs);color:#6E6559;margin-top:10px;line-height:1.6}
+
+/* =========================================================
+   9. Dock, toast, effects
+   ========================================================= */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:10;padding:16px max(12px,var(--safe-l)) calc(10px + var(--safe-b)) max(12px,var(--safe-r));background:linear-gradient(var(--dock-fade),var(--bg) 40%);pointer-events:none}
+.dock .in{pointer-events:auto;max-width:560px;margin:0 auto;background:var(--inv-bg);color:var(--inv-fg);border-radius:22px;display:flex;align-items:center;gap:12px;padding:10px 14px;box-shadow:0 10px 40px rgba(0,0,0,.45);min-height:var(--dock-h)}
+.dock svg{width:50px;height:50px;flex:none}
+.dock .t{flex:1;min-width:0;line-height:1.3}
+.dock .t small{display:block;font-size:var(--fs-xs);color:var(--inv-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dock .t b{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:clamp(20px,6vw,24px)}
+.dock .lvl small{display:block;font-weight:500;font-size:11px;color:#D9D0BF}
+.dock .lvl{font-family:var(--f-em);font-weight:900;font-size:14px;background:#2E2A26;color:#E2A33B;outline:2px solid rgba(226,163,59,.25);border-radius:12px;padding:6px 9px;text-align:center;line-height:1.25;flex:none}
+.pop{animation:pop .5s}
+@keyframes pop{40%{transform:scale(1.15)}}
+.toast{position:fixed;left:50%;top:calc(var(--bar-h) + 10px + env(safe-area-inset-top,0px));z-index:40;max-width:calc(100vw - 24px);transform:translate(-50%,-240%);background:var(--volt);color:var(--night);font-family:var(--f-head);font-weight:900;padding:10px 18px;border-radius:999px;transition:transform .35s cubic-bezier(.2,.9,.25,1.3),visibility .35s;visibility:hidden;font-size:var(--fs-s);text-align:center}
+.toast.show{transform:translate(-50%,0);visibility:visible}
+.toast.good{background:var(--mint)}
+.fx{position:fixed;left:0;top:0;z-index:31;pointer-events:none;will-change:transform}
+.fx.coin{width:18px;height:18px;border-radius:50%;background:var(--volt);border:3px solid #B07A1F}
+.fx.bit{width:12px;height:12px;border-radius:3px}
+.banner{position:fixed;left:12px;right:12px;top:12px;z-index:50;background:var(--hot);color:var(--night);border-radius:14px;padding:12px 16px;font-family:var(--f-head);font-weight:700;display:none}
+.banner.show{display:block}
+
+/* =========================================================
+   10. Card
+   ========================================================= */
+.check{display:grid;grid-template-columns:1fr;gap:10px;max-width:640px}
+@media (min-width:560px){.check{grid-template-columns:1fr 1fr}}
+.check label{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:16px;padding:10px 14px;font-size:var(--fs-s);color:var(--lav)}
+.check input{flex:1;min-width:0;min-height:var(--tap);font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:24px;background:transparent;border:0;border-bottom:2px solid var(--line);color:var(--accent-t);text-align:right}
+.result{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px;max-width:640px}
+.res{background:var(--inv-bg);color:var(--inv-fg);border-radius:16px;padding:12px 14px}
+.res b{display:block;font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:clamp(22px,6vw,28px);line-height:1.2}
+.res small{font-size:var(--fs-xs);color:var(--inv-soft)}
+.res.bad{background:var(--surface);color:var(--text)} .res.bad small{color:var(--lav)}
+.verdict{grid-column:1/-1;font-family:var(--f-em);font-weight:900;font-size:var(--fs-m);color:var(--mint-t)}
+.verdict.no{color:var(--hot-t)}
+.who{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.btns{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+@media (min-width:600px){.btns{grid-template-columns:1fr 1fr 1fr}}
+.mk{min-height:56px;border:0;border-radius:18px;padding:14px;font-family:var(--f-head);font-weight:900;font-size:18px;background:var(--volt);color:var(--night)}
+.mk.alt{background:var(--surface);color:var(--text);border:2px solid var(--line)}
+.cardwrap{max-width:440px;margin:16px auto 0}
+.cardwrap img{width:100%;height:auto;border-radius:18px}
+.copybox{width:100%;min-height:96px;margin-top:10px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--text);padding:10px;font-size:var(--fs-s)}
+footer{color:var(--dim);font-size:var(--fs-xs);line-height:1.7;padding:28px 0 8px;max-width:62em}
+canvas#cv{display:none}
+
+
+/* =========================================================
+   12. App shell: top bar, drawer (phone) / sidebar (desktop)
+   ========================================================= */
+:root{--bar-h:56px;--side-w:248px}
+.appbar{position:sticky;top:0;z-index:15;isolation:isolate;height:calc(var(--bar-h) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) max(10px,var(--safe-r)) 0 max(10px,var(--safe-l));display:flex;align-items:center;gap:8px;background:var(--bg);border-bottom:1px solid var(--surface)}
+.menu{width:var(--tap);height:var(--tap);border:0;background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;border-radius:12px}
+.menu span{display:block;width:22px;height:2.5px;border-radius:2px;background:var(--text);transition:transform .25s,opacity .25s}
+.menu[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.menu[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+.apptitle{flex:1;min-width:0;font-family:var(--f-serif);font-weight:900;font-size:var(--fs-m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.theme{position:static!important;flex:none}
+.dscrim{position:fixed;inset:0;z-index:16;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.dscrim.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;bottom:0;left:0;z-index:17;width:min(300px,84vw);background:var(--bg);border-right:1px solid var(--surface);padding:calc(18px + env(safe-area-inset-top,0px)) 12px calc(18px + var(--safe-b)) max(12px,var(--safe-l));display:flex;flex-direction:column;gap:4px;overflow-y:auto;transform:translateX(-102%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.9,.25,1),visibility .3s}
+.drawer.open{transform:none;visibility:visible}
+.drawer .brand{font-family:var(--f-serif);font-weight:900;font-size:20px;line-height:1.3;margin:4px 10px 14px;color:var(--text)}
+.drawer a{display:flex;align-items:center;gap:12px;min-height:48px;padding:8px 12px;border-radius:14px;color:var(--soft);text-decoration:none;font-size:var(--fs-m)}
+.drawer a svg{width:22px;height:22px;flex:none}
+.drawer a:hover{background:var(--surface)}
+.drawer a[aria-current="page"]{background:var(--text);color:var(--bg)}
+.drawer a[aria-current="page"] svg circle[fill="var(--bg)"]{fill:var(--text)}
+.dnote{margin-top:auto;padding:10px 12px;font-size:var(--fs-xs);color:var(--faint)}
+@media (min-width:1100px){
+  .menu,.dscrim{display:none}
+  .drawer{transform:none;visibility:visible;width:var(--side-w);top:0;padding-top:24px;transition:none}
+  .appbar,.page,.dock{margin-left:var(--side-w)}
+  .page{width:auto;max-width:1180px}
+  .dock{left:0}
+  .apptitle{padding-left:8px}
+}
+body.nodock{padding-bottom:calc(24px + var(--safe-b))}
+body.nodock .dock{display:none}
+.view:focus{outline:none}
+.vh{font-size:var(--fs-h1);margin-bottom:6px;letter-spacing:.04em}
+.vh::after{content:"";display:block;width:2.2em;height:3px;border-radius:2px;background:var(--hot-t);margin-top:10px;opacity:.85}
+.h2{font-size:var(--fs-h2);margin-bottom:6px}
+
+/* monsters dex */
+.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.mcard{background:var(--surface);border-radius:var(--radius-l);padding:16px;display:flex;flex-direction:column;gap:10px}
+.mcard header{display:flex;gap:12px;align-items:center}
+.mcard header svg{width:64px;height:64px;flex:none;background:#2E2A26;border-radius:16px}
+.mcard h3{font-size:20px}
+.mcard .k{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent-t);font-size:18px}
+.mcard .q{font-size:var(--fs-s);color:var(--soft);border-left:4px solid var(--line);padding-left:10px}
+.mcard ul{margin:0;padding-left:1.2em;font-size:var(--fs-s)}
+.mcard li{margin:2px 0}
+.mcard .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.mcard .acts .pill[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);color:#2E2A26}
+
+/* learn */
+.lesson{background:var(--surface);border-radius:var(--radius-l);padding:16px}
+.lrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.lrow b{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:clamp(26px,7vw,34px);color:var(--accent-t)}
+.lrow .pills{margin:0}
+.lbar{display:flex;height:56px;border-radius:12px;overflow:hidden;margin:12px 0 8px;background:var(--bg)}
+.lbar div{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#2E2A26;transition:flex-grow .3s;min-width:0;overflow:hidden;white-space:nowrap}
+.ltable{display:grid;grid-template-columns:auto 1fr auto auto;gap:4px 12px;font-size:var(--fs-s);align-items:center}
+.ltable i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.ltable .r{text-align:right;font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums}
+.ltot{grid-column:1/-1;display:flex;justify-content:space-between;font-weight:700;border-top:2px solid var(--line);padding-top:8px;margin-top:4px}.ltot b{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-weight:400}
+.lesson input[type=range]{width:100%;display:block;margin-top:6px}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px}
+.fact{background:var(--surface);border-radius:var(--radius-l);padding:16px}
+.fact b{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:32px;color:var(--accent-t)}
+.fact p{font-size:var(--fs-s);margin-top:4px}
+.qz{background:var(--surface);border-radius:var(--radius-l);padding:16px;margin-bottom:12px}
+.qz p.qq{font-weight:700;margin-bottom:8px}
+.qz .chips{gap:8px}
+.qz .chip{background:transparent;color:var(--text);border-color:var(--line)}
+.qz .chip.right{background:var(--mint);border-color:var(--mint);color:#2E2A26}
+.qz .chip.wrong{background:var(--hot);border-color:var(--hot);color:#2E2A26}
+.qz .ex{font-size:var(--fs-s);color:var(--soft);margin-top:8px}
+.score{font-family:var(--f-em);font-weight:900;font-size:var(--fs-h2);color:var(--mint-t)}
+
+/* challenge */
+.ring{display:flex;align-items:center;gap:16px;margin:6px 0 14px}
+.ring svg{width:110px;height:110px;flex:none}
+.ring circle{transition:stroke-dashoffset .6s cubic-bezier(.2,.9,.25,1)}
+.ring b{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:32px;color:var(--mint-t)}
+.missions{display:grid;gap:10px}
+.mis{background:var(--surface);border-radius:var(--radius-l);padding:14px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:start}
+.mis .tick{width:40px;height:40px;border-radius:12px;border:3px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;font-size:22px;color:#2E2A26}
+.mis .tick[aria-pressed="true"]{background:var(--mint);border-color:var(--mint)}
+.mis h3{font-size:18px}
+.mis p{font-size:var(--fs-s);color:var(--soft)}
+.mis .who2{grid-column:2;display:flex;gap:6px;flex-wrap:wrap}
+.mis .who2 .chip{min-height:34px;padding:2px 10px;background:transparent;color:var(--text);border-color:var(--line);font-size:var(--fs-xs)}
+.mis .who2 .chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.mis.done h3{text-decoration:line-through;text-decoration-color:var(--mint)}
+.predict{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.predict label{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:16px;padding:10px 14px;font-size:var(--fs-s);color:var(--soft);flex:1;min-width:240px}
+.predict input{flex:1;min-width:0;min-height:var(--tap);font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;font-size:24px;background:transparent;border:0;border-bottom:2px solid var(--line);color:var(--accent-t);text-align:right}
+
+/* history */
+.addbill{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
+@media (min-width:700px){.addbill{grid-template-columns:1.2fr 1fr 1fr auto}}
+.addbill label{display:flex;flex-direction:column;gap:4px;font-size:var(--fs-xs);color:var(--soft)}
+.addbill input,.addbill select{min-height:var(--tap);font:inherit;font-size:17px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--text);padding:6px 10px;width:100%}
+.addbill .mk{min-height:var(--tap);grid-column:1/-1}
+@media (min-width:700px){.addbill .mk{grid-column:auto}}
+.chart{margin-top:14px;background:var(--surface);border-radius:var(--radius-l);padding:12px 8px 4px;overflow-x:auto}
+.chart svg{display:block;min-width:100%;height:auto}
+.chart .empty{padding:24px;text-align:center;color:var(--soft);font-size:var(--fs-s)}
+.hlist{margin-top:12px;display:grid;gap:6px}
+.hrow{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:12px;padding:6px 10px;font-size:var(--fs-s)}
+.hrow b{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;flex:1}
+.hrow button{min-height:36px;border:0;background:transparent;color:var(--hot-t);font-size:var(--fs-xs)}
+
+/* elder */
+.elder{--efs:1.25}
+.elder[data-size="xl"]{--efs:1.55}
+.etiles{display:grid;gap:14px;margin-top:14px}
+.etile{border-radius:24px;padding:20px;border:4px solid currentColor}
+.etile .l{font-size:calc(18px * var(--efs));font-weight:700}
+.etile .v{font-family:var(--f-em);font-weight:900;font-size:calc(40px * var(--efs));line-height:1.2}
+.etile .s{font-size:calc(17px * var(--efs));margin-top:4px}
+.etile.z0{color:var(--mint-t);background:var(--surface);background:color-mix(in srgb,var(--mint) 18%,var(--bg))}
+.etile.z1{color:var(--accent-t);background:var(--surface);background:color-mix(in srgb,var(--volt) 20%,var(--bg))}
+.etile.z2{color:var(--hot-t);background:var(--surface);background:color-mix(in srgb,var(--hot) 16%,var(--bg))}
+.etile.act{color:var(--text);background:var(--surface)}
+.etile .s,.etile .l{color:var(--text)}
+.refs{padding-left:1.2em;font-size:var(--fs-s)} .refs li{margin:8px 0}
+
+
+/* =========================================================
+   13. Glass & motion — soft edges, translucent chrome, page transitions
+   ========================================================= */
+body::before{content:"";position:fixed;inset:-20vmax;z-index:-1;pointer-events:none;
+  background:radial-gradient(40vmax 34vmax at 12% 8%,var(--blob3),transparent 70%),
+             radial-gradient(36vmax 30vmax at 92% 30%,var(--blob1),transparent 70%),
+             radial-gradient(40vmax 34vmax at 40% 105%,var(--blob2),transparent 70%);
+  animation:drift 28s var(--ease) infinite alternate}
+@keyframes drift{to{transform:translate3d(3vmax,-2vmax,0) scale(1.06)}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.10;mix-blend-mode:multiply}
+:root:not([data-theme="light"]) body::after{opacity:.06;mix-blend-mode:screen}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) body::after{opacity:.10;mix-blend-mode:multiply}}
+
+/* translucent app bar with a soft fade instead of a hard edge */
+.appbar{background:var(--glass);border-bottom:1px solid var(--glass-edge);-webkit-backdrop-filter:saturate(170%) blur(18px);backdrop-filter:saturate(170%) blur(18px)}
+.appbar::after{content:"";position:absolute;left:0;right:0;top:100%;height:18px;pointer-events:none;background:linear-gradient(var(--glass),transparent);opacity:.9}
+.drawer{background:var(--glass-strong);-webkit-backdrop-filter:saturate(170%) blur(24px);backdrop-filter:saturate(170%) blur(24px);border-right:1px solid var(--glass-edge);box-shadow:var(--lift)}
+.dscrim{background:rgba(30,25,20,.28);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.scrim{background:rgba(30,25,20,.32);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.dock{background:none}
+.dock .in{background:var(--glass-inv);-webkit-backdrop-filter:saturate(170%) blur(20px);backdrop-filter:saturate(170%) blur(20px);border:1px solid var(--glass-edge);box-shadow:var(--lift)}
+.sheet{background:var(--glass-sheet);-webkit-backdrop-filter:saturate(170%) blur(26px);backdrop-filter:saturate(170%) blur(26px);border:1px solid rgba(255,255,255,.7);box-shadow:0 -10px 50px -10px rgba(30,25,20,.45)}
+.theme{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.toast{box-shadow:var(--lift)}
+
+/* surfaces: light top highlight + soft lift, so cards feel layered, not pasted */
+.say,.myth,.guess,.lesson,.fact,.qz,.mcard,.mis,.chart,.hrow,.check label,.predict label,.res.bad,.etile.act{
+  background:linear-gradient(180deg,var(--glass-hi),transparent 46%),var(--surface);
+  box-shadow:inset 0 1px 0 var(--glass-edge),var(--lift);border-color:var(--glass-edge)}
+.house{box-shadow:var(--lift)}
+.meter{box-shadow:0 0 0 8px var(--surface),inset 0 2px 0 rgba(255,255,255,.8),var(--lift)}
+
+/* fallback where blur is not supported: stay readable */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .appbar,.drawer{background:var(--bg)} .dock .in{background:var(--inv-bg)} .sheet{background:var(--sheet)}
+}
+
+/* gentle, consistent motion on interactive things */
+.pill,.chip,.mk,.pm,.tick,.theme,.drawer a,.rk,.linkbtn,.hrow button{transition:background-color .28s var(--ease),border-color .28s var(--ease),color .28s var(--ease),transform .18s var(--ease),box-shadow .28s var(--ease)}
+.pill:active,.chip:active,.mk:active,.tick:active,.theme:active{transform:scale(.96)}
+.mk{box-shadow:0 10px 24px -14px rgba(30,25,20,.6)}
+.drawer a{transition:background-color .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)}
+.drawer.open a{animation:slidein .45s var(--ease) both}
+.drawer.open a:nth-of-type(2){animation-delay:.03s}.drawer.open a:nth-of-type(3){animation-delay:.06s}.drawer.open a:nth-of-type(4){animation-delay:.09s}
+.drawer.open a:nth-of-type(5){animation-delay:.12s}.drawer.open a:nth-of-type(6){animation-delay:.15s}.drawer.open a:nth-of-type(7){animation-delay:.18s}
+@keyframes slidein{from{opacity:0;transform:translateX(-14px)}}
+.qz .ex,.gres,.verdict{animation:reveal .45s var(--ease) both}
+@keyframes reveal{from{opacity:0;transform:translateY(6px);filter:blur(4px)}}
+.tick[aria-pressed="true"]{animation:popin .35s var(--ease)}
+@keyframes popin{40%{transform:scale(1.15)}}
+.sheet,.drawer{transition-timing-function:var(--ease)}
+
+/* page change: fade + lift + slight blur (fallback when View Transitions API is missing) */
+.view.enter{animation:pagein .42s var(--ease) both}
+@keyframes pagein{from{opacity:0;transform:translate3d(0,10px,0)}}
+::view-transition-old(root){animation:vtout .22s var(--ease) both}
+::view-transition-new(root){animation:vtin .38s var(--ease) both}
+@keyframes vtout{to{opacity:0}}
+@keyframes vtin{from{opacity:0;transform:translate3d(0,10px,0)}}
+.appbar{view-transition-name:appbar}.drawer{view-transition-name:drawer}.dock{view-transition-name:dock}
+::view-transition-old(appbar),::view-transition-new(appbar),::view-transition-old(drawer),::view-transition-new(drawer){animation:none}
+
+
+/* =========================================================
+   14. Consistency layer — one control height, one field style, one card radius
+   ========================================================= */
+.pill,.chip,.presets .pill,.mis .who2 .chip,.guess .chip,.qz .chip{min-height:40px;padding:6px 14px;border-radius:999px;border-width:2px;font-size:var(--fs-s)}
+.sheet .chip{min-height:40px}
+.mk{min-height:52px;border-radius:var(--radius-m);font-size:17px}
+.mk.alt{border-width:2px}
+.exact input,.check label,.predict label,.addbill input,.addbill select{border-radius:var(--radius-m)}
+.exact input,.addbill input,.addbill select{border:2px solid var(--line);background:var(--surface);color:var(--text);min-height:var(--tap)}
+.exact input:focus,.addbill input:focus,.addbill select:focus,.check input:focus,.predict input:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 4px color-mix(in srgb,var(--focus) 22%,transparent)}
+.say,.myth,.guess,.lesson,.fact,.qz,.mcard,.mis,.chart,.etile,.res,.house{border-radius:var(--radius-l)}
+.hrow{border-radius:var(--radius-m)}
+.tip,.note{line-height:1.7}
+.lead{font-size:var(--fs-m);line-height:1.75}
+.view .sec+.sec{border-top:1px solid color-mix(in srgb,var(--line) 40%,transparent)}
+.readable{max-width:760px}
+.sign{text-align:right;margin:28px 0 0;font-family:var(--f-num);font-weight:500;letter-spacing:.12em;color:var(--faint);font-size:var(--fs-s)}
+.sign b{font-family:var(--f-head);font-weight:700;font-size:1.25em;letter-spacing:0;margin-right:.35em;color:var(--soft)}
+.skip{position:absolute;left:12px;top:-60px;z-index:60;background:var(--volt);color:#2E2A26;padding:10px 14px;border-radius:12px;font-weight:700;text-decoration:none}
+.skip:focus{top:12px}
+.hint{display:flex;gap:12px;align-items:flex-start;text-align:left;margin:14px auto 0;max-width:420px;background:linear-gradient(180deg,var(--glass-hi),transparent 46%),var(--surface);border:1px solid var(--glass-edge);border-radius:var(--radius-m);padding:12px 14px;font-size:var(--fs-s)}
+.hint button{flex:none;min-height:40px;padding:0 6px;border:0;background:transparent;color:var(--soft);font-size:var(--fs-xs);text-decoration:underline}
+
+
+
+/* =========================================================
+   15. Games & easter egg
+   ========================================================= */
+.egg{position:fixed;inset:0;z-index:45;display:grid;place-items:center;padding:20px;background:rgba(30,25,20,.42);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.egg[hidden]{display:none!important}
+.eggin{width:min(420px,100%);text-align:center;background:var(--glass-sheet);color:var(--sheet-ink);border:1px solid rgba(255,255,255,.7);border-radius:28px;padding:26px 22px 22px;box-shadow:0 30px 80px -20px rgba(30,25,20,.6);animation:eggin .6s var(--ease) both}
+@keyframes eggin{from{opacity:0;transform:translateY(24px) scale(.9)}}
+.trophy{width:110px;height:110px;margin:0 auto 8px;animation:spin 1.2s var(--ease) both}
+@keyframes spin{from{transform:rotate(-200deg) scale(.4);opacity:0}}
+.eggk{font-size:var(--fs-xs);letter-spacing:.2em;color:#9A5B12;font-weight:700}
+.eggin h2{font-size:30px;margin:4px 0 8px;color:var(--sheet-ink)}
+.eggin p{color:#4E463C} .eggs{font-size:var(--fs-xs);margin:8px 0 14px}
+.eggin .mk{width:100%}
+.patrol{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.ptile{position:relative;aspect-ratio:1;border-radius:var(--radius-l);border:2px solid var(--glass-edge);background:#2E2A26;color:#D9D0BF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:var(--fs-xs);padding:6px;overflow:hidden;transition:background-color .25s var(--ease),transform .15s var(--ease),box-shadow .25s var(--ease)}
+.ptile svg{width:52%;height:auto}
+.ptile.lit{background:#3A352F;box-shadow:0 0 0 3px #E2A33B,0 0 28px -4px #E2A33B}
+.ptile.lit.keep{box-shadow:0 0 0 3px #8DB487,0 0 24px -6px #8DB487}
+.ptile.hit{animation:hit .4s var(--ease)}
+.ptile.bad{animation:bad .4s}
+@keyframes hit{40%{transform:scale(.9)}}
+@keyframes bad{20%{transform:translateX(-5px)}60%{transform:translateX(5px)}}
+.ptile .tag2{position:absolute;top:6px;left:6px;right:6px;font-size:11px;text-align:left;color:#B5AB9A}
+.phead{display:flex;align-items:center;gap:12px;margin-top:12px}
+.phead b{font-family:var(--f-num);font-size:26px;color:var(--accent-t)}
+.phead span{font-family:var(--f-num);font-weight:700;color:var(--soft);flex:1}
+.phead .mk{min-width:140px}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.bdg{background:linear-gradient(180deg,var(--glass-hi),transparent 46%),var(--surface);border:1px solid var(--glass-edge);border-radius:var(--radius-l);padding:14px;text-align:center}
+.bdg i{display:grid;place-items:center;width:56px;height:56px;margin:0 auto 6px;border-radius:50%;font-style:normal;font-family:var(--f-serif);font-weight:900;font-size:24px;background:var(--surface-hi);color:var(--faint)}
+.bdg.on i{background:#E2A33B;color:#2E2A26;box-shadow:0 0 0 4px color-mix(in srgb,#E2A33B 30%,transparent)}
+.bdg b{display:block;font-size:var(--fs-s)}
+.bdg small{display:block;font-size:var(--fs-xs);color:var(--faint);line-height:1.5}
+.guessbill{background:linear-gradient(180deg,var(--glass-hi),transparent 46%),var(--surface);border:1px solid var(--glass-edge);border-radius:var(--radius-l);padding:16px;box-shadow:var(--lift)}
+.gq{font-family:var(--f-serif);font-weight:700;font-size:var(--fs-m);margin-bottom:6px}
+.guessbill input[type=range]{width:100%}
+
+
+/* =========================================================
+   16. Softer, rounder UI + drawer brand + why page
+   ========================================================= */
+:root{--radius-l:26px;--radius-m:18px;--radius-s:12px;--spring:cubic-bezier(.34,1.3,.64,1)}
+.sheet{border-radius:32px 32px 0 0}
+@media (min-width:900px){.sheet{border-radius:32px}}
+.dock .in{border-radius:28px}
+.house{border-radius:28px} .house svg{border-radius:24px}
+.meter{border-radius:150px 150px 34px 34px}
+.odo{border-radius:14px}
+.st{border-radius:14px 14px 0 0}
+.hint,.toast,.banner{border-radius:var(--radius-m)}
+.mk,.exact input,.addbill input,.addbill select,.check label,.predict label{border-radius:var(--radius-m)}
+.ptile{border-radius:22px}
+.eggin{border-radius:32px}
+.drawer a{border-radius:16px}
+/* gentle press + lift, spring back */
+.mk,.pill,.chip,.tick,.theme,.ptile,.rk{transition:transform .35s var(--spring),background-color .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),box-shadow .35s var(--ease)}
+.mk:active,.pill:active,.chip:active,.tick:active,.ptile:active{transform:scale(.95);transition-duration:.12s}
+@media (hover:hover){
+  .mk:hover{transform:translateY(-2px);box-shadow:0 16px 28px -16px rgba(30,25,20,.55)}
+  .mcard,.wcard,.fact,.mis,.aim,.bdg{transition:transform .45s var(--spring),box-shadow .45s var(--ease)}
+  .mcard:hover,.fact:hover,.mis:hover,.aim:hover,.bdg:hover{transform:translateY(-3px)}
+  .drawer a:hover{transform:translateX(3px)}
+}
+::view-transition-new(root){animation-duration:.32s}
+.view.enter{animation-duration:.32s}
+.sheet{transition:transform .5s var(--spring),visibility .5s,opacity .35s}
+.drawer{transition:transform .45s var(--ease),visibility .45s}
+
+/* drawer: never wrap labels; brand is a link to the story */
+.drawer a span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.drawer .brand{display:block;text-decoration:none;color:var(--text);padding:10px 12px 12px;margin:0 0 10px;border-radius:18px;border-bottom:1px solid color-mix(in srgb,var(--line) 50%,transparent)}
+.drawer .brand .bt{display:block;font-family:var(--f-serif);font-weight:900;font-size:20px;line-height:1.35}
+.drawer .brand .bs{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:var(--fs-xs);color:var(--hot-t);font-weight:700}
+.drawer .brand .bs::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor}
+.drawer .brand[aria-current="page"]{background:var(--surface)}
+.drawer .brand[aria-current="page"] .bt{color:var(--text)}
+.dsign{margin-top:auto;display:flex!important;align-items:center;gap:12px;color:var(--faint)!important;min-height:56px}
+.dsign small{display:block;font-size:11px;letter-spacing:0;color:var(--faint)}
+.dsign span:last-child{font-family:var(--f-num);font-weight:700;letter-spacing:.12em;line-height:1.2}
+.dsign[aria-current="page"]{background:transparent!important;color:var(--text)!important}
+/* hanko stamp */
+.hanko{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--hot-t);color:#F6F1E7;font-family:var(--f-serif);font-weight:900;font-size:22px;line-height:1;letter-spacing:0;transform:rotate(-4deg);box-shadow:inset 0 0 0 2px rgba(246,241,231,.35);flex:none}
+.hanko.sm{width:28px;height:28px;font-size:16px;border-radius:8px;margin-right:8px}
+.hanko.lg{width:64px;height:64px;font-size:36px;border-radius:16px}
+a.sign{display:flex;justify-content:flex-end;align-items:center;text-decoration:none;color:var(--faint)}
+/* why page */
+.whyhero .pq{margin:26px 0 20px;padding:0 0 0 22px;border-left:3px solid var(--hot-t)}
+.pq blockquote{margin:0;font-family:var(--f-serif);font-weight:700;font-size:clamp(24px,3.2vw + 12px,40px);line-height:1.45;letter-spacing:.02em;color:var(--text)}
+.pq figcaption{margin-top:10px;font-size:var(--fs-s);color:var(--faint)}
+.finds{list-style:none;margin:6px 0 0;padding:0}
+.finds li{display:grid;grid-template-columns:56px 1fr;gap:4px 16px;padding:18px 0;border-top:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+.finds li:last-child{border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+.finds .kn{font-family:var(--f-serif);font-weight:900;font-size:34px;line-height:1.1;color:var(--hot-t)}
+.finds b{display:block;font-family:var(--f-serif);font-size:20px;margin-bottom:4px}
+.finds p{color:var(--soft);font-size:var(--fs-s);line-height:1.75}
+.aims{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;margin-top:6px}
+.aim{background:linear-gradient(180deg,var(--glass-hi),transparent 46%),var(--surface);border:1px solid var(--glass-edge);border-radius:var(--radius-l);padding:20px 18px;box-shadow:var(--lift)}
+.aim .seal{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:2px solid var(--hot-t);color:var(--hot-t);font-family:var(--f-serif);font-weight:900;font-size:26px;margin-bottom:12px}
+.aim b{display:block;font-family:var(--f-serif);font-size:20px;margin-bottom:6px}
+.aim p{font-size:var(--fs-s);color:var(--soft);line-height:1.75}
+.kpis3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:1px;border-radius:var(--radius-l);overflow:hidden;border:1px solid var(--glass-edge);background:color-mix(in srgb,var(--line) 45%,transparent)}
+.kpis3 div{padding:16px 18px;background:var(--surface)}
+.kpis3 b{display:block;font-family:var(--f-serif);font-size:22px;color:var(--accent-t)}
+.kpis3 span{font-size:var(--fs-s);color:var(--soft);line-height:1.7}
+.colophon{display:flex;gap:18px;align-items:flex-start}
+.colophon b{display:block;font-family:var(--f-serif);font-size:18px;margin-bottom:4px}
+.colophon p{font-size:var(--fs-s);color:var(--soft);line-height:1.8}
+
+
+/* =========================================================
+   17. Emphasis typography — one rule for every 重點字
+   重點字（強調詞、關鍵數字、結論、徽章名、卡片標題）→ 明朝體 粗體
+   資料（表格、清單數字、百分比、輸入框）→ 黑體 等寬數字
+   按鈕與標籤 → 黑體
+   ========================================================= */
+em,strong,.say b,.gres b,.lead b,p b,li b,.ex b{font-family:var(--f-em);font-style:normal;font-weight:700}
+em{color:var(--accent-t)}
+.ghost em{font-family:var(--f-body);font-weight:700;color:#2E2A26}
+.mk,.pill,.chip,.tick,.theme,.linkbtn,.apptitle{font-family:var(--f-body)}
+.mk{font-weight:700}
+.apptitle{font-family:var(--f-serif);font-weight:700}
+.rk .v,.hrow b,.ltable .r,.ltable span,.st b,.stl span,.check input,.predict input,.exact input,.addbill input,.res small,.kpis3 span,.odo .u{font-family:var(--f-body);font-variant-numeric:tabular-nums}
+.st b{font-weight:700}
+.big,.kw,.res b,.mcard .k,.lrow b,.fact b,.ring b,.phead b,.myth .n,.myth .v,.dock .t b,.houseHead b,.kpis3 b,.wcard b,.aim b,.finds b,.mcard h3,.mis h3,.qz p.qq,.gq,.bdg b,.eggin h2,.colophon b,.etile .v,.score,.verdict,.tame span,.dock .lvl{font-family:var(--f-em);font-variant-numeric:lining-nums}
+.res b,.mcard .k,.lrow b,.fact b,.ring b,.phead b,.myth .n,.dock .t b,.houseHead b,.kpis3 b{font-weight:900;letter-spacing:.01em}
+.myth .v{font-weight:700}
+
+
+/* =========================================================
+   18. Elder mode content
+   ========================================================= */
+.elder h2{font-size:calc(var(--fs-h2) * var(--efs) * .85)}
+.elder .lead,.elder .tip{font-size:calc(16px * var(--efs))}
+.speak{display:inline-flex;align-items:center;gap:10px;margin-top:14px;min-height:56px;padding:8px 20px;border-radius:999px;border:0;background:var(--text);color:var(--bg);font-size:calc(17px * var(--efs));font-weight:700}
+.speak svg{width:26px;height:26px}
+.speak[aria-pressed="true"]{background:var(--hot-t)}
+.ebill{background:#FFFDF8;color:#2E2A26;border:1px solid var(--glass-edge);border-radius:var(--radius-l);padding:18px;box-shadow:var(--lift);display:grid;gap:12px}
+.ebill .row{display:grid;grid-template-columns:1fr;align-items:center;gap:2px 12px;padding:12px 14px;border-radius:16px;border:3px solid transparent}
+.ebill .row.hl1{border-color:#E2A33B;background:#FBF1DC}
+.ebill .row.hl2{border-color:#8DB487;background:#EAF2E5}
+.ebill .row.dim{opacity:.45;padding:6px 14px}
+@media (min-width:560px){.ebill .row{grid-template-columns:1fr auto}}
+.ebill .lab{font-size:calc(17px * var(--efs));font-weight:700}
+.ebill .val{font-family:var(--f-em);font-weight:900;font-size:calc(26px * var(--efs))}
+.ebill .say2{grid-column:1/-1;font-size:calc(15px * var(--efs));color:#5B5248}
+.ebill .say2 b{color:#9A5B12}
+.etop{display:grid;gap:12px}
+.etop .it{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;background:linear-gradient(180deg,var(--glass-hi),transparent 46%),var(--surface);border:1px solid var(--glass-edge);border-radius:var(--radius-l);padding:14px 16px}
+.etop .rk2{grid-row:span 2;width:calc(44px * var(--efs));height:calc(44px * var(--efs));border-radius:50%;display:grid;place-items:center;background:var(--text);color:var(--bg);font-family:var(--f-em);font-weight:900;font-size:calc(20px * var(--efs))}
+.etop b{font-family:var(--f-em);font-size:calc(22px * var(--efs))}
+.etop .bar2{height:14px;border-radius:7px;background:var(--hot)}
+.etop .note2{grid-column:2;font-size:calc(15px * var(--efs));color:var(--soft)}
+.edo{display:grid;gap:12px}
+.edo button{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;text-align:left;width:100%;border:3px solid var(--line);background:var(--surface);color:var(--text);border-radius:var(--radius-l);padding:16px}
+.edo button .bx{grid-row:span 2;width:calc(40px * var(--efs));height:calc(40px * var(--efs));border-radius:12px;border:3px solid var(--line);display:grid;place-items:center;font-size:calc(22px * var(--efs));color:#2E2A26}
+.edo button[aria-pressed="true"]{border-color:var(--mint);background:color-mix(in srgb,var(--mint) 18%,var(--surface))}
+.edo button[aria-pressed="true"] .bx{background:var(--mint);border-color:var(--mint)}
+.edo b{font-family:var(--f-em);font-size:calc(21px * var(--efs))}
+.edo small{font-size:calc(15px * var(--efs));color:var(--soft)}
+.ecall{background:linear-gradient(180deg,var(--glass-hi),transparent 46%),var(--surface);border:1px solid var(--glass-edge);border-radius:var(--radius-l);padding:18px}
+.calln{display:flex;align-items:center;gap:14px;min-height:72px;padding:12px 20px;border-radius:999px;background:var(--hot-t);color:#F6F1E7;text-decoration:none;font-size:calc(20px * var(--efs));font-weight:700;width:fit-content}
+.calln svg{width:30px;height:30px}
+.calln b{font-family:var(--f-em);font-size:1.4em;letter-spacing:.06em;margin-left:4px}
+.ecall ol{margin:14px 0 6px;padding-left:1.3em;font-size:calc(17px * var(--efs));line-height:1.8}
+.etip{background:linear-gradient(180deg,var(--glass-hi),transparent 46%),var(--surface);border:1px solid var(--glass-edge);border-left:6px solid var(--accent-t);border-radius:var(--radius-l);padding:18px;display:grid;gap:12px}
+.etip p{font-family:var(--f-em);font-weight:700;font-size:calc(21px * var(--efs));line-height:1.6}
+.etip .mk{justify-self:start;min-width:140px}
+
+
+/* =========================================================
+   19. Performance: smooth theme switch, lighter effects on phones
+   ========================================================= */
+html.theme-swap,html.theme-swap *,html.theme-swap *::before,html.theme-swap *::after{transition:none!important}
+html.vt-theme::view-transition-old(root){animation:none}
+html.vt-theme::view-transition-new(root){animation:themefade .34s ease-out both}
+html.vt-theme::view-transition-old(appbar),html.vt-theme::view-transition-new(appbar),html.vt-theme::view-transition-old(drawer),html.vt-theme::view-transition-new(drawer),html.vt-theme::view-transition-old(dock),html.vt-theme::view-transition-new(dock){animation:themefade .34s ease-out both}
+@keyframes themefade{from{opacity:0}}
+@media (pointer:coarse){
+  body::before{animation:none}
+  body::after{mix-blend-mode:normal!important;opacity:.04!important}
+  .appbar{-webkit-backdrop-filter:saturate(160%) blur(12px);backdrop-filter:saturate(160%) blur(12px)}
+  .drawer,.sheet,.dock .in{-webkit-backdrop-filter:saturate(160%) blur(16px);backdrop-filter:saturate(160%) blur(16px)}
+}
+
+/* =========================================================
+   19. Performance on phones / touch devices
+   ========================================================= */
+@media (pointer:coarse),(max-width:899px){
+  body::before{animation:none}
+  body::after{mix-blend-mode:normal!important;opacity:.05!important}
+  .appbar,.dock .in{-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+  .drawer{-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+  .dscrim,.scrim{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .drawer.open a{animation-duration:.3s}
+  .view{contain:layout paint}
+}
+.view.enter{will-change:opacity,transform}
+
+/* language selector */
+.langwrap{flex:none}
+.langsel{min-height:36px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:var(--fs-xs);padding:4px 26px 4px 12px;-webkit-appearance:none;appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 14px) 52%,calc(100% - 9px) 52%;background-size:5px 5px;background-repeat:no-repeat}
+@media (max-width:360px){.theme #themeTxt{display:none}}
+:root[lang="ja"]{--f-body:'Noto Sans JP','Noto Sans TC','Hiragino Sans','Yu Gothic',system-ui,sans-serif;--f-head:'Noto Sans JP','Noto Sans TC',system-ui,sans-serif;--f-serif:'Noto Serif JP','Noto Serif TC','Hiragino Mincho ProN','Yu Mincho',serif}
+:root[lang="en"] .vh,:root[lang="en"] h2{letter-spacing:0}
+
+/* =========================================================
+   11. Preferences & fallbacks
+   ========================================================= */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media (forced-colors:active){.st.on,.pill[aria-pressed="true"],.chip[aria-pressed="true"]{forced-color-adjust:none;outline:3px solid CanvasText}}
+@media (hover:hover){.mon:hover .body{filter:brightness(1.12)} .pill:hover,.chip:hover{border-color:var(--focus)}}
+@media (max-width:340px){.pill{padding:6px 10px}.dock .lvl{display:none}}
+@media (orientation:landscape) and (max-height:500px){:root{--dock-h:58px}.dock svg{width:40px;height:40px}.hero{padding-top:12px}}
+@media print{.dock,.scrim,.sheet,.toast,.dial,.pills,.linkbtn,.btns{display:none!important}body{background:#fff;color:#000;padding:0}}
+</style>
+</head>
+<body>
+<noscript><p style="padding:20px;background:#C8504A;color:#2E2A26">這個頁面需要開啟 JavaScript 才能計算電費。</p></noscript>
+<a class="skip" href="#main">跳到主要內容</a>
+<div class="banner" id="banner" role="alert"></div>
+<header class="appbar">
+  <button class="menu" id="menuBtn" type="button" aria-label="開啟選單" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
+  <p class="apptitle" id="appTitle">電費解碼器</p>
+  <label class="langwrap" data-noi18n><span class="sr">語言 Language</span><select id="langSel" class="langsel"><option value="zh">中文</option><option value="en">EN</option></select></label>
+  <button class="theme" id="theme" type="button" aria-label="切換顏色模式"><span id="themeIco" aria-hidden="true"></span><span id="themeTxt">跟隨系統</span></button>
+</header>
+<div class="dscrim" id="dscrim"></div>
+<nav class="drawer" id="drawer" aria-label="主選單">
+  <a class="brand" href="#why" data-route="why"><span class="bt">家裡幾度 C，<br>是「省」了沒？</span><span class="bs">為什麼做這個網站</span></a>
+  <a href="#decoder" data-route="decoder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="15" width="18" height="5" rx="2" fill="currentColor"/></svg><span>電費解碼器</span></a><a href="#monsters" data-route="monsters"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="5" fill="currentColor"/><circle cx="9.5" cy="10" r="2" fill="var(--bg)"/><circle cx="14.5" cy="10" r="2" fill="var(--bg)"/></svg><span>怪獸圖鑑</span></a><a href="#learn" data-route="learn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h4v-4h4v-4h4V8h4V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg><span>電價小教室</span></a><a href="#challenge" data-route="challenge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l-2 4 2 4H5" fill="currentColor"/><path d="M5 3v18" stroke="currentColor" stroke-width="2"/></svg><span>家庭挑戰</span></a><a href="#history" data-route="history"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="12" width="3" height="8" fill="currentColor"/><rect x="10.5" y="7" width="3" height="13" fill="currentColor"/><rect x="17" y="10" width="3" height="10" fill="currentColor"/></svg><span>帳單紀錄</span></a><a href="#elder" data-route="elder"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="14" font-weight="900" fill="currentColor">大</text><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>長輩模式</span></a><a href="#about" data-route="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>資料來源與設定</span></a>
+  <a class="dsign" href="#why" data-route="why" aria-label="關於作者與這個作品"><span class="hanko">り</span><span>2026<small>關於這個作品</small></span></a>
+</nav>
+
+<main class="page" id="main">
+<div class="view" id="v-decoder" data-title="電費解碼器">
+  <div class="grid">
+    <div class="col">
+      <section class="hero" id="s-bill" aria-labelledby="t-hero">
+        <h1 id="t-hero">家裡幾度 C，是<span class="q">「省」</span>了沒？</h1>
+        <p class="lead">輸入電費單上的度數，看看你家電費在第幾階、哪台電器最耗電</p>
+        <div class="meter">
+          <div class="brand">本期計費度數</div>
+          <div class="odo" id="odo" role="img" aria-label="計費度數"></div>
+          <div class="disc" id="disc" aria-hidden="true"></div>
+          <div class="sub" id="meterSub" aria-live="polite"></div>
+        </div>
+        <div class="dial">
+          <button class="pm" id="minus" type="button" aria-label="減少 50 度">−</button>
+          <input type="range" id="range" min="100" max="3000" step="10" value="1100" aria-label="本期計費度數">
+          <button class="pm" id="plus" type="button" aria-label="增加 50 度">+</button>
+        </div>
+        <button class="linkbtn" id="exactBtn" type="button" aria-expanded="false" aria-controls="exactBox">直接輸入帳單上的度數</button>
+        <form class="exact" id="exactBox" hidden novalidate>
+          <label class="sr" for="exact">計費度數</label>
+          <input id="exact" type="number" inputmode="numeric" min="0" max="9999" step="1" value="1100">
+          <button class="pill" type="submit" aria-pressed="true">好</button>
+        </form>
+        <div class="hint" id="hint" hidden><span>第一次來嗎？拿出最近一張電費單，把「計費度數」輸入上面的電表，往下滑就會一步步告訴你結果。</span><button type="button" id="hintX">知道了</button></div>
+        <div class="pills" role="group" aria-label="帳單是幾個月">
+          <button class="pill" type="button" data-months="2">兩個月一期</button>
+          <button class="pill" type="button" data-months="1">一個月一期</button>
+        </div>
+        <div class="pills" role="group" aria-label="計費季節">
+          <button class="pill" type="button" data-season="s">夏月 6–9 月</button>
+          <button class="pill" type="button" data-season="n">非夏月</button>
+        </div>
+      </section>
+
+      <section class="sec" id="s-stairs" aria-labelledby="t-stairs">
+        <h2 id="t-stairs" style="font-size:var(--fs-h2)">全家一起爬樓梯</h2>
+        <p class="lead">電價分成 6 階：一個月用得越多，多出來的那些度數就越貴。全家的電加在一起算，拖拖上面的滑桿看看。</p>
+        <div class="stairs" id="stairs" aria-hidden="true"></div>
+        <div class="stl" id="stl" aria-hidden="true"></div>
+        <div class="say" id="say" aria-live="polite"></div>
+      </section>
+
+      <section class="sec" id="s-myth" aria-labelledby="t-myth">
+        <h2 id="t-myth" style="font-size:var(--fs-h2)">先試試「隨手關燈」</h2>
+        <p class="lead">大家最常被念的省電方法。每按一下開關，就當作多一盞燈每天早關 1 小時，看看能省多少。</p>
+        <div class="myth">
+          <button class="switch" id="sw" type="button" aria-pressed="false" aria-label="多關一盞燈"><span></span></button>
+          <div aria-live="polite"><div class="n" id="mythN">0 盞</div><div class="v" id="mythV">每月省 NT$0</div><p id="mythP">按按看，要關幾盞燈才省得到一頓火鍋？</p></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="col side">
+      <section class="sec" id="s-house" aria-labelledby="t-house">
+        <h2 id="t-house" style="font-size:var(--fs-h2)">家裡的電費怪獸</h2>
+        <p class="lead">每台電器都是一隻怪獸，越大隻越耗電。點一隻，改成你家的情況，再按「讓它睡覺」看能省多少。</p>
+        <div class="presets" role="group" aria-label="快速套用家庭類型"><span>先選最像你家的：</span><button type="button" class="pill" data-preset="big">三代同堂</button><button type="button" class="pill" data-preset="small">小家庭</button><button type="button" class="pill" data-preset="elder">兩老在家</button></div>
+        <div class="guess" id="guess"><p><b>先猜猜看：</b>你覺得家裡哪一隻最會吃電？</p><div class="chips" id="guessChips"></div><p class="gres" id="gres" aria-live="polite"></p></div>
+        <div class="houseHead"><span>已經睡著的怪獸</span><b id="tamedN" aria-live="polite">0 / 0</b></div>
+        <div class="house" id="house"></div>
+        <p class="tip">這些數字是依台電公開的平均值估算的。家裡有智慧電表的話，台灣電力 App 的「住宅用電分析」會更準。</p>
+        <div class="rank" id="rank"></div>
+      </section>
+    </div>
+  </div>
+
+  <section class="sec" id="s-card" aria-labelledby="t-card">
+    <h2 id="t-card" style="font-size:var(--fs-h2)">給家人的一張卡</h2>
+    <p class="lead">把這期要做的一件事做成卡片。手機長按圖片就能存下來，傳到家庭群組，或印出來貼在冰箱上。</p>
+    <div class="lab" style="color:var(--lav);font-size:var(--fs-s)" id="whoLab">這件事交給誰負責？</div>
+    <div class="who" id="who" role="group" aria-labelledby="whoLab"></div>
+    <div class="btns"><button class="mk" id="mk" type="button">產生 LINE 卡片</button><button class="mk" id="mkA4" type="button" style="background:var(--mint)">產生冰箱卡（A4 列印）</button><button class="mk alt" id="cp" type="button">複製成一段文字</button></div>
+    <p class="tip">冰箱卡是給長輩的版本：白底大字、少用術語，下面留了空格，讓家人每期親手寫上新帳單的度數。</p>
+    <textarea class="copybox" id="copybox" readonly hidden aria-label="可複製的文字"></textarea>
+    <div class="cardwrap"><img id="cardImg" alt="" hidden></div>
+    <canvas id="cv" width="1080" height="1350"></canvas>
+  </section>
+
+  </div>
+
+
+<div class="view readable" id="v-why" data-title="為什麼做這個網站" hidden>
+  <section class="sec whyhero">
+    <h1 class="vh">為什麼做這個網站</h1>
+    <figure class="pq">
+      <blockquote>電費怎麼又這麼多？<br>是不是你半夜又開冷氣？</blockquote>
+      <figcaption>許多家庭收到電費單時，第一句話</figcaption>
+    </figure>
+    <p class="lead">收到電費單，大家的第一個反應常常不是看懂它，而是找人負責。這個網站，就是從這一句話開始的。</p>
+  </section>
+
+  <section class="sec">
+    <h2>我們發現的三件事</h2>
+    <ol class="finds">
+      <li><span class="kn">一</span><div><b>帳單只有一個數字</b><p>它說了用多少、付多少，卻不說是誰、什麼時候、哪一台電器。看不見，只能用猜的。</p></div></li>
+      <li><span class="kn">二</span><div><b>大家抓錯了怪獸</b><p>「隨手關燈」一個月只省幾塊錢。真正耗電的是冷氣的溫度設定、老舊電器，和 24 小時開著卻沒人注意的熱水瓶。</p></div></li>
+      <li><span class="kn">三</span><div><b>電價規則沒人看得懂</b><p>電價分 6 階、按每個月算，帳單卻兩個月一張；全家的電加在一起才決定價錢，最後開冷氣的人就成了兇手。</p></div></li>
+    </ol>
+  </section>
+
+  <section class="sec">
+    <h2>想做到的三件事</h2>
+    <div class="aims">
+      <div class="aim"><span class="seal">懂</span><b>看懂</b><p>把帳單上的一個數字，變成看得懂的故事：在第幾階、哪台最耗電、多用 1 度要多少錢。</p></div>
+      <div class="aim"><span class="seal">做</span><b>做到</b><p>只推「設定一次就一直有效」的方法。光提醒大家省電，平均只能省約 2%；改設定才是主力。</p></div>
+      <div class="aim"><span class="seal">共</span><b>一起</b><p>把「是誰浪費電」變成「我們一起做什麼」。省下來的錢，變成全家的火鍋基金。</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>怎麼知道有沒有用</h2>
+    <p class="lead">不看有多少人瀏覽，看真的改變了什麼。</p>
+    <div class="kpis3">
+      <div><b>登錄</b><span>12/17 前登錄台電節電獎勵的家庭數</span></div>
+      <div><b>設定</b><span>裝上定時器、貼上 27°C 的電器數</span></div>
+      <div><b>少用</b><span>下一期比去年同期少的度數，和台電發獎勵的標準一樣</span></div>
+    </div>
+  </section>
+
+  <section class="sec colophon">
+    <span class="hanko lg">り</span>
+    <div><b>家裡幾度 C，是「省」了沒？</b><p>回應台電千瓦設計獎題目「WATT’S UP: Decoding New Everyday Life」：用台電帳單上的數據當素材，設計讓人看懂、也願意行動的體驗。北科大文化事業發展系課堂作品，2026。</p></div>
+  </section>
+</div>
+
+<div class="view" id="v-monsters" data-title="怪獸圖鑑" hidden>
+  <section class="sec"><h1 class="vh">怪獸圖鑑</h1><p class="lead">家裡會偷偷耗電的電器，每一台都附上台電建議的省電方法。耗電數字會跟著你在「電費解碼器」裡的設定變。</p>
+  <div class="dex" id="dex"></div></section>
+</div>
+
+<div class="view readable" id="v-learn" data-title="電價小教室" hidden>
+  <section class="sec"><h1 class="vh">電價小教室</h1><p class="lead">拖動滑桿，看看一個月多用一點電，電費是怎麼一階一階加上去的。</p>
+    <div class="lesson">
+      <div class="lrow"><b id="lk">400 度 / 月</b><div class="pills" role="group" aria-label="季節"><button class="pill" type="button" data-lseason="s">夏月</button><button class="pill" type="button" data-lseason="n">非夏月</button></div></div>
+      <input type="range" id="lrange" min="0" max="1200" step="10" value="400" aria-label="每月用電度數">
+      <div class="lbar" id="lbar" aria-hidden="true"></div>
+      <div class="ltable" id="ltable"></div>
+      <p class="say" id="lsay"></p>
+    </div>
+  </section>
+  <section class="sec"><h2 class="h2">四件很多人不知道的事</h2>
+    <div class="facts">
+      <div class="fact"><b>99%</b><p>的住家用的是「用越多、每度越貴」的電價，白天和半夜價錢一樣。半夜開冷氣不會比較便宜，也不會比較貴。</p></div>
+      <div class="fact"><b>×2</b><p>電價的階是按「每個月」算的，但大多數帳單是兩個月一張：每月 500 度，帳單上會寫 1,000 度。</p></div>
+      <div class="fact"><b>可選</b><p>住家也可以改申請「時間電價」，半夜比較便宜、傍晚比較貴。划不划算要看全家什麼時候用電，要先試算。</p></div>
+      <div class="fact"><b>二選一</b><p>台電「節電獎勵」（每少 1 度 0.6 元）和台灣電力 App 的「節電集金點」，一個電號只能參加其中一個。</p></div>
+    </div>
+  </section>
+  <section class="sec"><h2>猜電費</h2><p class="lead">這一家一個月用了幾度，你猜猜看要付多少錢？猜得越準分數越高。</p>
+    <div class="guessbill">
+      <p class="gq" id="gbQ"></p>
+      <div class="lrow"><b id="gbV">NT$1,000</b></div>
+      <input type="range" id="gbR" min="0" max="6000" step="10" value="1000" aria-label="猜的電費金額">
+      <div class="btns" style="grid-template-columns:1fr 1fr"><button class="mk" type="button" id="gbGo">就猜這個</button><button class="mk alt" type="button" id="gbNext">換一題</button></div>
+      <p class="say" id="gbSay" hidden></p>
+    </div>
+  </section>
+  <section class="sec"><h2 class="h2">小測驗</h2><p class="lead">五題是非題，答完馬上看解答。</p><div id="quiz"></div></section>
+</div>
+
+<div class="view readable" id="v-challenge" data-title="家庭挑戰" hidden>
+  <section class="sec"><h1 class="vh">家庭挑戰</h1><p class="lead">六件事，每件只要做一次就會一直省電。分給家人負責，全部完成就一起去吃火鍋。</p>
+    <div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--surface)" stroke-width="14"/><circle id="ringArc" cx="60" cy="60" r="50" fill="none" stroke="var(--mint)" stroke-width="14" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314" transform="rotate(-90 60 60)"/></svg><div><b id="ringN">0 / 6</b><p id="ringP">還沒開始</p></div></div>
+    <div class="missions" id="missions"></div>
+  </section>
+  <section class="sec"><h2>深夜巡邏</h2><p class="lead">凌晨兩點，全家都睡了。20 秒內，點掉那些不該亮著的電器；但冰箱和有人在睡的房間冷氣，可別關。</p>
+    <div class="patrol" id="patrol" aria-live="polite"></div>
+    <div class="phead"><b id="pScore">0 分</b><span id="pTime">20 秒</span><button class="mk" type="button" id="pStart">開始巡邏</button></div>
+    <p class="say" id="pSay" hidden></p>
+  </section>
+  <section class="sec"><h2>我的徽章</h2><p class="lead">玩遍整個網站，就能把它們收齊。</p><div class="badges" id="badges"></div></section>
+  <section class="sec"><h2 class="h2">猜下期度數</h2><p class="lead">先猜下一張電費單會是幾度。收到帳單後，到「帳單紀錄」記下實際度數，就會告訴你猜得多準。</p>
+    <form class="predict" id="predict" novalidate><label>我猜下一期是<input id="predIn" type="number" inputmode="numeric" min="0" max="9999"><span>度</span></label><button class="pill" type="submit" aria-pressed="true">存下來</button></form>
+    <p class="say" id="predSay"></p>
+  </section>
+</div>
+
+<div class="view readable" id="v-history" data-title="帳單紀錄" hidden>
+  <section class="sec"><h1 class="vh">帳單紀錄</h1><p class="lead">每次收到電費單就記一筆。每根柱子是那一期平均每個月用的度數；虛線是 500 度，超過這條線，多用的電會貴很多。</p>
+    <form class="addbill" id="addbill" novalidate>
+      <label>帳單月份<input id="hYm" type="month" placeholder="2026-11" pattern="\d{4}-\d{2}"></label>
+      <label>計費度數<input id="hKwh" type="number" inputmode="numeric" min="0" max="9999" placeholder="例：1100"></label>
+      <label>幾個月一期<select id="hM"><option value="2">兩個月</option><option value="1">一個月</option></select></label>
+      <button class="mk" type="submit">記一筆</button>
+    </form>
+    <p class="tip" id="hMsg" aria-live="polite"></p>
+    <div class="chart" id="chart"></div>
+    <div class="result" id="hSummary" aria-live="polite"></div>
+    <div class="hlist" id="hList"></div>
+    <button class="linkbtn" id="hSample" type="button" style="padding-left:0">放入範例資料試試看</button>
+  </section>
+
+</div>
+
+<div class="view elder readable" id="v-elder" data-title="長輩模式" hidden>
+  <section class="sec"><h1 class="vh">長輩模式</h1>
+    <div class="pills" role="group" aria-label="字的大小" style="justify-content:flex-start"><button class="pill" type="button" data-esize="l">大字</button><button class="pill" type="button" data-esize="xl">特大字</button></div>
+    <button class="speak" id="eSpeak" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>唸給我聽</span></button>
+    <div class="etiles" id="etiles"></div>
+  </section>
+
+  <section class="sec"><h2>電費單上，只要看兩個數字</h2>
+    <div class="ebill" id="ebill"></div>
+  </section>
+
+  <section class="sec"><h2>家裡最耗電的三台</h2>
+    <div class="etop" id="etop"></div>
+    <p class="tip">數字是估算。年輕人可以在「電費解碼器」裡改成你家的實際情況。</p>
+  </section>
+
+  <section class="sec"><h2>今天就能做的三件事</h2>
+    <div class="edo" id="edo"></div>
+  </section>
+
+  <section class="sec"><h2>打一通電話，就能領獎勵</h2>
+    <div class="ecall">
+      <a class="calln" href="tel:1911"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z" fill="currentColor"/></svg><span>台電客服 <b>1911</b></span></a>
+      <ol><li>跟客服說：「我要登錄<b>節電獎勵</b>。」</li><li>報上<b>電號</b>：在電費單的左上角，11 個數字。</li><li>之後每期只要比去年同期少用 1 度，就少繳 0.6 元。</li></ol>
+      <p class="tip">2026 年要在 12 月 17 日前登錄。也可以到台電服務所辦理，或請家人上網登錄。</p>
+    </div>
+  </section>
+
+  <section class="sec"><h2>今天的小知識</h2>
+    <div class="etip"><p id="eTip"></p><button class="mk alt" type="button" id="eTipN">下一則</button></div>
+  </section>
+
+  <section class="sec"><h2>冰箱卡</h2><p class="lead">印出來貼在冰箱上，每期在空格寫下新的度數。</p>
+    <div class="btns" style="grid-template-columns:1fr"><button class="mk" id="eA4" type="button">產生冰箱卡（A4）</button></div>
+    <div class="cardwrap"><img id="eImg" alt="" hidden></div>
+  </section>
+</div>
+
+<div class="view readable" id="v-about" data-title="資料來源與設定" hidden>
+  <section class="sec"><h1 class="vh">資料來源與設定</h1>
+    <h2 class="h2">參考了哪些設計</h2>
+    <ul class="refs">
+      <li><b>台灣電力 App「電力集點」</b>：預測下期用電、和去年同期比較的集點活動 → 本站的「猜下期度數」和「帳單紀錄」。</li>
+      <li><b>英國 Octopus Energy「Saving Sessions」</b>：把省電變成限時活動和遊戲 → 「家庭挑戰」與「讓怪獸睡覺」。</li>
+      <li><b>東京電力「でんき家計簿」</b>：兩年用電圖表、同類家庭比較、省電建議 → 「帳單紀錄」圖表和「怪獸圖鑑」。</li>
+      <li><b>美國 Opower 家庭用電報告</b>：研究顯示「和別人比較」平均能省約 2% → 本站顯示「全台平均」做比較，但更依賴一次設定好的預設值。</li>
+    </ul>
+    <h2 class="h2">數據來源</h2>
+    <p class="tip" style="font-size:var(--fs-s)">2026 住宅累進電價與夏月費率（台電）；2025 住宅平均每月用電非夏月 308 度、夏月 418 度（台電）；熱水瓶每天約 2 度、定時約省 36%；15 年以上冰箱每月約 68 度、一級能效約 23 度；儲熱式電熱水器待機每年約 1,800 度；機上盒待機每年約 131 度；冷氣每調高 1°C 約省 6%（以上台電公開資料）；住宅電力排碳係數每度 0.471 公斤（經濟部能源署，2025 年度）；節電獎勵每度 0.6 元，2026/12/17 前登錄；汰舊換新補助每台 3,000 元，2026/12/31 前購買。家電數字為估算，僅供家人討論。</p>
+  <p class="tip" style="margin-top:20px">你輸入的度數和設定只存在這台手機的瀏覽器裡，不會上傳到任何地方。</p>
+  <button class="linkbtn" id="reset" type="button" style="padding-left:0">清除我的資料，重新開始</button>
+  </section>
+</div>
+  <a class="sign" href="#why" aria-label="作者 り，2026，關於這個作品"><span class="hanko sm">り</span>2026</a>
+</main>
+
+<div class="dock" aria-live="polite">
+  <div class="in">
+    <svg id="pot" viewBox="0 0 52 52" aria-hidden="true"><path d="M8 26h36a18 18 0 0 1-36 0z" fill="currentColor"/><rect x="4" y="23" width="44" height="5" rx="2.5" fill="currentColor"/><path id="steam" d="M18 18c-3-4 3-6 0-10M26 18c-3-4 3-6 0-10M34 18c-3-4 3-6 0-10" stroke="#7FA77A" stroke-width="3" fill="none" stroke-linecap="round" opacity="0"/><rect id="potFill" x="10" y="40" width="32" height="0" fill="#E2A33B"/></svg>
+    <div class="t"><small id="savedLab">讓怪獸睡覺，每期帳單可以省</small><b id="saved">NT$0</b></div>
+    <div class="lvl" id="lvl"></div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shName" tabindex="-1">
+  <button class="close" id="shClose" type="button" aria-label="關閉">✕</button>
+  <h3 id="shName"></h3>
+  <div class="bubble"><svg id="shAv" viewBox="-40 -40 80 80" aria-hidden="true"></svg><p id="shSay"></p></div>
+  <div class="kw" id="shKw"></div>
+  <p class="why" id="shWhy"></p>
+  <div id="shOpts"></div>
+  <button class="tame" id="shTame" type="button"></button>
+  <p class="note" id="shNote"></p>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="egg" id="egg" role="dialog" aria-modal="true" aria-labelledby="eggT" hidden>
+  <div class="eggin">
+    <svg viewBox="0 0 120 120" aria-hidden="true" class="trophy"><circle cx="60" cy="60" r="56" fill="#E2A33B"/><circle cx="60" cy="60" r="44" fill="#F6F1E7"/><path d="M60 26l9 20 22 2-17 14 5 22-19-11-19 11 5-22-17-14 22-2z" fill="#C8504A"/></svg>
+    <p class="eggk">隱藏成就解鎖</p>
+    <h2 id="eggT">關燈大師</h2>
+    <p id="eggP"></p>
+    <p class="eggs">徽章已收進「家庭挑戰」的徽章牆。</p>
+    <button class="mk" type="button" id="eggX">好啦，我去裝定時器</button>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* =========================================================
+   CONFIG — all numbers in one place (sources in footer)
+   ========================================================= */
+var CFG={
+  tiers:[120,330,500,700,1000,Infinity],
+  rate:{s:[1.78,2.55,3.80,5.14,6.44,8.86],n:[1.78,2.26,3.13,4.24,5.27,7.03]},
+  tierLabel:['≤120','121–330','331–500','501–700','701–1000','1001+'],
+  avg:{s:418,n:308},
+  kwhMin:0,kwhMax:9999,rangeMin:100,rangeMax:3000,
+  lampKwh:0.3,               // 10 W × 1 h × 30 days
+  reward:0.6,co2:0.471,          // kg CO2e per 度, residential, 2025 (MOEA)
+
+  storeKey:'degreesAtHome.v1'
+};
+var ACK={'5年內':0.8,'5–10年':1.0,'10年以上':1.3};
+function acKwh(o,s,t){return ACK[o.age]*o.h*30*(1+0.06*(27-t))*(s==='s'?1:0.25)}
+var APPLIANCES=[
+ {id:'ac1',name:'臥室冷氣',kind:'ac',x:70,y:62,def:{has:true,h:5,t:25,age:'5–10年'},
+  opts:[['h','每天開幾小時',[2,4,5,6,8,10],' 小時'],['t','設定溫度',[24,25,26,27,28],'°C'],['age','機齡',['5年內','5–10年','10年以上'],'']],
+  kwh:function(o,s){return acKwh(o,s,o.t)},tamed:function(o,s){return acKwh(o,s,Math.max(o.t,27))},
+  q:'凌晨一點陪讀書我不介意，但設 25°C 真的有點太賣力了。',qs:'27°C 加電風扇，我輕鬆多了。',
+  why:'夏天最大的一隻。重點不是誰按了開關，是設定溫度和機齡。',act:'改成 27°C＋電風扇',note:'把設定貼在遙控器背面。每調高 1°C 約省 6%；已經 27°C 以上就沒得省，可以改成清濾網。'},
+ {id:'ac2',name:'客廳冷氣',kind:'ac',x:66,y:170,def:{has:true,h:3,t:26,age:'10年以上'},
+  opts:[['h','每天開幾小時',[0,2,3,4,6,8],' 小時'],['t','設定溫度',[24,25,26,27,28],'°C'],['age','機齡',['5年內','5–10年','10年以上'],'']],
+  kwh:function(o,s){return acKwh(o,s,o.t)},tamed:function(o,s){return acKwh(o,s,Math.max(o.t,27))},
+  q:'我在客廳吹了很多年，年紀大了，喘得比較用力。',qs:'27°C 就好，大家一樣涼。',
+  why:'全家一起吹的那台。老冷氣比一級能效耗電多很多。',act:'改成 27°C＋電風扇',note:'10 年以上的冷氣，汰換有每台 3,000 元補助（2026/12/31 前購買）。'},
+ {id:'fr',name:'冰箱',kind:'fr',x:236,y:200,def:{has:true,age:'15年以上'},
+  opts:[['age','機齡',['10年內','10–15年','15年以上'],'']],
+  kwh:function(o){return {'10年內':25,'10–15年':45,'15年以上':68}[o.age]},tamed:function(){return 23},
+  q:'我 24 小時沒休息過，而且年紀越大越會吃電。',qs:'新來的那台一個月只要 23 度，我可以退休了。',
+  why:'24 小時不休息。15 年以上的老冰箱，耗電可以是一級能效的 2.5 倍以上。',act:'換成一級能效',note:'唯一要花大錢的一項：新冰箱以 2.5 萬元、扣補助 3,000 元估算，要好幾年才回本。還能用的話，先讓別隻怪獸睡覺。'},
+ {id:'ket',name:'熱水瓶',kind:'ket',x:306,y:208,def:{has:true,c:1},
+  opts:[['c','幾台',[1,2],'']],kwh:function(o){return 60*o.c},tamed:function(o){return 60*o.c*0.64},
+  q:'整晚一直重新燒水，可是早上才有人喝。',qs:'晚上睡覺，清晨六點前就煮好，茶照喝。',
+  why:'整夜反覆加熱保溫，一天約 2 度。沒人看見，所以也沒人怪它。',act:'加定時器，晚上睡覺',note:'台電：定時加熱約省 36%。先試試你家熱水瓶斷電再通電後，會不會自己重新煮沸。'},
+ {id:'wh',name:'電熱水器',kind:'wh',x:270,y:72,def:{has:false,c:1},
+  opts:[['c','幾台',[1,2],'']],kwh:function(o){return 150*o.c},tamed:function(o){return 75*o.c},
+  q:'沒人洗澡的時候，我也一直把水保溫著。',qs:'洗澡前一小時才叫我起床就好。',
+  why:'儲熱式電熱水器 24 小時保溫，待機一年約 1,800 度，是最大的隱形怪獸。',act:'加定時器，洗澡前才加熱',note:'以省一半保溫電估算。用瓦斯熱水器的家庭沒有這隻。'},
+ {id:'stb',name:'機上盒',kind:'stb',x:150,y:250,def:{has:true,c:1},
+  opts:[['c','幾台',[1,2,3],'']],kwh:function(o){return 11*o.c},tamed:function(){return 0},
+  q:'大家以為我關機了，其實我一直醒著。',qs:'開關一按，我就真的睡了。',
+  why:'待機時幾乎跟開著一樣耗電，一年約 131 度。',act:'接開關延長線，睡前關',note:'零成本，按一下就好。'}
+];
+var PRESETS={
+  big:{ac1:{has:true,h:5,t:25,age:'5–10年'},ac2:{has:true,h:3,t:26,age:'10年以上'},fr:{has:true,age:'15年以上'},ket:{has:true,c:1},wh:{has:false,c:1},stb:{has:true,c:1}},
+  small:{ac1:{has:true,h:4,t:26,age:'5–10年'},ac2:{has:true,h:2,t:26,age:'5年內'},fr:{has:true,age:'10年內'},ket:{has:true,c:1},wh:{has:false,c:1},stb:{has:true,c:1}},
+  elder:{ac1:{has:true,h:2,t:27,age:'10年以上'},ac2:{has:true,h:2,t:27,age:'10年以上'},fr:{has:true,age:'15年以上'},ket:{has:true,c:1},wh:{has:false,c:1},stb:{has:true,c:2}}};
+var TIPS={
+  ac1:['設定 26–28°C，搭配電風扇或循環扇','每 2–3 週清洗一次濾網','白天拉上窗簾，擋住陽光照進來的熱'],
+  ac2:['設定 26–28°C，搭配電風扇或循環扇','每 2–3 週清洗一次濾網','10 年以上的老冷氣，汰換可申請每台 3,000 元補助（2026/12/31 前購買）'],
+  fr:['背面和兩側留 10 公分以上散熱空間','冷藏放七、八分滿就好','熱食放涼再放進去，減少開門次數'],
+  ket:['加定時器：晚上休眠，起床前煮好','保溫溫度設 90°C 比 98°C 約省 25%','水不必一直裝滿，約一半就好'],
+  wh:['加定時器：洗澡前一小時才加熱','長時間出門時關掉電源','用瓦斯熱水器的家庭沒有這隻'],
+  stb:['接在有開關的延長線上，睡前一起關','電視、音響也接同一條','不看的時候按一下就好，零成本']};
+var MISSIONS=[
+  ['ket','熱水瓶裝定時器','晚上休眠，清晨自動煮好。'],
+  ['ac','冷氣遙控器貼「27°C＋電風扇」','把預設值貼在遙控器背面。'],
+  ['filter','清一次冷氣濾網','之後每 2–3 週清一次。'],
+  ['stb','機上盒改接開關延長線','睡前按一下就好。'],
+  ['fridge','冰箱離牆 10 公分','背面和兩側都要留空間散熱。'],
+  ['reward','登錄台電節電獎勵','2026/12/17 前；和 App 節電集金點只能二選一。']];
+var QUIZ=[
+  ['住家半夜開冷氣，每度電會比白天便宜嗎？',['會，半夜是離峰','不會，一般住宅白天晚上同價'],1,'約 99% 的住家，白天晚上電價一樣；只有另外申請「時間電價」的家庭，半夜才比較便宜。'],
+  ['帳單寫「計費度數 1,000 度」、兩個月一期，每月是幾度？',['1,000 度','500 度'],1,'電價的階是按每個月算的，兩個月一張的帳單要先除以 2。'],
+  ['一盞 10 瓦 LED 每天早關 1 小時，一個月大約省多少？',['不到 NT$5','大約 NT$100'],0,'一個月約 0.3 度，就算用最貴的夏月費率也不到 3 元。'],
+  ['24 小時保溫的 10 公升熱水瓶，一天大約用幾度電？',['約 0.2 度','約 2 度'],1,'台電：一天約 2 度，一年約 730 度。加定時器約省 36%。'],
+  ['電費高了，最後開冷氣的人要付比較貴的那幾度嗎？',['是，他把全家推上高價那一階','不是，全家的電加總後才計價'],1,'電費看的是全家加起來的總度數，沒有哪一個人用的那一度特別貴。']];
+var ACTIONS={ac1:['冷氣設 27°C＋電風扇','一樣涼，電費少一截'],ac2:['冷氣設 27°C＋電風扇','一樣涼，電費少一截'],fr:['換一台省電冰箱','補助到 12/31'],ket:['熱水瓶晚上睡覺','清晨自動煮好，茶照喝'],wh:['熱水器洗澡前才加熱','定時器幫我們記'],stb:['睡前關機上盒開關','一個開關就好']};
+var WHO=['阿公','阿嬤','爸爸','媽媽','我','全家'];
+
+/* =========================================================
+   UTIL
+   ========================================================= */
+function $(id){return document.getElementById(id)}
+function clamp(v,a,b){v=Number(v);if(!isFinite(v))v=a;return Math.min(b,Math.max(a,v))}
+function fmt(n){n=Math.round(Number(n)||0);try{return n.toLocaleString('zh-TW')}catch(e){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',')}}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+var mq=window.matchMedia?function(q){return window.matchMedia(q).matches}:function(){return false};
+function reduced(){return mq('(prefers-reduced-motion: reduce)')}
+var canAnimate=typeof Element!=='undefined'&&!!Element.prototype.animate;
+var raf=window.requestAnimationFrame?window.requestAnimationFrame.bind(window):function(f){return setTimeout(function(){f(Date.now())},16)};
+var now=window.performance&&performance.now?function(){return performance.now()}:function(){return Date.now()};
+var store={get:function(){try{return JSON.parse(localStorage.getItem(CFG.storeKey)||'null')}catch(e){return null}},
+           set:function(v){try{localStorage.setItem(CFG.storeKey,JSON.stringify(v))}catch(e){}}};
+
+/* =========================================================
+   MODEL — pure functions, no DOM
+   ========================================================= */
+var Model={
+  tierOf:function(k){for(var i=0;i<CFG.tiers.length;i++)if(k<=CFG.tiers[i])return i;return CFG.tiers.length-1},
+  monthBill:function(k,s){var t=0,p=0,r=CFG.rate[s];for(var i=0;i<CFG.tiers.length;i++){var c=CFG.tiers[i];t+=Math.max(0,Math.min(k,c)-p)*r[i];p=c;if(k<=c)break}return t},
+  base:function(a,st){var o=st.app[a.id];return o.has?a.kwh(o,st.season):0},
+  est:function(a,st){var o=st.app[a.id];return o.has?(o.tamed?a.tamed(o,st.season):a.kwh(o,st.season)):0},
+  compute:function(st){
+    var m=st.kwh/st.months,ti=Model.tierOf(m),tot=0,cut=0,rows=[];
+    APPLIANCES.forEach(function(a){var b=Model.base(a,st),e=Model.est(a,st);tot+=e;cut+=b-e;rows.push({a:a,base:b,est:e})});
+    var nm=Math.max(0,m-cut),nti=Model.tierOf(nm);
+    var billNow=Model.monthBill(m,st.season)*st.months,billNew=Model.monthBill(nm,st.season)*st.months;
+    return {m:m,ti:ti,tot:tot,cut:cut,nm:nm,nti:nti,rows:rows,other:Math.max(0,m-tot),billNow:billNow,save:billNow-billNew,
+            rate:CFG.rate[st.season][ti],reward:cut*st.months*CFG.reward};
+  }
+};
+
+/* =========================================================
+   STATE — validated, persisted
+   ========================================================= */
+function defaultState(){var app={};APPLIANCES.forEach(function(a){var o={tamed:false};for(var k in a.def)o[k]=a.def[k];app[a.id]=o});
+  return {kwh:1100,months:2,season:(function(){var m=new Date().getMonth()+1;return m>=6&&m<=9?'s':'n'})(),app:app,who:'阿公',lamps:0,guess:null,lastYear:null,newBill:null,theme:'auto',preset:'big',seenHint:false,lang:(function(){var n=(navigator.language||'zh').toLowerCase();return n.indexOf('en')===0?'en':'zh'})(),badges:{},patrolBest:0,history:[],pred:null,missions:{},quiz:{},esize:'l',lk:400}}
+function sanitize(raw){var d=defaultState();if(!raw||typeof raw!=='object')return d;
+  d.kwh=isFinite(Number(raw.kwh))&&raw.kwh!==''&&raw.kwh!==null?clamp(raw.kwh,CFG.kwhMin,CFG.kwhMax):1100;d.months=raw.months===1?1:2;d.season=raw.season==='n'?'n':'s';
+  if(WHO.indexOf(raw.who)>=0)d.who=raw.who;
+  if(APPLIANCES.some(function(a){return a.id===raw.guess}))d.guess=raw.guess;
+  ['lastYear','newBill'].forEach(function(k){if(raw[k]!=null&&isFinite(Number(raw[k])))d[k]=clamp(raw[k],0,CFG.kwhMax)});
+  d.lamps=clamp(raw.lamps,0,999)|0;d.checkEdited=!!raw.checkEdited;
+  if(Array.isArray(raw.history))d.history=raw.history.filter(function(h){return h&&/^\d{4}-\d{2}$/.test(h.ym)&&isFinite(Number(h.kwh))}).slice(0,60).map(function(h){return{ym:h.ym,kwh:clamp(h.kwh,0,CFG.kwhMax),months:h.months===1?1:2}});
+  if(raw.pred&&isFinite(Number(raw.pred.kwh)))d.pred={kwh:clamp(raw.pred.kwh,0,CFG.kwhMax),at:String(raw.pred.at||'')};
+  if(raw.missions&&typeof raw.missions==='object')MISSIONS.forEach(function(m){var r=raw.missions[m[0]];if(r)d.missions[m[0]]={done:!!r.done,who:WHO.indexOf(r.who)>=0?r.who:null}});
+  if(raw.quiz&&typeof raw.quiz==='object')QUIZ.forEach(function(q,i){var a=raw.quiz[i];if(a===0||a===1)d.quiz[i]=a});
+  d.esize=raw.esize==='xl'?'xl':'l';d.badges={};if(raw.badges&&typeof raw.badges==='object')['lamp','patrol','bill','quiz','tame','mission'].forEach(function(k){if(raw.badges[k])d.badges[k]=true});d.patrolBest=clamp(raw.patrolBest||0,0,999)|0;d.seenHint=!!raw.seenHint;if(['zh','en'].indexOf(raw.lang)>=0)d.lang=raw.lang;d.lk=clamp(raw.lk==null?400:raw.lk,0,1200);if(['auto','light','dark'].indexOf(raw.theme)>=0)d.theme=raw.theme;if(PRESETS[raw.preset]||raw.preset===null)d.preset=raw.preset;
+  APPLIANCES.forEach(function(a){var r=raw.app&&raw.app[a.id];if(!r)return;var o=d.app[a.id];o.has=!!r.has;o.tamed=!!r.tamed&&o.has;
+    a.opts.forEach(function(op){var k=op[0],vals=op[2];if(vals.some(function(v){return String(v)===String(r[k])}))o[k]=typeof vals[0]==='number'?Number(r[k]):r[k]})});
+  return d}
+var S=sanitize(store.get());
+var prev={ti:null,nti:null,save:0};
+
+/* =========================================================
+   VIEW: meter
+   ========================================================= */
+var Meter={cols:[],ang:0,
+  build:function(){var odo=$('odo'),self=this;odo.innerHTML='';for(var i=0;i<4;i++){var c=document.createElement('div');c.className='c';var s=document.createElement('div');s.className='s';
+    for(var d=0;d<10;d++){var sp=document.createElement('span');sp.textContent=d;s.appendChild(sp)}c.appendChild(s);odo.appendChild(c);self.cols.push(s)}
+    var u=document.createElement('span');u.className='u';u.textContent='度';odo.appendChild(u)},
+  render:function(st,r){var s=String(Math.round(st.kwh)).padStart?String(Math.round(st.kwh)).padStart(4,'0'):('0000'+Math.round(st.kwh)).slice(-4);
+    this.cols.forEach(function(c,i){c.style.transform='translateY('+(-Number(s[i])*1.2)+'em)'});
+    $('odo').setAttribute('aria-label','計費度數 '+st.kwh+' 度');
+    this.ang+=17;$('disc').style.transform='rotate('+this.ang+'deg)';
+    $('meterSub').innerHTML=(st.months===2?'兩個月一期，平均':'這一個月')+'<b>每月 '+fmt(r.m)+' 度</b><br>本期電費約 NT$'+fmt(r.billNow);
+    var rg=$('range');if(document.activeElement!==rg)rg.value=clamp(st.kwh,CFG.rangeMin,CFG.rangeMax);
+    document.querySelectorAll('[data-months]').forEach(function(b){b.setAttribute('aria-pressed',String(Number(b.dataset.months)===st.months))});
+    document.querySelectorAll('[data-season]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.season===st.season))});}
+};
+
+/* =========================================================
+   VIEW: stairs
+   ========================================================= */
+var Stairs={
+  build:function(){var el=$('stairs'),h='';for(var i=0;i<6;i++)h+='<div class="st'+(i===5?' top':'')+'" style="height:'+(18+i*14)+'%"><b></b></div>';
+    h+='<div class="fam" id="fam"><i style="background:#E2A33B"></i><i style="background:#7FA77A"></i><i style="background:#C8504A"></i><i style="background:#D9D0BF"></i></div>';
+    h+='<div class="ghost" id="ghost"><em>改完之後</em><i></i><i></i><i></i><i></i></div>';el.innerHTML=h;
+    $('stl').innerHTML=CFG.tierLabel.map(function(l){return '<span>'+l+'</span>'}).join('')},
+  place:function(el,t){el.style.left=((t+0.5)/6*100)+'%';el.style.bottom='calc('+(18+t*14)+'% + 12px)'},
+  render:function(st,r){var steps=$('stairs').querySelectorAll('.st');
+    for(var i=0;i<steps.length;i++){steps[i].className='st'+(i===5?' top':'')+(i===r.ti?' on':i<r.ti?' past':'');steps[i].firstChild.textContent=CFG.rate[st.season][i]}
+    this.place($('fam'),r.ti);var g=$('ghost');if(r.nti<r.ti){g.style.opacity=1;this.place(g,r.nti)}else g.style.opacity=0;
+    if(prev.ti!==null&&r.ti!==prev.ti){var el=$('stairs');el.classList.remove('shake');void el.offsetWidth;
+      if(r.ti>prev.ti){el.classList.add('shake');try{navigator.vibrate&&navigator.vibrate(60)}catch(e){}toast('跳上第 '+(r.ti+1)+' 階！多用 1 度要 '+r.rate+' 元')}
+      else toast('退回第 '+(r.ti+1)+' 階',true)}
+    var avg=CFG.avg[st.season],t='';
+    if(st.months===2)t+='帳單上的 '+fmt(st.kwh)+' 度，其實是<em>每月 '+fmt(r.m)+' 度</em>。';
+    if(r.ti>=3)t+='全家在第 '+(r.ti+1)+' 階，現在每多用 1 度要 <em>'+r.rate+' 元</em>。這不是最後開冷氣那個人的錯，是全家的電加起來才到這裡。';
+    else if(r.ti===2)t+='在第 3 階，離 500 度的跳階線還有 '+fmt(500-r.m)+' 度。';
+    else t+='你家用電不多，電價分階對你影響小。想省電，先看 24 小時都開著的電器。';
+    if(st.months===2)t+='<small>如果帳單剛好跨過 6 月或 9 月底（夏天電價的開始和結束），實際金額會和這裡的估算有點差距。</small>';
+    t+='<small>全台住宅'+(st.season==='s'?'夏月':'非夏月')+'平均每月 '+avg+' 度，你家'+(r.m>=avg?'多':'少')+' '+fmt(Math.abs(r.m-avg))+' 度。</small>';
+    $('say').innerHTML=t}
+};
+
+/* =========================================================
+   VIEW: myth switch
+   ========================================================= */
+var Myth={render:function(st,r){var n=st.lamps,v=n*CFG.lampKwh*r.rate;
+  $('mythN').textContent=n+' 盞';$('mythV').textContent='每月省 NT$'+(v<10?v.toFixed(1):fmt(v));
+  var ket=APPLIANCES.filter(function(a){return a.id==='ket'})[0],o=st.app.ket;var kv=(ket.kwh(o,st.season)-ket.tamed(o,st.season))*r.rate;
+  var need=Math.max(1,Math.ceil(kv/(CFG.lampKwh*r.rate)));Myth.need=need;
+  var msg=n<3?'按按看，要關幾盞燈才省得到一頓火鍋？':'要關 '+need+' 盞燈，才抵得上讓熱水瓶晚上睡覺（每月約 NT$'+fmt(kv)+'）。關燈沒錯，只是不是重點。';
+  if(n>=10&&n<need){var left=need-n;msg=(n<25?'手指還好嗎？':n<50?'你是認真的嗎……':'快到了，撐住！')+'還差 '+left+' 次就追上熱水瓶。'}
+  if(n>=need)msg='你真的按了 '+n+' 次。恭喜追平熱水瓶睡一個月的成果——而它只需要一個定時器。';
+  $('mythP').textContent=msg}};
+
+/* =========================================================
+   VIEW: house + monsters
+   ========================================================= */
+function geo(a){return{ey:a.kind==='fr'?-22:a.kind==='ac'?-3:a.kind==='stb'?-1:-6,sp:a.kind==='ac'?9:6,er:a.kind==='stb'?3:4.5}}
+function shape(a,fill,cls){var c=cls?' class="'+cls+'"':'',f=fill?' fill="'+fill+'"':'';return{
+  ac:'<rect'+c+f+' x="-30" y="-11" width="60" height="22" rx="7"/><line x1="-22" y1="6" x2="22" y2="6" stroke="#2E2A26" stroke-width="2"/>',
+  fr:'<rect'+c+f+' x="-17" y="-34" width="34" height="68" rx="6"/><line x1="-17" y1="-10" x2="17" y2="-10" stroke="#2E2A26" stroke-width="2"/><line x1="14" y1="-30" x2="14" y2="-16" stroke="#2E2A26" stroke-width="2.5"/>',
+  ket:'<rect'+c+f+' x="-13" y="-20" width="26" height="40" rx="10"/><rect x="-7" y="-25" width="14" height="6" rx="2" fill="#2E2A26"/>',
+  wh:'<rect'+c+f+' x="-18" y="-24" width="36" height="48" rx="16"/>',
+  stb:'<rect'+c+f+' x="-18" y="-7" width="36" height="14" rx="4"/>'}[a.kind]}
+function eyes(a){var g=geo(a);return '<circle cx="'+(-g.sp)+'" cy="'+g.ey+'" r="'+g.er+'" fill="#fff"/><circle cx="'+g.sp+'" cy="'+g.ey+'" r="'+g.er+'" fill="#fff"/><circle cx="'+(-g.sp+1)+'" cy="'+(g.ey+1)+'" r="'+g.er/2+'" fill="#2E2A26"/><circle cx="'+(g.sp+1)+'" cy="'+(g.ey+1)+'" r="'+g.er/2+'" fill="#2E2A26"/>'}
+function closed(a){var g=geo(a);return '<path d="M'+(-g.sp-4)+' '+g.ey+'q4 3 8 0M'+(g.sp-4)+' '+g.ey+'q4 3 8 0" stroke="#2E2A26" stroke-width="2" fill="none"/>'}
+function avatar(a,sleep){var sc=a.kind==='fr'?1:a.kind==='ac'?1.1:1.5;return '<g transform="scale('+sc+')">'+shape(a,sleep?'#7FA77A':'#C8504A')+(sleep?closed(a):eyes(a))+'</g>'}
+var House={
+  build:function(){var stars='';for(var i=0;i<18;i++)stars+='<circle cx="'+((i*53)%360)+'" cy="'+((i*29)%14+2)+'" r="'+(i%3?0.8:1.4)+'" fill="#fff" opacity="'+(0.4+(i%4)*0.15)+'"/>';
+    var mons=APPLIANCES.map(function(a){var g=geo(a),lb=a.kind==='fr'?48:a.kind==='ac'?26:a.kind==='stb'?20:34;
+      return '<g class="mon" id="m_'+a.id+'" tabindex="0" role="button" data-id="'+a.id+'" style="transform-origin:'+a.x+'px '+a.y+'px">'+
+      '<circle class="glow" cx="'+a.x+'" cy="'+a.y+'" r="44" fill="url(#gl)"/>'+
+      '<g transform="translate('+a.x+' '+a.y+')"><rect class="hit" x="-34" y="-38" width="68" height="76" rx="12"/><g class="wob">'+shape(a,null,'body')+
+      '<g class="eyes"><g class="blink" style="transform-origin:0 '+g.ey+'px">'+eyes(a)+'</g></g>'+
+      '<g class="sleep" opacity="0">'+closed(a)+'<text class="zzz" x="'+(g.sp+6)+'" y="'+(g.ey-8)+'">Z z</text></g></g></g>'+
+      '<text x="'+a.x+'" y="'+(a.y+lb)+'" text-anchor="middle" font-size="11" fill="#D9D0BF">'+esc(a.name)+'</text>'+
+      '<text x="'+a.x+'" y="'+(a.y+lb+12)+'" text-anchor="middle" font-size="10.5" fill="#E2A33B" font-family="Noto Serif TC,serif" font-weight="700" class="kwlbl" id="k_'+a.id+'"></text></g>'}).join('');
+    $('house').innerHTML='<svg viewBox="0 0 360 300" role="group" aria-label="家裡的電器怪獸，點一隻可以調整">'+
+     '<defs><radialGradient id="gl"><stop offset="0" stop-color="#C8504A" stop-opacity=".55"/><stop offset="1" stop-color="#C8504A" stop-opacity="0"/></radialGradient></defs>'+stars+
+     '<rect x="10" y="20" width="340" height="270" rx="14" fill="#3A352F" stroke="#5E564B" stroke-width="2"/>'+
+     '<line x1="10" y1="120" x2="350" y2="120" stroke="#5E564B" stroke-width="2"/><line x1="190" y1="20" x2="190" y2="290" stroke="#5E564B" stroke-width="2"/>'+
+     '<g font-size="11" fill="#B5AB9A"><text x="22" y="38">臥室 01:00</text><text x="202" y="38">浴室</text><text x="22" y="138">客廳</text><text x="202" y="138">廚房 06:00</text></g>'+
+     '<g fill="#45403A"><rect x="22" y="92" width="74" height="18" rx="5"/><rect x="22" y="84" width="20" height="12" rx="4" fill="#4C463E"/>'+
+     '<rect x="128" y="88" width="50" height="6" rx="2"/><rect x="132" y="94" width="4" height="16"/><rect x="170" y="94" width="4" height="16"/><path d="M142 88l6-12h10l-4 12z" fill="#4C463E"/>'+
+     '<rect x="122" y="36" width="44" height="34" rx="4" fill="#2E2A26" stroke="#5E564B" stroke-width="2"/><circle cx="154" cy="48" r="5" fill="#E2A33B" opacity=".8"/>'+
+     '<rect x="292" y="94" width="50" height="18" rx="8"/><rect x="214" y="44" width="34" height="24" rx="4" fill="#2E2A26" stroke="#5E564B" stroke-width="2"/>'+
+     '<rect x="22" y="246" width="78" height="26" rx="8"/><rect x="22" y="236" width="14" height="36" rx="6"/><rect x="86" y="236" width="14" height="36" rx="6"/>'+
+     '<rect x="118" y="198" width="62" height="36" rx="4" fill="#2E2A26" stroke="#5E564B" stroke-width="2"/><rect x="124" y="256" width="52" height="16" rx="3"/>'+
+     '<rect x="132" y="146" width="44" height="30" rx="4" fill="#2E2A26" stroke="#5E564B" stroke-width="2"/>'+
+     '<rect x="268" y="236" width="80" height="36" rx="4"/><rect x="262" y="230" width="88" height="8" rx="3" fill="#4C463E"/></g>'+
+     '<path d="M150 52 l-26 34 h52z" fill="#E2A33B" opacity=".06"/>'+mons+'</svg>';
+    var h=$('house');
+    h.addEventListener('click',function(e){var m=e.target.closest&&e.target.closest('.mon');if(m)Sheet.open(m.getAttribute('data-id'),m)});
+    h.addEventListener('keydown',function(e){var m=e.target.closest&&e.target.closest('.mon');if(m&&(e.key==='Enter'||e.key===' ')){e.preventDefault();Sheet.open(m.getAttribute('data-id'),m)}})},
+  render:function(st,r){var maxk=1;r.rows.forEach(function(x){if(x.base>maxk)maxk=x.base});
+    r.rows.forEach(function(x){var a=x.a,o=st.app[a.id],el=$('m_'+a.id);if(!el)return;
+      var sc=o.has?0.55+0.75*Math.sqrt(x.est/maxk):0.8;el.style.transform='scale('+sc.toFixed(3)+')';el.style.opacity=o.has?1:0.35;
+      el.querySelector('.body').setAttribute('fill',o.tamed?'#7FA77A':(x.est/maxk>0.5?'#C8504A':'#E3A69E'));
+      el.querySelector('.glow').style.opacity=o.tamed||!o.has?0:Math.min(1,x.est/maxk+0.1);
+      el.querySelector('.eyes').setAttribute('opacity',o.tamed?0:1);el.querySelector('.sleep').setAttribute('opacity',o.tamed?1:0);
+      $('k_'+a.id).textContent=o.has?fmt(x.est)+'度':'家裡有嗎？點我';
+      el.setAttribute('aria-label',a.name+(o.has?('，約每月 '+fmt(x.est)+' 度'+(o.tamed?'，已睡著':'')):'，目前設為沒有'))});
+    document.querySelectorAll('[data-preset]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.preset===st.preset))});
+    var has=APPLIANCES.filter(function(a){return st.app[a.id].has});
+    $('tamedN').textContent=has.filter(function(a){return st.app[a.id].tamed}).length+' / '+has.length;
+    var list=r.rows.filter(function(x){return st.app[x.a.id].has}).sort(function(p,q){return q.est-p.est});
+    var m=r.m||1,h=list.map(function(x){var t=st.app[x.a.id].tamed;return '<button type="button" class="rk'+(t?' tamed':'')+'" data-id="'+x.a.id+'" aria-label="'+esc(x.a.name)+'，約佔 '+Math.round(x.est/m*100)+'%，點開調整"><span>'+esc(x.a.name)+(t?'（睡）':'')+'</span><span class="bar" style="width:'+Math.max(2,x.est/m*100).toFixed(1)+'%"></span><span class="v">'+Math.round(x.est/m*100)+'%</span></button>'}).join('');
+    h+='<div class="rk other"><span>其他</span><span class="bar" style="width:'+Math.max(2,r.other/m*100).toFixed(1)+'%"></span><span class="v">'+Math.round(r.other/m*100)+'%</span></div>';
+    if(r.tot>r.m*1.05)h+='<p class="tip">估算比帳單還多，可能冷氣時數填多了。</p>';
+    $('rank').innerHTML=h}
+};
+
+/* =========================================================
+   VIEW: sheet (dialog with focus trap)
+   ========================================================= */
+var Sheet={cur:null,opener:null,
+  open:function(id,opener){this.cur=APPLIANCES.filter(function(a){return a.id===id})[0];if(!this.cur)return;if(!this.isOpen())Overlay.push();this.opener=opener||document.activeElement;
+    this.paint();$('sheet').classList.add('open');$('scrim').classList.add('open');document.documentElement.classList.add('lock');
+    try{$('main').inert=true}catch(e){}
+    setTimeout(function(){try{$('shTame').focus({preventScroll:true})}catch(e){$('shTame').focus()}},50)},
+  close:function(fromPop){if(!$('sheet').classList.contains('open'))return;if(fromPop!==true)Overlay.pop();$('sheet').classList.remove('open');$('scrim').classList.remove('open');document.documentElement.classList.remove('lock');
+    try{$('main').inert=false}catch(e){}var o=this.opener;if(o&&o.focus)setTimeout(function(){try{o.focus({preventScroll:true})}catch(e){}},60)},
+  isOpen:function(){return $('sheet').classList.contains('open')},
+  paint:function(){var a=this.cur;if(!a)return;var o=S.app[a.id];
+    $('shName').textContent=a.name;$('shSay').textContent=o.tamed?a.qs:a.q;$('shAv').innerHTML=avatar(a,o.tamed);
+    var e=Model.est(a,S);$('shKw').textContent=o.has?'約 '+fmt(e)+' 度 / 月':'家裡沒有這台';$('shKw').classList.toggle('ok',!!o.tamed);
+    $('shWhy').textContent=a.why;
+    var h='<div class="opt"><div class="lab">家裡有這台嗎？</div><div class="chips"><button type="button" class="chip" data-has="1" aria-pressed="'+o.has+'">有</button><button type="button" class="chip" data-has="0" aria-pressed="'+!o.has+'">沒有</button></div></div>';
+    if(o.has)a.opts.forEach(function(op){h+='<div class="opt"><div class="lab">'+op[1]+'</div><div class="chips">'+op[2].map(function(v){return '<button type="button" class="chip" data-k="'+op[0]+'" data-v="'+esc(v)+'" aria-pressed="'+(String(o[op[0]])===String(v))+'">'+esc(v)+op[3]+'</button>'}).join('')+'</div></div>'});
+    $('shOpts').innerHTML=h;
+    var cut=o.has?a.kwh(o,S.season)-a.tamed(o,S.season):0,tb=$('shTame');tb.hidden=!o.has;tb.classList.toggle('on',!!o.tamed);tb.setAttribute('aria-pressed',String(!!o.tamed));
+    tb.innerHTML=o.tamed?'<span>已經睡著了</span><small>'+esc(a.act)+'・點一下叫醒</small>':'<span>讓它睡覺</span><small>'+esc(a.act)+'・每月少 '+fmt(cut)+' 度，一年少排 '+fmt(cut*12*CFG.co2)+' 公斤二氧化碳</small>';
+    $('shNote').textContent=a.note},
+  trap:function(e){if(!Sheet.isOpen()||e.key!=='Tab')return;var f=$('sheet').querySelectorAll('button:not([hidden]),[tabindex="0"]');if(!f.length)return;
+    var first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
+};
+
+/* =========================================================
+   VIEW: dock + effects
+   ========================================================= */
+var tTimer;function toast(t,good){var el=$('toast');el.textContent=L(t);el.classList.toggle('good',!!good);el.classList.add('show');clearTimeout(tTimer);tTimer=setTimeout(function(){el.classList.remove('show')},1900)}
+function fly(cls,from,to,i,mid,dur,extra){var c=document.createElement('div');c.className='fx '+cls;if(extra)c.style.background=extra;document.body.appendChild(c);
+  var anim=c.animate([{transform:'translate('+from[0]+'px,'+from[1]+'px)',opacity:1},{transform:'translate('+mid[0]+'px,'+mid[1]+'px) rotate(200deg)',opacity:1,offset:.6},{transform:'translate('+to[0]+'px,'+to[1]+'px) rotate(420deg)',opacity:cls==='bit'?0:.9}],{duration:dur,delay:i*60,easing:'cubic-bezier(.3,.1,.4,1)',fill:'forwards'});
+  anim.onfinish=function(){c.remove()};setTimeout(function(){if(c.parentNode)c.remove()},dur+i*60+500)}
+function coins(id){if(reduced()||!canAnimate)return;var m=$('m_'+id),p=$('pot');if(!m||!p)return;var a=m.getBoundingClientRect(),b=p.getBoundingClientRect();
+  for(var i=0;i<6;i++){var sx=a.left+a.width/2+(Math.random()-.5)*30,sy=a.top+a.height/2,ex=b.left+16,ey=b.top+14;fly('coin',[sx,sy],[ex,ey],i,[(sx+ex)/2,Math.min(sy,ey)-120],900)}
+  setTimeout(function(){var s=$('saved');s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop')},900)}
+function celebrate(){if(reduced()||!canAnimate)return;var p=$('pot').getBoundingClientRect(),cs=['#E2A33B','#7FA77A','#C8504A','#D9D0BF'];
+  for(var i=0;i<26;i++){var sx=p.left+24,sy=p.top+18,ang=-Math.PI/2+(Math.random()-.5)*2.2,d=110+Math.random()*170;
+    fly('bit',[sx,sy],[sx+Math.cos(ang)*d,sy+Math.sin(ang)*d+90],i%6,[sx+Math.cos(ang)*d,sy+Math.sin(ang)*d],1300,cs[i%4])}}
+var countRaf=null;
+function countTo(el,from,to){if(countRaf)cancelAnimationFrame&&cancelAnimationFrame(countRaf);if(reduced()||Math.abs(from-to)<1){el.textContent='NT$'+fmt(to);return}
+  var t0=now();(function step(){var k=Math.min(1,(now()-t0)/600),e=1-Math.pow(1-k,3);el.textContent='NT$'+fmt(from+(to-from)*e);if(k<1)countRaf=raf(step)})()}
+var Dock={render:function(st,r){countTo($('saved'),prev.save,r.save);
+  $('lvl').innerHTML='<small>改完後</small>第 '+(r.nti+1)+' 階<br><small>每月 '+fmt(r.nm)+' 度</small>';$('savedLab').textContent=r.save>0?'火鍋基金：每期帳單可以省':'還沒有怪獸睡著，點房子裡的怪獸試試';
+  var f=Math.min(1,r.save/800);$('potFill').setAttribute('height',(f*10).toFixed(1));$('potFill').setAttribute('y',(40-f*10).toFixed(1));$('steam').setAttribute('opacity',r.save>0?1:0);
+  if(prev.nti!==null&&r.nti<prev.nti&&r.nti<r.ti){toast('改完之後退回第 '+(r.nti+1)+' 階！',true);celebrate()}}};
+
+/* =========================================================
+   VIEW: card
+   ========================================================= */
+function action(st){var best=null,bv=-1;APPLIANCES.forEach(function(a){var o=st.app[a.id];if(o.has&&o.tamed){var v=Model.base(a,st)-Model.est(a,st);if(v>bv){bv=v;best=a}}});
+  if(best)return ACTIONS[best.id];var top=null,tv=-1;APPLIANCES.forEach(function(a){var v=Model.est(a,st);if(v>tv){tv=v;top=a}});return ['一起看看'+(top?top.name:'帳單'),'它是我們家最大的怪獸']}
+function rr(x,X,Y,W,H,R){x.beginPath();x.moveTo(X+R,Y);x.arcTo(X+W,Y,X+W,Y+H,R);x.arcTo(X+W,Y+H,X,Y+H,R);x.arcTo(X,Y+H,X,Y,R);x.arcTo(X,Y,X+W,Y,R);x.closePath()}
+var FONT_BODY='"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif',FONT_HEAD='"Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif';
+function fit(x,txt,max,weight,start,fam){var fs=start;do{x.font=weight+' '+fs+'px '+fam;fs-=4}while(x.measureText(txt).width>max&&fs>32)}
+var Card={render:function(){var r=Model.compute(S),c=$('cv'),x=c.getContext&&c.getContext('2d');if(!x){toast('這台裝置無法產生圖片，請改用「複製成一段文字」');return}
+  x.fillStyle='#F4EFE6';x.fillRect(0,0,1080,1350);x.fillStyle='#2E2A26';x.fillRect(0,0,1080,14);
+  x.fillStyle='#5B5248';x.font='48px '+FONT_BODY;x.fillText('這期我們家的電',80,130);
+  x.fillStyle='#9A5B12';x.font='900 150px '+FONT_HEAD;x.fillText('第 '+(r.ti+1)+' 階',80,300);
+  x.fillStyle='#2E2A26';fit(x,'每月 '+fmt(r.m)+' 度，多用 1 度要 '+r.rate+' 元',920,'',54,FONT_BODY);x.fillText('每月 '+fmt(r.m)+' 度，多用 1 度要 '+r.rate+' 元',80,390);
+  for(var i=0;i<6;i++){var h=50+i*40;x.fillStyle=i===r.ti?'#E2A33B':i<r.ti?'#CBBFA9':'#E6DECF';rr(x,80+i*155,660-h,140,h,14);x.fill()}
+  var a=action(S);x.fillStyle='#2E2A26';rr(x,60,720,960,380,40);x.fill();
+  x.fillStyle='#8DB487';rr(x,850,770,110,160,46);x.fill();x.strokeStyle='#2E2A26';x.lineWidth=7;x.beginPath();x.arc(885,830,12,.15*Math.PI,.85*Math.PI);x.stroke();x.beginPath();x.arc(925,830,12,.15*Math.PI,.85*Math.PI);x.stroke();
+  x.fillStyle='#8DB487';x.font='900 40px '+FONT_HEAD;x.fillText('Zz',955,760);
+  x.fillStyle='#E7B65C';x.font='46px '+FONT_BODY;x.fillText(S.who+'負責這件事：',110,810);x.fillStyle='#F6F1E7';
+  fit(x,a[0],710,'900',92,FONT_HEAD);x.fillText(a[0],110,930);
+  x.fillStyle='#D9D0BF';x.font='46px '+FONT_BODY;x.fillText(a[1],110,1020);
+  var foot=r.save>0?'每期省 NT$'+fmt(r.save)+' → 火鍋基金':'下一期一起看帳單';x.fillStyle='#4E7A4A';fit(x,foot,920,'900',64,FONT_HEAD);x.fillText(foot,80,1200);
+  x.fillStyle='#7A7064';x.font='30px '+FONT_BODY;x.fillText('家裡幾度 C，是「省」了沒？　估算，僅供家人討論',80,1295);x.textAlign='right';x.fillText('り 2026',1000,1295);x.textAlign='left';
+  var img=$('cardImg');try{img.src=c.toDataURL('image/png')}catch(e){toast('圖片產生失敗，請改用「複製成一段文字」');return}
+  img.alt='家庭用電卡：第 '+(r.ti+1)+' 階，'+S.who+'負責'+a[0];img.hidden=false;
+  try{img.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'center'})}catch(e){img.scrollIntoView()}},
+  a4:function(target){var r=Model.compute(S),W=1240,H=1754,c=document.createElement('canvas');c.width=W;c.height=H;var x=c.getContext&&c.getContext('2d');if(!x){toast('這台裝置無法產生圖片');return}
+    var ink='#2E2A26',m2=S.months===2;
+    x.fillStyle='#FFFFFF';x.fillRect(0,0,W,H);
+    x.fillStyle=ink;fit(x,'我們家的用電樓梯',1080,'900',110,FONT_HEAD);x.fillText('我們家的用電樓梯',80,170);
+    x.font='44px '+FONT_BODY;x.fillStyle='#4E463C';x.fillText('電費按「每月」用多少度，一階一階算。全家一起算。',80,250);
+    var zones=[[0,330,'放心區','#4E7A4A','#E5EEDF'],[331,500,'注意區','#9A5B12','#F7E8C6'],[501,null,'跳階區','#A63A35','#F4DDD8']];
+    zones.forEach(function(z,i){var y=310+i*190;x.fillStyle=z[4];rr(x,80,y,1080,160,28);x.fill();x.lineWidth=8;x.strokeStyle=z[3];rr(x,80,y,1080,160,28);x.stroke();
+      x.fillStyle=z[3];x.font='900 72px '+FONT_HEAD;x.fillText(z[2],120,y+105);
+      x.fillStyle=ink;x.font='500 44px '+FONT_BODY;
+      var rng=i===0?'每月 330 度以下':i===1?'每月 331–500 度':'每月超過 500 度';var bill=m2?(i===0?'帳單上 660 度以下':i===1?'帳單上 661–1,000 度':'帳單上超過 1,000 度'):'';
+      x.fillText(rng,440,y+80);if(bill){x.fillStyle='#4E463C';x.font='40px '+FONT_BODY;x.fillText(bill,440,y+130)}
+      var here=(i===0&&r.m<=330)||(i===1&&r.m>330&&r.m<=500)||(i===2&&r.m>500);
+      if(here){x.fillStyle=ink;rr(x,890,y+38,240,84,42);x.fill();x.fillStyle='#FFFFFF';x.font='900 44px '+FONT_HEAD;x.fillText('我們在這',915,y+95)}});
+    var a=action(S);x.fillStyle=ink;rr(x,80,900,1080,330,36);x.fill();
+    x.fillStyle='#E2A33B';x.font='700 46px '+FONT_HEAD;x.fillText('這期一起做一件事（'+S.who+'負責）',130,980);
+    x.fillStyle='#FFFFFF';fit(x,a[0],980,'900',104,FONT_HEAD);x.fillText(a[0],130,1110);
+    x.fillStyle='#D9D0BF';x.font='46px '+FONT_BODY;x.fillText(a[1],130,1190);
+    x.fillStyle=ink;x.font='900 54px '+FONT_HEAD;x.fillText('每期帳單，寫在這裡',80,1330);
+    x.font='34px '+FONT_BODY;x.fillStyle='#6E6559';x.fillText('新帳單度數',320,1385);x.fillText('比去年同期少',880,1385);
+    x.strokeStyle='#CBBFA9';x.lineWidth=4;x.font='44px '+FONT_BODY;x.fillStyle='#4E463C';
+    for(var i=0;i<3;i++){var y=1470+i*90;x.fillText('____ 月：',80,y);x.beginPath();x.moveTo(320,y+8);x.lineTo(760,y+8);x.stroke();x.fillText('度',780,y);x.beginPath();x.moveTo(880,y+8);x.lineTo(1160,y+8);x.stroke()}
+    x.font='32px '+FONT_BODY;x.fillStyle='#6E6559';x.fillText('比去年同期每少 1 度，台電節電獎勵 0.6 元（要先登錄）',80,1712);x.textAlign='right';x.fillText('り 2026',1160,1712);x.textAlign='left';
+    var img=$(target||'cardImg');try{img.src=c.toDataURL('image/png')}catch(e){toast('圖片產生失敗');return}
+    img.alt='冰箱卡：用電樓梯與這期的行動';img.hidden=false;try{img.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'center'})}catch(e){}},
+  text:function(){var r=Model.compute(S),a=action(S);
+    if(I18N.lang==='en')return 'Our power this period: '+fmt(r.m)+' kWh a month, step '+(r.ti+1)+' of 6; each extra kWh costs NT$'+r.rate+'. '+L(S.who)+' is in charge: '+L(a[0])+' ('+L(a[1])+').'+(r.save>0?' Saves about NT$'+fmt(r.save)+' per bill → family hot-pot fund.':'');
+    if(I18N.lang==='ja')return '【今期のわが家の電気】月 '+fmt(r.m)+' kWh、全6段の第 '+(r.ti+1)+' 段。1 kWh 増えるごとに '+r.rate+' 元。担当：'+L(S.who)+'「'+L(a[0])+'」（'+L(a[1])+'）。'+(r.save>0?'毎回約 '+fmt(r.save)+' 元の節約 → 鍋パーティー資金へ。':'');
+    return '【這期我們家的電】每月 '+fmt(r.m)+' 度，在第 '+(r.ti+1)+' 階（共 6 階），多用 1 度要 '+r.rate+' 元。'+S.who+'負責：'+a[0]+'（'+a[1]+'）。'+(r.save>0?'每期約省 NT$'+fmt(r.save)+'，放進火鍋基金。':'')}};
+
+/* =========================================================
+   THEME — follows the OS; tap to force light / dark
+   ========================================================= */
+var Theme={modes:['auto','light','dark'],label:{auto:'跟隨系統',light:'淺色',dark:'深色'},
+  ico:{auto:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>',
+       light:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg>',
+       dark:'<svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg>'},
+  swap:function(mode,animate){var self=this,r=document.documentElement;
+    var doIt=function(){self.apply(mode)};
+    if(animate&&!reduced()&&document.startViewTransition){r.classList.add('vt-theme','theme-swap');var vt=document.startViewTransition(doIt);
+      var done=function(){r.classList.remove('vt-theme','theme-swap')};if(vt&&vt.finished)vt.finished.then(done,done);else setTimeout(done,400);return}
+    r.classList.add('theme-swap');doIt();raf(function(){raf(function(){r.classList.remove('theme-swap')})})},
+  apply:function(mode){var r=document.documentElement;if(mode==='auto')r.removeAttribute('data-theme');else r.setAttribute('data-theme',mode);
+    $('themeIco').innerHTML=this.ico[mode];$('themeTxt').textContent=this.label[mode];$('theme').setAttribute('aria-label','顏色模式：'+this.label[mode]+'，點一下切換');
+    var dark=mode==='dark'||(mode==='auto'&&mq('(prefers-color-scheme: dark)'));
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.setAttribute('content',dark?'#2E2A26':'#F4EFE6')})},
+  bind:function(){var self=this;$('theme').addEventListener('click',function(){var i=self.modes.indexOf(S.theme);S.theme=self.modes[(i+1)%3];self.swap(S.theme,true);store.set(S)});
+    if(window.matchMedia){var m=window.matchMedia('(prefers-color-scheme: dark)'),h=function(){if(S.theme==='auto')self.swap('auto',false)};if(m.addEventListener)m.addEventListener('change',h);else if(m.addListener)m.addListener(h)}
+    this.apply(S.theme)}};
+
+/* =========================================================
+   VIEW: guess game
+   ========================================================= */
+var Guess={build:function(){$('guessChips').innerHTML=APPLIANCES.map(function(a){return '<button type="button" class="chip" data-g="'+a.id+'">'+esc(a.name)+'</button>'}).join('');
+    $('guessChips').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-g]');if(!b)return;S.guess=b.dataset.g;schedule();
+      setTimeout(function(){try{$('house').scrollIntoView({behavior:reduced()?'auto':'smooth',block:'center'})}catch(x){}},250)})},
+  render:function(st,r){var g=st.guess,has=r.rows.filter(function(x){return st.app[x.a.id].has}).sort(function(p,q){return q.base-p.base});
+    $('guessChips').querySelectorAll('[data-g]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.g===g))});
+    $('house').classList.toggle('hide',!g);$('rank').classList.toggle('hide',!g);try{$('rank').inert=!g}catch(e){}
+    if(!g){$('gres').textContent='猜完才會公布每隻怪獸用多少電。';return}
+    var top=has[0],mine=r.rows.filter(function(x){return x.a.id===g})[0];
+    if(!top){$('gres').textContent='';return}
+    $('gres').innerHTML=top.a.id===g?'<b>猜對了！</b>'+esc(top.a.name)+'每月約 '+fmt(top.base)+' 度，是你家第一名。':
+      '其實是<b>'+esc(top.a.name)+'</b>（每月約 '+fmt(top.base)+' 度）。你猜的'+esc(mine.a.name)+(st.app[g].has?'每月約 '+fmt(mine.base)+' 度。':'你家設定為沒有。')+'多數人都會猜錯，這就是怪獸難抓的原因。'}};
+
+
+/* =========================================================
+   I18N — 中文 / English / 日本語
+   Every visible string is written in Chinese; L() looks it up with numbers
+   replaced by #, so "每月 550 度" and "每月 418 度" share one entry.
+   ========================================================= */
+var I18N_DATA={"D":{"# / # 題答對":["# / # correct","# / # 問正解"],"# 元":["NT$#","# 元"],"# 公斤":["# kg","# kg"],"# 分":["# pts","# 点"],"# 小時":["# h","# 時間"],"# 度":["# kWh","# kWh"],"#度":["# kWh","# kWh"],"# 度 / 月":["# kWh / month","# kWh / 月"],"# 度 × #":["# kWh × #","# kWh × #"],"# 盞":["# lamps","# 個"],"# 秒":["# s","# 秒"],"#–#年":["#–# yrs","#〜# 年"],"#年以上":["# yrs +","# 年以上"],"#年內":["within # yrs","# 年以内"],"# 小時不休息。# 年以上的老冰箱，耗電可以是一級能效的 # 倍以上。":["Runs # hours a day. A fridge over # years old can use # times or more than a grade-1 model.","# 時間休みなし。# 年以上の古い冷蔵庫は、省エネ1級の # 倍以上電気を使うことも。"],"# 年以上的冷氣，汰換有每台 # 元補助（#/#/# 前購買）。":["ACs over # years old: replacement subsidy of NT$# each (buy by #/#/#).","# 年以上のエアコンは買い替えで1台 # 元の補助（#/#/# までに購入）。"],"# 年以上的老冷氣，汰換可申請每台 # 元補助（#/#/# 前購買）":["Over # years old? Replacement subsidy NT$# each (buy by #/#/#)","# 年以上の古いエアコンは1台 # 元の買い替え補助（#/#/# までに購入）"],"# 年要在 # 月 # 日前登錄。也可以到台電服務所辦理，或請家人上網登錄。":["In #, register by # / #. You can also go to a Taipower service office, or ask family to register online.","# 年は # 月 # 日までに登録。台電の窓口や、家族にネットで登録してもらってもOK。"],"#-# 比去年同期少用 # 度。":["#-# used # kWh less than the same period last year.","#-# は前年同期より # kWh 少なかった。"],"#. # 小時保溫的 # 公升熱水瓶，一天大約用幾度電？":["#. A hot-water pot kept warm # hours a day, holding # L, uses about how much per day?","#. # 時間保温する # L の電気ポット、1日に何 kWh 使う？"],"#. 一盞 # 瓦 LED 每天早關 # 小時，一個月大約省多少？":["#. Turning off one # W LED # hour earlier daily saves about how much a month?","#. # W の LED を毎日 # 時間早く消すと、1か月でいくら節約？"],"#. 住家半夜開冷氣，每度電會比白天便宜嗎？":["#. Is power cheaper at night for an ordinary home?","#. 家庭で夜中にエアコンを使うと、電気は昼より安い？"],"#. 帳單寫「計費度數 # 度」、兩個月一期，每月是幾度？":["#. A two-month bill says “# kWh”. How much is that per month?","#. 2か月分の請求書に「# kWh」。1か月あたりは？"],"#. 電費高了，最後開冷氣的人要付比較貴的那幾度嗎？":["#. When the bill is high, does the last person to use the AC pay the pricey units?","#. 電気代が高いとき、最後にエアコンをつけた人が高い分を払うべき？"],"#/# 前登錄台電節電獎勵的家庭數":["Homes that register for the saving reward by #/#","#/# までに節電奨励に登録した家庭の数"],"#/#/# 前；和 App 節電集金點只能二選一。":["By #/#/#; you can join this or the App’s points programme, not both.","#/#/# まで。アプリのポイント制度とはどちらか一方のみ。"],"#°C 加電風扇，我輕鬆多了。":["#°C plus a fan — so much easier on me.","#°C と扇風機で、ずいぶん楽になった。"],"#°C 就好，大家一樣涼。":["#°C is enough; everyone stays cool.","#°C で十分。みんな涼しいまま。"],"____ 月：":["Month ____ :","____ 月："],"① 計費度數":["① Billed kWh","① 使用量（kWh）"],"② 應繳總金額":["② Amount due","② 請求金額"],"。你家用電不多，電價分階對你影響小。想省電，先看 # 小時都開著的電器。":[". You don’t use much, so the price steps barely matter. To save, start with what runs # hours a day.","。使用量は少なめなので、段階料金の影響は小さい。まずは # 時間つけっぱなしの家電から。"],"。全家在第 # 階，現在每多用 # 度要":[". Your home is on step #; each extra # kWh now costs","。家族全体で第 # 段。いま # kWh 増えるごとに"],"。小訣竅：亮黃框的是偷耗電的，亮綠框的是必須開著的（冰箱、有人在睡的冷氣、路由器）。":[". Tip: yellow frames are wasting power; green frames must stay on (fridge, AC where someone sleeps, router).","。コツ：黄色の枠はムダな電気、緑の枠はつけておくべきもの（冷蔵庫、寝ている人のエアコン、ルーター）。"],"。帳單來了，到「帳單紀錄」記一筆就會自動對答案。":[". When the bill arrives, log it in “Bill log” to check your guess.","。請求書が届いたら「請求書の記録」に入力すると答え合わせできます。"],"。看這個數字，就知道在哪一區。":[". This number tells you which zone you’re in.","。この数字で、どのゾーンか分かります。"],"。超過 # 度的部分，每度要 # 元，所以總價會比想像中高。":[". Every kWh above # costs NT$#, so the total is higher than people expect.","。# kWh を超えた分は1 kWh # 元なので、合計は思ったより高くなります。"],"。這不是最後開冷氣那個人的錯，是全家的電加起來才到這裡。":[". It’s not the fault of whoever switched on the AC last — the whole family’s use added up.","。最後にエアコンをつけた人のせいではなく、家族みんなの合計でここまで来たのです。"],"。這就是為什麼「最後開冷氣的人」看起來最貴：其實是全家的電一起把價錢推上去。":[". That’s why “whoever used the AC last” looks expensive: it’s the whole family pushing the price up together.","。だから「最後にエアコンをつけた人」が高く見える。実は家族全員の電気が値段を押し上げているのです。"],"「省」":[" Saving","「節約」"],"了沒？":[" or Not?","できてる？"],"家裡幾度 C，是":["Degrees at Home:","家の電気、"],"家裡幾度 C，":["Degrees at Home:","家の電気、"],"是「省」了沒？":["Saving or Not?","「節約」できてる？"],"家裡幾度 C，是「省」了沒？":["Degrees at Home: Saving or Not?","家の電気、「節約」できてる？"],"家裡幾度 C，是「省」了沒？　估算，僅供家人討論":["Degrees at Home · Estimates, for family discussion","家の電気、「節約」できてる？　試算・家族で話し合う用"],"「隨手關燈」一個月只省幾塊錢。真正耗電的是冷氣的溫度設定、老舊電器，和 # 小時開著卻沒人注意的熱水瓶。":["“Turn off the lights” saves only a few dollars a month. The real power users are AC settings, old appliances, and the hot-water pot running # hours unnoticed.","「こまめに消灯」は月に数元の節約。本当に電気を食うのは、エアコンの設定温度、古い家電、そして誰も気づかない # 時間稼働の電気ポット。"],"一":["1","一"],"二":["2","二"],"三":["3","三"],"一個家庭冬天一個月用了 # 度電，要付多少？":["A family used # kWh in a winter month. How much do they pay?","ある家庭が冬に1か月 # kWh 使いました。いくら払う？"],"一個家庭夏天（#–# 月）一個月用了 # 度電，要付多少？":["A family used # kWh in a summer month (#–#). How much do they pay?","ある家庭が夏（#〜# 月）に1か月 # kWh 使いました。いくら払う？"],"一個月":["1 month","1か月"],"一個月一期":["Monthly bill","毎月請求"],"一個月合計":["Total for one month","1か月の合計"],"一起":["Together","いっしょに"],"下一則":["Next tip","次へ"],"下一期比去年同期少的度數，和台電發獎勵的標準一樣":["kWh saved vs the same period last year — the same yardstick Taipower uses for rewards","次の請求が前年同期より減った量。台電の奨励と同じ基準"],"不到 NT$#":["Under NT$#","# 元未満"],"不是，全家的電加總後才計價":["No — the whole family’s total sets the price","いいえ。家族全体の合計で料金が決まる"],"不會，一般住宅白天晚上同價":["No — same price day and night","いいえ。昼も夜も同じ料金"],"不看有多少人瀏覽，看真的改變了什麼。":["Not page views — what actually changed.","閲覧数ではなく、実際に何が変わったかを見ます。"],"不看的時候按一下就好，零成本":["One click when you’re not watching — free","見ないときにワンクリック、費用ゼロ"],"主選單":["Main menu","メインメニュー"],"之後每 #–# 週清一次。":["Then every #–# weeks.","その後は # 〜 # 週ごとに。"],"之後每期只要比去年同期少用 # 度，就少繳 # 元。":["After that, every # kWh saved vs last year takes NT$# off the bill.","以後、前年同期より # kWh 減るごとに # 元安くなります。"],"二選一":["Pick one","どちらか一方"],"五題是非題，答完馬上看解答。":["Five quick questions; answers right away.","5問の二択クイズ。すぐに解説が見られます。"],"今天就能做的三件事":["Three things you can do today","今日できる3つのこと"],"今天的小知識":["Today’s tip","今日の豆知識"],"以省一半保溫電估算。用瓦斯熱水器的家庭沒有這隻。":["Estimated as half the standby heat saved. Homes with gas heaters don’t have this one.","保温の電気が半分になると試算。ガス給湯器の家にはいません。"],"估算比帳單還多，可能冷氣時數填多了。":["The estimate is higher than your bill — maybe the AC hours are too high.","試算が請求より多いです。エアコンの時間が多すぎるかも。"],"住家也可以改申請「時間電價」，半夜比較便宜、傍晚比較貴。划不划算要看全家什麼時候用電，要先試算。":["Homes can also choose time-of-use pricing: cheaper late at night, pricier in the evening. Whether it pays depends on when your family uses power — calculate first.","家庭でも「時間帯別料金」を選べます。深夜は安く、夕方は高い。得かどうかは家族の使う時間次第なので、まず試算を。"],"作者 り，#，關於這個作品":["By り, # — about this work","作者 り、#、この作品について"],"你在 #-#-# 猜下一期是":["On #-#-# you guessed the next bill would be","#-#-# に予想した次回の使用量は"],"你家設為沒有":["Set as not in your home","「なし」に設定中"],"你是認真的嗎……還差 # 次就追上熱水瓶。":["Are you serious… # more to catch up with the hot-water pot.","本気ですか……電気ポットに追いつくまであと # 回。"],"你真的按了 # 次。恭喜追平熱水瓶睡一個月的成果——而它只需要一個定時器。":["You really pressed # times. You’ve matched a month of the pot sleeping at night — which only takes a timer.","本当に # 回押しました。電気ポットを夜休ませる1か月分に追いつきました——タイマー1つで済むのに。"],"你真的開關了 # 次。這麼努力，省下的電跟「熱水瓶晚上睡覺」一個月差不多——而它只要一個 # 元的定時器。":["You really flipped the switch # times. All that effort saves about as much as letting the hot-water pot sleep for a month — which only needs a NT$# timer.","本当に # 回スイッチを押しました。これだけ頑張って、やっと「電気ポットを夜休ませる」1か月分——それは # 元のタイマーで済みます。"],"你覺得家裡哪一隻最會吃電？":["Which one do you think uses the most?","いちばん電気を食うのはどれだと思う？"],"你輸入的度數和設定只存在這台手機的瀏覽器裡，不會上傳到任何地方。":["What you enter stays in this device’s browser and is never uploaded.","入力した数値や設定はこの端末のブラウザにだけ保存され、どこにも送信されません。"],"例：#":["e.g. #","例：#"],"保溫溫度設 #°C 比 #°C 約省 #%":["Keeping it at #°C instead of #°C saves about #%","保温を #°C にすると #°C より約 #% 節約"],"做":["Do","行"],"做到":["Act","実行"],"做得很好！":["Well done!","よくできました！"],"儲熱式電熱水器 # 小時保溫，待機一年約 # 度，是最大的隱形怪獸。":["A storage water heater keeps water hot # hours a day — about # kWh a year on standby. The biggest hidden monster.","貯湯式の電気温水器は # 時間保温し、待機だけで年約 # kWh。最大の隠れ怪獣です。"],"先猜下一張電費單會是幾度。收到帳單後，到「帳單紀錄」記下實際度數，就會告訴你猜得多準。":["Guess the next bill’s kWh. When it arrives, log it in “Bill log” to see how close you were.","次の請求の使用量を予想。届いたら「請求書の記録」に入力すると、どれだけ当たったか分かります。"],"先猜猜看：":["Guess first: ","まず予想："],"先試試「隨手關燈」":["Try “turning off the lights” first","まずは「こまめに消灯」"],"先選最像你家的：":["Pick the closest to your home: ","いちばん近い家庭を選ぶ："],"全台住宅夏月平均每月 # 度，你家多 # 度。":["Taiwan’s average home uses # kWh a month in summer; yours uses # more.","台湾の住宅平均は夏 # kWh/月。あなたの家は # kWh 多い。"],"全台住宅夏月平均每月 # 度，你家少 # 度。":["Taiwan’s average home uses # kWh a month in summer; yours uses # less.","台湾の住宅平均は夏 # kWh/月。あなたの家は # kWh 少ない。"],"全台住宅非夏月平均每月 # 度，你家多 # 度。":["Taiwan’s average home uses # kWh a month outside summer; yours uses # more.","台湾の住宅平均は夏以外 # kWh/月。あなたの家は # kWh 多い。"],"全台住宅非夏月平均每月 # 度，你家少 # 度。":["Taiwan’s average home uses # kWh a month outside summer; yours uses # less.","台湾の住宅平均は夏以外 # kWh/月。あなたの家は # kWh 少ない。"],"全家一起吹的那台。老冷氣比一級能效耗電多很多。":["The one the whole family shares. Old ACs use far more than grade-1 models.","家族みんなで使う1台。古いエアコンは省エネ1級よりずっと電気を使います。"],"全家一起爬樓梯":["The whole family climbs the stairs","家族みんなで階段をのぼる"],"全家在第 # 階，現在每多用 # 度要":["Your home is on step #; each extra # kWh now costs","家族全体で第 # 段。いま # kWh 増えるごとに"],"全部完成，火鍋時間！":["All done — hot-pot time!","全部完了、鍋パーティーだ！"],"兩個月":["2 months","2か月"],"兩個月一張，除以 # ＝":["Two months per bill; divide by # =","2か月分なので # で割ると"],"兩個月一期":["Two-month bill","2か月ごとの請求"],"兩個月一期，平均":["Two-month bill, on average","2か月ごとの請求、平均"],"六件事，每件只要做一次就會一直省電。分給家人負責，全部完成就一起去吃火鍋。":["Six one-time changes that keep saving. Share them out; finish all six and go for hot pot.","一度やればずっと節電できる6つのこと。家族で分担して、全部できたら鍋パーティーへ。"],"六件全部完成！去吃火鍋吧":["All six done! Go have hot pot","6つ全部完了！鍋を食べに行こう"],"六件挑戰全部完成":["Finish all six challenges","6つのチャレンジを全部完了"],"共":["Share","共"],"其他":["Other","その他"],"其他明細":["Other details","その他の明細"],"其實是":["Actually it’s ","正解は"],"再巡一次":["Patrol again","もう一度"],"再按一次，確定清除":["Tap again to confirm","もう一度押して消去"],"再玩一次":["Play again","もう一度"],"冰箱不要塞太滿，七、八分滿最省電；背面離牆 # 公分。":["Don’t overfill the fridge — 70–80% full is most efficient; keep it # cm from the wall.","冷蔵庫は詰め込みすぎず7〜8割が省エネ。背面は壁から # cm 離して。"],"冰箱卡":["Fridge card","冷蔵庫カード"],"冰箱卡是給長輩的版本：白底大字、少用術語，下面留了空格，讓家人每期親手寫上新帳單的度數。":["The fridge card is for elders: white paper, big type, no jargon, with blanks to write each new bill by hand.","冷蔵庫カードは高齢者向け：白地に大きな文字、専門用語なし。毎回の使用量を手書きできる欄付き。"],"冰箱卡：用電樓梯與這期的行動":["Fridge card: the price stairs and this period’s action","冷蔵庫カード：料金の階段と今期の行動"],"冷氣濾網兩三個禮拜洗一次，涼得快又省電。":["Wash the AC filter every two or three weeks: cools faster, saves power.","エアコンのフィルターは2〜3週ごとに洗うと、早く冷えて省エネ。"],"冷氣設 # 度＋電風扇":["AC at #°C + fan","エアコン #°C＋扇風機"],"冷氣開 # 度，再開電風扇，一樣涼，電費少很多。":["Set the AC to #°C and add a fan — just as cool, much cheaper.","エアコンは #°C、扇風機を併用。同じ涼しさで電気代がぐっと減ります。"],"冷藏放七、八分滿就好":["Keep the fridge 70–80% full","冷蔵室は7〜8割まで"],"凌晨兩點，全家都睡了。# 秒內，點掉那些不該亮著的電器；但冰箱和有人在睡的房間冷氣，可別關。":["2 a.m., everyone’s asleep. In # seconds, tap off what shouldn’t be on — but leave the fridge and the AC where someone sleeps.","午前2時、家族はみんな就寝中。# 秒以内に、ついていなくていい家電をタップで消そう。冷蔵庫と寝ている人のエアコンは消さないで。"],"刪除":["Delete","削除"],"加定時器：晚上休眠，起床前煮好":["Timer: rest at night, boil before you wake","タイマーで夜は休止、起きる前に沸騰"],"加定時器：洗澡前一小時才加熱":["Timer: heat only an hour before baths","タイマーで入浴の1時間前だけ加熱"],"半夜開冷氣，電費不會比較便宜，也不會比較貴；白天晚上價錢一樣。":["Running the AC at night is neither cheaper nor pricier — the price is the same day and night.","夜中のエアコンは安くも高くもなりません。昼も夜も同じ料金です。"],"印出來貼在冰箱上，每期在空格寫下新的度數。":["Print it, stick it on the fridge, and write each new reading in the blanks.","印刷して冷蔵庫に貼り、毎回の使用量を空欄に書き込みます。"],"去年同一期":["the same period last year","前年の同じ時期"],"參考了哪些設計":["Designs we learned from","参考にしたデザイン"],"只推「設定一次就一直有效」的方法。光提醒大家省電，平均只能省約 #%；改設定才是主力。":["Only “set once, keeps working” changes. Reminders alone save about #% on average; changing settings does the heavy lifting.","「一度設定すればずっと効く」方法だけを勧めます。呼びかけだけでは平均約 #%。設定を変えることが主役です。"],"可複製的文字":["Text to copy","コピー用テキスト"],"可選":["Optional","選べる"],"台灣電力 App「電力集點」":["Taiwan Power App “points”","台湾電力アプリ「ポイント」"],"台電「節電獎勵」（每少 # 度 # 元）和台灣電力 App 的「節電集金點」，一個電號只能參加其中一個。":["Taipower’s saving reward (every # kWh saved = NT$#) and the App’s points programme: one account can join only one.","台電の「節電奨励」（# kWh 減で # 元）とアプリの「節電ポイント」は、1契約でどちらか一方のみ。"],"台電客服":["Taipower hotline","台電カスタマー"],"台電：定時加熱約省 #%。先試試你家熱水瓶斷電再通電後，會不會自己重新煮沸。":["Taipower: timed heating saves about #%. First check that your pot reboils by itself after power returns.","台電：時間指定の加熱で約 #% 節約。停電後に自動で再沸騰するか、まず確認を。"],"和去年同一期比":["Compared with the same period last year","前年同期と比べると"],"唯一要花大錢的一項：新冰箱以 # 萬元、扣補助 # 元估算，要好幾年才回本。還能用的話，先讓別隻怪獸睡覺。":["The only costly fix: a new fridge at about # × NT$10,000, minus a NT$# subsidy, takes years to pay back. If yours still works, tame the others first.","唯一お金がかかる方法：新しい冷蔵庫を # 万元、補助 # 元で試算すると回収に数年。まだ使えるなら、先にほかの怪獣を。"],"唸給我聽":["Read it to me","読み上げる"],"四件很多人不知道的事":["Four things most people don’t know","あまり知られていない4つのこと"],"回應台電千瓦設計獎題目「WATT’S UP: Decoding New Everyday Life」：用台電帳單上的數據當素材，設計讓人看懂、也願意行動的體驗。北科大文化事業發展系課堂作品，#。":["A response to the Taipower Design Awards brief “WATT’S UP: Decoding New Everyday Life”: using bill data to design an experience people understand and act on. Class project, Dept. of Cultural Vocation Development, NTUT, #.","台電デザイン賞の課題「WATT’S UP: Decoding New Everyday Life」への提案：請求書のデータを素材に、理解して行動したくなる体験を設計。国立台北科技大学 文化事業発展学科 授業作品、#。"],"報上":["Give your ","伝える："],"夏天最大的一隻。重點不是誰按了開關，是設定溫度和機齡。":["The biggest one in summer. What matters isn’t who pressed “on”, but the setting and the age.","夏いちばんの大物。大事なのは誰がつけたかではなく、設定温度と年数。"],"夏月":["Summer","夏季"],"夏月 #–# 月":["Summer (#–#)","夏季（#〜#月）"],"多關一盞燈":["Turn off one more lamp","もう1個消す"],"大":["L","大"],"大字":["Large","大きい文字"],"大家抓錯了怪獸":["We chase the wrong monster","みんな怪獣を間違えている"],"大家最常被念的省電方法。每按一下開關，就當作多一盞燈每天早關 # 小時，看看能省多少。":["The tip everyone gets nagged about. Each press = one more lamp off # hour earlier each day. See how much it saves.","いちばん言われがちな節電法。1回押すごとに、電気を1つ毎日 # 時間早く消すと考えて、いくら節約できるか見てみよう。"],"大約 NT$#":["About NT$#","約 # 元"],"太神了！正確答案是":["Amazing! The answer is ","すごい！正解は"],"好":["OK","OK"],"好啦，我去裝定時器":["Fine, I’ll get a timer","わかった、タイマーを付けてくる"],"如果帳單剛好跨過 # 月或 # 月底（夏天電價的開始和結束），實際金額會和這裡的估算有點差距。":["If your bill spans the start of # or end of # (when summer rates begin and end), the real amount will differ slightly.","請求期間が # 月や # 月末（夏季料金の始まりと終わり）をまたぐ場合、実際の金額は少し異なります。"],"字的大小":["Text size","文字の大きさ"],"存下來":["Save","保存"],"存好了，帳單來了記得去「帳單紀錄」對答案":["Saved — log the bill when it comes to check your guess","保存しました。請求書が来たら「請求書の記録」で答え合わせ"],"季節":["Season","季節"],"它說了用多少、付多少，卻不說是誰、什麼時候、哪一台電器。看不見，只能用猜的。":["It says how much and what to pay — not who, when, or which appliance. What you can’t see, you guess.","使った量と金額は分かっても、誰が・いつ・どの家電かは分からない。見えないから、推測するしかない。"],"定時器幫我們記":["The timer remembers for us","タイマーが覚えてくれる"],"客廳":["Living room","リビング"],"家庭挑戰":["Family challenge","家族チャレンジ"],"家裡最耗電的三台":["Top three power users at home","家でいちばん電気を使う3台"],"家裡會偷偷耗電的電器，每一台都附上台電建議的省電方法。耗電數字會跟著你在「電費解碼器」裡的設定變。":["Appliances that quietly eat power, each with Taipower’s saving tips. Numbers follow your settings in the Bill Decoder.","こっそり電気を食う家電たち。台電おすすめの節電法つき。数値は「電気代デコーダー」の設定に連動します。"],"家裡有嗎？點我":["Have one? Tap","ある？タップ"],"家裡有這台嗎？":["Do you have one?","家にある？"],"家裡沒有這台":["Not in this home","この家にはない"],"家裡的電器怪獸，點一隻可以調整":["Your appliance monsters — tap one to adjust","家電怪獣たち。タップで調整"],"家裡的電費怪獸":["The power monsters at home","家の電気代モンスター"],"小測驗":["Quiz","ミニクイズ"],"小測驗全對":["Get every quiz question right","クイズ全問正解"],"少了 # 度":["# kWh less","# kWh 減"],"少排的二氧化碳":["CO₂ avoided","削減したCO₂"],"少用":["Use less","減らす"],"尚未解鎖":["Locked","未獲得"],"就猜這個":["That’s my guess","これで予想"],"巡邏中…":["Patrolling…","巡回中…"],"巡邏拿到 # 分以上":["Score # + on patrol","パトロールで # 点以上"],"差很多喔。正確答案是":["Way off. The answer is ","かなり違います。正解は"],"已放入範例資料":["Sample data added","サンプルを入れました"],"已經睡著":["Asleep","おやすみ中"],"已經睡著了":["Asleep","おやすみ中"],"已經睡著的怪獸":["Monsters asleep","おやすみ中の怪獣"],"已複製，貼到家庭群組":["Copied — paste it in the family chat","コピーしました。家族グループに貼ってね"],"帳單上 # 度以下":["Under # kWh on the bill","請求書で # kWh 以下"],"帳單上 #–# 度":["#–# kWh on the bill","請求書で #〜# kWh"],"帳單上的 # 度，其實是":["The bill’s # kWh is really ","請求書の # kWh は、実は"],"帳單上超過 # 度":["Over # kWh on the bill","請求書で # kWh 超"],"帳單只有一個數字":["A bill is just one number","請求書は数字が1つだけ"],"帳單是幾個月":["Billing period","請求期間"],"帳單月份":["Bill month","請求月"],"帳單紀錄":["Bill log","請求書の記録"],"平均每度":["Average per kWh: ","1 kWh 平均"],"幾個月一期":["Months per bill","何か月ごと"],"幾台":["How many","台数"],"度":["kWh","kWh"],"廚房 #:#":["Kitchen #:#","キッチン #:#"],"臥室 #:#":["Bedroom #:#","寝室 #:#"],"浴室":["Bathroom","浴室"],"待機時幾乎跟開著一樣耗電，一年約 # 度。":["Uses almost as much on standby as when on — about # kWh a year.","待機中もほぼ使用時と同じ電気を使い、年約 # kWh。"],"有點差距。正確答案是":["Some way off. The answer is ","少し違います。正解は"],"很接近！正確答案是":["Close! The answer is ","惜しい！正解は"],"徽章已收進「家庭挑戰」的徽章牆。":["Badge saved to the wall in “Family challenge”.","バッジは「家族チャレンジ」のバッジ棚に入りました。"],"快到了，撐住！還差 # 次就追上熱水瓶。":["Almost — hang in there! # more to catch the hot-water pot.","あと少し、がんばれ！電気ポットまであと # 回。"],"快速套用家庭類型":["Quick household presets","家庭タイプを選ぶ"],"怎麼知道有沒有用":["How we’ll know it works","効果をどう確かめるか"],"怪獸圖鑑":["Monster guide","怪獣図鑑"],"想做到的三件事":["Three things we want to do","実現したい3つのこと"],"懂":["See","知"],"我們在這":["We’re here","いまここ"],"我們家現在在":["Our home is in the","わが家はいま"],"我們家的用電樓梯":["Our power price stairs","わが家の電気料金の階段"],"我們發現的三件事":["Three things we found","わかった3つのこと"],"我猜下一期是":["I guess next bill:","次回の予想："],"我的徽章":["My badges","わたしのバッジ"],"手指還好嗎？還差 # 次就追上熱水瓶。":["How are your fingers? # more to catch the hot-water pot.","指は大丈夫？電気ポットまであと # 回。"],"打一通電話，就能領獎勵":["One phone call gets you the reward","電話1本で奨励金をもらおう"],"把「是誰浪費電」變成「我們一起做什麼」。省下來的錢，變成全家的火鍋基金。":["Turn “who wasted power” into “what we’ll do together”. What you save becomes the family hot-pot fund.","「誰がムダ遣いした？」を「みんなで何をする？」に。浮いたお金は家族の鍋パーティー資金に。"],"把帳單上的一個數字，變成看得懂的故事：在第幾階、哪台最耗電、多用 # 度要多少錢。":["Turn the single number on the bill into a story: which step you’re on, which appliance uses most, and what # more kWh costs.","請求書の1つの数字を、分かる物語に：何段目か、どの家電がいちばん使うか、# kWh 増えるといくらか。"],"把設定貼在遙控器背面。每調高 #°C 約省 #%；已經 #°C 以上就沒得省，可以改成清濾網。":["Stick the setting on the back of the remote. Each #°C higher saves about #%; at #°C or above, clean the filter instead.","設定をリモコンの裏に貼る。#°C 上げるごとに約 #% 節約。すでに #°C 以上なら、フィルター掃除を。"],"把這期要做的一件事做成卡片。手機長按圖片就能存下來，傳到家庭群組，或印出來貼在冰箱上。":["Turn this period’s one action into a card. Long-press the image to save it, send it to the family chat, or print it for the fridge.","今期やることを1枚のカードに。画像を長押しで保存して家族グループへ。印刷して冷蔵庫に貼っても。"],"把隨手關燈按到追平熱水瓶":["Press the light switch until you match the pot","消灯ボタンで電気ポットに追いつく"],"把預設值貼在遙控器背面。":["Stick the setting on the back of the remote.","設定をリモコンの裏に貼る。"],"拖動上方滑桿看看。":["Drag the slider above.","上のスライダーを動かしてみて。"],"拖動滑桿，看看一個月多用一點電，電費是怎麼一階一階加上去的。":["Drag the slider to see how the bill climbs step by step as monthly use rises.","スライダーを動かして、使用量が増えると料金が段階的に上がる様子を見てみよう。"],"按按看，要關幾盞燈才省得到一頓火鍋？":["Try it: how many lamps for one hot-pot dinner?","押してみて：鍋1回分にはいくつ消せばいい？"],"換一台省電冰箱":["Get an efficient fridge","省エネ冷蔵庫に買い替え"],"換一題":["New question","次の問題"],"收到電費單，大家的第一個反應常常不是看懂它，而是找人負責。這個網站，就是從這一句話開始的。":["When the bill arrives, the first reaction is often not to understand it but to find someone to blame. This site starts from that sentence.","請求書が届くと、まず理解するより犯人探しをしがち。このサイトは、その一言から始まりました。"],"改完之後":["After the changes","変更後"],"改完後":["After","変更後"],"放入範例資料試試看":["Try with sample data","サンプルで試す"],"放心區":["Safe zone","安心ゾーン"],"整夜反覆加熱保溫，一天約 # 度。沒人看見，所以也沒人怪它。":["Reheats all night, about # kWh a day. Nobody sees it, so nobody blames it.","一晩中くり返し加熱して1日約 # kWh。誰も見ていないので、誰も責めない。"],"數字是估算。年輕人可以在「電費解碼器」裡改成你家的實際情況。":["These are estimates. Younger family members can set your real situation in the Bill Decoder.","数値は試算です。若い家族が「電気代デコーダー」で実際の状況に合わせられます。"],"數據來源":["Data sources","データの出典"],"新帳單度數":["New bill kWh","新しい使用量"],"是不是你半夜又開冷氣？":["Did you run the AC all night again?","また夜中にエアコンつけてたでしょ？"],"是，他把全家推上高價那一階":["Yes, they pushed everyone onto the pricey step","はい、その人が高い段に押し上げた"],"晚上不看電視時，把機上盒的開關也關掉。":["When you’re not watching TV at night, switch off the set-top box too.","夜テレビを見ないときは、セットトップボックスの電源も切りましょう。"],"晚上休眠，清晨自動煮好。":["Rests at night, boils by early morning.","夜は休止、朝には自動で沸騰。"],"最新一期平均每月 # 度":["Latest bill: # kWh a month","最新の請求：月平均 # kWh"],"會，半夜是離峰":["Yes, night is off-peak","はい、夜はオフピーク"],"有":["Yes","ある"],"本期計費度數":["Billed kWh this period","今期の使用量"],"本期電費約 NT$#":["This bill: about NT$#","今期の電気代 約 # 元"],"東京電力「でんき家計簿」":["TEPCO “Denki Kakeibo”","東京電力「でんき家計簿」"],"機齡":["Age","使用年数"],"每 #–# 週清洗一次濾網":["Clean the filter every #–# weeks","フィルターは # 〜 # 週ごとに掃除"],"每台電器都是一隻怪獸，越大隻越耗電。點一隻，改成你家的情況，再按「讓它睡覺」看能省多少。":["Each appliance is a monster — the bigger, the hungrier. Tap one, match it to your home, then “Put it to sleep” to see the saving.","家電は1台ずつ怪獣。大きいほど電気を食う。タップして家の状況に合わせ、「おやすみさせる」で節約額を見よう。"],"每天開幾小時":["Hours per day","1日の使用時間"],"每月 # 度":["# kWh a month","月 # kWh"],"每月 # 度以下":["Under # kWh a month","月 # kWh 以下"],"每月 # 度，多用 # 度要 # 元":["# kWh a month; # more kWh costs NT$#","月 # kWh、# kWh 増えるごとに # 元"],"每月 #–# 度":["#–# kWh a month","月 #〜# kWh"],"每月大約 # 度（帳單上 # 度）":["About # kWh a month (# on the bill)","月約 # kWh（請求書では # kWh）"],"每月用電度數":["kWh per month","月の使用量"],"每月省 NT$#":["Saves NT$# a month","月 # 元の節約"],"每月超過 # 度":["Over # kWh a month","月 # kWh 超"],"每期帳單，寫在這裡":["Write each bill here","毎回の請求をここに"],"每期平均每月用電長條圖":["Bar chart of monthly average per bill","請求ごとの月平均使用量のグラフ"],"每期省 NT$# → 火鍋基金":["NT$# saved per bill → hot-pot fund","毎回 # 元節約 → 鍋の資金"],"每次收到電費單就記一筆。每根柱子是那一期平均每個月用的度數；虛線是 # 度，超過這條線，多用的電會貴很多。":["Log each bill as it arrives. Each bar is that bill’s monthly average; the dashed line is # kWh — above it, extra power gets much pricier.","請求書が届くたびに記録。棒は各回の月平均、点線は # kWh。この線を超えると、追加分がぐっと高くなります。"],"比去年同期少":["Less than last year","前年同期より減"],"比去年同期每少 # 度，台電節電獎勵 # 元（要先登錄）":["Each # kWh below last year earns NT$# from Taipower (registration required)","前年同期より # kWh 減るごとに台電から # 元（要登録）"],"比，才知道有沒有省到；和上一期比，會被季節騙。":[" to know if you really saved; comparing with the last bill gets fooled by the season.","と比べて初めて節約が分かる。前回と比べると季節にだまされます。"],"水不必一直裝滿，約一半就好":["No need to keep it full; half is fine","満水にせず、半分くらいで十分"],"沒有":["No","ない"],"注意區":["Watch zone","注意ゾーン"],"深夜巡邏":["Night patrol","深夜パトロール"],"清除我的資料，重新開始":["Clear my data and start over","データを消して最初から"],"減少 # 度":["# kWh less","# kWh 減らす"],"增加 # 度":["# kWh more","# kWh 増やす"],"火":["Pot","鍋"],"火鍋基金：每期帳單可以省":["Hot-pot fund: saved per bill","鍋の資金：毎回の節約額"],"為什麼做這個網站":["Why this site","このサイトをつくった理由"],"熱水器洗澡前才加熱":["Heat water only before baths","入浴前だけ温水器を加熱"],"熱水瓶晚上睡覺":["Let the hot-water pot sleep at night","電気ポットは夜おやすみ"],"熱水瓶裝個定時器，晚上讓它休息，早上一樣有熱水泡茶。":["Put a timer on the hot-water pot: it rests at night, and there’s still hot water for morning tea.","電気ポットにタイマーを。夜は休ませても、朝はちゃんとお茶が飲めます。"],"熱的飯菜先放涼，再放進冰箱。":["Let hot food cool before it goes in the fridge.","温かい料理は冷ましてから冷蔵庫へ。"],"熱食放涼再放進去，減少開門次數":["Cool hot food first; open the door less","温かい物は冷ましてから。開け閉めは少なく"],"燈":["Lamp","灯"],"特大字":["Extra large","特大"],"猜下期度數":["Guess the next bill","次回の使用量を予想"],"猜下期的準確度（猜 #、實際 # 度）":["Guess accuracy (guessed #, actual # kWh)","予想の精度（予想 #、実際 # kWh）"],"猜完才會公布每隻怪獸用多少電。":["We reveal each monster’s use after you guess.","予想すると、各怪獣の使用量が分かります。"],"猜對了！":["Correct! ","正解！"],"猜的電費金額":["Your guess for the bill","予想する電気代"],"猜電費":["Guess the bill","電気代を当てよう"],"猜電費誤差 #% 以內":["Guess a bill within #%","電気代を誤差 #% 以内で当てる"],"玩遍整個網站，就能把它們收齊。":["Explore the whole site to collect them all.","サイトを遊びつくして全部集めよう。"],"產生 LINE 卡片":["Make a LINE card","LINE カードを作る"],"產生冰箱卡（A# 列印）":["Make a fridge card (A# print)","冷蔵庫カードを作る（A# 印刷）"],"產生冰箱卡（A#）":["Make a fridge card (A#)","冷蔵庫カードを作る（A#）"],"用瓦斯熱水器的家庭沒有這隻":["Homes with gas heaters don’t have this one","ガス給湯器の家にはいません"],"登錄":["Register","登録"],"白天拉上窗簾，擋住陽光照進來的熱":["Close curtains in the day to block the sun’s heat","昼はカーテンで日差しの熱を遮る"],"的住家用的是「用越多、每度越貴」的電價，白天和半夜價錢一樣。半夜開冷氣不會比較便宜，也不會比較貴。":[" of homes pay “the more you use, the more each kWh costs”, same price day and night. Night-time AC is neither cheaper nor pricier.","の家庭は「使うほど1 kWh が高くなる」料金で、昼も夜も同じ値段。夜中のエアコンは安くも高くもなりません。"],"直接輸入帳單上的度數":["Type the number from your bill","請求書の数値を直接入力"],"看懂":["Understand","わかる"],"睡":["Zz","眠"],"睡前按一下就好。":["One press at bedtime.","寝る前にワンプッシュ。"],"知道了":["Got it","わかった"],"第 # 階":["Step #","第 # 段"],"第 # 階（#+）":["Step # (#+)","第 # 段（# 以上）"],"第 # 階（#–#）":["Step # (#–#)","第 # 段（#〜#）"],"第 # 階（≤#）":["Step # (≤#)","第 # 段（# 以下）"],"第一次來嗎？拿出最近一張電費單，把「計費度數」輸入上面的電表，往下滑就會一步步告訴你結果。":["First time? Grab your latest bill, enter the “billed kWh” into the meter above, then scroll down step by step.","はじめて？最新の請求書の「使用量」を上のメーターに入れて、下へスクロールしていこう。"],"答對了。一個月約 # 度，就算用最貴的夏月費率也不到 # 元。":["Correct. About # kWh a month — under NT$# even at the top summer rate.","正解。月約 # kWh、夏の最高料金でも # 元未満。"],"答對了。台電：一天約 # 度，一年約 # 度。加定時器約省 #%。":["Correct. Taipower: about # kWh a day, # a year. A timer saves about #%.","正解。台電：1日約 # kWh、年約 # kWh。タイマーで約 #% 節約。"],"答對了。電價的階是按每個月算的，兩個月一張的帳單要先除以 #。":["Correct. Steps are monthly, so divide a two-month bill by # first.","正解。料金の段は月単位。2か月分の請求はまず # で割ります。"],"答錯了。約 #% 的住家，白天晚上電價一樣；只有另外申請「時間電價」的家庭，半夜才比較便宜。":["Not quite. About #% of homes pay the same day and night; only homes on time-of-use pricing get cheaper nights.","残念。約 #% の家庭は昼夜同じ料金。時間帯別料金に申し込んだ家庭だけ夜が安くなります。"],"答錯了。電費看的是全家加起來的總度數，沒有哪一個人用的那一度特別貴。":["Not quite. The bill depends on the family’s total; nobody’s kWh is the expensive one.","残念。料金は家族全体の合計で決まり、誰かの1 kWh だけが高いわけではありません。"],"答對了。約 #% 的住家，白天晚上電價一樣；只有另外申請「時間電價」的家庭，半夜才比較便宜。":["Correct. About #% of homes pay the same day and night; only homes on time-of-use pricing get cheaper nights.","正解。約 #% の家庭は昼夜同じ料金。時間帯別料金に申し込んだ家庭だけ夜が安くなります。"],"答對了。電費看的是全家加起來的總度數，沒有哪一個人用的那一度特別貴。":["Correct. The bill depends on the family’s total; nobody’s kWh is the expensive one.","正解。料金は家族全体の合計で決まり、誰かの1 kWh だけが高いわけではありません。"],"答錯了。一個月約 # 度，就算用最貴的夏月費率也不到 # 元。":["Not quite. About # kWh a month — under NT$# even at the top summer rate.","残念。月約 # kWh、夏の最高料金でも # 元未満。"],"答錯了。台電：一天約 # 度，一年約 # 度。加定時器約省 #%。":["Not quite. Taipower: about # kWh a day, # a year. A timer saves about #%.","残念。台電：1日約 # kWh、年約 # kWh。タイマーで約 #% 節約。"],"答錯了。電價的階是按每個月算的，兩個月一張的帳單要先除以 #。":["Not quite. Steps are monthly, so divide a two-month bill by # first.","残念。料金の段は月単位。2か月分の請求はまず # で割ります。"],"算":["Calc","算"],"節電獎勵":["saving reward","節電奨励"],"節電獎勵（已登錄的話）":["Saving reward (if registered)","節電奨励（登録済みなら）"],"約 # 度":["About # kWh","約 # kWh"],"約 # 度 / 月":["About # kWh / month","約 # kWh / 月"],"約 NT$#":["About NT$#","約 # 元"],"給家人的一張卡":["A card for the family","家族へのカード"],"美國 Opower 家庭用電報告":["Opower home energy reports (US)","米国 Opower の家庭向けレポート"],"背面和兩側都要留空間散熱。":["Leave space behind and on both sides.","背面と両側にすき間を。"],"英國 Octopus Energy「Saving Sessions」":["Octopus Energy “Saving Sessions” (UK)","英国 Octopus Energy「Saving Sessions」"],"補助到 #/#":["Subsidy until #/#","補助は #/# まで"],"裝上定時器、貼上 #°C 的電器數":["Appliances with a timer or a #°C sticker","タイマー設置・#°C ステッカーを貼った家電の数"],"複製成一段文字":["Copy as text","テキストでコピー"],"要繳的錢。和":["The amount to pay. Compare with ","支払う金額。"],"要關 # 盞燈，才抵得上讓熱水瓶晚上睡覺（每月約 NT$#）。關燈沒錯，只是不是重點。":["You’d need # lamps to match letting the hot-water pot sleep at night (about NT$# a month). Turning off lights isn’t wrong — it just isn’t the point.","# 個の電気を消して、やっと電気ポットを夜休ませる効果（月約 # 元）に並びます。消灯は間違いではないけれど、要点ではありません。"],"計費季節":["Billing season","料金の季節"],"計費度數":["Billed kWh","使用量"],"計費度數 # 度":["Billed # kWh","使用量 # kWh"],"記一筆":["Log it","記録する"],"設定":["Set","設定"],"設定溫度":["Temperature","設定温度"],"許多家庭收到電費單時，第一句話":["What many families say first when the bill arrives","多くの家庭が請求書を見て最初に言うひと言"],"誰負責":["Who’s in charge","担当"],"調整":["Adjust","調整"],"請輸入計費度數（# 到 #）。":["Please enter the billed kWh (# to #).","使用量を入力してください（# 〜 #）。"],"讓它睡覺":["Put it to sleep","おやすみさせる"],"讓所有怪獸睡著":["Put every monster to sleep","すべての怪獣をおやすみさせる"],"資料來源與設定":["Sources & settings","出典と設定"],"跟客服說：「我要登錄":["Tell the operator: “I’d like to register for the ","オペレーターに「"],"跟隨系統":["System","システム"],"跳上第 # 階！多用 # 度要 # 元":["Up to step #! Each extra # kWh costs NT$#","第 # 段に上がった！# kWh 増えるごとに # 元"],"跳到主要內容":["Skip to content","本文へスキップ"],"跳階區":["Pricey zone","割高ゾーン"],"輸入電費單上的度數，看看你家電費在第幾階、哪台電器最耗電":["Enter the kWh from your bill to see which price step you’re on and which appliance uses the most","請求書の使用量を入れて、料金が何段目か、どの家電がいちばん使うかを見てみよう"],"退回第 # 階":["Back down to step #","第 # 段に下がった"],"這一個月":["This month","今月"],"這一家一個月用了幾度，你猜猜看要付多少錢？猜得越準分數越高。":["Given a family’s monthly kWh, guess the bill. The closer, the better.","ある家庭の月の使用量から、電気代を予想しよう。近いほど高得点。"],"這些數字是依台電公開的平均值估算的。家裡有智慧電表的話，台灣電力 App 的「住宅用電分析」會更準。":["These are estimates from Taipower’s published averages. With a smart meter, the Taiwan Power App’s appliance analysis is more accurate.","数値は台電の公開平均に基づく試算です。スマートメーターがあれば、台湾電力アプリの「住宅電力分析」がより正確です。"],"這件事交給誰負責？":["Who’s in charge of this?","誰が担当する？"],"這期我們家的電":["Our power this period","今期のわが家の電気"],"還沒有怪獸睡著，點房子裡的怪獸試試":["No monsters asleep yet — tap one in the house","まだ誰もおやすみしていません。家の怪獣をタップ"],"還沒有紀錄。上面記一筆，或放入範例資料。":["No entries yet. Log one above, or add sample data.","まだ記録がありません。上で入力するか、サンプルを入れてみて。"],"還沒猜。可以參考現在這張帳單，再想想這兩個月有沒有比較熱、有沒有讓怪獸睡覺。":["No guess yet. Start from your current bill and think: was it hotter, did any monsters sleep?","まだ予想していません。今の請求を参考に、暑かったか、怪獣を休ませたかを考えてみて。"],"還沒開始":["Not started","未着手"],"長時間出門時關掉電源":["Switch it off when you’re away for long","長く留守にするときは電源オフ"],"長輩模式":["Elder mode","シニアモード"],"開啟選單":["Open menu","メニューを開く"],"關閉選單":["Close menu","メニューを閉じる"],"開始巡邏":["Start patrol","パトロール開始"],"關於作者與這個作品":["About the author and this work","作者とこの作品について"],"關於這個作品":["About this work","この作品について"],"關閉":["Close","閉じる"],"隱藏成就解鎖":["Hidden achievement unlocked","隠し実績を解除"],"零成本，按一下就好。":["Free — just one press.","費用ゼロ、ワンプッシュで。"],"電價分 # 階、按每個月算，帳單卻兩個月一張；全家的電加在一起才決定價錢，最後開冷氣的人就成了兇手。":["Prices have # steps counted per month, yet bills cover two months; the family total sets the price, so whoever used the AC last gets blamed.","料金は # 段階で月単位、なのに請求は2か月ごと。家族全体の合計で値段が決まるのに、最後にエアコンをつけた人が犯人にされます。"],"電價分成 # 階：一個月用得越多，多出來的那些度數就越貴。全家的電加在一起算，拖拖上面的滑桿看看。":["Prices come in # steps: the more you use in a month, the pricier the extra kWh. The whole family’s use counts together — drag the slider above.","料金は # 段階：月に多く使うほど、増えた分の単価が上がります。家族全体の合計で計算。上のスライダーを動かしてみて。"],"電價小教室":["Price class","電気料金の教室"],"電價的階是按「每個月」算的，但大多數帳單是兩個月一張：每月 # 度，帳單上會寫 # 度。":["Steps are counted per month, but most bills cover two months: # kWh a month shows as # on the bill.","料金の段は「月ごと」なのに、請求はたいてい2か月分：月 # kWh は請求書では # kWh。"],"電價規則沒人看得懂":["Nobody understands the pricing","料金ルールが分かりにくい"],"電號":["account number","お客様番号"],"電號・地址・計費期間":["Account no. · address · period","番号・住所・請求期間"],"電視、音響也接同一條":["Plug the TV and speakers into the same strip","テレビやオーディオも同じタップに"],"電費單上，只要看兩個數字":["On the bill, look at just two numbers","請求書は2つの数字だけ見ればいい"],"電費單通常兩個月一張，度數要除以 #，才是一個月用的。":["Bills usually cover two months; divide the kWh by # for one month.","請求書はふつう2か月分。使用量を # で割ると1か月分。"],"電費怎麼又這麼多？":["Why is the bill so high again?","電気代、なんでまたこんなに高いの？"],"電費按「每月」用多少度，一階一階算。全家一起算。":["Prices go up step by step with monthly use — for the whole family together.","料金は「月の使用量」で段階的に計算。家族全体の合計です。"],"電費神算":["Bill oracle","電気代の達人"],"電費解碼器":["Bill Decoder","電気代デコーダー"],"非夏月":["Non-summer","夏季以外"],"顏色模式：跟隨系統，點一下切換":["Colour mode: system, tap to change","カラーモード：システム、タップで切替"],"顏色模式：淺色，點一下切換":["Colour mode: light, tap to change","カラーモード：ライト、タップで切替"],"顏色模式：深色，點一下切換":["Colour mode: dark, tap to change","カラーモード：ダーク、タップで切替"],"淺色":["Light","ライト"],"深色":["Dark","ダーク"],"（每月約 # 度）。你猜的臥室冷氣每月約 # 度。多數人都會猜錯，這就是怪獸難抓的原因。":[" (about # kWh/month). Your pick, the bedroom AC, uses about # kWh. Most people guess wrong — that’s why monsters are hard to catch.","（月約 # kWh）。あなたの予想の寝室のエアコンは月約 # kWh。多くの人が外す、だから怪獣は捕まえにくい。"],"，但再多用 # 度要":[", but # more kWh costs ","。でも # kWh 増えると"],"，你猜 NT$#，準確度":["; you guessed NT$#, accuracy ","。予想は # 元、精度 "],"：兩年用電圖表、同類家庭比較、省電建議 → 「帳單紀錄」圖表和「怪獸圖鑑」。":[": two-year usage charts, peer comparison, saving tips → our Bill log chart and Monster guide.","：2年分のグラフ、似た家庭との比較、節電アドバイス →「請求書の記録」と「怪獣図鑑」。"],"：在電費單的左上角，# 個數字。":[": top-left of the bill, # digits.","：請求書の左上、# 桁の数字。"],"：把省電變成限時活動和遊戲 → 「家庭挑戰」與「讓怪獸睡覺」。":[": saving as timed events and games → our Family challenge and “Put it to sleep”.","：節電を期間限定イベントやゲームに →「家族チャレンジ」と「おやすみさせる」。"],"：研究顯示「和別人比較」平均能省約 #% → 本站顯示「全台平均」做比較，但更依賴一次設定好的預設值。":[": research shows peer comparison saves about #% → we show Taiwan’s average, but rely more on set-once defaults.","：研究では「他と比べる」と平均約 #% 節約 → 当サイトは全国平均を示しつつ、一度の設定変更を重視。"],"：預測下期用電、和去年同期比較的集點活動 → 本站的「猜下期度數」和「帳單紀錄」。":[": predict next usage and compare with last year for points → our Guess the next bill and Bill log.","：次回の使用量予想と前年比較でポイント →「次回の予想」と「請求書の記録」。"],"許多家庭":["Many families","多くの家庭"],"凌晨一點陪讀書我不介意，但設 #°C 真的有點太賣力了。":["I don’t mind keeping a student company at 1 a.m., but #°C is working me too hard.","深夜1時の勉強に付き合うのはいいけど、#°C はさすがに頑張りすぎ。"],"大家以為我關機了，其實我一直醒著。":["Everyone thinks I’m off. I’m wide awake.","みんな電源オフだと思ってるけど、ずっと起きてるよ。"],"我 # 小時沒休息過，而且年紀越大越會吃電。":["I haven’t rested in # hours, and the older I get, the hungrier I am.","# 時間休みなし。年をとるほど電気を食うんだ。"],"我在客廳吹了很多年，年紀大了，喘得比較用力。":["I’ve cooled this living room for years; I puff harder now.","リビングで何年も頑張ってきた。年をとって息が荒いんだ。"],"整晚一直重新燒水，可是早上才有人喝。":["I reboil all night, but nobody drinks until morning.","一晩中わかし直してるのに、飲むのは朝だけ。"],"新來的那台一個月只要 # 度，我可以退休了。":["The new one needs only # kWh a month. I can retire.","新しいのは月 # kWh だけ。引退していいかな。"],"晚上睡覺，清晨六點前就煮好，茶照喝。":["I sleep at night and boil before six — tea as usual.","夜は眠って、朝6時前に沸騰。お茶はいつも通り。"],"沒人洗澡的時候，我也一直把水保溫著。":["Even when nobody bathes, I keep the water hot.","誰もお風呂に入らなくても、ずっと保温してる。"],"洗澡前一小時才叫我起床就好。":["Just wake me an hour before bath time.","お風呂の1時間前に起こしてくれればいいよ。"],"開關一按，我就真的睡了。":["One flick and I’m really asleep.","スイッチひとつで、本当に眠れる。"],"冰箱":["Fridge","冷蔵庫"],"熱水瓶":["Hot-water pot","電気ポット"],"臥室冷氣":["Bedroom AC","寝室のエアコン"],"客廳冷氣":["Living-room AC","リビングのエアコン"],"電熱水器":["Electric water heater","電気温水器"],"機上盒":["Set-top box","セットトップボックス"],"電視":["TV","テレビ"],"電鍋":["Rice cooker","炊飯器"],"書桌燈":["Desk lamp","デスクライト"],"電風扇":["Fan","扇風機"],"路由器":["Router","ルーター"],"整晚加熱":["heating all night","一晩中加熱"],"待機中":["on standby","待機中"],"忘了關":["left on","消し忘れ"],"保溫 # 小時":["kept warm # h","保温 # 時間"],"房間沒人":["nobody in the room","部屋に誰もいない"],"對著空房間":["blowing at an empty room","空き部屋に送風"],"保存食物":["keeping food fresh","食品を保存中"],"阿嬤在睡":["Grandma is asleep","おばあちゃんが就寝中"],"手機在更新":["phones are updating","スマホが更新中"],"阿公":["Grandpa","おじいちゃん"],"阿嬤":["Grandma","おばあちゃん"],"爸爸":["Dad","お父さん"],"媽媽":["Mom","お母さん"],"我":["Me","わたし"],"全家":["Everyone","家族みんな"],"熱水瓶裝定時器":["Put a timer on the hot-water pot","電気ポットにタイマーを付ける"],"冷氣遙控器貼「#°C＋電風扇」":["Stick “#°C + fan” on the AC remote","エアコンのリモコンに「#°C＋扇風機」を貼る"],"清一次冷氣濾網":["Clean the AC filter once","エアコンのフィルターを一度掃除"],"機上盒改接開關延長線":["Plug the set-top box into a switched strip","セットトップボックスをスイッチ付きタップに"],"冰箱離牆 # 公分":["Move the fridge # cm from the wall","冷蔵庫を壁から # cm 離す"],"登錄台電節電獎勵":["Register for Taipower’s saving reward","台電の節電奨励に登録"],"加定時器，晚上睡覺":["Add a timer, sleep at night","タイマーで夜はおやすみ"],"加定時器，洗澡前才加熱":["Add a timer, heat only before baths","タイマーで入浴前だけ加熱"],"接開關延長線，睡前關":["Switched strip, off at bedtime","スイッチ付きタップで寝る前にオフ"],"換成一級能效":["Replace with a grade-1 model","省エネ1級に買い替え"],"改成 #°C＋電風扇":["Set #°C + fan","#°C＋扇風機に設定"],"三代同堂":["Three generations","三世代同居"],"小家庭":["Small family","核家族"],"兩老在家":["Elderly couple","高齢の夫婦"],"關燈大師":["Light-switch master","消灯マスター"],"深夜巡邏隊":["Night patrol","深夜パトロール隊"],"滿分學霸":["Perfect score","満点博士"],"怪獸馴服師":["Monster tamer","怪獣トレーナー"],"火鍋達人":["Hot-pot champion","鍋パーティー名人"],"設定 #–#°C，搭配電風扇或循環扇":["Set #–#°C and add a fan or circulator","#–#°C に設定し、扇風機やサーキュレーターを併用"],"背面和兩側留 # 公分以上散熱空間":["Leave # cm+ behind and on both sides","背面と両側に # cm 以上のすき間を"],"接在有開關的延長線上，睡前一起關":["Use a switched strip; switch off at bedtime","スイッチ付きタップにつなぎ、寝る前にまとめてオフ"],"晚上休息，清晨自動煮好":["Rests at night, boils by morning","夜は休んで、朝には自動で沸騰"],"遙控器背面貼一張提醒":["A reminder on the back of the remote","リモコンの裏にメモを貼る"],"七、八分滿就好":["Keep it 70–80% full","中身は7〜8割で十分"],"# 住宅累進電價與夏月費率（台電）；# 住宅平均每月用電非夏月 # 度、夏月 # 度（台電）；熱水瓶每天約 # 度、定時約省 #%；# 年以上冰箱每月約 # 度、一級能效約 # 度；儲熱式電熱水器待機每年約 # 度；機上盒待機每年約 # 度；冷氣每調高 #°C 約省 #%（以上台電公開資料）；住宅電力排碳係數每度 # 公斤（經濟部能源署，# 年度）；節電獎勵每度 # 元，#/#/# 前登錄；汰舊換新補助每台 # 元，#/#/# 前購買。家電數字為估算，僅供家人討論。":["# residential tiered and summer rates (Taipower); # average home use # kWh/month outside summer, # in summer (Taipower); hot-water pot about # kWh/day, timer saves about #%; fridges over # years about # kWh/month, grade-1 about #; storage water heater standby about # kWh/year; set-top box standby about # kWh/year; each #°C higher on the AC saves about #% (all Taipower public data); residential emission factor # kg per kWh (Energy Administration, #); saving reward NT$# per kWh, register by #/#/#; replacement subsidy NT$# each, buy by #/#/#. Appliance figures are estimates for family discussion.","# 住宅向け段階料金と夏季料金（台電）；# 住宅の月平均使用量 夏以外 # kWh、夏 # kWh（台電）；電気ポット1日約 # kWh、タイマーで約 #% 節約；# 年以上の冷蔵庫 月約 # kWh、省エネ1級 約 # kWh；貯湯式電気温水器の待機 年約 # kWh；セットトップボックス待機 年約 # kWh；エアコン #°C 上げるごとに約 #% 節約（以上 台電公開データ）；住宅の排出係数 1 kWh あたり # kg（経済部エネルギー署、# 年度）；節電奨励 1 kWh # 元、#/#/# までに登録；買い替え補助 1台 # 元、#/#/# までに購入。家電の数値は家族で話し合うための試算です。"],"冷氣設 #°C＋電風扇":["AC at #°C + fan","エアコン #°C＋扇風機"],"一樣涼，電費少一截":["Just as cool, much cheaper","同じ涼しさで電気代はぐっと安く"],"清晨自動煮好，茶照喝":["Boils by morning — tea as usual","朝には沸騰、お茶はいつも通り"],"睡前關機上盒開關":["Switch off the set-top box at bedtime","寝る前にセットトップボックスをオフ"],"一個開關就好":["Just one switch","スイッチひとつでOK"],"它是我們家最大的怪獸":["It’s our biggest monster","わが家いちばんの怪獣"],"一起看下一張電費單":["Look at the next bill together","次の請求書をみんなで見る"],"和去年同一期比比看":["Compare with the same period last year","前年同期と比べてみよう"],"下一期一起看帳單":["Read the next bill together","次の請求書をいっしょに見よう"],"已重新開始":["Started over","リセットしました"],"請輸入 # 到 # 之間的數字":["Please enter a number from # to #","# 〜 # の数字を入力してください"],"請輸入 # 到 # 的數字":["Please enter a number from # to #","# 〜 # の数字を入力してください"],"請長按文字框手動複製":["Long-press the text box to copy it","テキストを長押ししてコピーしてください"],"這台裝置無法產生圖片，請改用「複製成一段文字」":["This device can’t make images — use “Copy as text”","この端末では画像を作れません。「テキストでコピー」を使ってください"],"圖片產生失敗，請改用「複製成一段文字」":["Couldn’t make the image — use “Copy as text”","画像を作れませんでした。「テキストでコピー」を使ってください"],"這台裝置無法產生圖片":["This device can’t make images","この端末では画像を作れません"],"圖片產生失敗":["Couldn’t make the image","画像を作れませんでした"],"全對！":["All correct!","全問正解！"],"做到了！":["Done!","できた！"],"完成一件":["One done","1つ完了"],"改完之後退回第 # 階！":["After the changes you’re back to step #!","変更後、第 # 段に下がった！"],"畫面出了點問題，已重設成預設值。":["Something went wrong; settings were reset.","問題が起きたため、初期設定に戻しました。"],"。」":[".”","」と伝える。"],"這期一起做一件事":["One thing to do together this period","今期みんなでやること"],"語言":["Language","言語"],"電費解碼器｜家裡幾度 C，是「省」了沒？":["Bill Decoder | Degrees at Home","電気代デコーダー｜家の電気、「節約」できてる？"],"輸入電費帳單度數，看懂你家在第幾階、哪台電器最耗電，改一個設定能省多少。":["Enter your bill’s kWh to see your price step, your biggest power user, and what one change saves.","請求書の使用量を入れて、料金の段階、いちばん電気を使う家電、設定ひとつでの節約額をチェック。"]},"N":{"冰箱":["Fridge","冷蔵庫"],"熱水瓶":["Hot-water pot","電気ポット"],"臥室冷氣":["Bedroom AC","寝室のエアコン"],"客廳冷氣":["Living-room AC","リビングのエアコン"],"電熱水器":["Electric water heater","電気温水器"],"機上盒":["Set-top box","セットトップボックス"],"電視":["TV","テレビ"],"電鍋":["Rice cooker","炊飯器"],"書桌燈":["Desk lamp","デスクライト"],"電風扇":["Fan","扇風機"],"路由器":["Router","ルーター"]},"TAGS":{"整晚加熱":["heating all night","一晩中加熱"],"待機中":["on standby","待機中"],"忘了關":["left on","消し忘れ"],"保溫 # 小時":["kept warm # h","保温 # 時間"],"房間沒人":["nobody in the room","部屋に誰もいない"],"對著空房間":["blowing at an empty room","空き部屋に送風"],"保存食物":["keeping food fresh","食品を保存中"],"阿嬤在睡":["Grandma is asleep","おばあちゃんが就寝中"],"手機在更新":["phones are updating","スマホが更新中"]},"WHO":{"阿公":["Grandpa","おじいちゃん"],"阿嬤":["Grandma","おばあちゃん"],"爸爸":["Dad","お父さん"],"媽媽":["Mom","お母さん"],"我":["Me","わたし"],"全家":["Everyone","家族みんな"]},"MIS":{"熱水瓶裝定時器":["Put a timer on the hot-water pot","電気ポットにタイマーを付ける"],"冷氣遙控器貼「#°C＋電風扇」":["Stick “#°C + fan” on the AC remote","エアコンのリモコンに「#°C＋扇風機」を貼る"],"清一次冷氣濾網":["Clean the AC filter once","エアコンのフィルターを一度掃除"],"機上盒改接開關延長線":["Plug the set-top box into a switched strip","セットトップボックスをスイッチ付きタップに"],"冰箱離牆 # 公分":["Move the fridge # cm from the wall","冷蔵庫を壁から # cm 離す"],"登錄台電節電獎勵":["Register for Taipower’s saving reward","台電の節電奨励に登録"]},"ACT":{"加定時器，晚上睡覺":["Add a timer, sleep at night","タイマーで夜はおやすみ"],"加定時器，洗澡前才加熱":["Add a timer, heat only before baths","タイマーで入浴前だけ加熱"],"接開關延長線，睡前關":["Switched strip, off at bedtime","スイッチ付きタップで寝る前にオフ"],"換成一級能效":["Replace with a grade-1 model","省エネ1級に買い替え"],"改成 #°C＋電風扇":["Set #°C + fan","#°C＋扇風機に設定"]},"PRE":{"三代同堂":["Three generations","三世代同居"],"小家庭":["Small family","核家族"],"兩老在家":["Elderly couple","高齢の夫婦"]},"BAD":{"關燈大師":["Light-switch master","消灯マスター"],"深夜巡邏隊":["Night patrol","深夜パトロール隊"],"電費神算":["Bill oracle","電気代の達人"],"滿分學霸":["Perfect score","満点博士"],"怪獸馴服師":["Monster tamer","怪獣トレーナー"],"火鍋達人":["Hot-pot champion","鍋パーティー名人"]},"TIP":{"設定 #–#°C，搭配電風扇或循環扇":["Set #–#°C and add a fan or circulator","#–#°C に設定し、扇風機やサーキュレーターを併用"],"背面和兩側留 # 公分以上散熱空間":["Leave # cm+ behind and on both sides","背面と両側に # cm 以上のすき間を"],"加定時器：晚上休眠，起床前煮好":["Timer: rest at night, boil before you wake","タイマーで夜は休止、起きる前に沸騰"],"加定時器：洗澡前一小時才加熱":["Timer: heat only an hour before baths","タイマーで入浴の1時間前だけ加熱"],"接在有開關的延長線上，睡前一起關":["Use a switched strip; switch off at bedtime","スイッチ付きタップにつなぎ、寝る前にまとめてオフ"]},"EDO":{"晚上休息，清晨自動煮好":["Rests at night, boils by morning","夜は休んで、朝には自動で沸騰"],"遙控器背面貼一張提醒":["A reminder on the back of the remote","リモコンの裏にメモを貼る"],"七、八分滿就好":["Keep it 70–80% full","中身は7〜8割で十分"]}};
+var I18N={lang:'zh',li:0,
+  set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
+    document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
+    if(this.lang==='ja'&&!document.getElementById('jaFonts')){var l=document.createElement('link');l.id='jaFonts';l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@700;900&display=swap';document.head.appendChild(l)}
+    I18N.applyAll()}};
+var CJK=/[一-鿿　-〿！-｠]/;
+function T(k){var v=I18N_DATA.D[k];return v?v[I18N.li]:null}
+function grp(o){return Object.keys(o).sort(function(a,b){return b.length-a.length}).map(function(k){return k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}).join('|')}
+var G={N:grp(I18N_DATA.N),TAG:grp(I18N_DATA.TAGS),WHO:grp(I18N_DATA.WHO),MIS:grp(I18N_DATA.MIS),ACT:grp(I18N_DATA.ACT),PRE:grp(I18N_DATA.PRE),BAD:grp(I18N_DATA.BAD),TIP:grp(I18N_DATA.TIP),EDO:grp(I18N_DATA.EDO)};
+function R(src,en,ja){return{re:new RegExp('^'+src.replace(/\{(\w+)\}/g,function(_,g){return '('+G[g]+')'})+'$'),f:[en,ja]}}
+var RULES=[
+ R('{N}，約每月 # 度，已睡著','$1, about # kWh/month, asleep','$1、月約 # kWh、おやすみ中'),
+ R('{N}，約每月 # 度','$1, about # kWh/month','$1、月約 # kWh'),
+ R('{N}，約佔 #%，點開調整','$1, about #% — tap to adjust','$1、約 #%・タップで調整'),
+ R('{N}（睡）','$1 (asleep)','$1（おやすみ中）'),
+ R('{N}睡著了','$1 is asleep','$1がおやすみしました'),
+ R('{N}，目前設為沒有','$1, set as not in your home','$1、「なし」に設定中'),
+ R('{N}，{TAG}','$1, $2','$1、$2'),
+ R('{N}不能關！{TAG}','Don’t switch off the $1! $2','$1は消しちゃダメ！$2'),
+ R('{MIS}，已完成','$1, done','$1、完了'),R('{MIS}，未完成','$1, not done','$1、未完了'),
+ R('讓它睡覺：{ACT}','Put it to sleep: $1','おやすみさせる：$1'),
+ R('{ACT}・每月少 # 度，一年少排 # 公斤二氧化碳','$1 · # kWh less a month, # kg less CO₂ a year','$1・月 # kWh 減、年 # kg の CO₂ 削減'),
+ R('{ACT}・點一下叫醒','$1 · tap to wake','$1・タップで起こす'),
+ R('已套用「{PRE}」的常見狀況，可再點怪獸微調','Applied a typical “$1” home — tap monsters to fine-tune','「$1」の一般的な設定にしました。怪獣をタップして調整できます'),
+ R('獲得徽章：{BAD}','Badge earned: $1','バッジ獲得：$1'),
+ R('{WHO}負責這件事：','$1 is in charge:','担当：$1'),
+ R('這期一起做一件事（{WHO}負責）','One thing this period ($1 in charge)','今期みんなでやること（担当：$1）'),
+ R('每月約 # 度・{TIP}','About # kWh/month · $1','月約 # kWh・$1'),
+ R('{EDO}・{WHO}負責','$1 · $2 in charge','$1・担当：$2'),
+ R('刪除 #-#','Delete #-#','#-# を削除'),
+ R('{N}每月約 # 度，是你家第一名。','$1 uses about # kWh a month — your number one.','$1が月約 # kWh で、わが家の1位。'),
+ R('（每月約 # 度）。你猜的{N}每月約 # 度。多數人都會猜錯，這就是怪獸難抓的原因。',' (about # kWh/month). Your pick, $1, uses about # kWh. Most people guess wrong — that’s why monsters are hard to catch.','（月約 # kWh）。あなたが選んだ$1は月約 # kWh。多くの人が外す、だから怪獣は捕まえにくい。'),
+ R('（每月約 # 度）。你猜的{N}你家設定為沒有。多數人都會猜錯，這就是怪獸難抓的原因。',' (about # kWh/month). Your pick, $1, is set as not in your home. Most people guess wrong.','（月約 # kWh）。あなたが選んだ$1は「なし」に設定中。多くの人が外します。'),
+ R('一起看看{N}','Take a look at the $l1 together','$1をみんなで見てみよう'),
+ R('「(.+)」','“$Q”','「$Q」')
+];
+function lookup(key){var d=T(key);if(d!=null)return d;
+  for(var i=0;i<RULES.length;i++){var m=key.match(RULES[i].re);if(!m)continue;var tpl=RULES[i].f[I18N.li],ok=true;
+    var out=tpl.replace(/\$Q/g,function(){var q=T(m[1]);if(q==null)ok=false;return q}).replace(/\$l(\d)/g,function(_,n){var v=T(m[+n]);if(v==null)ok=false;return v&&I18N.lang==='en'?v.charAt(0).toLowerCase()+v.slice(1):v}).replace(/\$(\d)/g,function(_,n){var v=T(m[+n]);if(v==null)ok=false;return v});
+    if(ok)return out}
+  return null}
+function L(t){if(I18N.lang==='zh'||t==null)return t;t=String(t);if(!CJK.test(t))return t;
+  var lead=t.match(/^\s*/)[0],trail=t.match(/\s*$/)[0],core=t.trim(),nums=[];
+  var key=core.replace(/\d[\d,]*(?:\.\d+)?/g,function(n){nums.push(n);return '#'});
+  var out=lookup(key);if(out==null)return t;var i=0;out=out.replace(/#/g,function(){return nums[i++]||''});return lead+out+trail}
+/* DOM: translate text nodes and a few attributes, remember originals so we can switch back */
+var I18N_ORIG=new WeakMap(),I18N_MINE=new WeakMap(),ATTRS=['aria-label','placeholder','alt','data-title','title'];
+function trText(n){var p=n.parentNode;if(!p||p.closest&&p.closest('script,style,[data-noi18n]'))return;var v=n.nodeValue;
+  if(I18N_MINE.get(n)===v)return;I18N_ORIG.set(n,v);var out=L(v);I18N_MINE.set(n,out);if(out!==v)n.nodeValue=out}
+function trAttr(el,a){if(!el.hasAttribute(a))return;var v=el.getAttribute(a),k='data-i18n-'+a;
+  if(el.getAttribute('data-i18n-mine-'+a)===v)return;el.setAttribute(k,v);var out=L(v);el.setAttribute('data-i18n-mine-'+a,out);if(out!==v)el.setAttribute(a,out)}
+function trTree(root){if(root.nodeType===3){trText(root);return}if(root.nodeType!==1)return;
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n;while(n=w.nextNode())trText(n);
+  ATTRS.forEach(function(a){if(root.hasAttribute&&root.hasAttribute(a))trAttr(root,a);root.querySelectorAll('['+a+']').forEach(function(e){trAttr(e,a)})})}
+I18N.applyAll=function(){
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),n;
+  while(n=w.nextNode()){if(I18N_ORIG.has(n)&&I18N_MINE.get(n)===n.nodeValue){var o=I18N_ORIG.get(n);n.nodeValue=o;I18N_MINE.delete(n)}}
+  ATTRS.forEach(function(a){document.querySelectorAll('[data-i18n-'+a+']').forEach(function(e){if(e.getAttribute('data-i18n-mine-'+a)===e.getAttribute(a))e.setAttribute(a,e.getAttribute('data-i18n-'+a));e.removeAttribute('data-i18n-mine-'+a)})});
+  if(I18N.lang!=='zh')trTree(document.body);
+  var md=document.querySelector('meta[name="description"]');if(md){if(!md.dataset.zh)md.dataset.zh=md.content;md.content=L(md.dataset.zh)}
+  if(window.Router&&Router.cur)Router.setTitle()};
+var I18N_OBS=new MutationObserver(function(ms){if(I18N.lang==='zh')return;ms.forEach(function(m){
+  if(m.type==='characterData')trText(m.target);else if(m.type==='attributes')trAttr(m.target,m.attributeName);else m.addedNodes.forEach(trTree)})});
+I18N_OBS.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:ATTRS});
+/* canvas cards: translate whatever gets drawn */
+(function(){var P=window.CanvasRenderingContext2D&&CanvasRenderingContext2D.prototype;if(!P)return;var f=P.fillText,m=P.measureText;
+  P.fillText=function(t){var a=[].slice.call(arguments);a[0]=L(t);return f.apply(this,a)};P.measureText=function(t){return m.call(this,L(t))}})();
+
+/* =========================================================
+   ROUTER — #decoder #monsters #learn #challenge #history #elder #about
+   ========================================================= */
+window.Router=null;var ROUTES=['decoder','why','monsters','learn','challenge','history','elder','about'];
+var Router={cur:null,setTitle:function(){var v=$('v-'+this.cur);if(!v)return;var t=v.getAttribute('data-i18n-data-title')||v.getAttribute('data-title');$('appTitle').textContent=L(t);document.title=L(t)+'｜'+L('家裡幾度 C，是「省」了沒？')},
+  go:function(name,focus){if(ROUTES.indexOf(name)<0)name='decoder';var changed=name!==this.cur,first=this.cur===null,self=this;
+    if(changed&&!first&&!reduced()&&document.startViewTransition&&!mq('(pointer: coarse)')&&!mq('(max-width: 899px)')){document.startViewTransition(function(){self.swap(name,focus,changed,false)});return}
+    this.swap(name,focus,changed,changed&&!first&&!reduced())},
+  swap:function(name,focus,changed,animate){if(name!=='challenge'&&window.Patrol)Patrol.stop();if(name!=='elder'&&typeof Speak!=='undefined')Speak.stop();this.cur=name;
+    ROUTES.forEach(function(r){var v=$('v-'+r);if(v)v.hidden=r!==name});
+    var nv=$('v-'+name);if(animate&&nv){nv.classList.remove('enter');void nv.offsetWidth;nv.classList.add('enter')}
+    document.querySelectorAll('[data-route]').forEach(function(a){if(a.dataset.route===name)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+    var v=$('v-'+name);this.setTitle();
+    document.body.classList.toggle('nodock',!(name==='decoder'||name==='monsters'));
+    Drawer.close(false);
+    if(changed){window.scrollTo(0,0);if(animate){raf(function(){try{renderAll()}catch(e){}})}else{try{renderAll()}catch(e){}};if(focus&&v){var h=v.querySelector('h1');if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true})}catch(e){}}}}},
+  init:function(){window.Router=Router;var self=this;window.addEventListener('hashchange',function(){self.go(location.hash.slice(1),true)});this.go(location.hash.slice(1),false)}};
+var Overlay={push:function(){try{history.pushState({ov:1},'')}catch(e){}},pop:function(){try{if(history.state&&history.state.ov)history.back()}catch(e){}}};
+window.addEventListener('popstate',function(){if(Sheet.isOpen())Sheet.close(true);else if(Drawer.isOpen())Drawer.close(true,true)});
+var Drawer={open:function(){Overlay.push();$('drawer').classList.add('open');$('dscrim').classList.add('open');$('menuBtn').setAttribute('aria-expanded','true');$('menuBtn').setAttribute('aria-label','關閉選單');
+    var a=$('drawer').querySelector('[aria-current="page"]')||$('drawer').querySelector('a');setTimeout(function(){try{a.focus()}catch(e){}},60)},
+  close:function(ret,fromPop){if(!$('drawer').classList.contains('open'))return;if(!fromPop)Overlay.pop();$('drawer').classList.remove('open');$('dscrim').classList.remove('open');$('menuBtn').setAttribute('aria-expanded','false');$('menuBtn').setAttribute('aria-label','開啟選單');if(ret)$('menuBtn').focus()},
+  isOpen:function(){return $('drawer').classList.contains('open')},
+  bind:function(){var self=this;$('menuBtn').addEventListener('click',function(){self.isOpen()?self.close(true):self.open()});$('dscrim').addEventListener('click',function(){self.close(true)});
+    $('drawer').addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-route]');if(a&&a.dataset.route===Router.cur){e.preventDefault();self.close(false)}})}};
+
+/* =========================================================
+   VIEW: monsters dex
+   ========================================================= */
+var Dex={build:function(){$('dex').innerHTML=APPLIANCES.map(function(a){return '<article class="mcard" id="d_'+a.id+'"><header><svg viewBox="-40 -40 80 80" aria-hidden="true" class="dav"></svg><div><h3>'+esc(a.name)+'</h3><div class="k"></div></div></header>'+
+      '<p class="q"></p><p style="font-size:var(--fs-s)">'+esc(a.why)+'</p><ul>'+TIPS[a.id].map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul>'+
+      '<div class="acts"><button type="button" class="pill" data-dtame="'+a.id+'"></button><button type="button" class="pill" data-dopen="'+a.id+'">調整</button></div></article>'}).join('');
+    $('dex').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button');if(!b)return;
+      if(b.dataset.dopen){Sheet.open(b.dataset.dopen,b);return}
+      var id=b.dataset.dtame;if(!id)return;var o=S.app[id];if(!o.has){o.has=true}o.tamed=!o.tamed;schedule();if(o.tamed)toast(APPLIANCES.filter(function(a){return a.id===id})[0].name+'睡著了',true)})},
+  render:function(st,r){if(Router.cur!=='monsters')return;r.rows.forEach(function(x){var a=x.a,o=st.app[a.id],c=$('d_'+a.id);if(!c)return;
+    c.querySelector('.dav').innerHTML=avatar(a,o.tamed);c.querySelector('.k').textContent=o.has?'約 '+fmt(x.est)+' 度 / 月':'你家設為沒有';
+    c.querySelector('.q').textContent='「'+(o.tamed?a.qs:a.q)+'」';var b=c.querySelector('[data-dtame]');b.setAttribute('aria-pressed',String(!!o.tamed));b.textContent=o.tamed?'已經睡著':'讓它睡覺：'+a.act})}};
+
+/* =========================================================
+   VIEW: learn (tier explainer + quiz)
+   ========================================================= */
+var TCOL=['#7FA77A','#B9D3AE','#E2A33B','#E7B36A','#D9774E','#C8504A'];
+var Learn={season:null,
+  bind:function(){var self=this;$('lrange').addEventListener('input',function(e){S.lk=clamp(e.target.value,0,1200);schedule()});
+    document.querySelectorAll('[data-lseason]').forEach(function(b){b.addEventListener('click',function(){self.season=b.dataset.lseason;schedule()})});
+    $('quiz').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-qa]');if(!b)return;var qi=Number(b.dataset.qi);if(S.quiz[qi]!=null)return;S.quiz[qi]=Number(b.dataset.qa);schedule();
+      if(Object.keys(S.quiz).length===QUIZ.length){var sc=QUIZ.filter(function(q,i){return S.quiz[i]===q[2]}).length;if(sc===QUIZ.length){toast('全對！',true);celebrate()}}});},
+  render:function(st){if(Router.cur!=='learn')return;var se=this.season||st.season,k=st.lk,rate=CFG.rate[se],p=0,rows=[],tot=0;
+    document.querySelectorAll('[data-lseason]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lseason===se))});
+    if(document.activeElement!==$('lrange'))$('lrange').value=k;$('lk').textContent=fmt(k)+' 度 / 月';
+    for(var i=0;i<6;i++){var cap=CFG.tiers[i],u=Math.max(0,Math.min(k,cap)-p);if(u>0){rows.push({i:i,u:u,c:u*rate[i]});tot+=u*rate[i]}p=cap;if(k<=cap)break}
+    $('lbar').innerHTML=rows.map(function(x){return '<div style="flex-grow:'+x.c.toFixed(1)+';background:'+TCOL[x.i]+'">'+(x.c/tot>0.09?'NT$'+fmt(x.c):'')+'</div>'}).join('')||'<div style="flex-grow:1;color:var(--soft)">0 度</div>';
+    $('ltable').innerHTML=rows.map(function(x){return '<i style="background:'+TCOL[x.i]+'"></i><span>第 '+(x.i+1)+' 階（'+CFG.tierLabel[x.i]+'）</span><span class="r">'+fmt(x.u)+' 度 × '+rate[x.i]+'</span><span class="r">NT$'+fmt(x.c)+'</span>'}).join('')+
+      '<div class="ltot"><span>一個月合計</span><b>NT$'+fmt(tot)+'</b></div>';
+    var last=rows.length?rows[rows.length-1]:null,avg=k>0?tot/k:0;
+    $('lsay').innerHTML=k===0?'拖動上方滑桿看看。':'平均每度 <em>'+avg.toFixed(2)+' 元</em>，但再多用 1 度要 <em>'+(last?rate[last.i]:rate[0])+' 元</em>。這就是為什麼「最後開冷氣的人」看起來最貴：其實是全家的電一起把價錢推上去。';
+    $('quiz').innerHTML=QUIZ.map(function(q,i){var a=st.quiz[i],done=a!=null;return '<div class="qz"><p class="qq">'+(i+1)+'. '+esc(q[0])+'</p><div class="chips">'+q[1].map(function(o,j){var cls=done?(j===q[2]?' right':(j===a?' wrong':'')):'';return '<button type="button" class="chip'+cls+'" data-qi="'+i+'" data-qa="'+j+'"'+(done?' aria-disabled="true"':'')+'>'+esc(o)+'</button>'}).join('')+'</div>'+(done?'<p class="ex">'+(a===q[2]?'答對了。':'答錯了。')+esc(q[3])+'</p>':'')+'</div>'}).join('');
+    var n=Object.keys(st.quiz).length;if(n===QUIZ.length){var sc=QUIZ.filter(function(q,i){return st.quiz[i]===q[2]}).length;$('quiz').innerHTML+='<p class="score">'+sc+' / '+QUIZ.length+' 題答對</p><button class="linkbtn" type="button" id="qReset" style="padding-left:0">再玩一次</button>'}
+    var qr=$('qReset');if(qr)qr.onclick=function(){S.quiz={};schedule()}}};
+
+/* =========================================================
+   VIEW: challenge (missions + prediction)
+   ========================================================= */
+var Challenge={bind:function(){$('missions').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button');if(!b)return;var id=b.dataset.m;if(!id)return;var m=S.missions[id]||(S.missions[id]={done:false,who:null});
+      if(b.dataset.w){m.who=m.who===b.dataset.w?null:b.dataset.w}else{m.done=!m.done;if(m.done){var all=MISSIONS.every(function(x){return S.missions[x[0]]&&S.missions[x[0]].done});toast(all?'六件全部完成！去吃火鍋吧':'完成一件',true);if(all)celebrate()}}schedule()});
+    $('predict').addEventListener('submit',function(e){e.preventDefault();var v=$('predIn').value;if(v===''||!isFinite(Number(v))){toast('請輸入 0 到 9,999 的數字');return}S.pred={kwh:clamp(Math.round(v),0,CFG.kwhMax),at:new Date().toISOString().slice(0,10)};schedule();toast('存好了，帳單來了記得去「帳單紀錄」對答案',true)})},
+  render:function(st){if(Router.cur!=='challenge')return;var done=0;
+    $('missions').innerHTML=MISSIONS.map(function(m){var o=st.missions[m[0]]||{};if(o.done)done++;return '<div class="mis'+(o.done?' done':'')+'"><button type="button" class="tick" data-m="'+m[0]+'" aria-pressed="'+!!o.done+'" aria-label="'+esc(m[1])+(o.done?'，已完成':'，未完成')+'">'+(o.done?'✓':'')+'</button><div><h3>'+esc(m[1])+'</h3><p>'+esc(m[2])+'</p></div>'+
+      '<div class="who2" role="group" aria-label="誰負責">'+WHO.map(function(w){return '<button type="button" class="chip" data-m="'+m[0]+'" data-w="'+w+'" aria-pressed="'+(o.who===w)+'">'+w+'</button>'}).join('')+'</div></div>'}).join('');
+    $('ringArc').setAttribute('stroke-dashoffset',String(314*(1-done/MISSIONS.length)));$('ringN').textContent=done+' / '+MISSIONS.length;
+    $('ringP').textContent=done===0?'還沒開始':done===MISSIONS.length?'全部完成，火鍋時間！':'再 '+(MISSIONS.length-done)+' 件';
+    if(document.activeElement!==$('predIn'))$('predIn').value=st.pred?st.pred.kwh:'';
+    $('predSay').innerHTML=st.pred?'你在 '+esc(st.pred.at)+' 猜下一期是 <em>'+fmt(st.pred.kwh)+' 度</em>。帳單來了，到「帳單紀錄」記一筆就會自動對答案。':'還沒猜。可以參考現在這張帳單，再想想這兩個月有沒有比較熱、有沒有讓怪獸睡覺。'}};
+
+/* =========================================================
+   VIEW: history (bill log + chart)
+   ========================================================= */
+function ymAdd(ym,d){var y=Number(ym.slice(0,4)),m=Number(ym.slice(5,7))-1+d;y+=Math.floor(m/12);m=((m%12)+12)%12;return y+'-'+(m<9?'0':'')+(m+1)}
+var History={bind:function(){var now=new Date();$('hYm').value=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');$('hKwh').value='';
+    $('addbill').addEventListener('submit',function(e){e.preventDefault();var ym=$('hYm').value,k=$('hKwh').value;
+      if(!/^\d{4}-\d{2}$/.test(ym)){$('hMsg').textContent='請選帳單月份。';return}if(k===''||!isFinite(Number(k))){$('hMsg').textContent='請輸入計費度數（0 到 9,999）。';return}
+      S.history=S.history.filter(function(h){return h.ym!==ym});S.history.push({ym:ym,kwh:clamp(Math.round(k),0,CFG.kwhMax),months:Number($('hM').value)===1?1:2});S.history.sort(function(a,b){return a.ym<b.ym?-1:1});
+      S.history=S.history.slice(-60);$('hMsg').textContent='已記下 '+ym+'。';$('hKwh').value='';schedule()});
+    $('hList').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-del]');if(!b)return;S.history=S.history.filter(function(h){return h.ym!==b.dataset.del});schedule()});
+    $('hSample').addEventListener('click',function(){var base=new Date().getFullYear()-1,vals=[[base+'-01',820],[base+'-03',760],[base+'-05',900],[base+'-07',1250],[base+'-09',1180],[base+'-11',860],[(base+1)+'-01',790],[(base+1)+'-03',720],[(base+1)+'-05',840],[(base+1)+'-07',1120],[(base+1)+'-09',1060]];
+      S.history=vals.map(function(v){return{ym:v[0],kwh:v[1],months:2}});schedule();toast('已放入範例資料',true)})},
+  render:function(st){if(Router.cur!=='history')return;var H=st.history;
+    if(!H.length){$('chart').innerHTML='<p class="empty">還沒有紀錄。上面記一筆，或放入範例資料。</p>';$('hSummary').innerHTML='';$('hList').innerHTML='';return}
+    var bw=44,gap=14,pl=40,ph=180,top=16,w=pl+H.length*(bw+gap)+10,maxv=Math.max(600,Math.max.apply(null,H.map(function(h){return h.kwh/h.months}))*1.1),y=function(v){return top+ph-v/maxv*ph};
+    var svg='<svg viewBox="0 0 '+w+' '+(top+ph+40)+'" style="width:max(100%,'+w+'px)" role="img" aria-label="每期平均每月用電長條圖">';
+    [0,250,500].forEach(function(g){if(g<=maxv)svg+='<line x1="'+pl+'" x2="'+w+'" y1="'+y(g)+'" y2="'+y(g)+'" stroke="var(--line)" stroke-width="1"'+(g===500?' stroke-dasharray="5 4" stroke-width="2"':'')+'/><text x="'+(pl-6)+'" y="'+(y(g)+4)+'" text-anchor="end" font-size="11" fill="var(--soft)">'+g+'</text>'});
+    H.forEach(function(h,i){var m=h.kwh/h.months,x=pl+i*(bw+gap)+gap/2,t=Model.tierOf(m);svg+='<rect x="'+x+'" y="'+y(m)+'" width="'+bw+'" height="'+(top+ph-y(m))+'" rx="6" fill="'+TCOL[t]+'"/><text x="'+(x+bw/2)+'" y="'+(y(m)-5)+'" text-anchor="middle" font-size="11" fill="var(--text)">'+fmt(m)+'</text><text x="'+(x+bw/2)+'" y="'+(top+ph+16)+'" text-anchor="middle" font-size="11" fill="var(--soft)">'+h.ym.slice(2).replace('-','/')+'</text>'});
+    $('chart').innerHTML=svg+'</svg>';
+    var L=H[H.length-1],prevY=H.filter(function(h){return h.ym===ymAdd(L.ym,-12)})[0],mL=L.kwh/L.months,out='';
+    if(prevY){var saved=prevY.kwh-L.kwh;out+='<p class="verdict'+(saved>0?'':' no')+'">'+(saved>0?L.ym+' 比去年同期少用 '+fmt(saved)+' 度。':L.ym+' 比去年同期多用 '+fmt(-saved)+' 度，看看是不是天氣比較熱。')+'</p>'+
+      '<div class="res'+(saved>0?'':' bad')+'"><b>NT$'+fmt(Math.max(0,saved)*CFG.reward)+'</b><small>節電獎勵（已登錄的話）</small></div><div class="res'+(saved>0?'':' bad')+'"><b>'+fmt(Math.max(0,saved)*CFG.co2)+' 公斤</b><small>少排的二氧化碳</small></div>'}
+    else out+='<p class="verdict" style="color:var(--soft)">記下去年同一期的帳單，就能比較省了多少。</p>';
+    out+='<div class="res"><b>第 '+(Model.tierOf(mL)+1)+' 階</b><small>最新一期平均每月 '+fmt(mL)+' 度</small></div>';
+    if(st.pred){var err=Math.abs(st.pred.kwh-L.kwh)/Math.max(1,L.kwh),acc=Math.max(0,Math.round((1-err)*100));out+='<div class="res"><b>'+acc+'%</b><small>猜下期的準確度（猜 '+fmt(st.pred.kwh)+'、實際 '+fmt(L.kwh)+' 度）</small></div>'}
+    $('hSummary').innerHTML=out;
+    $('hList').innerHTML=H.slice().reverse().map(function(h){return '<div class="hrow"><span>'+h.ym+'</span><b>'+fmt(h.kwh)+' 度</b><span>'+(h.months===2?'兩個月':'一個月')+'</span><button type="button" data-del="'+h.ym+'" aria-label="刪除 '+h.ym+'">刪除</button></div>'}).join('')}};
+
+/* =========================================================
+   VIEW: elder mode
+   ========================================================= */
+var ETIPS=['熱水瓶裝個定時器，晚上讓它休息，早上一樣有熱水泡茶。','冷氣開 27 度，再開電風扇，一樣涼，電費少很多。','冰箱不要塞太滿，七、八分滿最省電；背面離牆 10 公分。','熱的飯菜先放涼，再放進冰箱。','冷氣濾網兩三個禮拜洗一次，涼得快又省電。','晚上不看電視時，把機上盒的開關也關掉。','半夜開冷氣，電費不會比較便宜，也不會比較貴；白天晚上價錢一樣。','電費單通常兩個月一張，度數要除以 2，才是一個月用的。'];
+var EDO=[['ket','熱水瓶裝定時器','晚上休息，清晨自動煮好'],['ac','冷氣設 27 度＋電風扇','遙控器背面貼一張提醒'],['fridge','冰箱離牆 10 公分','七、八分滿就好']];
+var Speak={ok:'speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined',on:false,
+  say:function(t){if(!this.ok)return;try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang=I18N.lang==='en'?'en-US':I18N.lang==='ja'?'ja-JP':'zh-TW';u.rate=.88;var self=this;u.onend=u.onerror=function(){self.on=false;$('eSpeak').setAttribute('aria-pressed','false');$('eSpeak').lastChild.textContent='唸給我聽'};
+    this.on=true;$('eSpeak').setAttribute('aria-pressed','true');$('eSpeak').lastChild.textContent='停止';speechSynthesis.speak(u)}catch(e){}},
+  stop:function(){try{speechSynthesis.cancel()}catch(e){}this.on=false;var b=$('eSpeak');if(b){b.setAttribute('aria-pressed','false');b.lastChild.textContent='唸給我聽'}}};
+var Elder={tip:0,act:function(st){var tamed=APPLIANCES.some(function(a){return st.app[a.id].has&&st.app[a.id].tamed});if(tamed)return action(st);var d=EDO.filter(function(x){return !(st.missions[x[0]]&&st.missions[x[0]].done)})[0];return d?[d[1],d[2]]:['一起看下一張電費單','和去年同一期比比看']},
+  bind:function(){var self=this;$('eSpeak').hidden=!Speak.ok;
+    $('eSpeak').addEventListener('click',function(){if(Speak.on){Speak.stop();return}var r=Model.compute(S),z=r.m<=330?'放心區':r.m<=500?'注意區':'跳階區',a=self.act(S);
+      Speak.say($('etiles').innerText.replace(/\n+/g,'。 ')+'。 '+$('eTip').textContent)});
+    $('eTipN').addEventListener('click',function(){self.tip=(self.tip+1)%ETIPS.length;$('eTip').textContent=ETIPS[self.tip]});
+    $('edo').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-eid]');if(!b)return;var id=b.dataset.eid,m=S.missions[id]||(S.missions[id]={done:false,who:null});m.done=!m.done;if(m.done)toast('做到了！',true);schedule()});document.querySelectorAll('[data-esize]').forEach(function(b){b.addEventListener('click',function(){S.esize=b.dataset.esize;schedule()})});
+    $('eA4').addEventListener('click',function(){var go=function(){try{Card.a4('eImg')}catch(e){fail(e)}};if(document.fonts&&document.fonts.ready){Promise.race([document.fonts.ready,new Promise(function(r){setTimeout(r,1500)})]).then(go)}else go()})},
+  render:function(st,r){if(Router.cur!=='elder')return;$('v-elder').setAttribute('data-size',st.esize);document.querySelectorAll('[data-esize]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.esize===st.esize))});
+    var z=r.m<=330?0:r.m<=500?1:2,zn=['放心區','注意區','跳階區'][z],a=Elder.act(st),H=st.history,L=H[H.length-1],prevY=L&&H.filter(function(h){return h.ym===ymAdd(L.ym,-12)})[0];
+    var t='<div class="etile z'+z+'"><div class="l">我們家現在在</div><div class="v">'+zn+'</div><div class="s">每月大約 '+fmt(r.m)+' 度'+(st.months===2?'（帳單上 '+fmt(st.kwh)+' 度）':'')+'</div></div>'+
+      '<div class="etile act"><div class="l">這期一起做一件事（'+esc(st.who)+'負責）</div><div class="v">'+esc(a[0])+'</div><div class="s">'+esc(a[1])+'</div></div>';
+    if(prevY){var sv=prevY.kwh-L.kwh;t+='<div class="etile '+(sv>0?'z0':'z2')+'"><div class="l">和去年同一期比</div><div class="v">'+(sv>0?'少了 '+fmt(sv)+' 度':'多了 '+fmt(-sv)+' 度')+'</div><div class="s">'+(sv>0?'做得很好！':'沒關係，下期再一起努力。')+'</div></div>'}
+    $('etiles').innerHTML=t;
+    var bm=st.months===2,bill=r.billNow;
+    $('ebill').innerHTML='<div class="row dim"><span class="lab">電號・地址・計費期間</span><span></span></div>'+
+      '<div class="row hl1"><span class="lab">① 計費度數</span><span class="val">'+fmt(st.kwh)+' 度</span><span class="say2">'+(bm?'兩個月一張，除以 2 ＝ <b>每月 '+fmt(r.m)+' 度</b>。看這個數字，就知道在哪一區。':'這就是這個月用的度數。')+'</span></div>'+
+      '<div class="row hl2"><span class="lab">② 應繳總金額</span><span class="val">約 NT$'+fmt(bill)+'</span><span class="say2">要繳的錢。和<b>去年同一期</b>比，才知道有沒有省到；和上一期比，會被季節騙。</span></div>'+
+      '<div class="row dim"><span class="lab">其他明細</span><span></span></div>';
+    var top=r.rows.filter(function(x){return st.app[x.a.id].has}).sort(function(p,q){return q.est-p.est}).slice(0,3),mx=top.length?top[0].est:1;
+    $('etop').innerHTML=top.map(function(x,i){return '<div class="it"><span class="rk2">'+(i+1)+'</span><b>'+esc(x.a.name)+'</b><span class="note2"><span class="bar2" style="display:block;width:'+Math.max(8,x.est/mx*100).toFixed(0)+'%"></span>每月約 '+fmt(x.est)+' 度・'+esc(TIPS[x.a.id][0])+'</span></div>'}).join('');
+    $('edo').innerHTML=EDO.map(function(d){var o=st.missions[d[0]]||{};return '<button type="button" data-eid="'+d[0]+'" aria-pressed="'+!!o.done+'"><span class="bx">'+(o.done?'✓':'')+'</span><b>'+d[1]+'</b><small>'+d[2]+(o.who?'・'+esc(o.who)+'負責':'')+'</small></button>'}).join('');
+    if(!$('eTip').textContent)$('eTip').textContent=ETIPS[this.tip]}};
+
+
+/* =========================================================
+   GAMES: easter egg, night patrol, bill guess, badges
+   ========================================================= */
+var BADGES=[['lamp','燈','關燈大師','把隨手關燈按到追平熱水瓶'],['patrol','巡','深夜巡邏隊','巡邏拿到 10 分以上'],['bill','算','電費神算','猜電費誤差 5% 以內'],['quiz','答','滿分學霸','小測驗全對'],['tame','睡','怪獸馴服師','讓所有怪獸睡著'],['mission','火','火鍋達人','六件挑戰全部完成']];
+function award(id,label){S.badges=S.badges||{};if(S.badges[id])return;S.badges[id]=true;store.set(S);toast('獲得徽章：'+label,true);celebrate()}
+var Egg={show:function(n){$('eggP').textContent='你真的開關了 '+n+' 次。這麼努力，省下的電跟「熱水瓶晚上睡覺」一個月差不多——而它只要一個 200 元的定時器。';$('egg').hidden=false;celebrate();setTimeout(function(){try{$('eggX').focus()}catch(e){}},300)},
+  hide:function(){$('egg').hidden=true;try{$('sw').focus()}catch(e){}},bind:function(){$('eggX').addEventListener('click',function(){Egg.hide()});$('egg').addEventListener('click',function(e){if(e.target===$('egg'))Egg.hide()})}};
+
+var PATROL=[['ket','熱水瓶','整晚加熱',1],['stb','機上盒','待機中',1],['tv','電視','忘了關',1],['rice','電鍋','保溫 9 小時',1],['lamp','書桌燈','房間沒人',1],['fan','電風扇','對著空房間',1],['fr','冰箱','保存食物',0],['ac','臥室冷氣','阿嬤在睡',0],['wifi','路由器','手機在更新',0]];
+function picon(id){var c='#D9D0BF',m={ket:'<rect x="30" y="22" width="40" height="60" rx="14" fill="'+c+'"/><rect x="40" y="14" width="20" height="10" rx="3" fill="'+c+'"/>',
+  stb:'<rect x="16" y="40" width="68" height="22" rx="5" fill="'+c+'"/><circle cx="72" cy="51" r="4" fill="#C8504A"/>',tv:'<rect x="12" y="20" width="76" height="48" rx="6" fill="'+c+'"/><rect x="40" y="70" width="20" height="8" fill="'+c+'"/>',
+  rice:'<path d="M18 46h64v18a16 16 0 0 1-16 16H34a16 16 0 0 1-16-16z" fill="'+c+'"/><rect x="24" y="36" width="52" height="10" rx="5" fill="'+c+'"/>',lamp:'<path d="M30 20h40l10 26H20z" fill="'+c+'"/><rect x="47" y="46" width="6" height="28" fill="'+c+'"/><rect x="32" y="74" width="36" height="6" rx="3" fill="'+c+'"/>',
+  fan:'<circle cx="50" cy="42" r="26" fill="none" stroke="'+c+'" stroke-width="6"/><circle cx="50" cy="42" r="6" fill="'+c+'"/><rect x="47" y="68" width="6" height="12" fill="'+c+'"/>',
+  fr:'<rect x="30" y="10" width="40" height="80" rx="6" fill="'+c+'"/><line x1="30" y1="38" x2="70" y2="38" stroke="#2E2A26" stroke-width="3"/>',ac:'<rect x="10" y="30" width="80" height="26" rx="8" fill="'+c+'"/><path d="M28 66q4 8 0 14M50 66q4 8 0 14M72 66q4 8 0 14" stroke="'+c+'" stroke-width="3" fill="none"/>',
+  wifi:'<rect x="22" y="56" width="56" height="20" rx="6" fill="'+c+'"/><path d="M32 46a26 26 0 0 1 36 0M40 38a14 14 0 0 1 20 0" stroke="'+c+'" stroke-width="4" fill="none"/>'};return '<svg viewBox="0 0 100 100" aria-hidden="true">'+m[id]+'</svg>'}
+window.Patrol=null;var Patrol={on:false,score:0,t:0,timers:[],lit:{},
+  build:function(){$('patrol').innerHTML=PATROL.map(function(p,i){return '<button type="button" class="ptile'+(p[3]?'':' keep')+'" data-pi="'+i+'" aria-label="'+p[1]+'，'+p[2]+'"><span class="tag2">'+p[2]+'</span>'+picon(p[0])+'<span>'+p[1]+'</span></button>'}).join('');
+    var self=this;$('patrol').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.ptile');if(!b||!self.on)return;var i=Number(b.dataset.pi),p=PATROL[i];
+      if(!self.lit[i]){return}
+      if(p[3]){self.score++;b.classList.remove('lit');self.lit[i]=false;b.classList.remove('hit');void b.offsetWidth;b.classList.add('hit')}
+      else{self.score=Math.max(0,self.score-1);b.classList.remove('bad');void b.offsetWidth;b.classList.add('bad');toast(p[1]+'不能關！'+p[2],false)}
+      $('pScore').textContent=self.score+' 分'});
+    $('pStart').addEventListener('click',function(){self.start()})},
+  start:function(){if(this.on)return;var self=this;this.on=true;this.score=0;this.t=20;this.lit={};$('pScore').textContent='0 分';$('pSay').hidden=true;$('pStart').textContent='巡邏中…';$('pStart').disabled=true;
+    var tiles=$('patrol').querySelectorAll('.ptile');tiles.forEach(function(t){t.classList.remove('lit')});
+    var tick=setInterval(function(){self.t--;$('pTime').textContent=self.t+' 秒';if(self.t<=0)self.end()},1000);
+    var pop=setInterval(function(){var i=Math.floor(Math.random()*PATROL.length);if(self.lit[i])return;self.lit[i]=true;tiles[i].classList.add('lit');
+      setTimeout(function(){if(self.lit[i]){self.lit[i]=false;tiles[i].classList.remove('lit')}},1500)},reduced()?900:650);
+    this.timers=[tick,pop]},
+  end:function(){this.timers.forEach(clearInterval);this.on=false;$('patrol').querySelectorAll('.ptile').forEach(function(t){t.classList.remove('lit')});this.lit={};
+    $('pStart').disabled=false;$('pStart').textContent='再巡一次';$('pTime').textContent='20 秒';var sc=this.score;
+    $('pSay').hidden=false;$('pSay').innerHTML=sc>=10?'<em>'+sc+' 分</em>，巡邏隊長就是你。現實中，熱水瓶、機上盒這些只要裝定時器或開關延長線，就不用每晚巡邏。':'<em>'+sc+' 分</em>。小訣竅：亮黃框的是偷耗電的，亮綠框的是必須開著的（冰箱、有人在睡的冷氣、路由器）。';
+    if(sc>=10)award('patrol','深夜巡邏隊');S.patrolBest=Math.max(S.patrolBest||0,sc);store.set(S)},
+  stop:function(){if(this.on){this.timers.forEach(clearInterval);this.on=false;$('pStart').disabled=false;$('pStart').textContent='開始巡邏';$('pTime').textContent='20 秒';$('patrol').querySelectorAll('.ptile').forEach(function(t){t.classList.remove('lit')});this.lit={}}}};
+
+window.Patrol=Patrol;
+var BillGuess={q:null,
+  next:function(){var k=Math.round((150+Math.random()*750)/10)*10,se=Math.random()<.5?'s':'n';this.q={k:k,se:se,ans:Model.monthBill(k,se)};
+    $('gbQ').textContent='一個家庭'+(se==='s'?'夏天（6–9 月）':'冬天')+'一個月用了 '+fmt(k)+' 度電，要付多少？';$('gbSay').hidden=true;$('gbR').value=1000;$('gbV').textContent='NT$1,000';$('gbGo').disabled=false},
+  go:function(){var g=Number($('gbR').value),a=this.q.ans,err=Math.abs(g-a)/a,pct=Math.max(0,Math.round((1-err)*100));
+    var line=err<=.05?'太神了！':err<=.15?'很接近！':err<=.35?'有點差距。':'差很多喔。';
+    $('gbSay').hidden=false;$('gbSay').innerHTML=line+'正確答案是 <em>NT$'+fmt(a)+'</em>，你猜 NT$'+fmt(g)+'，準確度 <em>'+pct+'%</em>。'+(this.q.k>500?'超過 500 度的部分，每度要 '+CFG.rate[this.q.se][Model.tierOf(this.q.k)]+' 元，所以總價會比想像中高。':'');
+    $('gbGo').disabled=true;if(err<=.05)award('bill','電費神算')},
+  bind:function(){var self=this;$('gbR').addEventListener('input',function(e){$('gbV').textContent='NT$'+fmt(e.target.value)});$('gbGo').addEventListener('click',function(){self.go()});$('gbNext').addEventListener('click',function(){self.next()});this.next()}};
+
+var Badges={render:function(st){if(Router.cur!=='challenge')return;var b=st.badges||{};
+  $('badges').innerHTML=BADGES.map(function(x){var on=!!b[x[0]];return '<div class="bdg'+(on?' on':'')+'"><i>'+(on?x[1]:'?')+'</i><b>'+(on?x[2]:'尚未解鎖')+'</b><small>'+x[3]+'</small></div>'}).join('')},
+  check:function(st){var b=st.badges||{};
+    var has=APPLIANCES.filter(function(a){return st.app[a.id].has});if(has.length&&has.every(function(a){return st.app[a.id].tamed}))award('tame','怪獸馴服師');
+    if(MISSIONS.every(function(m){return st.missions[m[0]]&&st.missions[m[0]].done}))award('mission','火鍋達人');
+    if(Object.keys(st.quiz).length===QUIZ.length&&QUIZ.every(function(q,i){return st.quiz[i]===q[2]}))award('quiz','滿分學霸')}};
+
+/* =========================================================
+   CONTROLLER — one render loop, rAF-throttled, error-guarded
+   ========================================================= */
+var pending=false;
+function schedule(){if(pending)return;pending=true;raf(function(){pending=false;renderAll()})}
+function renderAll(){
+  try{var r=Model.compute(S),onDec=Router.cur==='decoder'||Router.cur===null;if(onDec){Meter.render(S,r);Stairs.render(S,r);Myth.render(S,r);House.render(S,r);Guess.render(S,r)}if(onDec||Router.cur==='monsters')Dock.render(S,r);Dex.render(S,r);Learn.render(S);Challenge.render(S);Badges.check(S);Badges.render(S);History.render(S);Elder.render(S,r);if(Sheet.isOpen())Sheet.paint();
+    prev.ti=r.ti;prev.nti=r.nti;prev.save=r.save;store.set(S);}
+  catch(err){fail(err)}}
+var failed=false;
+function fail(err){if(window.console)console.error(err);if(failed)return;failed=true;
+  var b=$('banner');b.textContent='畫面出了點問題，已重設成預設值。';b.classList.add('show');setTimeout(function(){b.classList.remove('show')},4000);
+  S=defaultState();try{localStorage.removeItem(CFG.storeKey)}catch(e){}prev={ti:null,nti:null,save:0};
+  try{var r=Model.compute(S);Meter.render(S,r);Stairs.render(S,r);Myth.render(S,r);House.render(S,r);Dock.render(S,r)}catch(e2){}
+  setTimeout(function(){failed=false},1000)}
+function setKwh(v){S.kwh=clamp(Math.round(v),CFG.kwhMin,CFG.kwhMax);schedule()}
+
+function bind(){
+  $('range').addEventListener('input',function(e){setKwh(e.target.value)});
+  $('minus').addEventListener('click',function(){setKwh(S.kwh-50)});
+  $('plus').addEventListener('click',function(){setKwh(S.kwh+50)});
+  $('exactBtn').addEventListener('click',function(){var b=$('exactBox');b.hidden=!b.hidden;this.setAttribute('aria-expanded',String(!b.hidden));if(!b.hidden){$('exact').value=S.kwh;$('exact').focus()}});
+  $('exactBox').addEventListener('submit',function(e){e.preventDefault();var v=$('exact').value;if(v===''||!isFinite(Number(v))){toast('請輸入 0 到 9,999 之間的數字');return}setKwh(v);$('exact').value=S.kwh});
+  document.querySelectorAll('[data-months]').forEach(function(b){b.addEventListener('click',function(){S.months=Number(b.dataset.months)===1?1:2;schedule()})});
+  document.querySelectorAll('[data-season]').forEach(function(b){b.addEventListener('click',function(){S.season=b.dataset.season==='n'?'n':'s';schedule()})});
+  $('sw').addEventListener('click',function(){S.lamps=Math.min(999,S.lamps+1);
+    if(Myth.need&&S.lamps===Myth.need&&!(S.badges&&S.badges.lamp)){S.badges=S.badges||{};S.badges.lamp=true;setTimeout(function(){Egg.show(Myth.need)},250)}this.setAttribute('aria-pressed',String(this.getAttribute('aria-pressed')!=='true'));schedule()});
+  $('rank').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.rk[data-id]');if(b)Sheet.open(b.getAttribute('data-id'),b)});
+  $('shOpts').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.chip');if(!b||!Sheet.cur)return;var o=S.app[Sheet.cur.id];
+    if(b.dataset.has!==undefined){o.has=b.dataset.has==='1';if(!o.has)o.tamed=false}
+    else{var k=b.dataset.k,op=Sheet.cur.opts.filter(function(x){return x[0]===k})[0];if(!op)return;o[k]=typeof op[2][0]==='number'?Number(b.dataset.v):b.dataset.v}
+    S.preset=null;Sheet.paint();schedule()});
+  $('shTame').addEventListener('click',function(){var a=Sheet.cur;if(!a)return;var o=S.app[a.id];o.tamed=!o.tamed;Sheet.paint();schedule();if(o.tamed){coins(a.id);toast(a.name+'睡著了',true)}});
+  $('shClose').addEventListener('click',function(){Sheet.close()});$('scrim').addEventListener('click',function(){Sheet.close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!$('egg').hidden){Egg.hide();return}if(Sheet.isOpen())Sheet.close();else Drawer.close(true)}Sheet.trap(e)});
+  $('who').innerHTML=WHO.map(function(w){return '<button type="button" class="pill" data-w="'+w+'" aria-pressed="'+(w===S.who)+'">'+w+'</button>'}).join('');
+  $('who').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-w]');if(!b)return;S.who=b.dataset.w;$('who').querySelectorAll('[data-w]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});store.set(S)});
+  $('mk').addEventListener('click',function(){var go=function(){try{Card.render()}catch(e){fail(e)}};if(document.fonts&&document.fonts.ready){Promise.race([document.fonts.ready,new Promise(function(r){setTimeout(r,1500)})]).then(go)}else go()});
+  $('mkA4').addEventListener('click',function(){var go=function(){try{Card.a4()}catch(e){fail(e)}};if(document.fonts&&document.fonts.ready){Promise.race([document.fonts.ready,new Promise(function(r){setTimeout(r,1500)})]).then(go)}else go()});
+  $('house').parentNode.querySelectorAll('[data-preset]').forEach(function(b){b.addEventListener('click',function(){var pr=PRESETS[b.dataset.preset];if(!pr)return;
+    APPLIANCES.forEach(function(a){var o=S.app[a.id],src=pr[a.id];for(var k in src)o[k]=src[k];o.tamed=false});S.preset=b.dataset.preset;schedule();toast('已套用「'+({big:'三代同堂',small:'小家庭',elder:'兩老在家'})[b.dataset.preset]+'」的常見狀況，可再點怪獸微調',true)})});
+  $('cp').addEventListener('click',function(){var t=Card.text(),box=$('copybox');
+    var fallback=function(){box.hidden=false;box.value=t;box.focus();box.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}toast(ok?'已複製，貼到家庭群組':'請長按文字框手動複製',ok)};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){box.hidden=true;toast('已複製，貼到家庭群組',true)},fallback)}else fallback()});
+  var armed=false;$('reset').addEventListener('click',function(){if(!armed){armed=true;this.textContent='再按一次，確定清除';var b=this;setTimeout(function(){armed=false;b.textContent='清除我的資料，重新開始'},4000);return}
+    try{localStorage.removeItem(CFG.storeKey)}catch(e){}S=defaultState();prev={ti:null,nti:null,save:0};Theme.apply(S.theme);armed=false;this.textContent='清除我的資料，重新開始';$('cardImg').hidden=true;schedule();toast('已重新開始',true);window.scrollTo(0,0)});
+  $('hint').hidden=!!S.seenHint;$('hintX').addEventListener('click',function(){S.seenHint=true;$('hint').hidden=true;store.set(S)});
+  window.addEventListener('pageshow',function(e){if(e.persisted)schedule()});
+}
+
+/* polyfills for older browsers */
+if(window.NodeList&&!NodeList.prototype.forEach)NodeList.prototype.forEach=Array.prototype.forEach;
+if(window.Element&&!Element.prototype.closest)Element.prototype.closest=function(s){var el=this;while(el&&el.nodeType===1){if((el.matches||el.msMatchesSelector||el.webkitMatchesSelector).call(el,s))return el;el=el.parentElement||el.parentNode}return null};
+if(window.Element&&!Element.prototype.remove)Element.prototype.remove=function(){if(this.parentNode)this.parentNode.removeChild(this)};
+
+window.addEventListener('error',function(e){fail(e.error||e.message)});
+try{$('langSel').value=S.lang;$('langSel').addEventListener('change',function(){S.lang=this.value;store.set(S);I18N.set(S.lang);try{BillGuess.next()}catch(e){}});Theme.bind();Meter.build();Stairs.build();House.build();Guess.build();Dex.build();Learn.bind();Challenge.bind();History.bind();Elder.bind();Drawer.bind();Egg.bind();Patrol.build();BillGuess.bind();bind();Router.init();renderAll();I18N.set(S.lang)}catch(err){fail(err)}
+
+/* expose for testing only */
+window.__DAH={Model:Model,state:function(){return S},cfg:CFG,go:function(n){location.hash=n}};
+})();
+try{if('serviceWorker' in navigator&&location.protocol==='https:'&&window.top===window.self){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}}catch(e){}
+</script>
+</body>
+</html>
