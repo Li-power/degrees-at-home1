@@ -1458,6 +1458,31 @@ html[lang="en"] .cites-zh,html:not([lang="en"]) .cites-en{display:none}
 .ghboard li em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums}
 .ghboard li small{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
 .ghboard li.me{background:color-mix(in srgb,var(--accent-t) 12%,transparent);border-radius:10px}
+
+/* v9.4: policy pages + footer */
+html[lang="en"] .lang-zh,html:not([lang="en"]) .lang-en{display:none}
+.pcard{background:var(--elev);border-radius:24px;box-shadow:var(--card-sh);padding:clamp(20px,5vw,40px)!important;margin-top:12px}
+.policy h2{font-size:clamp(19px,4.6vw,23px);margin:26px 0 8px}
+.policy p,.policy li{font-size:var(--fs-s);line-height:1.85}
+.policy ul{padding-left:1.2em;margin:6px 0 10px}
+.policy li{margin-bottom:4px}
+.policy li::marker{color:var(--accent-t)}
+.policy a{color:var(--accent-t);font-weight:700;text-decoration:underline;text-underline-offset:3px;word-break:break-word}
+.policy b{font-family:inherit;font-weight:700}
+.pmeta{color:var(--faint);font-size:var(--fs-xs)!important;margin:-4px 0 14px}
+.pnote{margin-top:26px;padding-top:16px;border-top:1px solid var(--hair);color:var(--faint);font-size:var(--fs-xs)!important}
+.sitefoot{text-align:center;margin:56px 0 8px;color:var(--faint);font-size:var(--fs-xs);line-height:1.7}
+.sfline{display:block;width:72px;height:2px;border-radius:2px;background:var(--hair);margin:0 auto 18px}
+.sitefoot p{margin:0 0 4px}
+.sfname{font-family:var(--f-serif);font-weight:700;font-size:var(--fs-s);color:var(--soft)}
+.sfname a{color:inherit;text-decoration:none}
+.sfname span{margin:0 6px;opacity:.5}
+.sflinks{margin-top:10px!important;font-size:var(--fs-s);font-weight:700}
+.sflinks a{color:var(--soft);text-decoration:none;padding:6px 4px}
+.sflinks span{margin:0 10px;opacity:.5}
+.sitefoot a[aria-current="page"],.sflinks a.on{color:var(--text)}
+.sfcopy{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px!important;letter-spacing:.14em;font-size:11px}
+.pvlink{color:var(--accent-t);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 </style>
 </head>
 <body>
@@ -1491,7 +1516,6 @@ html[lang="en"] .cites-zh,html:not([lang="en"]) .cites-en{display:none}
   <a class="brand" href="#why" data-route="why"><span class="bt">家裡幾度 C，<br>是「省」了沒？</span><span class="bs">為什麼做這個網站</span></a>
   <div class="dlang" id="dLang" role="group" aria-label="語言 Language" data-noi18n><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>語言 Language</span><button type="button" data-dl="zh">中文</button><button type="button" data-dl="en">English</button></div>
   <a href="#guide" data-route="guide" class="dguide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9.3a2.6 2.6 0 1 1 3.6 2.4c-.7.3-1.1.9-1.1 1.6v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/></svg><span>使用說明</span></a><a href="#decoder" data-route="decoder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="15" width="18" height="5" rx="2" fill="currentColor"/></svg><span>電費解碼器</span></a><a href="#basics" data-route="basics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13z" fill="currentColor"/></svg><span>用電基本知識</span></a><a href="#home" data-route="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></svg><span>我家設定</span></a><a href="#monsters" data-route="monsters"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="5" fill="currentColor"/><circle cx="9.5" cy="10" r="2" fill="var(--bg)"/><circle cx="14.5" cy="10" r="2" fill="var(--bg)"/></svg><span>怪獸圖鑑</span></a><a href="#learn" data-route="learn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h4v-4h4v-4h4V8h4V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg><span>電價小教室</span></a><a href="#challenge" data-route="challenge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l-2 4 2 4H5" fill="currentColor"/><path d="M5 3v18" stroke="currentColor" stroke-width="2"/></svg><span>家庭挑戰</span></a><a href="#studio" data-route="studio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path d="M4 18l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>卡片工作室</span></a><a href="#history" data-route="history"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="12" width="3" height="8" fill="currentColor"/><rect x="10.5" y="7" width="3" height="13" fill="currentColor"/><rect x="17" y="10" width="3" height="10" fill="currentColor"/></svg><span>帳單紀錄</span></a><a href="#elder" data-route="elder"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="14" font-weight="900" fill="currentColor">大</text><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>長輩版重點</span></a><a href="#about" data-route="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>資料來源與設定</span></a>
-  <div class="dlang" data-noi18n><span>語言 Language</span><div class="pills seg" role="group" aria-label="語言 Language"><button class="pill" type="button" data-lang="zh">中文</button><button class="pill" type="button" data-lang="en">EN</button></div></div>
   <div class="dfoot"><a class="dsign" href="#why" data-route="why" aria-label="關於作者與這個作品"><span class="hanko">り</span><span>2026<small>關於這個作品</small></span></a><button class="bdgbtn" id="bdgBtn" type="button" aria-label="我的徽章" aria-haspopup="dialog"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="none" stroke="var(--surface-hi)" stroke-width="4"/><circle id="bdgArc" cx="22" cy="22" r="19" fill="none" stroke="#E2A33B" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 22 22)"/></svg><span class="bi" id="bdgIco"></span><i class="dot" id="bdgDot" hidden></i></button></div>
 </nav>
 
@@ -1967,6 +1991,7 @@ html[lang="en"] .cites-zh,html:not([lang="en"]) .cites-en{display:none}
         <li><b>照片不離開手機</b><span>卡片工作室的照片在手機裡合成，不會上傳。</span></li>
         <li><b>沒有廣告和追蹤</b><span>不放廣告、不裝追蹤程式，資料不會被拿去分析或賣掉。</span></li>
       </ul>
+      <p class="pv-fine"><a class="pvlink" href="#privacy" data-route="privacy">看完整的隱私權政策</a></p>
       <p class="pv-fine"><b>補充說明：</b>網站放在 GitHub Pages，字型來自 Google Fonts。打開網頁時，它們會和一般網站一樣收到基本連線紀錄（例如 IP 位址、瀏覽器種類），但收不到你輸入的度數和設定。</p>
     </div>
 
@@ -2026,7 +2051,112 @@ html[lang="en"] .cites-zh,html:not([lang="en"]) .cites-en{display:none}
     </ol><p class="tip">怪獸的度數（熱水瓶、冰箱、機上盒、除濕機、照明、電鍋保溫等）整理自台電、能源署與工研院公開的省電資料，詳列在上面「數據從哪裡來」。所有連結於 2026 年 11 月查閱。</p></details><details class="acc"><summary>數據從哪裡來</summary><p>住宅累進電價：2025 年 10 月 1 日起的現行電價，「照帳單算一次」另外收錄 2024 年 4 月至 2025 年 9 月的舊電價（台電）；租屋電費：2024 年 7 月 15 日起新簽租約，每度不得超過電費單「當期每度平均電價」（內政部）；2025 住宅平均每月用電非夏月 308 度、夏月 418 度（台電）；熱水瓶每天約 2 度、定時約省 36%；15 年以上冰箱每月約 68 度、一級能效約 23 度；儲熱式電熱水器待機每年約 1,800 度；機上盒待機每年約 131 度；冷氣每調高 1°C 約省 6%（以上台電公開資料）；住宅電力排碳係數每度 0.471 公斤（經濟部能源署，2025 年度）；節電獎勵每度 0.6 元，2026/12/17 前登錄；汰舊換新補助每台 3,000 元，2026/12/31 前購買。家電數字為估算，僅供家人討論。</p></details></div>
   </section>
 </div>
-  <a class="sign" href="#why" aria-label="作者 り，2026，關於這個作品"><span class="hanko sm">り</span>2026</a>
+<div class="view readable policy" id="v-privacy" data-title="隱私權政策" hidden>
+  <section class="sec pcard"><h1 class="vh">隱私權政策</h1>
+  <div class="lang-zh">
+    <p class="pmeta">生效日期：2026 年 11 月 17 日</p>
+    <p>「家裡幾度 C，是『省』了沒？」（以下稱「本網站」，網址 li-power.github.io/degrees-at-home1）是北科大文化事業發展系學生的課堂作品。本頁說明本網站怎麼處理你的資料。簡單說：<b>本網站不收集你的個人資料</b>。</p>
+    <h2>一、我們不收集個人資料</h2>
+    <ul><li>本網站不需要註冊或登入，沒有會員系統，也沒有自己的伺服器或資料庫。</li><li>不放廣告，不使用 Google Analytics 等分析或追蹤工具，也不使用追蹤用的 Cookie。</li><li>你輸入的任何內容，網站作者都看不到。</li></ul>
+    <h2>二、存在你裝置上的資料</h2>
+    <p>為了讓你下次打開還看得到自己的設定，本網站會用瀏覽器內建的「本機儲存空間（localStorage）」，把以下資料存在<b>你自己的手機或電腦</b>裡：</p>
+    <ul><li>家庭型態、家人稱呼、繳費方式</li><li>你輸入的度數、帳單紀錄與節電獎勵金額</li><li>家庭挑戰的任務分工、徽章、抓鬼遊戲的迷你排行榜</li><li>卡片工作室的文字與貼紙位置</li><li>語言、深色模式、大字等顯示設定</li></ul>
+    <p>這些資料不會傳送到任何地方。換一台裝置、換一個瀏覽器，或網站網址改變時，資料都不會跟過去。</p>
+    <h2>三、照片</h2>
+    <p>卡片工作室的照片只在你的瀏覽器裡縮小、合成，<b>不會上傳</b>，也不會存進本機儲存空間；關掉頁面後就不會保留。做好的卡片圖片只有在你按「下載」或「分享」時才會離開這個頁面，並由你決定傳給誰。</p>
+    <h2>四、第三方服務</h2>
+    <p>本網站本身不收集資料，但打開網頁時，你的瀏覽器會連到以下服務，它們可能依自己的政策記錄 IP 位址、瀏覽器種類等技術資料：</p>
+    <ul><li><b>GitHub Pages</b>：網站存放的地方。GitHub 可能為了安全和維運記錄造訪者的 IP 位址（見 <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub 隱私聲明</a>）。</li><li><b>Google Fonts</b>：網站使用的字體由 Google 提供，瀏覽器下載字體時會連到 Google（見 <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Google Fonts 隱私說明</a>）。</li><li><b>外部連結</b>：「引用來源」裡的新聞與政府網站，點進去之後適用它們自己的隱私政策。</li></ul>
+    <h2>五、分享與複製</h2>
+    <p>只有在你按下「分享」「複製」按鈕時，本網站才會使用手機的分享功能或剪貼簿，內容就是你看到、準備送出的文字或圖片。</p>
+    <h2>六、刪除你的資料</h2>
+    <ul><li>到「資料來源與設定」，按「清除資料」，就會全部刪除。</li><li>也可以在瀏覽器設定裡清除這個網站的資料。</li><li>你下載的備份檔存在你自己的裝置裡，請自行保管或刪除。</li></ul>
+    <h2>七、政策更新</h2>
+    <p>如果本網站之後加入新功能、改變處理資料的方式，會更新本頁並修改上方的生效日期。</p>
+    <h2>八、聯絡我們</h2>
+    <p>對本政策有任何疑問，歡迎到 <a href="https://github.com/Li-power/degrees-at-home1/issues" target="_blank" rel="noopener">本網站的 GitHub 問題回報頁</a> 留言。</p>
+    <p class="pnote">備註：本頁為學生課堂作品的說明文件，不是經律師審閱的正式法律文件。</p>
+  </div>
+  <div class="lang-en">
+    <p class="pmeta">Effective: November 17, 2026</p>
+    <p>“Degrees at Home: Saving or Not?” (the “site”, at li-power.github.io/degrees-at-home1) is a student class project from the Department of Cultural Vocation Development, NTUT. This page explains how the site handles your data. In short: <b>the site does not collect your personal data</b>.</p>
+    <h2>1. We don’t collect personal data</h2>
+    <ul><li>No sign-up or login, no member system, and no server or database of our own.</li><li>No ads, no analytics or tracking tools such as Google Analytics, and no tracking cookies.</li><li>The site’s author cannot see anything you enter.</li></ul>
+    <h2>2. Data stored on your device</h2>
+    <p>So your settings are still there next time, the site uses your browser’s built-in storage (localStorage) to keep the following <b>on your own phone or computer</b>:</p>
+    <ul><li>Household type, family nicknames, how the bill is paid</li><li>kWh you enter, bill log entries and saving rewards</li><li>Family challenge assignments, badges, and the ghost game’s mini leaderboard</li><li>Card studio text and sticker positions</li><li>Language, dark mode, large text and other display settings</li></ul>
+    <p>None of this is sent anywhere. It does not follow you to another device, another browser, or a new web address.</p>
+    <h2>3. Photos</h2>
+    <p>Photos in the card studio are resized and combined inside your browser. They are <b>never uploaded</b> and are not saved in browser storage; they are gone when you close the page. A finished card leaves the page only when you tap Download or Share, and you decide who gets it.</p>
+    <h2>4. Third-party services</h2>
+    <p>The site itself collects nothing, but when the page loads your browser connects to these services, which may log technical data such as your IP address and browser type under their own policies:</p>
+    <ul><li><b>GitHub Pages</b>, which hosts the site. GitHub may log visitor IP addresses for security and operations (see the <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>).</li><li><b>Google Fonts</b>, which serves the fonts (see <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Google Fonts privacy</a>).</li><li><b>External links</b>: news and government sites in “Sources” follow their own privacy policies.</li></ul>
+    <h2>5. Sharing and copying</h2>
+    <p>The site uses your phone’s share sheet or clipboard only when you tap Share or Copy, and only for the text or image you are about to send.</p>
+    <h2>6. Deleting your data</h2>
+    <ul><li>In Sources &amp; settings, tap the button to clear this device’s data.</li><li>Or clear this site’s data in your browser settings.</li><li>Backup files you download stay on your device; keep or delete them yourself.</li></ul>
+    <h2>7. Changes</h2>
+    <p>If the site adds features or changes how data is handled, this page and its effective date will be updated.</p>
+    <h2>8. Contact</h2>
+    <p>Questions about this policy? Leave a message on the <a href="https://github.com/Li-power/degrees-at-home1/issues" target="_blank" rel="noopener">site’s GitHub issues page</a>.</p>
+    <p class="pnote">Note: this is an explanatory page for a student project, not a formal legal document reviewed by a lawyer.</p>
+  </div>
+  </section>
+</div>
+
+<div class="view readable policy" id="v-terms" data-title="服務條款" hidden>
+  <section class="sec pcard"><h1 class="vh">服務條款</h1>
+  <div class="lang-zh">
+    <p class="pmeta">生效日期：2026 年 11 月 17 日</p>
+    <p>歡迎使用「家裡幾度 C，是『省』了沒？」（以下稱「本網站」）。使用本網站，即表示你同意以下條款。</p>
+    <h2>一、網站性質</h2>
+    <p>本網站是北科大文化事業發展系學生的課堂作品，回應台電「瓩設計獎」的題目。<b>本網站不是台灣電力公司的官方網站，也沒有得到台電背書</b>；提到台電，只是說明資料來源。本網站免費使用，不販售任何商品或服務。</p>
+    <h2>二、內容僅供參考</h2>
+    <ul><li>電費試算依台電公開的住宅電價表計算，怪獸（家電）的用電量是依公開資料推估的數字。實際金額一律以<b>台電寄給你的帳單</b>為準。</li><li>節電獎勵、汰舊換新補助、租屋電費規定等資訊，可能隨政策改變；辦理前請向台電（客服 1911）或主管機關確認。</li><li>本網站內容不構成專業的財務、法律或用電安全建議。</li></ul>
+    <h2>三、資料來源與授權</h2>
+    <p>電價與住宅平均用電資料取自台灣電力公司在政府資料開放平臺公開的資料，依「政府資料開放授權條款－第 1 版」利用。新聞與政府網站的內容屬於原作者，本網站只提供連結與重點摘要，詳見「資料來源與設定」裡的「引用來源」。</p>
+    <h2>四、你製作的內容</h2>
+    <ul><li>你在卡片工作室輸入的文字、放進去的照片，由你自己負責。請只使用你有權使用的照片，並取得照片中人物的同意。</li><li>請勿把本網站或做出來的卡片用來冒充台電或政府機關、催繳電費、要求匯款，或做其他詐騙、騷擾、違法用途。本網站會擋下部分不適合的字詞，但無法保證全部攔截。</li><li>你做出來的卡片，可以自由分享給家人朋友；卡片底部的網站浮水印請保留。</li></ul>
+    <h2>五、智慧財產權</h2>
+    <p>本網站的文字、怪獸角色、插圖、圖示與程式碼為作者原創，著作權屬於作者。歡迎個人、非商業地分享網站連結與截圖；其他用途請先聯絡作者。網站使用的字體來自 Google Fonts，依 SIL Open Font License 使用。</p>
+    <h2>六、責任限制</h2>
+    <ul><li>本網站以「現況」提供，不保證隨時可用、沒有錯誤，或數字完全正確。</li><li>資料只存在你的裝置裡，清除瀏覽器資料、換手機或網址改變都可能讓資料消失。重要的紀錄請用「備份」功能另外保存。</li><li>因使用或無法使用本網站而產生的任何損失，作者不負賠償責任。</li></ul>
+    <h2>七、條款修改</h2>
+    <p>本條款可能隨網站更新而修改，修改後會更新上方的生效日期。修改後繼續使用本網站，即表示你同意新的條款。</p>
+    <h2>八、聯絡我們</h2>
+    <p>對本條款有任何疑問，歡迎到 <a href="https://github.com/Li-power/degrees-at-home1/issues" target="_blank" rel="noopener">本網站的 GitHub 問題回報頁</a> 留言。</p>
+    <p class="pnote">備註：本頁為學生課堂作品的說明文件，不是經律師審閱的正式法律文件。</p>
+  </div>
+  <div class="lang-en">
+    <p class="pmeta">Effective: November 17, 2026</p>
+    <p>Welcome to “Degrees at Home: Saving or Not?” (the “site”). By using the site you agree to these terms.</p>
+    <h2>1. What this site is</h2>
+    <p>The site is a student class project from the Department of Cultural Vocation Development, NTUT, made for the Taipower Design Awards brief. <b>It is not an official Taiwan Power Company website and is not endorsed by Taipower</b>; Taipower is named only to credit the data. The site is free and sells nothing.</p>
+    <h2>2. For reference only</h2>
+    <ul><li>Bill estimates follow Taipower’s published residential rates, and appliance (monster) figures are estimates from public data. <b>Your actual Taipower bill</b> is always final.</li><li>Saving rewards, replacement subsidies and rental electricity rules may change; check with Taipower (call 1911) or the responsible agency before acting.</li><li>Nothing on the site is professional financial, legal or electrical-safety advice.</li></ul>
+    <h2>3. Sources and licences</h2>
+    <p>Price and household-average data come from Taiwan Power Company data on the government open-data platform, used under the Open Government Data License, version 1.0. News and government content belongs to its owners; the site only links to and summarises it — see “Sources” in Sources &amp; settings.</p>
+    <h2>4. Content you make</h2>
+    <ul><li>You are responsible for the text and photos you put into the card studio. Use only photos you have the right to use, with the consent of the people in them.</li><li>Don’t use the site or its cards to pose as Taipower or a government agency, demand payment, ask for money transfers, or for any scam, harassment or unlawful purpose. The site blocks some unsuitable words but can’t catch everything.</li><li>You’re free to share your cards with family and friends; please keep the site watermark at the bottom.</li></ul>
+    <h2>5. Intellectual property</h2>
+    <p>The site’s text, monster characters, illustrations, icons and code are the author’s original work and copyright. Personal, non-commercial sharing of links and screenshots is welcome; for anything else, contact the author first. Fonts are from Google Fonts under the SIL Open Font License.</p>
+    <h2>6. Limitation of liability</h2>
+    <ul><li>The site is provided “as is”, with no promise that it is always available, error-free or exact.</li><li>Your data lives only on your device; clearing browser data, changing phones or a new web address can erase it. Use Backup to keep important records.</li><li>The author is not liable for any loss arising from using, or being unable to use, the site.</li></ul>
+    <h2>7. Changes</h2>
+    <p>These terms may change as the site is updated, and the effective date above will change with them. Using the site after a change means you accept the new terms.</p>
+    <h2>8. Contact</h2>
+    <p>Questions about these terms? Leave a message on the <a href="https://github.com/Li-power/degrees-at-home1/issues" target="_blank" rel="noopener">site’s GitHub issues page</a>.</p>
+    <p class="pnote">Note: this is an explanatory page for a student project, not a formal legal document reviewed by a lawyer.</p>
+  </div>
+  </section>
+</div>
+  <footer class="sitefoot">
+    <i class="sfline" aria-hidden="true"></i>
+    <p class="sfname"><a href="#why" data-route="why">家裡幾度 C，是「省」了沒？</a></p>
+    <p class="sfsub">北科大文發系課堂作品・非台電官方網站</p>
+    <p class="sflinks"><a href="#terms" data-route="terms">服務條款</a><span aria-hidden="true">・</span><a href="#privacy" data-route="privacy">隱私權政策</a></p>
+    <p class="sfcopy"><span class="hanko sm">り</span>© 2026 DEGREES AT HOME</p>
+  </footer>
 </main>
 
 
@@ -2713,6 +2843,7 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];I18N_DATA.D[n]=[A[k],'']}})({"回應台電瓩設計獎題目「WATT’S UP: Decoding New Everyday Life」：用台電帳單上的數據當素材，設計讓人看懂、也願意行動的體驗。北科大文化事業發展系課堂作品，2026。": "A response to the Taipower Design Awards brief “WATT’S UP: Decoding New Everyday Life”: using bill data to design an experience people understand and act on. Class project, Dept. of Cultural Vocation Development, NTUT, 2026.", "本網站為學生課堂作品，不是台電官方網站，也沒有得到台電背書；文中提到台電只是說明資料來源。電價與平均用電資料取自台灣電力股份有限公司在政府資料開放平臺公開的資料，依「政府資料開放授權條款－第一版」利用（data.gov.tw/license）。怪獸角色、插圖與圖示皆為原創；字體使用 Google Fonts 的 Noto Sans TC、Noto Serif TC 與 DotGothic16（SIL Open Font License）。": "A student class project. This is not an official Taipower website and is not endorsed by Taipower; Taipower is named only to credit the data. Electricity prices and household averages come from Taiwan Power Company data published on the government open-data platform, used under the Open Government Data License, version 1.0 (data.gov.tw/license). The monsters, illustrations and icons are original; fonts are Noto Sans TC, Noto Serif TC, DotGothic16 and justfont Huninn from Google Fonts (SIL Open Font License)."});
 (function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];I18N_DATA.D[n]=[A[k],'']}})({"用電基本知識": "Power basics", "不知道 1 度是多少？看「用電基本知識」": "Not sure what 1 kWh is? See “Power basics”", "節電獎勵怎麼算、智慧電表看得到什麼？看「用電基本知識」": "How the saving reward works, and what a smart meter shows — see “Power basics”", "看電費單之前，先知道這幾件事。每一段都很短，看不懂的地方可以直接跳過。": "A few things worth knowing before you read the bill. Each part is short — skip anything you don’t need.", "這一頁的內容": "On this page", "1 度是多少": "What 1 kWh is", "為什麼越用越貴": "Why more costs more", "夏天比較貴": "Summer costs more", "兩個月一張帳單": "One bill every two months", "節電獎勵": "Saving reward", "租屋的電費": "Electricity when renting", "為什麼越用越貴？": "Why does using more cost more?", "住家電價是": "Home prices are ", "累進": "tiered", "的，像爬樓梯一樣分成 # 階：前 # 度最便宜，用得越多，": ", like a staircase with 6 steps: the first 120 kWh are cheapest, and the more you use, the more ", "多出來的那幾度": "the extra kWh", "就算越貴的價錢。": " cost.", "全家的電是加在一起算的，所以不是「誰用比較多誰付比較貴」，而是全家一起爬上了比較高的階。": "The whole household’s use is added together, so it isn’t “whoever uses more pays more” — the family climbs to a higher step together.", "看你家在第幾階": "See which step you’re on", "# 月 # 日到 # 月 # 日是「夏月」": "Jun 1 – Sep 30 is the “summer” period", "，# 度以上的每一階都比其他月份貴。帳單如果剛好跨到夏天，會按天數拆開算。": ": every step above 120 kWh costs more than in other months. A bill that crosses into summer is split by days.", "所以夏天電費變多，不一定是用得比較兇，也可能只是電價變貴了。": "So a bigger summer bill doesn’t always mean you used more — the price may simply be higher.", "去電價小教室玩玩看": "Try it in Price class", "大部分住家": "Most homes ", "兩個月才收到一張電費單": "get a bill only every two months", "，上面的度數是兩個月加起來的。想知道「一個月用多少」，先除以 #。": ", and its kWh cover both months. For a monthly figure, halve it first.", "兩個月一期時，每一階的度數上限也跟著乘 #，例如第一階變成 # 度。網站會自動幫你換算。": "For a two-month bill each step’s limit doubles too — the first step becomes 240 kWh. The site converts this for you.", "台電的節電獎勵是": "Taipower’s saving reward ", "跟「去年同一期」比": "compares with the same period last year", "，不是跟上一期比：每少用 # 度，扣 # 元，直接從帳單扣。": ", not the last bill: NT$0.6 off your bill for each kWh saved.", "要先登錄才算（# 年 # 月 # 日前，可上網、到櫃台或打 #）。# 年起取消每期 # 元的保底。": "You must sign up first (by Dec 17, 2026 — online, at a counter or by calling 1911). The NT$84 minimum per bill ended in 2026.", "節電量 ＝（去年同期每天平均度數 － 這期每天平均度數）× 這期天數": "kWh saved = (last year’s daily average − this bill’s daily average) × days in this bill", "去帳單紀錄記一筆": "Log a bill", "# 年 # 月 # 日以後簽的租約，房東如果": "For leases signed from Jul 15, 2024, a landlord who ", "按度數收電費": "charges by the kWh", "，每度不能超過那一期帳單的「每度平均電價」（總電費 ÷ 總度數）。覺得收太多，可以打 # 內政部專線問。": " can’t charge more per kWh than that bill’s average price (total ÷ kWh). If it seems too high, call the Ministry of the Interior on 1996.", "每一段的出處都列在「資料來源與設定」的「引用來源」。": "Sources for every part are listed under “Sources” in Sources & settings."});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"誰在玩": "Who’s playing", "語言 Language": "Language 語言"});
+(function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"隱私權政策": "Privacy policy", "服務條款": "Terms of use", "家裡幾度 C，是「省」了沒？": "Degrees at Home: Saving or Not?", "北科大文發系課堂作品": "NTUT class project", "北科大文發系課堂作品・非台電官方網站": "NTUT class project · not an official Taipower site", "看完整的隱私權政策": "Read the full privacy policy"});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -2790,7 +2921,7 @@ I18N_OBS.observe(document.body,{subtree:true,childList:true,characterData:true,a
 /* =========================================================
    ROUTER — #decoder #monsters #learn #challenge #history #elder #about
    ========================================================= */
-window.Router=null;var ROUTES=['decoder','basics','guide','home','why','monsters','learn','challenge','studio','history','elder','about'];
+window.Router=null;var ROUTES=['decoder','basics','privacy','terms','guide','home','why','monsters','learn','challenge','studio','history','elder','about'];
 var Router={cur:null,setTitle:function(){var v=$('v-'+this.cur);if(!v)return;var t=v.getAttribute('data-i18n-data-title')||v.getAttribute('data-title');$('appTitle').textContent=L(t);document.title=L(t)+'｜'+L('家裡幾度 C，是「省」了沒？')},
   go:function(name,focus){if(ROUTES.indexOf(name)<0)name='decoder';var changed=name!==this.cur,first=this.cur===null,self=this;
     if(false&&changed&&!first&&!reduced()&&document.startViewTransition&&!mq('(pointer: coarse)')&&!mq('(max-width: 899px)')){document.startViewTransition(function(){self.swap(name,focus,changed,false)});return}
@@ -3565,7 +3696,7 @@ var BillCheck={
 var pending=false;
 function schedule(){if(pending)return;pending=true;raf(function(){pending=false;renderAll()})}
 function renderAll(){
-  try{var r=Model.compute(S),onDec=Router.cur==='decoder'||Router.cur===null;if(onDec){Meter.render(S,r);Stairs.render(S,r);Myth.render(S,r);House.render(S,r);Guess.render(S,r)}Dock.render(S,r);Dex.render(S,r);Learn.render(S);Challenge.render(S);Guide.render();Pick.render();Rank2.render(S,r);document.querySelectorAll('#dLang [data-dl]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.dl===(S.lang||'zh')))});React2.render(S);try{if(Router.cur==="challenge"&&!Patrol.on){Patrol.who();Patrol.board(-1)}}catch(e){}Unit.render(S,r);Steppers.sync();Stats.render(S,r);Badges.check(S);Badges.render(S);History.render(S);Elder.render(S,r);Home.render(S);Settings.render(S);Studio.render(S);if(Sheet.isOpen())Sheet.paint();
+  try{var r=Model.compute(S),onDec=Router.cur==='decoder'||Router.cur===null;if(onDec){Meter.render(S,r);Stairs.render(S,r);Myth.render(S,r);House.render(S,r);Guess.render(S,r)}Dock.render(S,r);Dex.render(S,r);Learn.render(S);Challenge.render(S);Guide.render();Pick.render();Rank2.render(S,r);document.querySelectorAll('.sflinks a').forEach(function(a){a.classList.toggle('on',a.dataset.route===Router.cur)});document.querySelectorAll('#dLang [data-dl]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.dl===(S.lang||'zh')))});React2.render(S);try{if(Router.cur==="challenge"&&!Patrol.on){Patrol.who();Patrol.board(-1)}}catch(e){}Unit.render(S,r);Steppers.sync();Stats.render(S,r);Badges.check(S);Badges.render(S);History.render(S);Elder.render(S,r);Home.render(S);Settings.render(S);Studio.render(S);if(Sheet.isOpen())Sheet.paint();
     prev.ti=r.ti;prev.nti=r.nti;prev.save=r.save;store.set(S);}
   catch(err){fail(err)}}
 var failed=false;
