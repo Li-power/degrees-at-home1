@@ -1517,6 +1517,16 @@ html[lang="en"] .lang-zh,html:not([lang="en"]) .lang-en{display:none}
 .gm>div{display:flex;flex-wrap:wrap;gap:6px}
 .gm .gjump{margin:0}
 .gmapnote{font-size:var(--fs-xs);color:var(--faint);margin:4px 0 16px}
+
+/* v9.6: no visible scrollbars; desktop content centred in the space beside the sidebar */
+html,body,.drawer,.sheet,.bmin,.outin,.eggin{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.sheet::-webkit-scrollbar,.bmin::-webkit-scrollbar,.outin::-webkit-scrollbar,.eggin::-webkit-scrollbar{display:none;width:0;height:0}
+@media (min-width:1100px){
+  .page{max-width:none!important;margin-right:0!important}
+  .page>.view{margin-left:auto;margin-right:auto}
+  .page>.view:not(.readable){max-width:1180px}
+  .sitefoot{max-width:760px;margin-left:auto!important;margin-right:auto!important}
+}
 </style>
 </head>
 <body>
