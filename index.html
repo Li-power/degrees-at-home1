@@ -2985,7 +2985,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.13 (dah-v35)';
+var SITE_VER='9.14 (dah-v36)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -3009,11 +3009,11 @@ var Feedback={type:'bug',last:'decoder',
     var done=function(ok,msg){self.sending=false;b.disabled=false;b.textContent=ZT('送出回報','Send report');st.hidden=false;st.className='fbstatus '+(ok?'ok':'no');
       if(ok){self.sentAt=Date.now();st.textContent=ZT('已送出，謝謝你！作者會在信箱收到。','Sent — thank you! The author will get it by email.');$('fbText').value='';toast(ZT('回報已送出','Report sent'),true)}
       else st.textContent=ZT('沒有送出去','Not sent')+(msg?'（'+msg+'）':'')+ZT('。可能是網路不穩，等一下再試一次；有 GitHub 帳號也可以用下面的連結回報。',' — maybe the connection dropped. Try again shortly, or use the GitHub link below.')};
-    /* form-encoded = a "simple" request (no CORS preflight); give up waiting after 15 s */
+    /* form-encoded = a "simple" request (no CORS preflight); give up waiting after 6 s */
     var fd=new URLSearchParams();Object.keys(body).forEach(function(k){fd.append(k,body[k])});
     var finished=false,fin=function(ok,msg,slow){if(finished)return;finished=true;clearTimeout(tm);if(slow){self.sending=false;b.disabled=false;b.textContent=ZT('送出回報','Send report');self.sentAt=Date.now();st.hidden=false;st.className='fbstatus ok';
-        st.textContent=ZT('已經送出，伺服器回應比較慢。通常還是會寄到，不用再按一次，謝謝你！','Sent — the server is slow to answer, but it usually still arrives. No need to press again. Thank you!');return}done(ok,msg)};
-    var ctl=window.AbortController?new AbortController():null,tm=setTimeout(function(){try{ctl&&ctl.abort()}catch(e){}fin(false,'',true)},15000);
+        st.textContent=ZT('已經寄出囉，謝謝你！作者會在信箱收到。','Sent — thank you! The author will get it by email.');return}done(ok,msg)};
+    var ctl=null,tm=setTimeout(function(){fin(false,'',true)},6000);/* stop waiting after 6 s but let the request finish in the background */
     fetch(FB_MAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd,signal:ctl?ctl.signal:undefined})
       .then(function(r){return r.text().then(function(t){try{return JSON.parse(t)}catch(e){return{success:r.ok?'true':'false'}}})})
       .then(function(j){var ok=String(j&&j.success)==='true',m=j&&j.message||'';if(!ok&&/activat/i.test(m)){ok=true}fin(ok,ok?'':m)})

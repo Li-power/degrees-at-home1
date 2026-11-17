@@ -1,5 +1,5 @@
 // 離線快取：第一次開啟後，沒有網路也能使用
-const CACHE='dah-v35';
+const CACHE='dah-v36';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./data/taipower.json'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>Promise.all(CORE.map(u=>c.add(u).catch(()=>{})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
