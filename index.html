@@ -1580,6 +1580,17 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 .vwave i:nth-child(7){height:11px}.vwave i:nth-child(8){height:16px}.vwave i:nth-child(9){height:7px}.vwave i:nth-child(10){height:13px}.vwave i:nth-child(11){height:9px}.vwave i:nth-child(12){height:5px}
 .vlen{font-size:12px;font-variant-numeric:tabular-nums;opacity:.75}
 .whystart{font-family:var(--f-serif);font-weight:700;color:var(--text)}
+
+/* v9.12 feedback sending */
+.fbhoney{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.fbgh{justify-self:center;font-size:var(--fs-xs);color:var(--soft)}
+.fbstatus{margin:0;padding:12px 14px;border-radius:14px;font-size:var(--fs-s);font-weight:700;line-height:1.6}
+.fbstatus.ok{background:color-mix(in srgb,var(--mint-t) 18%,var(--elev));color:var(--text)}
+.fbstatus.no{background:color-mix(in srgb,var(--hot-t) 14%,var(--elev));color:var(--text)}
+
+/* v9.13 */
+.whyhero .lead .whystart{display:block;margin-top:.9em}
+.fbsub{display:block;margin-top:6px;font-size:var(--fs-s);color:var(--soft)}
 </style>
 </head>
 <body>
@@ -1795,8 +1806,7 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
       <div class="cmsg"><span class="who">阿嬤</span><div class="bub voice" role="img" aria-label="語音訊息，0 分 14 秒"><span class="vplay" aria-hidden="true"></span><span class="vwave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="vlen">0:14</span></div></div>
     </div>
     <p class="chatcap">很多家庭收到電費單的那一刻，都長這樣。</p>
-    <p class="lead">這個網站的起因，是一堂企劃課。我們發現，收到電費單時，大家的第一個反應通常是「怎麼漲這麼多？」，或是「你是不是一直在浪費電？」——很少人真的看懂它，倒是很快就開始找人怪。</p>
-    <p class="lead whystart">這，就是這個網站的開端。</p>
+    <p class="lead"><span>這個網站的起因，是一堂企劃課。我們發現，收到電費單時，大家的第一個反應通常是「怎麼漲這麼多？」，或是「你是不是一直在浪費電？」</span><span class="whystart">這，就是這個網站的開端。</span></p>
   </section>
 
   <section class="sec react" id="react">
@@ -2205,7 +2215,7 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 </div>
 <div class="view readable" id="v-feedback" data-title="回報問題" hidden>
   <section class="sec"><h1 class="vh">回報問題</h1>
-    <p class="lead">網站還在 Beta 測試。看到錯字、數字怪怪的、按了沒反應，或有想要的功能，都歡迎告訴作者。</p>
+    <p class="lead">嗨～遇到問題了嗎？請回報給我，謝謝您～<br><small class="fbsub">錯字、數字怪怪的、按了沒反應，或想要什麼功能，都可以寫在這裡。</small></p>
     <form class="fbform" id="fbForm" novalidate>
       <p class="secsub">這是哪一種？</p>
       <div class="fbtypes" role="group" aria-label="回報類型">
@@ -2219,8 +2229,10 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
       <label class="fbl">想收到回覆的話，留個聯絡方式（選填）<input id="fbContact" maxlength="80" placeholder="Email 或 IG 帳號" autocomplete="off"></label>
       <label class="fbchk"><input type="checkbox" id="fbDev" checked> 附上網站版本和裝置資訊（螢幕大小、瀏覽器），方便找問題</label>
       <p class="tip" id="fbWarn" hidden></p>
+      <input type="text" id="fbHoney" tabindex="-1" autocomplete="off" aria-hidden="true" class="fbhoney">
       <div class="fbbtns" id="fbBtns"></div>
-      <p class="tip">送出時，內容只會送到你按的那個地方，網站本身不會收集。請不要寫電號、地址或電話。</p>
+      <p class="fbstatus" id="fbStatus" role="status" hidden></p>
+      <p class="tip">按下「送出回報」，內容會用 Email 寄給作者，不用登入、也不會公開。網站本身不會留存。請不要寫電號、地址或電話。</p>
     </form>
   </section>
 </div>
@@ -2231,7 +2243,7 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
     <p class="pmeta">生效日期：2026 年 11 月 17 日</p>
     <p>「家裡幾度 C，是『省』了沒？」（以下稱「本網站」，網址 li-power.github.io/degrees-at-home1）是北科大文化事業發展系學生的課堂作品。本頁說明本網站怎麼處理你的資料。簡單說：<b>本網站不收集你的個人資料</b>。</p>
     <h2>一、我們不收集個人資料</h2>
-    <ul><li>本網站不需要註冊或登入，沒有會員系統，也沒有自己的伺服器或資料庫。</li><li>不放廣告，不使用 Google Analytics 等分析或追蹤工具，也不使用追蹤用的 Cookie。</li><li>你輸入的任何內容，網站作者都看不到。</li></ul>
+    <ul><li>本網站不需要註冊或登入，沒有會員系統，也沒有自己的伺服器或資料庫。唯一會送出資料的，是你主動按下的「回報問題」（見第五段）。</li><li>不放廣告，不使用 Google Analytics 等分析或追蹤工具，也不使用追蹤用的 Cookie。</li><li>你輸入的任何內容，網站作者都看不到。</li></ul>
     <h2>二、存在你裝置上的資料</h2>
     <p>為了讓你下次打開還看得到自己的設定，本網站會用瀏覽器內建的「本機儲存空間（localStorage）」，把以下資料存在<b>你自己的手機或電腦</b>裡：</p>
     <ul><li>家庭型態、家人稱呼、繳費方式</li><li>你輸入的度數、帳單紀錄與節電獎勵金額</li><li>家庭挑戰的任務分工、徽章、抓鬼遊戲的迷你排行榜</li><li>卡片工作室的文字與貼紙位置</li><li>語言、深色模式、大字等顯示設定</li></ul>
@@ -2243,7 +2255,7 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
     <ul><li><b>GitHub Pages</b>：網站存放的地方。GitHub 可能為了安全和維運記錄造訪者的 IP 位址（見 <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub 隱私聲明</a>）。</li><li><b>Google Fonts</b>：網站使用的字體由 Google 提供，瀏覽器下載字體時會連到 Google（見 <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Google Fonts 隱私說明</a>）。</li><li><b>外部連結</b>：「引用來源」裡的新聞與政府網站，點進去之後適用它們自己的隱私政策。</li></ul>
     <h2>五、分享與複製</h2>
     <p>只有在你按下「分享」「複製」按鈕時，本網站才會使用手機的分享功能或剪貼簿，內容就是你看到、準備送出的文字或圖片。</p>
-    <p><b>回報問題</b>：只有在你按下送出時，你寫的內容（和你勾選的版本、裝置資訊）才會帶到你選的地方——Google 表單或 GitHub，並依它們的隱私政策處理。GitHub 上的回報是公開的，請不要寫電號、地址或電話。</p>
+    <p><b>回報問題</b>：只有在你按下「送出回報」時，你寫的內容（和你勾選的版本、裝置資訊、選填的聯絡方式）才會透過表單轉寄服務 FormSubmit（formsubmit.co）寄到作者的信箱，並依它的隱私政策處理；作者只用來修正網站和回覆你。如果你改用 GitHub 回報，內容會公開在 GitHub 上。請不要寫電號、地址或電話。</p>
     <h2>六、刪除你的資料</h2>
     <ul><li>到「資料來源與設定」，按「清除資料」，就會全部刪除。</li><li>也可以在瀏覽器設定裡清除這個網站的資料。</li><li>你下載的備份檔存在你自己的裝置裡，請自行保管或刪除。</li></ul>
     <h2>七、政策更新</h2>
@@ -2256,7 +2268,7 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
     <p class="pmeta">Effective: November 17, 2026</p>
     <p>“Degrees at Home: Saving or Not?” (the “site”, at li-power.github.io/degrees-at-home1) is a student class project from the Department of Cultural Vocation Development, NTUT. This page explains how the site handles your data. In short: <b>the site does not collect your personal data</b>.</p>
     <h2>1. We don’t collect personal data</h2>
-    <ul><li>No sign-up or login, no member system, and no server or database of our own.</li><li>No ads, no analytics or tracking tools such as Google Analytics, and no tracking cookies.</li><li>The site’s author cannot see anything you enter.</li></ul>
+    <ul><li>No sign-up or login, no member system, and no server or database of our own. The only thing ever sent is a report you choose to send (see section 5).</li><li>No ads, no analytics or tracking tools such as Google Analytics, and no tracking cookies.</li><li>The site’s author cannot see anything you enter.</li></ul>
     <h2>2. Data stored on your device</h2>
     <p>So your settings are still there next time, the site uses your browser’s built-in storage (localStorage) to keep the following <b>on your own phone or computer</b>:</p>
     <ul><li>Household type, family nicknames, how the bill is paid</li><li>kWh you enter, bill log entries and saving rewards</li><li>Family challenge assignments, badges, and the ghost game’s mini leaderboard</li><li>Card studio text and sticker positions</li><li>Language, dark mode, large text and other display settings</li></ul>
@@ -2268,7 +2280,7 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
     <ul><li><b>GitHub Pages</b>, which hosts the site. GitHub may log visitor IP addresses for security and operations (see the <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>).</li><li><b>Google Fonts</b>, which serves the fonts (see <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Google Fonts privacy</a>).</li><li><b>External links</b>: news and government sites in “Sources” follow their own privacy policies.</li></ul>
     <h2>5. Sharing and copying</h2>
     <p>The site uses your phone’s share sheet or clipboard only when you tap Share or Copy, and only for the text or image you are about to send.</p>
-    <p><b>Feedback</b>: only when you press send does what you wrote (plus the version and device details, if ticked) go to the place you chose — a Google Form or GitHub — under their privacy policies. GitHub reports are public, so don’t include your account number, address or phone.</p>
+    <p><b>Feedback</b>: only when you press “Send report” does what you wrote (plus the version and device details if ticked, and any contact you give) go to the author’s inbox through the form-relay service FormSubmit (formsubmit.co), under its privacy policy; the author uses it only to fix the site and reply. If you report on GitHub instead, it is public there. Don’t include your account number, address or phone.</p>
     <h2>6. Deleting your data</h2>
     <ul><li>In Sources &amp; settings, tap the button to clear this device’s data.</li><li>Or clear this site’s data in your browser settings.</li><li>Backup files you download stay on your device; keep or delete them yourself.</li></ul>
     <h2>7. Changes</h2>
@@ -2973,10 +2985,12 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.11 (dah-v32)';
+var SITE_VER='9.12 (dah-v33)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
+/* one-button email relay. After the first report, FormSubmit mails an activation link and a random alias; put the alias here instead of the address. */
+var FB_MAIL='https://formsubmit.co/ajax/ritsuka01127@gmail.com';
 var FB_ISSUES='https://github.com/Li-power/degrees-at-home1/issues/new';
 var Feedback={type:'bug',last:'decoder',
   pages:function(){return ROUTES.filter(function(r){return['feedback','privacy','terms'].indexOf(r)<0}).map(function(r){var v=$('v-'+r);return[r,v?L(v.getAttribute('data-title')):r]})},
@@ -2987,7 +3001,19 @@ var Feedback={type:'bug',last:'decoder',
   body:function(d){return '【類型】'+d.type+'\n【頁面】'+d.page+'\n【內容】\n'+d.text+(d.contact?'\n【聯絡方式】'+d.contact:'')+(d.device?'\n【裝置】'+d.device:'')},
   check:function(d){var w=$('fbWarn');if(!d.text){w.hidden=false;w.textContent=ZT('先寫一下發生什麼事喔。','Tell us what happened first.');$('fbText').focus();return false}
     if(/\d{2}-\d{2}-\d{4}-\d{2}-\d|\b\d{11}\b/.test(d.text)){w.hidden=false;w.textContent=ZT('內容裡好像有電號，請先刪掉再送出。','That looks like an account number — please remove it first.');return false}w.hidden=true;return true},
-  go:function(kind){var d=this.data();if(!this.check(d))return;var url;
+  sending:false,sentAt:0,
+  send:function(){var self=this,d=this.data();if(!this.check(d)||this.sending)return;if(this.sentAt&&Date.now()-this.sentAt<20000){toast(ZT('剛剛已經送出一則了，等一下再送喔','You just sent one — wait a moment'));return}
+    var b=$('fbBtns').querySelector('[data-fbgo="mail"]'),st=$('fbStatus');this.sending=true;b.disabled=true;b.textContent=ZT('送出中…','Sending…');st.hidden=true;
+    var body={_subject:'【家裡幾度C 回報】'+d.type+'｜'+d.page,_template:'table',_captcha:'false',_honey:$('fbHoney').value,'類型':d.type,'頁面':d.page,'內容':d.text,'聯絡方式':d.contact||'（沒有留）','裝置':d.device||'（沒有附）'};
+    if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.contact))body._replyto=d.contact;
+    var done=function(ok,msg){self.sending=false;b.disabled=false;b.textContent=ZT('送出回報','Send report');st.hidden=false;st.className='fbstatus '+(ok?'ok':'no');
+      if(ok){self.sentAt=Date.now();st.textContent=ZT('已送出，謝謝你！作者會在信箱收到。','Sent — thank you! The author will get it by email.');$('fbText').value='';toast(ZT('回報已送出','Report sent'),true)}
+      else st.textContent=ZT('沒有送出去','Not sent')+(msg?'（'+msg+'）':'')+ZT('。可能是網路不穩，等一下再試一次；有 GitHub 帳號也可以用下面的連結回報。',' — maybe the connection dropped. Try again shortly, or use the GitHub link below.')};
+    fetch(FB_MAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.json().catch(function(){return{success:r.ok?'true':'false'}})})
+      .then(function(j){var ok=String(j&&j.success)==='true',m=j&&j.message||'';if(!ok&&/activat/i.test(m)){ok=true}done(ok,ok?'':m)})
+      .catch(function(){done(false,'')})},
+  go:function(kind){if(kind==='mail'){this.send();return}var d=this.data();if(!this.check(d))return;var url;
     if(kind==='form'){url=FB_FORM.replace('TYPE',encodeURIComponent(d.type)).replace('PAGE',encodeURIComponent(d.page)).replace('TEXT',encodeURIComponent(d.text)).replace('CONTACT',encodeURIComponent(d.contact)).replace('DEVICE',encodeURIComponent(d.device))}
     else if(kind==='gh'){url=FB_ISSUES+'?title='+encodeURIComponent('['+d.type+'] '+d.text.slice(0,40))+'&body='+encodeURIComponent(this.body(d)+'\n\n（請不要在這裡留電號、地址或電話；GitHub 上的回報是公開的）')}
     else{var t=this.body(d);var ok=function(){toast(ZT('已複製，可以貼給作者','Copied — paste it to the author'),true)};
@@ -2999,9 +3025,8 @@ var Feedback={type:'bug',last:'decoder',
     $('fbForm').addEventListener('submit',function(e){e.preventDefault()})},
   render:function(){if(Router.cur!=='feedback'){this.last=Router.cur;return}var sel=$('fbPage'),cur=sel.value||this.last;
     sel.innerHTML=this.pages().map(function(p){return '<option value="'+p[0]+'"'+(p[0]===cur?' selected':'')+'>'+esc(p[1])+'</option>'}).join('');
-    var h='';if(FB_FORM)h+='<button type="button" class="mk" data-fbgo="form">送出回報（不用登入）</button>';
-    h+='<button type="button" class="mk'+(FB_FORM?' alt':'')+'" data-fbgo="gh">'+ZT('用 GitHub 回報（需要帳號）','Report on GitHub (account needed)')+'</button>';
-    h+='<button type="button" class="mk alt" data-fbgo="copy">'+ZT('複製內容，自己傳給作者','Copy it and send it yourself')+'</button>';
+    var h='<button type="button" class="mk" data-fbgo="mail">'+ZT('送出回報','Send report')+'</button>';
+    h+='<button type="button" class="linkbtn fbgh" data-fbgo="gh">'+ZT('有 GitHub 帳號？也可以在 GitHub 公開回報','Have a GitHub account? You can also report publicly there')+'</button>';
     if($('fbBtns').innerHTML!==h)$('fbBtns').innerHTML=h}};
 var Guess={yr:function(a,st){var o=st.app[a.id];return o.has?a.kwh(o,'s')*4+a.kwh(o,'n')*8:0},
   build:function(){$('guessChips').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-g]');if(!b)return;S.guess=b.dataset.g;schedule();
@@ -3058,6 +3083,8 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"測試版：功能和數字還在調整，發現問題歡迎回報": "version: features and figures are still being tuned — please report problems", "台電兒童網：什麼叫一度電": "Taipower kids’ site: what is 1 kWh (Chinese)", "台電兒童網：一度電多少錢（附現行電價表）": "Taipower kids’ site: price per kWh, with the current rate table (Chinese)", "台電兒童網：電費是怎麼計算的呢？（兩個月一期的算法）": "Taipower kids’ site: how a bill is calculated, incl. two-month billing (Chinese)", "台電官方的知識補充": "More from Taipower", "台電官方補充": "More from Taipower", "台電的「台電兒童網」用很白話的方式寫了很多用電知識，給小朋友看，大人看也剛好。下面是和這個網站最相關的幾篇，點了會開新分頁。": "Taipower’s kids’ site explains power in plain words — written for children, just right for adults too. These pages (in Chinese) match this site best; they open in a new tab.", "電費怎麼算": "How bills work", "電器節電": "Appliance tips", "節電撇步": "Saving tricks", "什麼叫一度電": "What is 1 kWh", "一度電多少錢": "Price per kWh", "電費是怎麼計算的呢？": "How is a bill calculated?", "1 度＝1,000 瓦×1 小時，還教你看指針電表": "1 kWh = 1,000 W × 1 hour, plus how to read a dial meter", "現行累進電價表，和這個網站用的一樣": "The current tiered rates — the same ones this site uses", "兩個月一期，每一階的度數要乘 2": "For two-month bills each step’s limit doubles", "冷氣機": "Air conditioner", "電冰箱": "Fridge", "照明燈具": "Lighting", "電熱水器": "Electric water heater", "電視機": "TV", "設定溫度每提高 1°C 約省 6%，濾網兩週清一次": "Each 1°C higher saves about 6%; clean the filter every two weeks", "背面離牆 10 公分，放太滿耗電多 4%～5%": "Keep it 10 cm from the wall; overfilling uses 4–5% more", "優先選 LED，燈具定期清潔": "Choose LED and clean fittings regularly", "儲熱式加定時器，洗澡前 30 分鐘再開": "Put a timer on storage heaters; switch on 30 minutes before showers", "離牆 10 公分散熱，長時間外出拔插頭": "Keep it 10 cm from the wall; unplug for long trips", "隔熱降溫的方法": "Keeping heat out", "窗戶做好隔熱，室內可降 3～5 度": "Insulating windows can cool a room by 3–5°C", "開新分頁 ↗": "New tab ↗", "台電兒童網：冷氣機怎麼省電": "Taipower kids’ site: saving with the AC (Chinese)", "台電兒童網：電冰箱省電法寶": "Taipower kids’ site: fridge tips (Chinese)", "台電兒童網：照明燈具": "Taipower kids’ site: lighting (Chinese)", "台電兒童網：電熱水器＝吃電怪獸？": "Taipower kids’ site: water heaters (Chinese)", "台電兒童網：電視機": "Taipower kids’ site: TV (Chinese)"});
 (function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"買電器，看能源效率標示": "Buying appliances: read the energy label", "冷氣、冰箱、除濕機等電器上，會貼一張像溫度計的": "Air conditioners, fridges, dehumidifiers and more carry a thermometer-style ", "能源效率分級標示": "energy efficiency label", "，分成 # 到 # 級，": ", graded 1 to 5 — ", "數字越小越省電": "the lower the number, the more efficient", "，# 級最省。標示上還會寫「每年耗電量」，可以直接拿來比較。": "; grade 1 is best. It also shows yearly kWh, so you can compare directly.", "另一個是": "There’s also the ", "節能標章": "Energy Label mark", "，代表能源效率比國家標準高 #%～#%。": ", meaning 10–50% more efficient than the national standard.", "要買之前，可以到經濟部能源署的「能源效率分級標示管理系統」用型號查等級，因為分級標準改了，舊標示的級數可能已經不同。": "Before buying, look the model up in the Energy Administration’s label system — grading standards change, so an old label’s grade may no longer apply.", "能源效率分級標示查詢（能源署）": "Energy label lookup (Energy Administration, Chinese)", "沒開也在吃電：待機電力": "Using power while off: standby", "依工研院的統計，": "ITRI’s figures show ", "待機電力約占家庭用電的 #%": "standby power is about 7.4% of home use", "。分辨方法很簡單：插著電會": ". An easy test: if it ", "亮小燈、有顯示螢幕、能用遙控器開": "shows a light or a display, or turns on by remote", "的電器，大多有待機電力。": " while plugged in, it probably draws standby power.", "# 度": "# kWh", "洗衣機": "Washing machine", "微波爐": "Microwave", "每年待機": "standby a year", "但": "But ", "不是每台都該拔插頭": "not everything should be unplugged", "：冰箱、路由器要一直開著；吹風機、檯燈這類關掉就不耗電的，拔不拔都一樣。每天要開關的影音設備，能源署和台電建議改用": ": fridges and routers must stay on, and things like hair dryers and desk lamps use nothing when off. For AV gear you switch daily, the Energy Administration and Taipower suggest a ", "有獨立開關的延長線": "power strip with its own switch", "，按一下就好。": " — one press.", "台電與能源署：默默吃電小怪獸（聯合新聞網）": "Taipower & Energy Administration: the quiet power-eaters (UDN, Chinese)", "用電安全：一個插座能插多少？": "Safety: how much can one socket take?", "一般 # 安培的插座，最多只能用 ": "A normal 15 A socket can supply at most ", "# 安培 × # 伏特 ＝ #,# 瓦": "15 A × 110 V = 1,650 W", "。一台 #,# 瓦的電暖器插上去，同一個迴路只剩 # 瓦，再插吹風機就會超過負載。": ". Plug in a 1,200 W heater and only 450 W is left on that circuit — add a hair dryer and it’s overloaded.", "電暖器、吹風機、電鍋這類": "Heaters, hair dryers, rice cookers and other ", "高瓦數電器用獨立插座": "high-wattage appliances need their own socket", "，不要接在延長線上。": " — not a power strip.", "除濕機離牆 # 公分，": "Keep dehumidifiers 50 cm from walls, ", "不要在睡覺或沒人在家時開": "don’t run them while asleep or out", "，也不要拿來烘衣服。": ", and don’t use them to dry clothes.", "插頭積灰塵容易起火；長時間不用的插座可以加保護蓋。": "Dusty plugs can catch fire; cap sockets you don’t use for long.", "台電兒童網：電暖器為什麼要用獨立插座": "Taipower kids’ site: why heaters need their own socket (Chinese)", "台電兒童網：除濕機這樣用才安全": "Taipower kids’ site: using dehumidifiers safely (Chinese)", "能源效率標示": "Energy labels", "待機電力": "Standby power", "用電安全": "Safety", "電熱水瓶": "Hot-water pot", "電暖器": "Heater", "保溫設 #°C 比 #°C 約省 #% 電費": "Keeping it at 90°C instead of 98°C saves about 25%", "累積到 #～# 分滿再洗，脫水 # 分鐘就夠": "Wait until it’s 70–80% full; 3 minutes of spin is enough", "不同種類適合的空間大小，濾網半年清一次": "Which type suits which room; clean the filter every six months", "最後整理：# 年 # 月 # 日。台電網站改版時連結可能會變，發現打不開歡迎回報。": "Last checked 17 Nov 2026. Taipower may move pages — please report broken links.", "回報問題": "Report a problem", "網站還在 Beta 測試。看到錯字、數字怪怪的、按了沒反應，或有想要的功能，都歡迎告訴作者。": "The site is in beta. Typos, odd numbers, buttons that do nothing, features you’d like — please tell the author.", "這是哪一種？": "What kind is it?", "回報類型": "Report type", "壞掉了／按了沒反應": "Broken / nothing happens", "數字或資料不對": "Wrong number or data", "想要的功能": "Feature idea", "其他": "Other", "在哪一頁？": "Which page?", "發生什麼事？": "What happened?", "例如：在家庭挑戰按「開始抓鬼」沒反應。用的是 iPhone。": "e.g. On Family challenge, “Start” does nothing. I’m on an iPhone.", "想收到回覆的話，留個聯絡方式（選填）": "Contact, if you’d like a reply (optional)", "Email 或 IG 帳號": "Email or Instagram", " 附上網站版本和裝置資訊（螢幕大小、瀏覽器），方便找問題": " Include site version and device info (screen size, browser) to help find the problem", "送出時，內容只會送到你按的那個地方，網站本身不會收集。請不要寫電號、地址或電話。": "When you send, it goes only where you choose; the site itself collects nothing. Please don’t include your account number, address or phone.", "送出回報（不用登入）": "Send report (no login)", "歡迎回報": "please report it"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"電費怎麼漲這麼多？": "Why has the bill gone up so much?", "是不是有人一直在浪費電？": "Is someone wasting power again?", "語音訊息，# 分 # 秒": "Voice message, 14 seconds", "這個網站的起因，是一堂企劃課。我們發現，收到電費單時，大家的第一個反應通常是「怎麼漲這麼多？」，或是「你是不是一直在浪費電？」——很少人真的看懂它，倒是很快就開始找人怪。": "This site began in a planning class. We noticed that when the bill arrives, the first reaction is usually “Why has it gone up so much?” or “Are you wasting power again?” — few people actually read it, but everyone is quick to blame someone.", "這，就是這個網站的開端。": "That’s where this site began.", "一般 # 安培的插座，最多只能用": "A normal 15 A socket can supply at most", "一般 15 安培的插座，最多只能用": "A normal 15 A socket can supply at most", "15 安培 × 110 伏特 ＝ 1,650 瓦": "15 A × 110 V = 1,650 W", "# 安培 × # 伏特 ＝ # 瓦": "15 A × 110 V = 1,650 W", "。一台 # 瓦的電暖器插上去，同一個迴路只剩 # 瓦，再插吹風機就會超過負載。": ". Plug in a 1,200 W heater and only 450 W is left on that circuit — add a hair dryer and it’s overloaded.", "。一台 1,200 瓦的電暖器插上去，同一個迴路只剩 450 瓦，再插吹風機就會超過負載。": ". Plug in a 1,200 W heater and only 450 W is left on that circuit — add a hair dryer and it’s overloaded.", "附上網站版本和裝置資訊（螢幕大小、瀏覽器），方便找問題": "Include site version and device info (screen size, browser) to help find the problem", "測試版：功能和數字還在調整，發現問題": "version: features and figures are still being tuned —"});
+(function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"按下「送出回報」，內容會用 Email 寄給作者，不用登入、也不會公開。網站本身不會留存。請不要寫電號、地址或電話。": "Press “Send report” and it’s emailed to the author — no login, nothing public. The site keeps nothing. Please don’t include your account number, address or phone.", "本網站不需要註冊或登入，沒有會員系統，也沒有自己的伺服器或資料庫。唯一會送出資料的，是你主動按下的「回報問題」（見第五段）。": "No sign-up or login, no member system, and no server or database of our own. The only thing ever sent is a report you choose to send (see section 5)."});
+(function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"這個網站的起因，是一堂企劃課。我們發現，收到電費單時，大家的第一個反應通常是「怎麼漲這麼多？」，或是「你是不是一直在浪費電？」": "This site began in a planning class. We noticed that when the bill arrives, the first reaction is usually “Why has it gone up so much?” or “Are you wasting power again?”", "嗨～遇到問題了嗎？請回報給我，謝謝您～": "Hi! Run into a problem? Please let me know — thank you!", "錯字、數字怪怪的、按了沒反應，或想要什麼功能，都可以寫在這裡。": "Typos, odd numbers, buttons that do nothing, or features you’d like — write it all here."});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
