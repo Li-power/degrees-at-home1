@@ -1540,6 +1540,24 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
 .ere svg{width:24px;height:24px}
 .ereading{outline:3px solid var(--accent-t);outline-offset:6px;border-radius:18px;transition:outline-color .2s}
 #etiles.ereading{outline-offset:4px}
+
+/* v9.9 beta + Taipower reading */
+.beta{display:inline-block;vertical-align:middle;margin-left:8px;padding:2px 8px;border-radius:999px;background:var(--accent-t);color:var(--bg);font-family:var(--f-body);font-style:normal;font-size:11px;font-weight:700;letter-spacing:.06em;line-height:1.5}
+sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;top:-.4em}
+.drawer .bt .beta{font-size:10px;margin-left:6px;top:-2px;position:relative}
+.sfbeta{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--faint)}
+.sfbeta .beta{margin-left:0}
+.tplink{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:var(--fs-xs);font-weight:700;color:var(--accent-t);text-decoration:underline;text-underline-offset:3px}
+.tplink::after{content:"↗";text-decoration:none;font-weight:400}
+.mcard .tplink{display:flex;margin:4px 0 10px}
+.tpgrid{display:grid;gap:12px;margin-top:10px}
+@media (min-width:640px){.tpgrid{grid-template-columns:1fr 1fr}}
+.tpg{display:flex;flex-direction:column;gap:6px;background:var(--surface);border-radius:16px;padding:12px 14px}
+.tpg b{font-size:var(--fs-s)}
+.tpg a{display:flex;flex-direction:column;padding:8px 10px;border-radius:12px;background:var(--elev);color:var(--text);text-decoration:none;font-size:var(--fs-s);font-weight:700}
+.tpg a{position:relative;padding-right:30px}
+.tpg a::after{content:"↗";position:absolute;right:12px;top:9px;font-size:14px;font-weight:400;color:var(--accent-t)}
+.tpg small{font-weight:400;color:var(--soft);font-size:var(--fs-xs);line-height:1.5}
 </style>
 </head>
 <body>
@@ -1570,7 +1588,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
 </div>
 <div class="dscrim" id="dscrim"></div>
 <nav class="drawer" id="drawer" aria-label="主選單">
-  <a class="brand" href="#why" data-route="why"><span class="bt">家裡幾度 C，<br>是「省」了沒？</span><span class="bs">為什麼做這個網站</span></a>
+  <a class="brand" href="#why" data-route="why"><span class="bt">家裡幾度 C，<br>是「省」了沒？<i class="beta" data-noi18n>Beta</i></span><span class="bs">為什麼做這個網站</span></a>
   <div class="dlang" id="dLang" role="group" aria-label="語言 Language" data-noi18n><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>語言 Language</span><button type="button" data-dl="zh">中文</button><button type="button" data-dl="en">English</button></div>
   <a href="#guide" data-route="guide" class="dguide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9.3a2.6 2.6 0 1 1 3.6 2.4c-.7.3-1.1.9-1.1 1.6v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/></svg><span>使用說明</span></a><p class="dgrp">看懂帳單</p><a href="#decoder" data-route="decoder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="15" width="18" height="5" rx="2" fill="currentColor"/></svg><span>電費解碼器</span></a><a href="#basics" data-route="basics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13z" fill="currentColor"/></svg><span>用電基本知識</span></a><a href="#learn" data-route="learn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h4v-4h4v-4h4V8h4V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg><span>電價小教室</span></a><p class="dgrp">設定我家</p><a href="#home" data-route="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></svg><span>我家設定</span></a><a href="#history" data-route="history"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="12" width="3" height="8" fill="currentColor"/><rect x="10.5" y="7" width="3" height="13" fill="currentColor"/><rect x="17" y="10" width="3" height="10" fill="currentColor"/></svg><span>帳單紀錄</span></a><p class="dgrp">一起省電</p><a href="#monsters" data-route="monsters"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="5" fill="currentColor"/><circle cx="9.5" cy="10" r="2" fill="var(--bg)"/><circle cx="14.5" cy="10" r="2" fill="var(--bg)"/></svg><span>怪獸圖鑑</span></a><a href="#challenge" data-route="challenge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l-2 4 2 4H5" fill="currentColor"/><path d="M5 3v18" stroke="currentColor" stroke-width="2"/></svg><span>家庭挑戰</span></a><a href="#studio" data-route="studio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path d="M4 18l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>卡片工作室</span></a><p class="dgrp">更多</p><a href="#elder" data-route="elder"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="14" font-weight="900" fill="currentColor">大</text><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>長輩版重點</span></a><a href="#about" data-route="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>資料來源與設定</span></a>
   <div class="dfoot"><a class="dsign" href="#why" data-route="why" aria-label="關於作者與這個作品"><span class="hanko">り</span><span>2026<small>關於這個作品</small></span></a><button class="bdgbtn" id="bdgBtn" type="button" aria-label="我的徽章" aria-haspopup="dialog"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="none" stroke="var(--surface-hi)" stroke-width="4"/><circle id="bdgArc" cx="22" cy="22" r="19" fill="none" stroke="#E2A33B" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 22 22)"/></svg><span class="bi" id="bdgIco"></span><i class="dot" id="bdgDot" hidden></i></button></div>
@@ -1581,7 +1599,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
   <div class="grid">
     <div class="col">
       <section class="hero" id="s-bill" aria-labelledby="t-hero">
-        <h1 id="t-hero">家裡幾度 C，是<span class="q">「省」</span>了沒？</h1>
+        <h1 id="t-hero">家裡幾度 C，是<span class="q">「省」</span>了沒？<sup class="beta" data-noi18n>Beta</sup></h1>
         <p class="lead">輸入電費單上的度數，看看你家電費在第幾階、哪台電器最耗電 <a class="howlink" href="#guide">怎麼用？</a></p>
         <div class="start" id="hint" hidden>
           <p class="sth2"><b>第一次來？</b>選一種開始</p>
@@ -1887,7 +1905,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
 <div class="view readable" id="v-basics" data-title="用電基本知識" hidden>
   <section class="sec"><h1 class="vh">用電基本知識</h1>
     <p class="lead">看電費單之前，先知道這幾件事。每一段都很短，看不懂的地方可以直接跳過。</p>
-    <nav class="btoc" aria-label="這一頁的內容"><a href="#b-unit" data-bjump="b-unit">1 度是多少</a><a href="#b-stairs" data-bjump="b-stairs">為什麼越用越貴</a><a href="#b-season" data-bjump="b-season">夏天比較貴</a><a href="#b-two" data-bjump="b-two">兩個月一張帳單</a><a href="#b-reward" data-bjump="b-reward">節電獎勵</a><a href="#b-rent" data-bjump="b-rent">租屋的電費</a><a href="#b-meter" data-bjump="b-meter">智慧電表</a></nav>
+    <nav class="btoc" aria-label="這一頁的內容"><a href="#b-unit" data-bjump="b-unit">1 度是多少</a><a href="#b-stairs" data-bjump="b-stairs">為什麼越用越貴</a><a href="#b-season" data-bjump="b-season">夏天比較貴</a><a href="#b-two" data-bjump="b-two">兩個月一張帳單</a><a href="#b-reward" data-bjump="b-reward">節電獎勵</a><a href="#b-rent" data-bjump="b-rent">租屋的電費</a><a href="#b-meter" data-bjump="b-meter">智慧電表</a><a href="#b-read" data-bjump="b-read">台電官方補充</a></nav>
   </section>
 
   <section class="sec bcard" id="b-unit"><h2>1 度是多少？</h2>
@@ -1895,12 +1913,14 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
     <p class="umix">「瓦」是電器<b>一下子有多耗電</b>，寫在電器背後的標籤上；「度」是<b>總共用了多少電</b>，電費就是照度數算的。<br>瓦數 × 使用小時 ÷ 1,000 ＝ 度數</p>
     <div class="ugrid"><div><b>1,000 瓦</b><small>吹風機開強風</small><em>1 小時＝1 度</em></div><div><b>100 瓦</b><small>一台電視</small><em>10 小時＝1 度</em></div><div><b>20 瓦</b><small>一顆燈泡</small><em>50 小時＝1 度</em></div></div>
     <p class="umine" id="unitMine"></p>
+    <a class="tplink" href="https://www.taipower.com.tw/1136/1149/2271/simpleList" target="_blank" rel="noopener">台電兒童網：什麼叫一度電</a>
   </section>
 
   <section class="sec bcard" id="b-stairs"><h2>為什麼越用越貴？</h2>
     <p>住家電價是<b>累進</b>的，像爬樓梯一樣分成 6 階：前 120 度最便宜，用得越多，<b>多出來的那幾度</b>就算越貴的價錢。</p>
     <p>全家的電是加在一起算的，所以不是「誰用比較多誰付比較貴」，而是全家一起爬上了比較高的階。</p>
     <button type="button" class="gjump" data-bgo="decoder" data-bto="s-stairs">看你家在第幾階</button>
+    <a class="tplink" href="https://www.taipower.com.tw/1136/1149/2271/3119/normalPost" target="_blank" rel="noopener">台電兒童網：一度電多少錢（附現行電價表）</a>
   </section>
 
   <section class="sec bcard" id="b-season"><h2>夏天比較貴</h2>
@@ -1912,6 +1932,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
   <section class="sec bcard" id="b-two"><h2>兩個月一張帳單</h2>
     <p>大部分住家<b>兩個月才收到一張電費單</b>，上面的度數是兩個月加起來的。想知道「一個月用多少」，先除以 2。</p>
     <p>兩個月一期時，每一階的度數上限也跟著乘 2，例如第一階變成 240 度。網站會自動幫你換算。</p>
+    <a class="tplink" href="https://www.taipower.com.tw/1136/1149/2271/3120/normalPost" target="_blank" rel="noopener">台電兒童網：電費是怎麼計算的呢？（兩個月一期的算法）</a>
   </section>
 
   <section class="sec bcard" id="b-reward"><h2>節電獎勵</h2>
@@ -1925,6 +1946,14 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
     <p>2024 年 7 月 15 日以後簽的租約，房東如果<b>按度數收電費</b>，每度不能超過那一期帳單的「每度平均電價」（總電費 ÷ 總度數）。覺得收太多，可以打 1996 內政部專線問。</p>
   </section>
 
+  <section class="sec bcard" id="b-read"><h2>台電官方的知識補充</h2>
+    <p>台電的「台電兒童網」用很白話的方式寫了很多用電知識，給小朋友看，大人看也剛好。下面是和這個網站最相關的幾篇，點了會開新分頁。</p>
+    <div class="tpgrid">
+      <div class="tpg"><b>電費怎麼算</b><a href="https://www.taipower.com.tw/1136/1149/2271/simpleList" target="_blank" rel="noopener">什麼叫一度電<small>1 度＝1,000 瓦×1 小時，還教你看指針電表</small></a><a href="https://www.taipower.com.tw/1136/1149/2271/3119/normalPost" target="_blank" rel="noopener">一度電多少錢<small>現行累進電價表，和這個網站用的一樣</small></a><a href="https://www.taipower.com.tw/1136/1149/2271/3120/normalPost" target="_blank" rel="noopener">電費是怎麼計算的呢？<small>兩個月一期，每一階的度數要乘 2</small></a></div>
+      <div class="tpg"><b>電器節電</b><a href="https://www.taipower.com.tw/1136/1149/2273/3157/normalPost" target="_blank" rel="noopener">冷氣機<small>設定溫度每提高 1°C 約省 6%，濾網兩週清一次</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3158/normalPost" target="_blank" rel="noopener">電冰箱<small>背面離牆 10 公分，放太滿耗電多 4%～5%</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3160/normalPost" target="_blank" rel="noopener">照明燈具<small>優先選 LED，燈具定期清潔</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3161/normalPost" target="_blank" rel="noopener">電熱水器<small>儲熱式加定時器，洗澡前 30 分鐘再開</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3165/normalPost" target="_blank" rel="noopener">電視機<small>離牆 10 公分散熱，長時間外出拔插頭</small></a></div>
+      <div class="tpg"><b>節電撇步</b><a href="https://www.taipower.com.tw/1136/1149/2272/simpleList" target="_blank" rel="noopener">隔熱降溫的方法<small>窗戶做好隔熱，室內可降 3～5 度</small></a></div>
+    </div>
+  </section>
   <section class="sec bcard" id="b-meter"><h2>你家是智慧電表嗎？看得到的資訊差很多</h2>
 
       <div class="mtwo">
@@ -2108,6 +2137,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
       <li><b>租屋電費新制</b>（2024-07-15 起新簽租約，按度數收費不得超過「當期每度平均電價」）：內政部，台灣英文新聞 2024-07-14。<a href="https://www.taiwannews.com.tw/zh/news/5900913" target="_blank" rel="noopener">台灣英文新聞</a></li>
       <li><b>1 度電的定義</b>（1,000 瓦電器連續使用 1 小時；20 瓦燈泡 50 小時＝1 度）：工商時報 2026-06-01；關鍵評論網。<a href="https://www.ctee.com.tw/news/20260601700956-430104" target="_blank" rel="noopener">工商時報</a>、<a href="https://www.thenewslens.com/article/169695" target="_blank" rel="noopener">關鍵評論網</a></li>
       <li><b>智慧電表</b>（App 每 15 分鐘用電、同區比較、未出帳用電量、住宅用電分析；2024 年 6 月超過 300 萬具、目標 2035 年全面換裝）：天下雜誌、鏡週刊、工商時報 2024-10-29。<a href="https://www.cw.com.tw/article/5122346" target="_blank" rel="noopener">天下</a>、<a href="https://www.mirrormedia.mg/story/20240703mkt001" target="_blank" rel="noopener">鏡週刊</a>、<a href="https://www.ctee.com.tw/news/20241029701841-430104" target="_blank" rel="noopener">工商時報</a></li>
+      <li><b>用電與節電知識</b>（1 度電的定義、累進電價與兩個月一期的算法、冷氣／冰箱／照明／電熱水器／電視的省電方法）：台灣電力公司「台電兒童網」。<a href="https://www.taipower.com.tw/1136/1149/2271/3119/normalPost" target="_blank" rel="noopener">電費怎麼算</a>、<a href="https://www.taipower.com.tw/1136/1149/2273/3157/normalPost" target="_blank" rel="noopener">電器節電</a></li>
       <li><b>全台住宅每月平均用電（自動更新）</b>：台灣電力公司〈住宅用戶每月平均用電度數及電費〉，政府資料開放平臺，政府資料開放授權條款第 1 版。<a href="https://data.gov.tw/dataset/17062" target="_blank" rel="noopener">data.gov.tw 17062</a></li>
       <li><b>參考設計：東京電力「くらしTEPCO web」</b>：最多兩年的電費與用量圖表、預測、相似家庭比較。<a href="https://www.tepco.co.jp/ep/kurashi/feature.html" target="_blank" rel="noopener">TEPCO</a></li>
     </ol><ol class="cites cites-en">
@@ -2118,6 +2148,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
       <li><b>Rental electricity rule</b> (leases signed from 2024-07-15 may not charge more per kWh than that bill’s average price): Ministry of the Interior via Taiwan News, 2024-07-14. <a href="https://www.taiwannews.com.tw/zh/news/5900913" target="_blank" rel="noopener">Taiwan News</a></li>
       <li><b>What 1 kWh means</b> (a 1,000 W appliance for 1 hour; a 20 W bulb for 50 hours): Commercial Times 2026-06-01; The News Lens. <a href="https://www.ctee.com.tw/news/20260601700956-430104" target="_blank" rel="noopener">Commercial Times</a>, <a href="https://www.thenewslens.com/article/169695" target="_blank" rel="noopener">The News Lens</a></li>
       <li><b>Smart meters</b> (15-minute data, area comparison, unbilled usage and appliance estimates in the app; over 3 million by June 2024, all homes by 2035): CommonWealth, Mirror Media, Commercial Times 2024-10-29. <a href="https://www.cw.com.tw/article/5122346" target="_blank" rel="noopener">CommonWealth</a>, <a href="https://www.mirrormedia.mg/story/20240703mkt001" target="_blank" rel="noopener">Mirror Media</a>, <a href="https://www.ctee.com.tw/news/20241029701841-430104" target="_blank" rel="noopener">Commercial Times</a></li>
+      <li><b>Power and saving basics</b> (what 1 kWh is, tiered and two-month billing, saving tips for AC, fridge, lights, water heater and TV): Taipower’s kids’ site. <a href="https://www.taipower.com.tw/1136/1149/2271/3119/normalPost" target="_blank" rel="noopener">How bills work</a>, <a href="https://www.taipower.com.tw/1136/1149/2273/3157/normalPost" target="_blank" rel="noopener">Appliance tips</a> (in Chinese)</li>
       <li><b>Taiwan’s monthly home average (auto-updated)</b>: Taipower dataset on government open data, Open Government Data License v1. <a href="https://data.gov.tw/dataset/17062" target="_blank" rel="noopener">data.gov.tw 17062</a></li>
       <li><b>Design reference: TEPCO “Kurashi TEPCO web”</b>: up to two years of bills and usage charts, forecasts and similar-home comparisons. <a href="https://www.tepco.co.jp/ep/kurashi/feature.html" target="_blank" rel="noopener">TEPCO</a></li>
     </ol><p class="tip">怪獸的度數（熱水瓶、冰箱、機上盒、除濕機、照明、電鍋保溫等）整理自台電、能源署與工研院公開的省電資料，詳列在上面「數據從哪裡來」。所有連結於 2026 年 11 月查閱。</p></details><details class="acc"><summary>數據從哪裡來</summary><p>住宅累進電價：2025 年 10 月 1 日起的現行電價，「照帳單算一次」另外收錄 2024 年 4 月至 2025 年 9 月的舊電價（台電）；租屋電費：2024 年 7 月 15 日起新簽租約，每度不得超過電費單「當期每度平均電價」（內政部）；2025 住宅平均每月用電非夏月 308 度、夏月 418 度（台電）；熱水瓶每天約 2 度、定時約省 36%；15 年以上冰箱每月約 68 度、一級能效約 23 度；儲熱式電熱水器待機每年約 1,800 度；機上盒待機每年約 131 度；冷氣每調高 1°C 約省 6%（以上台電公開資料）；住宅電力排碳係數每度 0.471 公斤（經濟部能源署，2025 年度）；節電獎勵每度 0.6 元，2026/12/17 前登錄；汰舊換新補助每台 3,000 元，2026/12/31 前購買。家電數字為估算，僅供家人討論。</p></details></div>
@@ -2226,6 +2257,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
     <i class="sfline" aria-hidden="true"></i>
     <p class="sfname"><a href="#why" data-route="why">家裡幾度 C，是「省」了沒？</a></p>
     <p class="sfsub">北科大文發系課堂作品・非台電官方網站</p>
+    <p class="sfbeta"><i class="beta" data-noi18n>Beta</i>測試版：功能和數字還在調整，發現問題歡迎回報</p>
     <p class="sflinks"><a href="#terms" data-route="terms">服務條款</a><span aria-hidden="true">・</span><a href="#privacy" data-route="privacy">隱私權政策</a></p>
     <p class="sfcopy"><span class="hanko sm">り</span>© 2026 DEGREES AT HOME</p>
   </footer>
@@ -2918,6 +2950,7 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"隱私權政策": "Privacy policy", "服務條款": "Terms of use", "家裡幾度 C，是「省」了沒？": "Degrees at Home: Saving or Not?", "北科大文發系課堂作品": "NTUT class project", "北科大文發系課堂作品・非台電官方網站": "NTUT class project · not an official Taipower site", "看完整的隱私權政策": "Read the full privacy policy"});
 (function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"電費單上寫「計費度數」的那個數字。拉電表下方的滑桿，或按「直接輸入度數」。手邊沒有帳單，可以先用台灣電力 App 查，或隨便拉拉看。不知道「度」是什麼，先看": "The “billed kWh” number on your bill. Drag the slider under the meter, or tap “Type the kWh”. No bill to hand? Look it up in the Taipower app, or just play with the slider. Not sure what a kWh is? Start with ", "看懂帳單": "Read the bill", "設定我家": "Set up my home", "一起省電": "Save together", "更多": "More", "網站地圖": "Site map", "網站分成四大塊。每一步都有「帶我去」，按了會直接跳到那個地方。": "The site has four parts. Every step has a “Take me there” button that jumps straight to it.", "① 看懂帳單": "① Read the bill", "② 設定我家": "② Set up my home", "③ 一起省電": "③ Save together", "④ 更多": "④ More", "度數、電價樓梯、季節，一次弄懂": "kWh, the price staircase and seasons, all in one place", "家裡有誰、電費怎麼付、每期記一筆": "Who lives here, how the bill is paid, a log of every bill", "找出吃電怪獸、分工、做卡片傳給家人": "Find the power monsters, share the jobs, make a card for the family", "給長輩的大字重點、資料來源、備份": "Large-text summary for elders, sources, backup", "選單也照這四類排好了。不知道從哪開始，就選下面一種方式。": "The menu follows the same four groups. Not sure where to start? Pick one of the ways below.", "不知道「度」是什麼，先看": "Not sure what a kWh is? Start with ", "先懂幾個名詞": "Learn a few words first", "1 度是多少、為什麼越用越貴、夏天為什麼比較貴、節電獎勵怎麼算，「用電基本知識」一頁看完。": "What 1 kWh is, why using more costs more, why summer costs more and how the saving reward works — all on the Power basics page.", "六件「做一次就一直省」的事，每件指定給一位家人。上面有「我們家的成績」、全台匿名排名和家人分工榜；下面的抓吸電鬼小遊戲，可以選誰在玩，比比看誰上排行榜。": "Six do-it-once fixes, each assigned to someone. Above them: your scoreboard, an anonymous Taiwan ranking and the family board; below, the ghost-catching game — pick who’s playing and see who tops the leaderboard.", "收到新帳單就到帳單紀錄記一筆，帳單上有節電獎勵也一起填。記兩筆以上就看得出有沒有變少；有去年同一期的紀錄，還會幫你估節電獎勵。": "Log each new bill, including any saving reward on it. After two bills you can see whether use is falling; with last year’s same period logged, the site estimates your reward too.", "怎麼切換成英文？": "How do I switch to English?", "打開左上角的選單，最上面就是「語言 Language」，按 English 就會切換。": "Open the menu at the top left; “語言 Language” is at the very top — tap English.", "怪獸設成「沒有」，為什麼不能讓牠睡覺？": "Why can’t I put a monster to sleep when it’s set to “none”?", "家裡沒有這台電器，就沒有電可以省。家裡其實有的話，在怪獸圖鑑按「調整」，或在電費解碼器點那隻怪獸，改成「有」就好。": "If the appliance isn’t in your home there’s nothing to save. If you do have one, tap Adjust in the Monster guide, or tap the monster in the Bill Decoder, and set it to “yes”.", "後半場偶爾會冒出": "Late in the round a ", "金色大吸電鬼": "golden ghost", "，抓到 +3": " sometimes appears — catch it for +3"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"念的速度": "Reading speed", "慢慢念": "Slow", "正常": "Normal", "這台裝置沒有中文語音，念出來會怪怪的。可以到手機的「設定 → 文字轉語音」下載「中文（台灣）」語音，再回來試一次。": "This device has no Chinese voice, so Chinese read-aloud may sound odd. In English mode, an English voice is used.", "念這一段：電費單上，只要看兩個數字": "Read this part", "念這一段：家裡最耗電的三台": "Read this part", "念這一段：今天就能做的三件事": "Read this part", "念這一段：打一通電話，就能領獎勵": "Read this part", "念這一段：今天的小知識": "Read this part"});
+(function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"測試版：功能和數字還在調整，發現問題歡迎回報": "version: features and figures are still being tuned — please report problems", "台電兒童網：什麼叫一度電": "Taipower kids’ site: what is 1 kWh (Chinese)", "台電兒童網：一度電多少錢（附現行電價表）": "Taipower kids’ site: price per kWh, with the current rate table (Chinese)", "台電兒童網：電費是怎麼計算的呢？（兩個月一期的算法）": "Taipower kids’ site: how a bill is calculated, incl. two-month billing (Chinese)", "台電官方的知識補充": "More from Taipower", "台電官方補充": "More from Taipower", "台電的「台電兒童網」用很白話的方式寫了很多用電知識，給小朋友看，大人看也剛好。下面是和這個網站最相關的幾篇，點了會開新分頁。": "Taipower’s kids’ site explains power in plain words — written for children, just right for adults too. These pages (in Chinese) match this site best; they open in a new tab.", "電費怎麼算": "How bills work", "電器節電": "Appliance tips", "節電撇步": "Saving tricks", "什麼叫一度電": "What is 1 kWh", "一度電多少錢": "Price per kWh", "電費是怎麼計算的呢？": "How is a bill calculated?", "1 度＝1,000 瓦×1 小時，還教你看指針電表": "1 kWh = 1,000 W × 1 hour, plus how to read a dial meter", "現行累進電價表，和這個網站用的一樣": "The current tiered rates — the same ones this site uses", "兩個月一期，每一階的度數要乘 2": "For two-month bills each step’s limit doubles", "冷氣機": "Air conditioner", "電冰箱": "Fridge", "照明燈具": "Lighting", "電熱水器": "Electric water heater", "電視機": "TV", "設定溫度每提高 1°C 約省 6%，濾網兩週清一次": "Each 1°C higher saves about 6%; clean the filter every two weeks", "背面離牆 10 公分，放太滿耗電多 4%～5%": "Keep it 10 cm from the wall; overfilling uses 4–5% more", "優先選 LED，燈具定期清潔": "Choose LED and clean fittings regularly", "儲熱式加定時器，洗澡前 30 分鐘再開": "Put a timer on storage heaters; switch on 30 minutes before showers", "離牆 10 公分散熱，長時間外出拔插頭": "Keep it 10 cm from the wall; unplug for long trips", "隔熱降溫的方法": "Keeping heat out", "窗戶做好隔熱，室內可降 3～5 度": "Insulating windows can cool a room by 3–5°C", "開新分頁 ↗": "New tab ↗", "台電兒童網：冷氣機怎麼省電": "Taipower kids’ site: saving with the AC (Chinese)", "台電兒童網：電冰箱省電法寶": "Taipower kids’ site: fridge tips (Chinese)", "台電兒童網：照明燈具": "Taipower kids’ site: lighting (Chinese)", "台電兒童網：電熱水器＝吃電怪獸？": "Taipower kids’ site: water heaters (Chinese)", "台電兒童網：電視機": "Taipower kids’ site: TV (Chinese)"});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -3021,8 +3054,9 @@ var Drawer={open:function(){Overlay.push();$('menuDot').hidden=true;$('drawer').
 /* =========================================================
    VIEW: monsters dex
    ========================================================= */
+var TPKIDS={"ac": ["https://www.taipower.com.tw/1136/1149/2273/3157/normalPost", "台電兒童網：冷氣機怎麼省電"], "fr": ["https://www.taipower.com.tw/1136/1149/2273/3158/normalPost", "台電兒童網：電冰箱省電法寶"], "lt": ["https://www.taipower.com.tw/1136/1149/2273/3160/normalPost", "台電兒童網：照明燈具"], "wh": ["https://www.taipower.com.tw/1136/1149/2273/3161/normalPost", "台電兒童網：電熱水器＝吃電怪獸？"], "stb": ["https://www.taipower.com.tw/1136/1149/2273/3165/normalPost", "台電兒童網：電視機"]};
 var Dex={build:function(){$('dex').innerHTML=APPLIANCES.map(function(a){return '<article class="mcard" id="d_'+a.id+'"><header><svg viewBox="-40 -40 80 80" aria-hidden="true" class="dav"></svg><div><h3>'+esc(a.name)+'</h3><div class="k"></div></div></header>'+
-      '<p class="q"></p><p style="font-size:var(--fs-s)">'+esc(a.why)+'</p><ul>'+TIPS[a.id].map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul>'+
+      '<p class="q"></p><p style="font-size:var(--fs-s)">'+esc(a.why)+'</p><ul>'+TIPS[a.id].map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul>'+(TPKIDS[a.kind]?'<a class="tplink" href="'+TPKIDS[a.kind][0]+'" target="_blank" rel="noopener">'+TPKIDS[a.kind][1]+'</a>':'')+
       '<div class="acts"><button type="button" class="pill" data-dtame="'+a.id+'"></button><button type="button" class="pill" data-dopen="'+a.id+'">調整</button></div></article>'}).join('');
     $('dex').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button');if(!b)return;
       if(b.dataset.dopen){Sheet.open(b.dataset.dopen,b);return}
