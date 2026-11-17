@@ -1591,6 +1591,22 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 /* v9.13 */
 .whyhero .lead .whystart{display:block;margin-top:.9em}
 .fbsub{display:block;margin-top:6px;font-size:var(--fs-s);color:var(--soft)}
+
+/* v9.15 tidy footer */
+.sitefoot{margin:44px auto 4px!important;padding:20px 0 6px;border-top:1px solid var(--hair);text-align:center;line-height:1.6}
+.sitefoot .sfline,.sitefoot .sfbeta{display:none}
+.sfbrand{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.sfbrand a{font-family:var(--f-serif);font-weight:700;font-size:var(--fs-s);color:var(--soft);text-decoration:none}
+.sfbrand .beta{margin:0;font-size:10px}
+.sfbrand .hanko{flex:none}
+.sitefoot .sfsub{margin:4px 0 0;font-size:12px;color:var(--faint)}
+.sitefoot .sflinks{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 18px;margin:12px 0 0!important;font-size:13px;font-weight:700}
+.sitefoot .sflinks a{color:var(--soft);text-decoration:none;padding:4px 0}
+.sitefoot .sflinks a+a{position:relative}
+.sitefoot .sflinks a+a::before{content:"";position:absolute;left:-10px;top:50%;width:3px;height:3px;border-radius:50%;background:var(--faint);transform:translateY(-50%)}
+.sitefoot .sfcopy{display:block;margin:10px 0 0!important;font-size:11px;letter-spacing:.08em;color:var(--faint)}
+.fbnote{margin:-2px 0 0;font-size:12px;color:var(--faint);text-align:center;line-height:1.6}
+#fbAlt{text-align:center;margin-top:6px}
 </style>
 </head>
 <body>
@@ -2232,7 +2248,8 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
       <input type="text" id="fbHoney" tabindex="-1" autocomplete="off" aria-hidden="true" class="fbhoney">
       <div class="fbbtns" id="fbBtns"></div>
       <p class="fbstatus" id="fbStatus" role="status" hidden></p>
-      <p class="tip">按下「送出回報」，內容會用 Email 寄給作者，不用登入、也不會公開。網站本身不會留存。請不要寫電號、地址或電話。</p>
+      <p class="fbnote">用 Email 寄給作者，不用登入、不會公開。請不要寫電號、地址或電話。</p>
+      <div id="fbAlt"></div>
     </form>
   </section>
 </div>
@@ -2339,12 +2356,10 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
   </section>
 </div>
   <footer class="sitefoot">
-    <i class="sfline" aria-hidden="true"></i>
-    <p class="sfname"><a href="#why" data-route="why">家裡幾度 C，是「省」了沒？</a></p>
+    <div class="sfbrand"><span class="hanko sm" aria-hidden="true">り</span><a href="#why" data-route="why">家裡幾度 C，是「省」了沒？</a><i class="beta" data-noi18n>Beta</i></div>
     <p class="sfsub">北科大文發系課堂作品・非台電官方網站</p>
-    <p class="sfbeta"><i class="beta" data-noi18n>Beta</i>測試版：功能和數字還在調整，發現問題<a href="#feedback" data-route="feedback">歡迎回報</a></p>
-    <p class="sflinks"><a href="#terms" data-route="terms">服務條款</a><span aria-hidden="true">・</span><a href="#privacy" data-route="privacy">隱私權政策</a><span aria-hidden="true">・</span><a href="#feedback" data-route="feedback">回報問題</a></p>
-    <p class="sfcopy"><span class="hanko sm">り</span>© 2026 DEGREES AT HOME</p>
+    <nav class="sflinks" aria-label="網站資訊"><a href="#feedback" data-route="feedback">回報問題</a><a href="#privacy" data-route="privacy">隱私權政策</a><a href="#terms" data-route="terms">服務條款</a></nav>
+    <p class="sfcopy">© 2026 Degrees at Home</p>
   </footer>
 </main>
 
@@ -2985,7 +3000,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.14 (dah-v36)';
+var SITE_VER='9.15 (dah-v37)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -3031,7 +3046,7 @@ var Feedback={type:'bug',last:'decoder',
   render:function(){if(Router.cur!=='feedback'){this.last=Router.cur;return}var sel=$('fbPage'),cur=sel.value||this.last;
     sel.innerHTML=this.pages().map(function(p){return '<option value="'+p[0]+'"'+(p[0]===cur?' selected':'')+'>'+esc(p[1])+'</option>'}).join('');
     var h='<button type="button" class="mk" data-fbgo="mail">'+ZT('送出回報','Send report')+'</button>';
-    h+='<button type="button" class="linkbtn fbgh" data-fbgo="gh">'+ZT('有 GitHub 帳號？也可以在 GitHub 公開回報','Have a GitHub account? You can also report publicly there')+'</button>';
+    var ga='<button type="button" class="linkbtn fbgh" data-fbgo="gh">'+ZT('有 GitHub 帳號？也可以在 GitHub 公開回報','Have a GitHub account? You can also report publicly there')+'</button>';if($('fbAlt').innerHTML!==ga)$('fbAlt').innerHTML=ga;
     if($('fbBtns').innerHTML!==h)$('fbBtns').innerHTML=h}};
 var Guess={yr:function(a,st){var o=st.app[a.id];return o.has?a.kwh(o,'s')*4+a.kwh(o,'n')*8:0},
   build:function(){$('guessChips').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-g]');if(!b)return;S.guess=b.dataset.g;schedule();
@@ -3090,6 +3105,7 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"電費怎麼漲這麼多？": "Why has the bill gone up so much?", "是不是有人一直在浪費電？": "Is someone wasting power again?", "語音訊息，# 分 # 秒": "Voice message, 14 seconds", "這個網站的起因，是一堂企劃課。我們發現，收到電費單時，大家的第一個反應通常是「怎麼漲這麼多？」，或是「你是不是一直在浪費電？」——很少人真的看懂它，倒是很快就開始找人怪。": "This site began in a planning class. We noticed that when the bill arrives, the first reaction is usually “Why has it gone up so much?” or “Are you wasting power again?” — few people actually read it, but everyone is quick to blame someone.", "這，就是這個網站的開端。": "That’s where this site began.", "一般 # 安培的插座，最多只能用": "A normal 15 A socket can supply at most", "一般 15 安培的插座，最多只能用": "A normal 15 A socket can supply at most", "15 安培 × 110 伏特 ＝ 1,650 瓦": "15 A × 110 V = 1,650 W", "# 安培 × # 伏特 ＝ # 瓦": "15 A × 110 V = 1,650 W", "。一台 # 瓦的電暖器插上去，同一個迴路只剩 # 瓦，再插吹風機就會超過負載。": ". Plug in a 1,200 W heater and only 450 W is left on that circuit — add a hair dryer and it’s overloaded.", "。一台 1,200 瓦的電暖器插上去，同一個迴路只剩 450 瓦，再插吹風機就會超過負載。": ". Plug in a 1,200 W heater and only 450 W is left on that circuit — add a hair dryer and it’s overloaded.", "附上網站版本和裝置資訊（螢幕大小、瀏覽器），方便找問題": "Include site version and device info (screen size, browser) to help find the problem", "測試版：功能和數字還在調整，發現問題": "version: features and figures are still being tuned —"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"按下「送出回報」，內容會用 Email 寄給作者，不用登入、也不會公開。網站本身不會留存。請不要寫電號、地址或電話。": "Press “Send report” and it’s emailed to the author — no login, nothing public. The site keeps nothing. Please don’t include your account number, address or phone.", "本網站不需要註冊或登入，沒有會員系統，也沒有自己的伺服器或資料庫。唯一會送出資料的，是你主動按下的「回報問題」（見第五段）。": "No sign-up or login, no member system, and no server or database of our own. The only thing ever sent is a report you choose to send (see section 5)."});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"這個網站的起因，是一堂企劃課。我們發現，收到電費單時，大家的第一個反應通常是「怎麼漲這麼多？」，或是「你是不是一直在浪費電？」": "This site began in a planning class. We noticed that when the bill arrives, the first reaction is usually “Why has it gone up so much?” or “Are you wasting power again?”", "嗨～遇到問題了嗎？請回報給我，謝謝您～": "Hi! Run into a problem? Please let me know — thank you!", "錯字、數字怪怪的、按了沒反應，或想要什麼功能，都可以寫在這裡。": "Typos, odd numbers, buttons that do nothing, or features you’d like — write it all here."});
+(function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"用 Email 寄給作者，不用登入、不會公開。請不要寫電號、地址或電話。": "Emailed to the author — no login, nothing public. Please don’t include your account number, address or phone.", "網站資訊": "Site info"});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
