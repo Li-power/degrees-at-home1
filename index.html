@@ -1483,6 +1483,40 @@ html[lang="en"] .lang-zh,html:not([lang="en"]) .lang-en{display:none}
 .sitefoot a[aria-current="page"],.sflinks a.on{color:var(--text)}
 .sfcopy{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px!important;letter-spacing:.14em;font-size:11px}
 .pvlink{color:var(--accent-t);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* v9.5 ghost game: separate stages */
+#gh:not(.playing) .ghbar,#gh:not(.playing) .ghroom{display:none}
+#gh .ghov{position:static;inset:auto;background:none;padding:18px 6px 10px;gap:14px}
+#gh .ghov h3{font-size:clamp(20px,5vw,24px)}
+#gh.playing{padding-bottom:16px}
+.ghcd{position:absolute;inset:0;z-index:4;display:grid;place-items:center;font-family:var(--f-num);font-weight:900;font-size:min(30vw,140px);color:#F3E3B5;background:rgba(24,21,32,.55);pointer-events:none}
+.ghcd.pop{animation:cdpop .5s var(--spring)}
+@keyframes cdpop{from{transform:scale(1.4);opacity:.3}to{transform:none;opacity:1}}
+.gt.haunt.gold{background:rgba(226,163,59,.25);box-shadow:inset 0 0 0 2.5px #E2A33B,0 0 30px -4px #E2A33B}
+.gt.haunt.gold .sp svg path:first-child{fill:#E2A33B}
+.gt.haunt.gold .sp{transform:translate(-50%,0) scale(1.18)}
+/* monsters you don't own */
+.mcard.nohave{opacity:.72}
+.pill.nohave{border-style:dashed;color:var(--faint)}
+/* secret badge */
+.bsecret{display:flex;align-items:center;gap:14px;margin-top:16px;padding:14px;border-radius:18px;background:linear-gradient(135deg,#2E2A26,#4A4036);color:#F3E3B5}
+.bsecret svg{width:56px;height:56px;flex:none}
+.bsecret div{display:flex;flex-direction:column;gap:2px}
+.bsecret small{font-size:11px;letter-spacing:.08em;color:#E2A33B}
+.bsecret b{font-size:17px}
+.bsecret span{font-size:var(--fs-xs);color:#D9D0BF}
+/* menu groups */
+.dgrp{margin:14px 14px 2px;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--faint)}
+/* guide site map */
+.gmap{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0 6px}
+@media (min-width:640px){.gmap{grid-template-columns:1fr 1fr}}
+.gm{padding:14px 16px;border-radius:20px;background:var(--elev);box-shadow:var(--card-sh);border-left:6px solid var(--c,#8DB487)}
+.gm.g1{--c:#E2A33B}.gm.g2{--c:#8DB487}.gm.g3{--c:#D9774E}.gm.g4{--c:#9B8AC4}
+.gm b{display:block;font-family:var(--f-serif);font-size:18px}
+.gm small{display:block;font-size:var(--fs-xs);color:var(--soft);margin:2px 0 8px}
+.gm>div{display:flex;flex-wrap:wrap;gap:6px}
+.gm .gjump{margin:0}
+.gmapnote{font-size:var(--fs-xs);color:var(--faint);margin:4px 0 16px}
 </style>
 </head>
 <body>
@@ -1515,7 +1549,7 @@ html[lang="en"] .lang-zh,html:not([lang="en"]) .lang-en{display:none}
 <nav class="drawer" id="drawer" aria-label="主選單">
   <a class="brand" href="#why" data-route="why"><span class="bt">家裡幾度 C，<br>是「省」了沒？</span><span class="bs">為什麼做這個網站</span></a>
   <div class="dlang" id="dLang" role="group" aria-label="語言 Language" data-noi18n><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>語言 Language</span><button type="button" data-dl="zh">中文</button><button type="button" data-dl="en">English</button></div>
-  <a href="#guide" data-route="guide" class="dguide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9.3a2.6 2.6 0 1 1 3.6 2.4c-.7.3-1.1.9-1.1 1.6v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/></svg><span>使用說明</span></a><a href="#decoder" data-route="decoder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="15" width="18" height="5" rx="2" fill="currentColor"/></svg><span>電費解碼器</span></a><a href="#basics" data-route="basics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13z" fill="currentColor"/></svg><span>用電基本知識</span></a><a href="#home" data-route="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></svg><span>我家設定</span></a><a href="#monsters" data-route="monsters"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="5" fill="currentColor"/><circle cx="9.5" cy="10" r="2" fill="var(--bg)"/><circle cx="14.5" cy="10" r="2" fill="var(--bg)"/></svg><span>怪獸圖鑑</span></a><a href="#learn" data-route="learn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h4v-4h4v-4h4V8h4V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg><span>電價小教室</span></a><a href="#challenge" data-route="challenge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l-2 4 2 4H5" fill="currentColor"/><path d="M5 3v18" stroke="currentColor" stroke-width="2"/></svg><span>家庭挑戰</span></a><a href="#studio" data-route="studio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path d="M4 18l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>卡片工作室</span></a><a href="#history" data-route="history"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="12" width="3" height="8" fill="currentColor"/><rect x="10.5" y="7" width="3" height="13" fill="currentColor"/><rect x="17" y="10" width="3" height="10" fill="currentColor"/></svg><span>帳單紀錄</span></a><a href="#elder" data-route="elder"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="14" font-weight="900" fill="currentColor">大</text><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>長輩版重點</span></a><a href="#about" data-route="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>資料來源與設定</span></a>
+  <a href="#guide" data-route="guide" class="dguide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9.3a2.6 2.6 0 1 1 3.6 2.4c-.7.3-1.1.9-1.1 1.6v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/></svg><span>使用說明</span></a><p class="dgrp">看懂帳單</p><a href="#decoder" data-route="decoder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="15" width="18" height="5" rx="2" fill="currentColor"/></svg><span>電費解碼器</span></a><a href="#basics" data-route="basics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13z" fill="currentColor"/></svg><span>用電基本知識</span></a><a href="#learn" data-route="learn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h4v-4h4v-4h4V8h4V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg><span>電價小教室</span></a><p class="dgrp">設定我家</p><a href="#home" data-route="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></svg><span>我家設定</span></a><a href="#history" data-route="history"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="12" width="3" height="8" fill="currentColor"/><rect x="10.5" y="7" width="3" height="13" fill="currentColor"/><rect x="17" y="10" width="3" height="10" fill="currentColor"/></svg><span>帳單紀錄</span></a><p class="dgrp">一起省電</p><a href="#monsters" data-route="monsters"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="5" fill="currentColor"/><circle cx="9.5" cy="10" r="2" fill="var(--bg)"/><circle cx="14.5" cy="10" r="2" fill="var(--bg)"/></svg><span>怪獸圖鑑</span></a><a href="#challenge" data-route="challenge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l-2 4 2 4H5" fill="currentColor"/><path d="M5 3v18" stroke="currentColor" stroke-width="2"/></svg><span>家庭挑戰</span></a><a href="#studio" data-route="studio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path d="M4 18l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>卡片工作室</span></a><p class="dgrp">更多</p><a href="#elder" data-route="elder"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="14" font-weight="900" fill="currentColor">大</text><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>長輩版重點</span></a><a href="#about" data-route="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>資料來源與設定</span></a>
   <div class="dfoot"><a class="dsign" href="#why" data-route="why" aria-label="關於作者與這個作品"><span class="hanko">り</span><span>2026<small>關於這個作品</small></span></a><button class="bdgbtn" id="bdgBtn" type="button" aria-label="我的徽章" aria-haspopup="dialog"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="none" stroke="var(--surface-hi)" stroke-width="4"/><circle id="bdgArc" cx="22" cy="22" r="19" fill="none" stroke="#E2A33B" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 22 22)"/></svg><span class="bi" id="bdgIco"></span><i class="dot" id="bdgDot" hidden></i></button></div>
 </nav>
 
@@ -1628,7 +1662,15 @@ html[lang="en"] .lang-zh,html:not([lang="en"]) .lang-en{display:none}
 
 <div class="view readable" id="v-guide" data-title="使用說明" hidden>
   <section class="sec"><h1 class="vh">使用說明</h1>
-    <p class="lead">不知道從哪裡開始？選一種最適合你的方式。每一步都有「帶我去」，按了會直接跳到那個地方。</p>
+    <p class="lead">網站分成四大塊。每一步都有「帶我去」，按了會直接跳到那個地方。</p>
+    <div class="gmap" aria-label="網站地圖">
+      <div class="gm g1"><b>① 看懂帳單</b><small>度數、電價樓梯、季節，一次弄懂</small><div><button type="button" class="gjump" data-go="decoder">電費解碼器</button><button type="button" class="gjump" data-go="basics">用電基本知識</button><button type="button" class="gjump" data-go="learn">電價小教室</button></div></div>
+      <div class="gm g2"><b>② 設定我家</b><small>家裡有誰、電費怎麼付、每期記一筆</small><div><button type="button" class="gjump" data-go="home">我家設定</button><button type="button" class="gjump" data-go="history">帳單紀錄</button></div></div>
+      <div class="gm g3"><b>③ 一起省電</b><small>找出吃電怪獸、分工、做卡片傳給家人</small><div><button type="button" class="gjump" data-go="monsters">怪獸圖鑑</button><button type="button" class="gjump" data-go="challenge">家庭挑戰</button><button type="button" class="gjump" data-go="studio">卡片工作室</button></div></div>
+      <div class="gm g4"><b>④ 更多</b><small>給長輩的大字重點、資料來源、備份</small><div><button type="button" class="gjump" data-go="elder">長輩版重點</button><button type="button" class="gjump" data-go="about">資料來源與設定</button></div></div>
+    </div>
+    <p class="gmapnote">選單也照這四類排好了。不知道從哪開始，就選下面一種方式。</p>
+    
     <div class="pills seg gtabs" id="gTabs" role="tablist" aria-label="使用方式">
       <button class="pill" type="button" role="tab" data-gt="quick">1 分鐘看懂</button>
       <button class="pill" type="button" role="tab" data-gt="full">完整說明書</button>
@@ -1638,7 +1680,7 @@ html[lang="en"] .lang-zh,html:not([lang="en"]) .lang-en{display:none}
     <div class="gpane" data-gp="quick">
       <p class="gsum">只要一張電費單，三步就知道錢花在哪裡。</p>
       <ol class="gsteps">
-        <li><b>輸入計費度數</b><span>電費單上寫「計費度數」的那個數字。拉電表下方的滑桿，或按「直接輸入度數」。手邊沒有帳單，可以先用台灣電力 App 查，或隨便拉拉看。</span><button type="button" class="gjump" data-go="decoder" data-to="s-bill">帶我去</button></li>
+        <li><b>輸入計費度數</b><span>電費單上寫「計費度數」的那個數字。拉電表下方的滑桿，或按「直接輸入度數」。手邊沒有帳單，可以先用台灣電力 App 查，或隨便拉拉看。不知道「度」是什麼，先看<button type="button" class="inl" data-go="basics">用電基本知識</button>。</span><button type="button" class="gjump" data-go="decoder" data-to="s-bill">帶我去</button></li>
         <li><b>看你家在第幾階</b><span>電價像爬樓梯，用越多、多出來的每一度越貴。兩個月一張的帳單，網站會自動先除以 2。</span><button type="button" class="gjump" data-go="decoder" data-to="s-stairs">帶我去</button></li>
         <li><b>找出最吃電的怪獸</b><span>先猜一隻，再看答案。點怪獸可以改使用時間，按「讓它睡覺」就會算出能省多少，存進右上角的火鍋基金。</span><button type="button" class="gjump" data-go="decoder" data-to="guess">帶我去</button></li>
       </ol>
@@ -1648,12 +1690,13 @@ html[lang="en"] .lang-zh,html:not([lang="en"]) .lang-en{display:none}
     <div class="gpane" data-gp="full" hidden>
       <p class="gsum">照順序做一次大約 10 分鐘，之後每次收到帳單只要做第 6 步。</p>
       <ol class="gsteps">
+        <li><b>先懂幾個名詞</b><span>1 度是多少、為什麼越用越貴、夏天為什麼比較貴、節電獎勵怎麼算，「用電基本知識」一頁看完。</span><button type="button" class="gjump" data-go="basics">帶我去</button></li>
         <li><b>告訴網站你家的狀況</b><span>選家庭型態（一個人住、三代同堂、宿舍⋯⋯）和電費怎麼付（自己繳、家人繳、房東按度數收⋯⋯），再改成家裡人的稱呼。怪獸、分工和卡片都會跟著變。</span><button type="button" class="gjump" data-go="home">帶我去</button></li>
         <li><b>輸入帳單，選對期別和季節</b><span>輸入計費度數，選「兩個月一期」或「一個月一期」。帳單跨過 6/1 或 9/30 就選「兩季都有」，再看範例數夏月天數。想對到一塊錢，用「照帳單算一次」輸入日期。</span><button type="button" class="gjump" data-go="decoder" data-to="s-bill">帶我去</button></li>
         <li><b>看懂電價樓梯</b><span>看你家在第幾階、離下一階還差幾度，以及和全台住家平均比起來是多還是少。</span><button type="button" class="gjump" data-go="decoder" data-to="s-stairs">帶我去</button></li>
         <li><b>調整怪獸，讓牠們睡覺</b><span>先猜最吃電的是誰。再點每隻怪獸，改成你家真實的時數和年份，數字才會準。按「讓它睡覺」看能省多少；怪獸圖鑑裡有每隻的省電方法。</span><button type="button" class="gjump" data-go="decoder" data-to="guess">帶我去</button></li>
-        <li><b>分工：家庭挑戰</b><span>六件「做一次就一直省」的事，每件指定給一位家人。最上面「我們家的成績」會顯示睡了幾隻怪獸、一年省多少。</span><button type="button" class="gjump" data-go="challenge">帶我去</button></li>
-        <li><b>每期記一筆帳單</b><span>收到新帳單就到帳單紀錄記一筆，可以先猜下一期的度數，帳單來了再對答案。記兩筆以上，就能看出有沒有真的變少。</span><button type="button" class="gjump" data-go="history">帶我去</button></li>
+        <li><b>分工：家庭挑戰</b><span>六件「做一次就一直省」的事，每件指定給一位家人。上面有「我們家的成績」、全台匿名排名和家人分工榜；下面的抓吸電鬼小遊戲，可以選誰在玩，比比看誰上排行榜。</span><button type="button" class="gjump" data-go="challenge">帶我去</button></li>
+        <li><b>每期記一筆帳單</b><span>收到新帳單就到帳單紀錄記一筆，帳單上有節電獎勵也一起填。記兩筆以上就看得出有沒有變少；有去年同一期的紀錄，還會幫你估節電獎勵。</span><button type="button" class="gjump" data-go="history">帶我去</button></li>
         <li><b>分享給家人</b><span>在卡片工作室放一張全家的照片，做成省電卡傳到家庭群組；要給長輩，就印冰箱卡。</span><button type="button" class="gjump" data-go="studio">帶我去</button></li>
         <li><b>換手機前先備份</b><span>資料只存在這台裝置。到「資料來源與設定」下載備份檔，新手機再還原。</span><button type="button" class="gjump" data-go="about">帶我去</button></li>
       </ol>
@@ -1672,6 +1715,8 @@ html[lang="en"] .lang-zh,html:not([lang="en"]) .lang-en{display:none}
     <details class="acc gq"><summary>我的資料會被上傳嗎？</summary><p>不會。度數、家人稱呼、照片都只存在這台手機或電腦的瀏覽器裡，網站作者也看不到。</p></details>
     <details class="acc gq"><summary>數字準嗎？</summary><p>電價、階梯和「照帳單算一次」照台電公告的算法；每隻怪獸的度數是依台電和政府公開資料估算，把怪獸的時數、年份改成你家的，就會更接近。</p></details>
     <details class="acc gq"><summary>計費度數在帳單哪裡？</summary><p>紙本帳單和台灣電力 App 都有「計費度數」，是這一期總共用了幾度。注意不是「電號」，也不是「應繳金額」。</p></details>
+    <details class="acc gq"><summary>怎麼切換成英文？</summary><p>打開左上角的選單，最上面就是「語言 Language」，按 English 就會切換。</p></details>
+    <details class="acc gq"><summary>怪獸設成「沒有」，為什麼不能讓牠睡覺？</summary><p>家裡沒有這台電器，就沒有電可以省。家裡其實有的話，在怪獸圖鑑按「調整」，或在電費解碼器點那隻怪獸，改成「有」就好。</p></details>
     <details class="acc gq"><summary>我不用自己繳電費，也能用嗎？</summary><p>可以。到「我家設定」選家人繳、房東按度數收、儲值卡或包在房租裡，網站會改用適合你的算法。</p></details>
   </section>
 </div>
@@ -1777,10 +1822,11 @@ html[lang="en"] .lang-zh,html:not([lang="en"]) .lang-en{display:none}
     <div class="gh" id="gh">
       <div class="ghbar"><div class="ghtime" aria-hidden="true"><i id="ghT"></i></div><div class="ghstat" aria-live="polite"><b id="ghN">0</b><span>隻</span></div></div>
       <div class="ghroom" id="ghRoom"></div>
+      <div class="ghcd" id="ghCd" aria-live="assertive" hidden></div>
       <div class="ghov" id="ghIntro"><h3>凌晨兩點，全家都睡了</h3>
         <div class="ghrules"><div><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M10 31a20 20 0 0 1 40 0v21l-6.7-5-6.6 5-6.7-5-6.7 5-6.6-5-6.7 5z" fill="#9B8AC4"/><circle cx="23" cy="30" r="3.4" fill="#2E2A26"/><circle cx="37" cy="30" r="3.4" fill="#2E2A26"/></svg><span>紫色小鬼冒出來，<b>馬上點它</b></span></div>
         <div><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="20" fill="none" stroke="#8DB487" stroke-width="4"/><circle cx="36" cy="26" r="12" fill="#211E2B"/><circle cx="28" cy="30" r="12" fill="#A8C9A0"/><circle cx="34" cy="26" r="11" fill="#2a2636"/></svg><span>綠框是<b>守夜電器</b>：冰箱、有人在睡的冷氣、路由器，點了會扣分</span></div>
-        <div><svg viewBox="0 0 60 60" aria-hidden="true"><text x="30" y="40" text-anchor="middle" font-size="26" font-weight="900" fill="#F3E3B5" font-family="sans-serif">×3</text></svg><span>連續快速抓到，<b>每隻多加 1 分</b></span></div></div>
+        <div><svg viewBox="0 0 60 60" aria-hidden="true"><text x="30" y="40" text-anchor="middle" font-size="26" font-weight="900" fill="#F3E3B5" font-family="sans-serif">×3</text></svg><span>連續快速抓到，<b>每隻多加 1 分</b></span></div><div><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M10 31a20 20 0 0 1 40 0v21l-6.7-5-6.6 5-6.7-5-6.7 5-6.6-5-6.7 5z" fill="#E2A33B"/><circle cx="23" cy="30" r="3.4" fill="#2E2A26"/><circle cx="37" cy="30" r="3.4" fill="#2E2A26"/></svg><span>後半場偶爾會冒出<b>金色大吸電鬼</b>，抓到 +3</span></div></div>
         <div class="ghwho" id="ghWho" role="group" aria-label="誰在玩"></div><button class="mk" type="button" id="ghGo">開始抓鬼</button><small id="ghBest"></small></div>
       <div class="ghov" id="ghEnd" hidden><div class="ghstars" id="ghStars"></div><h3 id="ghEndT"></h3><p id="ghRes"></p><small id="ghEndBest"></small><button class="mk" type="button" id="ghAgain">再抓一次</button></div>
     </div>
@@ -2451,7 +2497,7 @@ function sanitize(raw){var d=defaultState();if(!raw||typeof raw!=='object')retur
   if(raw.pred&&isFinite(Number(raw.pred.kwh)))d.pred={kwh:clamp(raw.pred.kwh,0,CFG.kwhMax),at:String(raw.pred.at||'')};
   if(raw.missions&&typeof raw.missions==='object')MISSIONS.forEach(function(m){var r=raw.missions[m[0]];if(r)d.missions[m[0]]={done:!!r.done,who:whoList(d).indexOf(r.who)>=0?r.who:null}});
   if(Array.isArray(raw.qset)&&raw.qset.length===5&&raw.qset.every(function(i){return QUIZ[i]})){d.qset=raw.qset.slice();if(raw.quiz&&typeof raw.quiz==='object')d.qset.forEach(function(i){var a=raw.quiz[i];if(a===0||a===1)d.quiz[i]=a})}
-  d.esize=raw.esize==='xl'?'xl':'l';d.big=[0,1,2].indexOf(raw.big)>=0?raw.big:0;d.bseen=clamp(raw.bseen||0,0,6)|0;d.badges={};if(raw.badges&&typeof raw.badges==='object')['lamp','patrol','bill','quiz','tame','mission'].forEach(function(k){if(raw.badges[k])d.badges[k]=true});d.patrolBest=clamp(raw.patrolBest||0,0,999)|0;d.patrolStars=clamp(raw.patrolStars||0,0,3)|0;d.ghWho=typeof raw.ghWho==='string'?raw.ghWho.slice(0,8):null;d.patrolBoard=Array.isArray(raw.patrolBoard)?raw.patrolBoard.filter(function(x){return x&&typeof x.w==='string'&&isFinite(x.n)&&/^\d{4}-\d\d-\d\d$/.test(x.d)}).slice(0,5).map(function(x){return{w:x.w.slice(0,8),n:clamp(Math.round(x.n),0,999),d:x.d}}):[];d.whyReact=['shock','blame','pay','compare'].indexOf(raw.whyReact)>=0?raw.whyReact:null;d.seenHint=!!raw.seenHint;if(['zh','en'].indexOf(raw.lang)>=0)d.lang=raw.lang;d.lk=clamp(raw.lk==null?400:raw.lk,0,1200);if(['auto','light','dark'].indexOf(raw.theme)>=0)d.theme=raw.theme;if(PRESETS[raw.preset]||raw.preset===null)d.preset=raw.preset;if(!raw.home&&PRESETS[raw.preset])d.home.type=raw.preset;
+  d.esize=raw.esize==='xl'?'xl':'l';d.big=[0,1,2].indexOf(raw.big)>=0?raw.big:0;d.bseen=clamp(raw.bseen||0,0,6)|0;d.badges={};if(raw.badges&&typeof raw.badges==='object')['lamp','patrol','bill','quiz','tame','mission','lamp999'].forEach(function(k){if(raw.badges[k])d.badges[k]=true});d.patrolBest=clamp(raw.patrolBest||0,0,999)|0;d.patrolStars=clamp(raw.patrolStars||0,0,3)|0;d.ghWho=typeof raw.ghWho==='string'?raw.ghWho.slice(0,8):null;d.patrolBoard=(function(L){var m={};L.forEach(function(x){if(!m[x.w]||x.n>m[x.w].n)m[x.w]=x});return Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.n-a.n}).slice(0,5)})(Array.isArray(raw.patrolBoard)?raw.patrolBoard.filter(function(x){return x&&typeof x.w==='string'&&isFinite(x.n)&&/^\d{4}-\d\d-\d\d$/.test(x.d)}).slice(0,5).map(function(x){return{w:x.w.slice(0,8),n:clamp(Math.round(x.n),0,999),d:x.d}}):[]);d.whyReact=['shock','blame','pay','compare'].indexOf(raw.whyReact)>=0?raw.whyReact:null;d.seenHint=!!raw.seenHint;if(['zh','en'].indexOf(raw.lang)>=0)d.lang=raw.lang;d.lk=clamp(raw.lk==null?400:raw.lk,0,1200);if(['auto','light','dark'].indexOf(raw.theme)>=0)d.theme=raw.theme;if(PRESETS[raw.preset]||raw.preset===null)d.preset=raw.preset;if(!raw.home&&PRESETS[raw.preset])d.home.type=raw.preset;
   APPLIANCES.forEach(function(a){var r=raw.app&&raw.app[a.id];if(!r)return;var o=d.app[a.id];o.has=!!r.has;o.tamed=!!r.tamed&&o.has;
     a.opts.forEach(function(op){var k=op[0],vals=op[2];if(vals.some(function(v){return String(v)===String(r[k])}))o[k]=typeof vals[0]==='number'?Number(r[k]):r[k]})});
   return d}
@@ -2844,6 +2890,7 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];I18N_DATA.D[n]=[A[k],'']}})({"用電基本知識": "Power basics", "不知道 1 度是多少？看「用電基本知識」": "Not sure what 1 kWh is? See “Power basics”", "節電獎勵怎麼算、智慧電表看得到什麼？看「用電基本知識」": "How the saving reward works, and what a smart meter shows — see “Power basics”", "看電費單之前，先知道這幾件事。每一段都很短，看不懂的地方可以直接跳過。": "A few things worth knowing before you read the bill. Each part is short — skip anything you don’t need.", "這一頁的內容": "On this page", "1 度是多少": "What 1 kWh is", "為什麼越用越貴": "Why more costs more", "夏天比較貴": "Summer costs more", "兩個月一張帳單": "One bill every two months", "節電獎勵": "Saving reward", "租屋的電費": "Electricity when renting", "為什麼越用越貴？": "Why does using more cost more?", "住家電價是": "Home prices are ", "累進": "tiered", "的，像爬樓梯一樣分成 # 階：前 # 度最便宜，用得越多，": ", like a staircase with 6 steps: the first 120 kWh are cheapest, and the more you use, the more ", "多出來的那幾度": "the extra kWh", "就算越貴的價錢。": " cost.", "全家的電是加在一起算的，所以不是「誰用比較多誰付比較貴」，而是全家一起爬上了比較高的階。": "The whole household’s use is added together, so it isn’t “whoever uses more pays more” — the family climbs to a higher step together.", "看你家在第幾階": "See which step you’re on", "# 月 # 日到 # 月 # 日是「夏月」": "Jun 1 – Sep 30 is the “summer” period", "，# 度以上的每一階都比其他月份貴。帳單如果剛好跨到夏天，會按天數拆開算。": ": every step above 120 kWh costs more than in other months. A bill that crosses into summer is split by days.", "所以夏天電費變多，不一定是用得比較兇，也可能只是電價變貴了。": "So a bigger summer bill doesn’t always mean you used more — the price may simply be higher.", "去電價小教室玩玩看": "Try it in Price class", "大部分住家": "Most homes ", "兩個月才收到一張電費單": "get a bill only every two months", "，上面的度數是兩個月加起來的。想知道「一個月用多少」，先除以 #。": ", and its kWh cover both months. For a monthly figure, halve it first.", "兩個月一期時，每一階的度數上限也跟著乘 #，例如第一階變成 # 度。網站會自動幫你換算。": "For a two-month bill each step’s limit doubles too — the first step becomes 240 kWh. The site converts this for you.", "台電的節電獎勵是": "Taipower’s saving reward ", "跟「去年同一期」比": "compares with the same period last year", "，不是跟上一期比：每少用 # 度，扣 # 元，直接從帳單扣。": ", not the last bill: NT$0.6 off your bill for each kWh saved.", "要先登錄才算（# 年 # 月 # 日前，可上網、到櫃台或打 #）。# 年起取消每期 # 元的保底。": "You must sign up first (by Dec 17, 2026 — online, at a counter or by calling 1911). The NT$84 minimum per bill ended in 2026.", "節電量 ＝（去年同期每天平均度數 － 這期每天平均度數）× 這期天數": "kWh saved = (last year’s daily average − this bill’s daily average) × days in this bill", "去帳單紀錄記一筆": "Log a bill", "# 年 # 月 # 日以後簽的租約，房東如果": "For leases signed from Jul 15, 2024, a landlord who ", "按度數收電費": "charges by the kWh", "，每度不能超過那一期帳單的「每度平均電價」（總電費 ÷ 總度數）。覺得收太多，可以打 # 內政部專線問。": " can’t charge more per kWh than that bill’s average price (total ÷ kWh). If it seems too high, call the Ministry of the Interior on 1996.", "每一段的出處都列在「資料來源與設定」的「引用來源」。": "Sources for every part are listed under “Sources” in Sources & settings."});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"誰在玩": "Who’s playing", "語言 Language": "Language 語言"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"隱私權政策": "Privacy policy", "服務條款": "Terms of use", "家裡幾度 C，是「省」了沒？": "Degrees at Home: Saving or Not?", "北科大文發系課堂作品": "NTUT class project", "北科大文發系課堂作品・非台電官方網站": "NTUT class project · not an official Taipower site", "看完整的隱私權政策": "Read the full privacy policy"});
+(function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"電費單上寫「計費度數」的那個數字。拉電表下方的滑桿，或按「直接輸入度數」。手邊沒有帳單，可以先用台灣電力 App 查，或隨便拉拉看。不知道「度」是什麼，先看": "The “billed kWh” number on your bill. Drag the slider under the meter, or tap “Type the kWh”. No bill to hand? Look it up in the Taipower app, or just play with the slider. Not sure what a kWh is? Start with ", "看懂帳單": "Read the bill", "設定我家": "Set up my home", "一起省電": "Save together", "更多": "More", "網站地圖": "Site map", "網站分成四大塊。每一步都有「帶我去」，按了會直接跳到那個地方。": "The site has four parts. Every step has a “Take me there” button that jumps straight to it.", "① 看懂帳單": "① Read the bill", "② 設定我家": "② Set up my home", "③ 一起省電": "③ Save together", "④ 更多": "④ More", "度數、電價樓梯、季節，一次弄懂": "kWh, the price staircase and seasons, all in one place", "家裡有誰、電費怎麼付、每期記一筆": "Who lives here, how the bill is paid, a log of every bill", "找出吃電怪獸、分工、做卡片傳給家人": "Find the power monsters, share the jobs, make a card for the family", "給長輩的大字重點、資料來源、備份": "Large-text summary for elders, sources, backup", "選單也照這四類排好了。不知道從哪開始，就選下面一種方式。": "The menu follows the same four groups. Not sure where to start? Pick one of the ways below.", "不知道「度」是什麼，先看": "Not sure what a kWh is? Start with ", "先懂幾個名詞": "Learn a few words first", "1 度是多少、為什麼越用越貴、夏天為什麼比較貴、節電獎勵怎麼算，「用電基本知識」一頁看完。": "What 1 kWh is, why using more costs more, why summer costs more and how the saving reward works — all on the Power basics page.", "六件「做一次就一直省」的事，每件指定給一位家人。上面有「我們家的成績」、全台匿名排名和家人分工榜；下面的抓吸電鬼小遊戲，可以選誰在玩，比比看誰上排行榜。": "Six do-it-once fixes, each assigned to someone. Above them: your scoreboard, an anonymous Taiwan ranking and the family board; below, the ghost-catching game — pick who’s playing and see who tops the leaderboard.", "收到新帳單就到帳單紀錄記一筆，帳單上有節電獎勵也一起填。記兩筆以上就看得出有沒有變少；有去年同一期的紀錄，還會幫你估節電獎勵。": "Log each new bill, including any saving reward on it. After two bills you can see whether use is falling; with last year’s same period logged, the site estimates your reward too.", "怎麼切換成英文？": "How do I switch to English?", "打開左上角的選單，最上面就是「語言 Language」，按 English 就會切換。": "Open the menu at the top left; “語言 Language” is at the very top — tap English.", "怪獸設成「沒有」，為什麼不能讓牠睡覺？": "Why can’t I put a monster to sleep when it’s set to “none”?", "家裡沒有這台電器，就沒有電可以省。家裡其實有的話，在怪獸圖鑑按「調整」，或在電費解碼器點那隻怪獸，改成「有」就好。": "If the appliance isn’t in your home there’s nothing to save. If you do have one, tap Adjust in the Monster guide, or tap the monster in the Bill Decoder, and set it to “yes”.", "後半場偶爾會冒出": "Late in the round a ", "金色大吸電鬼": "golden ghost", "，抓到 +3": " sometimes appears — catch it for +3"});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -2952,10 +2999,10 @@ var Dex={build:function(){$('dex').innerHTML=APPLIANCES.map(function(a){return '
       '<div class="acts"><button type="button" class="pill" data-dtame="'+a.id+'"></button><button type="button" class="pill" data-dopen="'+a.id+'">調整</button></div></article>'}).join('');
     $('dex').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button');if(!b)return;
       if(b.dataset.dopen){Sheet.open(b.dataset.dopen,b);return}
-      var id=b.dataset.dtame;if(!id)return;var o=S.app[id];if(!o.has){o.has=true}o.tamed=!o.tamed;schedule();if(o.tamed)toast(APPLIANCES.filter(function(a){return a.id===id})[0].name+'睡著了',true)})},
+      var id=b.dataset.dtame;if(!id)return;var o=S.app[id];if(!o.has){toast(ZT('你家設為沒有這台，沒有電可以省。家裡其實有的話，按「調整」改成有。','You’ve set this as not in your home, so there’s nothing to save. If you do have one, tap Adjust.'));return}o.tamed=!o.tamed;schedule();if(o.tamed)toast(APPLIANCES.filter(function(a){return a.id===id})[0].name+'睡著了',true)})},
   render:function(st,r){if(Router.cur!=='monsters')return;r.rows.forEach(function(x){var a=x.a,o=st.app[a.id],c=$('d_'+a.id);if(!c)return;
     c.querySelector('.dav').innerHTML=avatar(a,o.tamed);c.querySelector('.k').textContent=o.has?'約 '+fmt(x.est)+' 度 / 月':'你家設為沒有';
-    c.querySelector('.q').textContent='「'+(o.tamed?a.qs:a.q)+'」';var b=c.querySelector('[data-dtame]');b.setAttribute('aria-pressed',String(!!o.tamed));b.textContent=o.tamed?'已經睡著':'讓它睡覺：'+a.act})}};
+    c.querySelector('.q').textContent='「'+(o.tamed?a.qs:a.q)+'」';var b=c.querySelector('[data-dtame]');b.setAttribute('aria-pressed',String(!!o.tamed));b.classList.toggle('nohave',!o.has);b.setAttribute('aria-disabled',String(!o.has));b.textContent=!o.has?ZT('家裡沒有這台','Not in your home'):o.tamed?'已經睡著':'讓它睡覺：'+a.act;c.classList.toggle('nohave',!o.has)})}};
 
 /* =========================================================
    VIEW: learn (tier explainer + quiz)
@@ -3205,7 +3252,7 @@ var Home={
     $('hAdd').addEventListener('submit',function(e){e.preventDefault();var n=cleanName($('hName').value);if(!n){toast('先輸入稱呼');return}
       if(S.members.indexOf(n)>=0||n===teamWord(S)){toast('已經有「'+n+'」了');return}if(S.members.length>=8){toast('最多 8 個人');return}
       S.members.push(n);$('hName').value='';schedule();toast('加入了「'+n+'」',true)});
-    $('hReset').addEventListener('click',function(){S.members=HMEM[S.home.type].slice();Home.fixWho();schedule()});
+    $('hReset').addEventListener('click',function(){var d=HMEM[S.home.type].slice(),same=d.join('|')===S.members.join('|');S.members=d;Home.fixWho();schedule();toast(same?ZT('已經是「'+homeName(S.home.type)+'」的預設成員了','These are already the default members'):ZT('已恢復成預設成員：'+d.join('、'),'Default members restored: '+d.map(NM).join(', ')),!same)});
     $('homeCard').addEventListener('click',function(){location.hash='home'})},
   summary:function(st){var n=st.members.length;$('homeIco').innerHTML=homeIcon(st.home.type);$('homeT').textContent=homeName(st.home.type);
     $('homeS').textContent=ZT(payName(st.home.pay)+(payMode(st.home)==='rate'?'（每度 '+st.home.rate+' 元）':'')+'・'+n+' 人',NM(payName(st.home.pay))+(payMode(st.home)==='rate'?' (NT$'+st.home.rate+'/kWh)':'')+' · '+n+(n===1?' person':' people'))},
@@ -3264,7 +3311,11 @@ Badges.render=function(st){this.chrome(st);if($('bModal').hidden)return;var b=st
   var h='<div class="bhead"><div class="bbar"><i style="width:'+(n/BADGES.length*100)+'%"></i></div><b>'+n+' / '+BADGES.length+'</b></div>';
   if(n===BADGES.length)h+='<div class="ballc">'+art('crown')+'<h3>全收集！電力家族到齊</h3><p>六枚徽章都到手了。牠們都變成卡片工作室裡的貼紙，還送你一個金框版型。</p><a class="mk" href="#studio" data-route="studio" style="display:inline-grid;place-items:center;text-decoration:none">去做一張金框卡</a></div>';
   h+='<div class="badges">'+BADGES.map(function(x){var on=!!b[x[0]];return '<div class="bdg'+(on?' on':'')+(f===x[0]?' fresh':'')+'">'+art(x[0])+(on?'':'<svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="3" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.4" fill="none"/></svg>')+'<b>'+(on?x[1]:'尚未解鎖')+'</b><small>'+x[2]+'</small></div>'}).join('')+'</div>';
+  if(b.lamp999)h+='<div class="bsecret">'+art('lamp')+'<div><small>'+ZT('隱藏成就・不算在收集裡','Hidden achievement · not part of the collection')+'</small><b>'+ZT('比作者還有毅力','More patient than the author')+'</b><span>'+ZT('隨手關燈按到 999 次','Flipped the light switch 999 times')+'</span></div></div>';
   $('badges').innerHTML=h};
+Egg.s999=function(){Egg.mode='s999';$('eggArt').innerHTML=art('lamp','eggart');$('eggK').textContent=ZT('真正的隱藏成就','A truly hidden achievement');$('eggT').textContent=ZT('比作者還有毅力','More patient than the author');
+  $('eggP').textContent=ZT('哇……作者甚至都沒按到這裡，你竟然有毅力可以關這麼多次電燈！','Wow… even the author never got this far. You actually had the patience to flip the light switch 999 times!');
+  $('eggS').textContent=ZT('這個成就不算進徽章收集，只是想跟你說：手指辛苦了。','This one doesn’t count toward your badge collection — it’s just to say: your finger deserves a rest.');$('eggX').textContent=ZT('讓手指休息一下','Give my finger a rest');$('egg').hidden=false;celebrate();setTimeout(function(){try{$('eggX').focus()}catch(e){}},300)};
 Egg.all=function(){$('eggArt').innerHTML=art('crown','eggart');$('eggK').textContent='全收集';$('eggT').textContent='電力家族到齊';
   $('eggP').textContent='六枚徽章全部到手。每一枚都是你家真的做過、想過的一件事。';$('eggS').textContent='卡片工作室解鎖了金框版型和全部貼紙。';$('eggX').textContent='去做一張金框卡';Egg.mode='all';
   $('egg').hidden=false;celebrate();setTimeout(function(){try{$('eggX').focus()}catch(e){}},300)};
@@ -3283,7 +3334,7 @@ var Ghost={on:false,n:0,miss:0,left:20,timers:[],live:{},lastHit:0,combo:0,
     $('ghGo').addEventListener('click',function(){self.start()});$('ghWho').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-gw]');if(!b)return;S.ghWho=b.dataset.gw;store.set(S);self.who()});$('ghAgain').addEventListener('click',function(){self.start()});this.intro()},
   who:function(){var cur=S.ghWho&&S.members.indexOf(S.ghWho)>=0?S.ghWho:(S.members.indexOf('我')>=0?'我':S.members[0]);S.ghWho=cur;
     $('ghWho').innerHTML='<span>'+ZT('誰在玩？','Who’s playing?')+'</span>'+S.members.map(function(m){return '<button type="button" class="pill" data-gw="'+esc(m)+'" aria-pressed="'+(m===cur)+'">'+esc(NM(m))+'</button>'}).join('')},
-  board:function(hi){var B=S.patrolBoard||[],h='<div class="gbh"><b>'+ZT('迷你排行榜','Mini leaderboard')+'</b><small>'+ZT('只存在這台手機','Saved on this phone only')+'</small></div>';
+  board:function(hi){var B=S.patrolBoard||[],h='<div class="gbh"><b>'+ZT('迷你排行榜','Mini leaderboard')+'</b><small>'+ZT('每人留最高分・只存在這台手機','Best score per person · this phone only')+'</small></div>';
     if(!B.length)h+='<p class="gbe">'+ZT('還沒有紀錄。抓一場，第一個上榜！','No scores yet — play a round and be first on the board!')+'</p>';
     else h+='<ol>'+B.map(function(x,i){return '<li class="'+(i===hi?'me':'')+'"><span class="gbr">'+(i+1)+'</span><b>'+esc(NM(x.w))+'</b><em>'+ZT(x.n+' 隻',x.n+(x.n===1?' ghost':' ghosts'))+'</em><small>'+x.d.slice(5).replace('-','/')+'</small></li>'}).join('')+'</ol>';
     $('ghBoard').innerHTML=h},
@@ -3292,26 +3343,30 @@ var Ghost={on:false,n:0,miss:0,left:20,timers:[],live:{},lastHit:0,combo:0,
   tap:function(b){var i=Number(b.dataset.gi),g=GHOSTMAP[i];
     if(!g[2]){b.classList.remove('oops');void b.offsetWidth;b.classList.add('oops');this.float(b,'別關！',true);toast(GUARDWHY[g[0]]);this.n=Math.max(0,this.n-1);this.combo=0;this.paint();try{navigator.vibrate&&navigator.vibrate([30,40,30])}catch(e){}return}
     if(!this.live[i])return;clearTimeout(this.live[i]);this.live[i]=null;b.classList.remove('haunt');b.classList.add('caught');setTimeout(function(){b.classList.remove('caught')},360);
-    var t=now();this.combo=(t-this.lastHit<900)?this.combo+1:1;this.lastHit=t;this.n+=this.combo>=3?2:1;this.float(b,this.combo>=3?'+2':'+1');
+    var t=now();this.combo=(t-this.lastHit<900)?this.combo+1:1;this.lastHit=t;var pts=b.dataset.gold==='1'?3:(this.combo>=3?2:1);b.dataset.gold='';b.classList.remove('gold');this.n+=pts;this.float(b,'+'+pts);if(pts===3)toast(ZT('金色大吸電鬼！+3','Golden ghost! +3'),true);
     if(this.combo>=3&&this.combo%3===0){var c=document.createElement('div');c.className='combo';c.textContent=L('連擊 ×'+this.combo);$('gh').appendChild(c);setTimeout(function(){c.remove()},720)}
     try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}this.paint()},
   paint:function(){$('ghN').textContent=this.n},
   spawn:function(){var self=this,free=[];GHOSTMAP.forEach(function(g,i){if(g[2]&&!self.live[i])free.push(i)});if(!free.length)return;
-    var i=free[Math.floor(Math.random()*free.length)],b=$('ghRoom').children[i],life=Math.max(900,1600-(20-this.left)*30);b.classList.add('haunt');
-    this.live[i]=setTimeout(function(){self.live[i]=null;b.classList.remove('haunt');self.miss++},life)},
-  start:function(){if(this.on)return;var self=this;this.on=true;this.n=0;this.miss=0;this.left=20;this.combo=0;this.live={};this.paint();
+    var i=free[Math.floor(Math.random()*free.length)],b=$('ghRoom').children[i],gold=this.left<14&&Math.random()<.14,life=gold?800:Math.max(900,1600-(20-this.left)*30);b.classList.add('haunt');b.classList.toggle('gold',gold);b.dataset.gold=gold?'1':'';
+    this.live[i]=setTimeout(function(){self.live[i]=null;b.classList.remove('haunt','gold');b.dataset.gold='';self.miss++},life)},
+  start:function(){if(this.on||this.counting)return;var self=this,k=3,cd=$('ghCd');this.counting=true;$('gh').classList.add('playing');$('ghIntro').hidden=true;$('ghEnd').hidden=true;this.n=0;this.paint();$('ghT').style.transition='none';$('ghT').style.transform='scaleX(1)';
+    try{$('gh').scrollIntoView({behavior:reduced()?'auto':'smooth',block:'center'})}catch(e){}cd.hidden=false;cd.textContent=k;
+    var tick=function(){k--;if(k>0){cd.textContent=k;cd.classList.remove('pop');void cd.offsetWidth;cd.classList.add('pop');self.timers.push(setTimeout(tick,650))}else{cd.textContent=ZT('抓！','Go!');self.timers.push(setTimeout(function(){cd.hidden=true;self.counting=false;self.go()},380))}};
+    this.timers.push(setTimeout(tick,650))},
+  go:function(){if(this.on)return;var self=this;this.on=true;this.n=0;this.miss=0;this.left=20;this.combo=0;this.live={};this.paint();
     $('ghIntro').hidden=true;$('ghEnd').hidden=true;var bar=$('ghT');bar.style.transition='none';bar.style.transform='scaleX(1)';void bar.offsetWidth;bar.style.transition='transform 20s linear';bar.style.transform='scaleX(0)';
     var loop=function(){if(!self.on)return;self.spawn();if(self.left<12&&Math.random()<.5)self.spawn();self.timers.push(setTimeout(loop,Math.max(420,820-(20-self.left)*22)))};
     this.timers=[setInterval(function(){self.left--;if(self.left<=0)self.end()},1000)];loop()},
-  clear:function(){this.timers.forEach(function(t){clearInterval(t);clearTimeout(t)});this.timers=[];for(var k in this.live){clearTimeout(this.live[k])}this.live={};
-    $('ghRoom').querySelectorAll('.gt').forEach(function(t){t.classList.remove('haunt')})},
-  end:function(){this.clear();this.on=false;var n=this.n,st=n>=16?3:n>=10?2:n>=4?1:0;
+  clear:function(){this.timers.forEach(function(t){clearInterval(t);clearTimeout(t)});this.timers=[];this.counting=false;try{$('ghCd').hidden=true}catch(e){}for(var k in this.live){clearTimeout(this.live[k])}this.live={};
+    $('ghRoom').querySelectorAll('.gt').forEach(function(t){t.classList.remove('haunt','gold');t.dataset.gold=''})},
+  end:function(){this.clear();this.on=false;$('gh').classList.remove('playing');var n=this.n,st=n>=16?3:n>=10?2:n>=4?1:0;
     $('ghStars').innerHTML='★★★'.slice(0,st)+'<i>'+'★★★'.slice(st)+'</i>';
     $('ghEndT').textContent='抓到 '+n+' 隻吸電鬼';$('ghRes').textContent=(this.miss?'跑掉 '+this.miss+' 隻。':'')+'真實的吸電鬼不會跑：機上盒待機一年約 131 度。一條有開關的延長線，睡前按一下，就能一次抓光。';
     var best=Math.max(S.patrolBest||0,n);$('ghEndBest').textContent=n>=(S.patrolBest||0)&&n>0?'新紀錄！':'最佳紀錄：'+best+' 隻';S.patrolBest=best;var B=(S.patrolBoard||[]).slice(),rec={w:S.ghWho||'我',n:n,d:new Date().toISOString().slice(0,10)},pos=-1;
-    if(n>0){B.push(rec);B.sort(function(a,b){return b.n-a.n});B=B.slice(0,5);pos=B.indexOf(rec)}S.patrolBoard=B;store.set(S);this.board(pos);if(pos===0&&B.length>1)toast(ZT(NM(rec.w)+' 拿下第一名！',NM(rec.w)+' takes first place!'),true);
+    if(n>0){var old=B.filter(function(x){return x.w===rec.w})[0];if(old){if(n>old.n){old.n=n;old.d=rec.d}rec=old}else B.push(rec);B.sort(function(a,b){return b.n-a.n});B=B.slice(0,5);pos=B.indexOf(rec)}S.patrolBoard=B;store.set(S);this.board(pos);if(pos===0&&B.length>1)toast(ZT(NM(rec.w)+' 拿下第一名！',NM(rec.w)+' takes first place!'),true);
     $('ghEnd').hidden=false;if(n>=10)award('patrol','深夜抓鬼隊');try{$('ghAgain').focus({preventScroll:true})}catch(e){}},
-  stop:function(){if(!this.on)return;this.clear();this.on=false;this.intro()}};
+  stop:function(){if(!this.on&&!this.counting)return;this.clear();this.on=false;$('gh').classList.remove('playing');this.intro()}};
 window.Patrol=Ghost;Patrol=Ghost;
 
 /* =========================================================
@@ -3716,7 +3771,7 @@ function bind(){
   document.querySelectorAll('[data-months]').forEach(function(b){b.addEventListener('click',function(){S.months=Number(b.dataset.months)===1?1:2;schedule()})});
   document.querySelectorAll('[data-season]').forEach(function(b){b.addEventListener('click',function(){var v=b.dataset.season;S.season=v==='n'?'n':v==='m'?'m':'s';schedule()})});
   $('mixR').addEventListener('input',function(){S.sd=clamp(this.value,0,S.months===2?62:31)|0;schedule()});MixEg.bind();
-  $('sw').addEventListener('click',function(){S.lamps=Math.min(999,S.lamps+1);
+  $('sw').addEventListener('click',function(){S.lamps=Math.min(999,S.lamps+1);if(S.lamps>=999&&!(S.badges&&S.badges.lamp999)){S.badges=S.badges||{};S.badges.lamp999=true;store.set(S);setTimeout(function(){Egg.s999()},250)}
     if(Myth.need&&S.lamps>=Myth.need&&!(S.badges&&S.badges.lamp)){S.badges=S.badges||{};S.badges.lamp=true;setTimeout(function(){Egg.show(Myth.need)},250)}this.setAttribute('aria-pressed',String(this.getAttribute('aria-pressed')!=='true'));schedule()});
   $('rank').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.rk[data-id]');if(b)Sheet.open(b.getAttribute('data-id'),b)});
   $('shOpts').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.chip');if(!b||!Sheet.cur)return;var o=S.app[Sheet.cur.id];
