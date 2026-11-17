@@ -3132,7 +3132,7 @@ function wrapLines(x,txt,maxW,maxLines){txt=L(String(txt||''));var cjk=CJK.test(
   if(lines.length>maxLines){lines=lines.slice(0,maxLines);var l=lines[maxLines-1];while(l.length&&x.measureText(l+'…').width>maxW)l=l.slice(0,-1);lines[maxLines-1]=l+'…'}return lines}
 function cover(x,img,X,Y,W,H,z,ox,oy){var iw=img.width,ih=img.height,s=Math.max(W/iw,H/ih)*z,dw=iw*s,dh=ih*s,maxX=(dw-W)/2,maxY=(dh-H)/2;
   var cx=X+W/2-dw/2+clamp(ox,-1,1)*maxX,cy=Y+H/2-dh/2+clamp(oy,-1,1)*maxY;x.save();x.beginPath();x.rect(X,Y,W,H);x.clip();x.drawImage(img,cx,cy,dw,dh);x.restore()}
-var WM_URL='sick7174-ctrl.github.io/degrees-at-home1';
+var WM_URL='li-power.github.io/degrees-at-home1';
 function fitBlock(x,txt,fam,weight,maxW,maxH,maxSize,minSize,lhK,maxLines){txt=String(txt||'');var b={lines:[],size:minSize,lh:minSize*lhK,h:0,font:''};if(!txt.trim()||maxH<minSize)return b;
   for(var sz=Math.round(maxSize);sz>=minSize;sz-=Math.max(2,Math.round(sz*0.06))){x.font=weight+' '+sz+'px '+fam;var ls=wrapLines(x,txt,maxW,99);
     if(ls.length<=maxLines&&ls.length*sz*lhK<=maxH)return {lines:ls,size:sz,lh:sz*lhK,h:ls.length*sz*lhK,font:x.font}}
