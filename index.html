@@ -1527,6 +1527,19 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
   .page>.view:not(.readable){max-width:1180px}
   .sitefoot{max-width:760px;margin-left:auto!important;margin-right:auto!important}
 }
+
+/* v9.7: decoder columns scroll together (the sticky right column was taller than the screen) */
+.col.side{position:static!important;top:auto}
+
+/* v9.8 read-aloud */
+.ectl{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:12px;font-size:var(--fs-s);color:var(--soft)}
+.ecap{margin:14px 0 0;padding:14px 16px;border-radius:16px;background:var(--text);color:var(--bg);font-size:calc(19px * var(--ez,1));line-height:1.6;font-weight:700;min-height:2.6em}
+.enovoice{margin-top:10px}
+.eh{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ere{flex:none;width:48px;height:48px;border-radius:50%;border:2px solid var(--line);background:var(--elev);color:var(--text);display:grid;place-items:center}
+.ere svg{width:24px;height:24px}
+.ereading{outline:3px solid var(--accent-t);outline-offset:6px;border-radius:18px;transition:outline-color .2s}
+#etiles.ereading{outline-offset:4px}
 </style>
 </head>
 <body>
@@ -1930,23 +1943,26 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
     <p class="lead">只放最重要的幾件事。右上角的「大字」可以把整個網站的字都放大。</p>
     <div class="pills seg" role="group" aria-label="字的大小"><button class="pill" type="button" data-big="0">一般</button><button class="pill" type="button" data-big="1">大字</button><button class="pill" type="button" data-big="2">特大字</button></div>
     <button class="speak" id="eSpeak" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>唸給我聽</span></button>
-    <div class="etiles" id="etiles"></div>
+    <div class="ectl" id="eCtl" hidden><span>念的速度</span><div class="pills seg" role="group" aria-label="念的速度"><button class="pill" type="button" data-erate="slow">慢慢念</button><button class="pill" type="button" data-erate="norm">正常</button></div></div>
+    <p class="ecap" id="eCap" hidden></p>
+    <p class="tip enovoice" id="eNoVoice" hidden>這台裝置沒有中文語音，念出來會怪怪的。可以到手機的「設定 → 文字轉語音」下載「中文（台灣）」語音，再回來試一次。</p>
+    <div class="etiles" id="etiles" data-eread="tiles"></div>
   </section>
 
-  <section class="sec"><h2>電費單上，只要看兩個數字</h2>
+  <section class="sec" data-eread="bill"><h2 class="eh"><span>電費單上，只要看兩個數字</span><button type="button" class="ere" data-ereplay="bill" aria-label="念這一段：電費單上，只要看兩個數字" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></h2>
     <div class="ebill" id="ebill"></div>
   </section>
 
-  <section class="sec"><h2>家裡最耗電的三台</h2>
+  <section class="sec" data-eread="top"><h2 class="eh"><span>家裡最耗電的三台</span><button type="button" class="ere" data-ereplay="top" aria-label="念這一段：家裡最耗電的三台" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></h2>
     <div class="etop" id="etop"></div>
     <p class="tip">數字是估算的。可以請家人在「電費解碼器」裡，改成我們家的實際情況。</p>
   </section>
 
-  <section class="sec"><h2>今天就能做的三件事</h2>
+  <section class="sec" data-eread="do"><h2 class="eh"><span>今天就能做的三件事</span><button type="button" class="ere" data-ereplay="do" aria-label="念這一段：今天就能做的三件事" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></h2>
     <div class="edo" id="edo"></div>
   </section>
 
-  <section class="sec"><h2>打一通電話，就能領獎勵</h2>
+  <section class="sec" data-eread="call"><h2 class="eh"><span>打一通電話，就能領獎勵</span><button type="button" class="ere" data-ereplay="call" aria-label="念這一段：打一通電話，就能領獎勵" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></h2>
     <div class="ecall">
       <a class="calln" href="tel:1911"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z" fill="currentColor"/></svg><span>台電客服 <b>1911</b></span></a>
       <ol><li>跟客服說：「我要登錄<b>節電獎勵</b>。」</li><li>報上<b>電號</b>：在電費單的左上角，11 個數字。</li><li>之後每期只要比去年同期少用 1 度，就少繳 0.6 元。</li></ol>
@@ -1954,7 +1970,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.drawer::-webkit-scrollbar,.shee
     </div>
   </section>
 
-  <section class="sec"><h2>今天的小知識</h2>
+  <section class="sec" data-eread="tip"><h2 class="eh"><span>今天的小知識</span><button type="button" class="ere" data-ereplay="tip" aria-label="念這一段：今天的小知識" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></h2>
     <div class="etip"><p id="eTip"></p><button class="mk alt" type="button" id="eTipN">下一則</button></div>
   </section>
 
@@ -2507,7 +2523,7 @@ function sanitize(raw){var d=defaultState();if(!raw||typeof raw!=='object')retur
   if(raw.pred&&isFinite(Number(raw.pred.kwh)))d.pred={kwh:clamp(raw.pred.kwh,0,CFG.kwhMax),at:String(raw.pred.at||'')};
   if(raw.missions&&typeof raw.missions==='object')MISSIONS.forEach(function(m){var r=raw.missions[m[0]];if(r)d.missions[m[0]]={done:!!r.done,who:whoList(d).indexOf(r.who)>=0?r.who:null}});
   if(Array.isArray(raw.qset)&&raw.qset.length===5&&raw.qset.every(function(i){return QUIZ[i]})){d.qset=raw.qset.slice();if(raw.quiz&&typeof raw.quiz==='object')d.qset.forEach(function(i){var a=raw.quiz[i];if(a===0||a===1)d.quiz[i]=a})}
-  d.esize=raw.esize==='xl'?'xl':'l';d.big=[0,1,2].indexOf(raw.big)>=0?raw.big:0;d.bseen=clamp(raw.bseen||0,0,6)|0;d.badges={};if(raw.badges&&typeof raw.badges==='object')['lamp','patrol','bill','quiz','tame','mission','lamp999'].forEach(function(k){if(raw.badges[k])d.badges[k]=true});d.patrolBest=clamp(raw.patrolBest||0,0,999)|0;d.patrolStars=clamp(raw.patrolStars||0,0,3)|0;d.ghWho=typeof raw.ghWho==='string'?raw.ghWho.slice(0,8):null;d.patrolBoard=(function(L){var m={};L.forEach(function(x){if(!m[x.w]||x.n>m[x.w].n)m[x.w]=x});return Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.n-a.n}).slice(0,5)})(Array.isArray(raw.patrolBoard)?raw.patrolBoard.filter(function(x){return x&&typeof x.w==='string'&&isFinite(x.n)&&/^\d{4}-\d\d-\d\d$/.test(x.d)}).slice(0,5).map(function(x){return{w:x.w.slice(0,8),n:clamp(Math.round(x.n),0,999),d:x.d}}):[]);d.whyReact=['shock','blame','pay','compare'].indexOf(raw.whyReact)>=0?raw.whyReact:null;d.seenHint=!!raw.seenHint;if(['zh','en'].indexOf(raw.lang)>=0)d.lang=raw.lang;d.lk=clamp(raw.lk==null?400:raw.lk,0,1200);if(['auto','light','dark'].indexOf(raw.theme)>=0)d.theme=raw.theme;if(PRESETS[raw.preset]||raw.preset===null)d.preset=raw.preset;if(!raw.home&&PRESETS[raw.preset])d.home.type=raw.preset;
+  d.esize=raw.esize==='xl'?'xl':'l';d.big=[0,1,2].indexOf(raw.big)>=0?raw.big:0;d.bseen=clamp(raw.bseen||0,0,6)|0;d.badges={};if(raw.badges&&typeof raw.badges==='object')['lamp','patrol','bill','quiz','tame','mission','lamp999'].forEach(function(k){if(raw.badges[k])d.badges[k]=true});d.patrolBest=clamp(raw.patrolBest||0,0,999)|0;d.patrolStars=clamp(raw.patrolStars||0,0,3)|0;d.ghWho=typeof raw.ghWho==='string'?raw.ghWho.slice(0,8):null;d.erate=raw.erate==='norm'?'norm':'slow';d.patrolBoard=(function(L){var m={};L.forEach(function(x){if(!m[x.w]||x.n>m[x.w].n)m[x.w]=x});return Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.n-a.n}).slice(0,5)})(Array.isArray(raw.patrolBoard)?raw.patrolBoard.filter(function(x){return x&&typeof x.w==='string'&&isFinite(x.n)&&/^\d{4}-\d\d-\d\d$/.test(x.d)}).slice(0,5).map(function(x){return{w:x.w.slice(0,8),n:clamp(Math.round(x.n),0,999),d:x.d}}):[]);d.whyReact=['shock','blame','pay','compare'].indexOf(raw.whyReact)>=0?raw.whyReact:null;d.seenHint=!!raw.seenHint;if(['zh','en'].indexOf(raw.lang)>=0)d.lang=raw.lang;d.lk=clamp(raw.lk==null?400:raw.lk,0,1200);if(['auto','light','dark'].indexOf(raw.theme)>=0)d.theme=raw.theme;if(PRESETS[raw.preset]||raw.preset===null)d.preset=raw.preset;if(!raw.home&&PRESETS[raw.preset])d.home.type=raw.preset;
   APPLIANCES.forEach(function(a){var r=raw.app&&raw.app[a.id];if(!r)return;var o=d.app[a.id];o.has=!!r.has;o.tamed=!!r.tamed&&o.has;
     a.opts.forEach(function(op){var k=op[0],vals=op[2];if(vals.some(function(v){return String(v)===String(r[k])}))o[k]=typeof vals[0]==='number'?Number(r[k]):r[k]})});
   return d}
@@ -2901,6 +2917,7 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"誰在玩": "Who’s playing", "語言 Language": "Language 語言"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"隱私權政策": "Privacy policy", "服務條款": "Terms of use", "家裡幾度 C，是「省」了沒？": "Degrees at Home: Saving or Not?", "北科大文發系課堂作品": "NTUT class project", "北科大文發系課堂作品・非台電官方網站": "NTUT class project · not an official Taipower site", "看完整的隱私權政策": "Read the full privacy policy"});
 (function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"電費單上寫「計費度數」的那個數字。拉電表下方的滑桿，或按「直接輸入度數」。手邊沒有帳單，可以先用台灣電力 App 查，或隨便拉拉看。不知道「度」是什麼，先看": "The “billed kWh” number on your bill. Drag the slider under the meter, or tap “Type the kWh”. No bill to hand? Look it up in the Taipower app, or just play with the slider. Not sure what a kWh is? Start with ", "看懂帳單": "Read the bill", "設定我家": "Set up my home", "一起省電": "Save together", "更多": "More", "網站地圖": "Site map", "網站分成四大塊。每一步都有「帶我去」，按了會直接跳到那個地方。": "The site has four parts. Every step has a “Take me there” button that jumps straight to it.", "① 看懂帳單": "① Read the bill", "② 設定我家": "② Set up my home", "③ 一起省電": "③ Save together", "④ 更多": "④ More", "度數、電價樓梯、季節，一次弄懂": "kWh, the price staircase and seasons, all in one place", "家裡有誰、電費怎麼付、每期記一筆": "Who lives here, how the bill is paid, a log of every bill", "找出吃電怪獸、分工、做卡片傳給家人": "Find the power monsters, share the jobs, make a card for the family", "給長輩的大字重點、資料來源、備份": "Large-text summary for elders, sources, backup", "選單也照這四類排好了。不知道從哪開始，就選下面一種方式。": "The menu follows the same four groups. Not sure where to start? Pick one of the ways below.", "不知道「度」是什麼，先看": "Not sure what a kWh is? Start with ", "先懂幾個名詞": "Learn a few words first", "1 度是多少、為什麼越用越貴、夏天為什麼比較貴、節電獎勵怎麼算，「用電基本知識」一頁看完。": "What 1 kWh is, why using more costs more, why summer costs more and how the saving reward works — all on the Power basics page.", "六件「做一次就一直省」的事，每件指定給一位家人。上面有「我們家的成績」、全台匿名排名和家人分工榜；下面的抓吸電鬼小遊戲，可以選誰在玩，比比看誰上排行榜。": "Six do-it-once fixes, each assigned to someone. Above them: your scoreboard, an anonymous Taiwan ranking and the family board; below, the ghost-catching game — pick who’s playing and see who tops the leaderboard.", "收到新帳單就到帳單紀錄記一筆，帳單上有節電獎勵也一起填。記兩筆以上就看得出有沒有變少；有去年同一期的紀錄，還會幫你估節電獎勵。": "Log each new bill, including any saving reward on it. After two bills you can see whether use is falling; with last year’s same period logged, the site estimates your reward too.", "怎麼切換成英文？": "How do I switch to English?", "打開左上角的選單，最上面就是「語言 Language」，按 English 就會切換。": "Open the menu at the top left; “語言 Language” is at the very top — tap English.", "怪獸設成「沒有」，為什麼不能讓牠睡覺？": "Why can’t I put a monster to sleep when it’s set to “none”?", "家裡沒有這台電器，就沒有電可以省。家裡其實有的話，在怪獸圖鑑按「調整」，或在電費解碼器點那隻怪獸，改成「有」就好。": "If the appliance isn’t in your home there’s nothing to save. If you do have one, tap Adjust in the Monster guide, or tap the monster in the Bill Decoder, and set it to “yes”.", "後半場偶爾會冒出": "Late in the round a ", "金色大吸電鬼": "golden ghost", "，抓到 +3": " sometimes appears — catch it for +3"});
+(function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"念的速度": "Reading speed", "慢慢念": "Slow", "正常": "Normal", "這台裝置沒有中文語音，念出來會怪怪的。可以到手機的「設定 → 文字轉語音」下載「中文（台灣）」語音，再回來試一次。": "This device has no Chinese voice, so Chinese read-aloud may sound odd. In English mode, an English voice is used.", "念這一段：電費單上，只要看兩個數字": "Read this part", "念這一段：家裡最耗電的三台": "Read this part", "念這一段：今天就能做的三件事": "Read this part", "念這一段：打一通電話，就能領獎勵": "Read this part", "念這一段：今天的小知識": "Read this part"});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -3091,14 +3108,83 @@ var Speak={ok:'speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='un
   say:function(t){if(!this.ok)return;try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang=I18N.lang==='en'?'en-US':I18N.lang==='ja'?'ja-JP':'zh-TW';u.rate=.88;var self=this;u.onend=u.onerror=function(){self.on=false;$('eSpeak').setAttribute('aria-pressed','false');$('eSpeak').lastChild.textContent='唸給我聽'};
     this.on=true;$('eSpeak').setAttribute('aria-pressed','true');$('eSpeak').lastChild.textContent='停止';speechSynthesis.speak(u)}catch(e){}},
   stop:function(){try{speechSynthesis.cancel()}catch(e){}this.on=false;var b=$('eSpeak');if(b){b.setAttribute('aria-pressed','false');b.lastChild.textContent='唸給我聽'}}};
+
+/* ===== v9.8 read-aloud ===== */
+function zhInt(n){n=Math.round(Math.abs(n));if(n===0)return'零';var D='零一二三四五六七八九',U=['千','百','十',''];
+  var chunk=function(x){var out='',started=false,zero=false,ds=[Math.floor(x/1000),Math.floor(x/100)%10,Math.floor(x/10)%10,x%10];
+    for(var i=0;i<4;i++){var d=ds[i];if(d){if(zero)out+='零';out+=D[d]+U[i];started=true;zero=false}else if(started)zero=true}return out};
+  var parts=[[Math.floor(n/1e8),'億'],[Math.floor(n/1e4)%1e4,'萬'],[n%1e4,'']],out='',seen=false,pz=false;
+  parts.forEach(function(p){var v=p[0];if(v){if(seen&&(pz||v<1000))out+='零';out+=chunk(v)+p[1];seen=true;pz=false}else if(seen)pz=true});
+  if(out.indexOf('一十')===0)out=out.slice(1);return out.replace(/(^|[^十])二(?=[千萬百億])/g,'$1兩')}
+function zhNum(str){var t=String(str).replace(/,/g,''),m=t.split('.');var o=zhInt(Number(m[0]));if(m[1])o+='點'+m[1].split('').map(function(c){return'零一二三四五六七八九'[+c]}).join('');return o}
+function spokenZh(t){return String(t)
+  .replace(/NT\$\s?([\d,]+(?:\.\d+)?)/g,function(_,n){return zhNum(n)+'元'})
+  .replace(/(\d+(?:\.\d+)?)\s?%/g,function(_,n){return'百分之'+zhNum(n)})
+  .replace(/(?:^|[^\d])(1911|1996)(?!\d)/g,function(m,n){return m.slice(0,m.length-n.length)+n.split('').map(function(c){return'零一二三四五六七八九'[+c]}).join('、')})
+  .replace(/(20\d\d)\s?年/g,function(_,y){return y.split('').map(function(c){return'〇一二三四五六七八九'[+c]}).join('')+'年'})
+  .replace(/(\d+)\s?\/\s?(\d+)/g,function(_,a,b){return zhNum(a)+'月'+zhNum(b)+'日'})
+  .replace(/\d[\d,]*(?:\.\d+)?/g,zhNum)
+  .replace(/°C/g,'度').replace(/＋|\+/g,'，再加').replace(/→/g,'，').replace(/[（(]/g,'，').replace(/[）)]/g,'，').replace(/[・·]/g,'，').replace(/／/g,'或')
+  .replace(/[「」『』“”]/g,'').replace(/\s+/g,'').replace(/，+/g,'，').replace(/，([。！？])/g,'$1').trim()}
+var Voice={v:null,zh:false,
+  score:function(v){var l=(v.lang||'').replace('_','-').toLowerCase(),n=(v.name||'').toLowerCase(),s=0;
+    if(l==='zh-tw'||l==='cmn-hant-tw')s+=50;else if(l==='zh-cn'||l==='cmn-hans-cn'||l==='zh')s+=25;else if(l.indexOf('zh-hk')===0||l.indexOf('yue')===0)s+=5;else if(l.indexOf('zh')===0)s+=10;else return -1;
+    if(/natural|online|neural|enhanced|premium|增強|高品質/.test(n))s+=20;if(/mei-?jia|美佳|hsiao|hanhan|yating|zhiwei|國語|台灣|臺灣|taiwan/.test(n))s+=10;if(/google/.test(n))s+=6;if(v.localService===false)s+=2;return s},
+  pick:function(){if(!Speak.ok)return;var vs=speechSynthesis.getVoices()||[],best=null,bs=-1;vs.forEach(function(v){var sc=Voice.score(v);if(sc>bs){bs=sc;best=v}});
+    Voice.v=bs>=0?best:null;Voice.zh=!!Voice.v;try{$('eNoVoice').hidden=!(vs.length&&!Voice.zh)||I18N.lang==='en'}catch(e){}},
+  en:function(){var vs=speechSynthesis.getVoices()||[];return vs.filter(function(v){return /^en[-_]/i.test(v.lang)&&/natural|online|google|samantha|neural/i.test(v.name)})[0]||vs.filter(function(v){return /^en[-_]/i.test(v.lang)})[0]||null}};
+Speak.q=[];Speak.gen=0;
+Speak.play=function(list){if(!this.ok)return;var self=this,g=++this.gen;try{speechSynthesis.cancel()}catch(e){}this.q=list.filter(function(x){return x.t&&x.t.replace(/[\s，。]/g,'')});if(!this.q.length)return;
+  this.on=true;var b=$('eSpeak');b.setAttribute('aria-pressed','true');b.lastChild.textContent=ZT('停止','Stop');var i=0,E=I18N.lang==='en',rate=S.erate==='norm'?(E?.95:.9):(E?.8:.74);
+  var next=function(){if(g!==self.gen)return;if(i>=self.q.length){self.stop();return}var it=self.q[i++],u=new SpeechSynthesisUtterance(it.t);
+    if(E){u.lang='en-US';var ev=Voice.en();if(ev)u.voice=ev}else{u.lang=Voice.v?Voice.v.lang:'zh-TW';if(Voice.v)u.voice=Voice.v}
+    u.rate=rate;u.pitch=1;u.onend=function(){setTimeout(next,it.pause||260)};u.onerror=function(e){if(e&&(e.error==='interrupted'||e.error==='canceled'))return;setTimeout(next,60)};
+    document.querySelectorAll('.ereading').forEach(function(x){x.classList.remove('ereading')});if(it.el){it.el.classList.add('ereading');try{it.el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'center'})}catch(e){}}
+    var c=$('eCap');c.hidden=false;c.textContent=it.show||it.t;speechSynthesis.speak(u)};
+  /* Chrome sometimes starts paused */
+  try{speechSynthesis.resume()}catch(e){}next()};
+Speak.say=function(t){this.play([{t:t}])};
+Speak.stop=function(){this.gen++;try{speechSynthesis.cancel()}catch(e){}this.on=false;var b=$('eSpeak');if(b){b.setAttribute('aria-pressed','false');b.lastChild.textContent=ZT('唸給我聽','Read it to me')}
+  document.querySelectorAll('.ereading').forEach(function(x){x.classList.remove('ereading')});try{$('eCap').hidden=true}catch(e){}};
+var EScript={
+  parts:function(st,r){var E=I18N.lang==='en',z=r.m<=330?0:r.m<=500?1:2,a=Elder.act(st),H=st.history,Lh=H[H.length-1],prevY=Lh&&H.filter(function(h){return h.ym===ymAdd(Lh.ym,-12)})[0];
+    var sec=function(k){return document.querySelector('[data-eread="'+k+'"]')},P={};
+    var who=st.who&&st.who!=='全家'?st.who:'';
+    if(E){P.tiles=['Our electricity price is '+['still cheap','about to get pricey','already pricey'][z]+'. We use about '+Math.round(r.m)+' kilowatt hours a month.',
+        (st.months===2?'The bill covers two months and shows '+st.kwh+'. Halve it for one month.':''),
+        'This period, let’s do one thing together: '+NM(a[0])+'. '+NM(a[1])+'.',
+        prevY?(prevY.kwh>Lh.kwh?'Compared with the same period last year, we used '+(prevY.kwh-Lh.kwh)+' less. Well done!':'Compared with the same period last year, we used '+(Lh.kwh-prevY.kwh)+' more. That’s okay — let’s try again next time.'):''];
+      P.bill=['On the bill, look at just two numbers.','First, the billed kilowatt hours: '+st.kwh+'.','Second, the total amount due: about '+Math.round(r.billNow)+' dollars.','Compare it with the same period last year, not with the last bill.'];
+      P.top=['The three appliances that use the most:'].concat(EScript.top(st,r).map(function(x,i){return 'Number '+(i+1)+', '+NM(x.a.name)+', about '+Math.round(x.est)+' kilowatt hours a month.'}));
+      P['do']=['Three things you can do today:'].concat(EDO.map(function(d,i){return (i+1)+'. '+NM(d[1])+'.'}));
+      P.call=['To sign up for the saving reward, call Taipower on one nine one one, and say you want to register for the saving reward.','Do it by December seventeenth, 2026.'];
+      P.tip=['Today’s tip: '+$('eTip').textContent];
+    }else{
+      P.tiles=['我們家的電價，'+['還算便宜','快要變貴了','已經變貴了'][z]+'。','每個月大約用 '+Math.round(r.m)+' 度電。',
+        (st.months===2?'電費單是兩個月一張，上面寫 '+st.kwh+' 度，要除以二，才是一個月。':''),
+        '這一期，請大家一起做一件事：'+a[0]+'。'+a[1]+'。'+(who?'由'+who+'負責。':''),
+        prevY?(prevY.kwh>Lh.kwh?'跟去年同一期比，少用了 '+(prevY.kwh-Lh.kwh)+' 度，做得很好！':'跟去年同一期比，多用了 '+(Lh.kwh-prevY.kwh)+' 度。沒關係，下一期再一起努力。'):''];
+      P.bill=['看電費單的時候，只要看兩個數字。','第一個，是計費度數。這一期是 '+st.kwh+' 度。','第二個，是應繳總金額，大約 '+Math.round(r.billNow)+' 元。','有沒有省到，要跟去年同一期比，不要跟上一期比，因為季節不一樣。'];
+      P.top=['家裡最耗電的三台電器是：'].concat(EScript.top(st,r).map(function(x,i){return '第'+'一二三'[i]+'名，'+x.a.name+'，每個月大約 '+Math.round(x.est)+' 度。'}));
+      P['do']=['今天就能做的三件事：'].concat(EDO.map(function(d,i){return '第'+'一二三'[i]+'，'+d[1]+'。'+d[2]+'。'}));
+      P.call=['想領節電獎勵，打一通電話就好。','打台電客服 1911，跟客服說：我要登錄節電獎勵。','再報上電費單左上角的電號。','2026 年要在 12 月 17 日前登錄。之後只要比去年同一期少用一度，就少繳零點六元。'];
+      P.tip=['今天的小知識：'+$('eTip').textContent];
+    }
+    var out={};Object.keys(P).forEach(function(k){out[k]=P[k].filter(Boolean).map(function(t){return{t:E?t:spokenZh(t),show:t.replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1,'),el:sec(k)}});if(out[k][0])out[k][out[k].length-1].pause=650});return out},
+  top:function(st,r){return r.rows.filter(function(x){return st.app[x.a.id].has}).sort(function(p,q){return q.est-p.est}).slice(0,3)},
+  all:function(st,r){var p=this.parts(st,r);return['tiles','bill','top','do','call','tip'].reduce(function(a,k){return a.concat(p[k]||[])},[])}};
 var Elder={tip:(function(){var d=new Date(),o=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5);return o})()%16,act:function(st){var tamed=APPLIANCES.some(function(a){return st.app[a.id].has&&st.app[a.id].tamed});if(tamed)return action(st);var d=EDO.filter(function(x){return !(st.missions[x[0]]&&st.missions[x[0]].done)})[0];return d?[d[1],d[2]]:['一起看下一張電費單','和去年同一期比比看']},
   bind:function(){var self=this;$('eSpeak').hidden=!Speak.ok;
     $('eSpeak').addEventListener('click',function(){if(Speak.on){Speak.stop();return}var r=Model.compute(S),z=r.m<=330?'還算便宜':r.m<=500?'快要變貴':'已經變貴',a=self.act(S);
-      Speak.say($('etiles').innerText.replace(/\n+/g,'。 ')+'。 '+$('eTip').textContent)});
+      Speak.play(EScript.all(S,Model.compute(S)))});
+    $('v-elder').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-ereplay]');if(b){Speak.play(EScript.parts(S,Model.compute(S))[b.dataset.ereplay]||[]);return}
+      var rt=e.target.closest&&e.target.closest('[data-erate]');if(rt){S.erate=rt.dataset.erate;store.set(S);schedule();if(Speak.on){Speak.stop();Speak.play(EScript.all(S,Model.compute(S)))}}});
+    if(Speak.ok){Voice.pick();try{speechSynthesis.addEventListener?speechSynthesis.addEventListener('voiceschanged',Voice.pick):(speechSynthesis.onvoiceschanged=Voice.pick)}catch(e){}}
+    $('eCtl').hidden=!Speak.ok;document.querySelectorAll('[data-ereplay]').forEach(function(b){b.hidden=!Speak.ok});
     $('eTipN').addEventListener('click',function(){self.tip=(self.tip+1)%ETIPS.length;$('eTip').textContent=ETIPS[self.tip]});
     $('edo').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-eid]');if(!b)return;var id=b.dataset.eid,m=S.missions[id]||(S.missions[id]={done:false,who:null});m.done=!m.done;if(m.done)toast('做到了！',true);schedule()});
     $('eA4').addEventListener('click',function(){var go=function(){try{Card.a4('eImg')}catch(e){fail(e)}};if(document.fonts&&document.fonts.ready){Promise.race([document.fonts.ready,new Promise(function(r){setTimeout(r,1500)})]).then(go)}else go()})},
-  render:function(st,r){if(Router.cur!=='elder')return;$('v-elder').setAttribute('data-size',st.esize);document.querySelectorAll('[data-esize]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.esize===st.esize))});
+  render:function(st,r){if(Router.cur!=='elder')return;document.querySelectorAll('[data-erate]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.erate===(st.erate||'slow')))});try{Voice.pick()}catch(e){}$('v-elder').setAttribute('data-size',st.esize);document.querySelectorAll('[data-esize]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.esize===st.esize))});
     var z=r.m<=330?0:r.m<=500?1:2,zn=['還算便宜','快要變貴','已經變貴'][z],a=Elder.act(st),H=st.history,L=H[H.length-1],prevY=L&&H.filter(function(h){return h.ym===ymAdd(L.ym,-12)})[0];
     var t='<div class="etile z'+z+'"><div class="l">我們家的電價</div><div class="v">'+zn+'</div><div class="s">每月大約 '+fmt(r.m)+' 度'+(st.months===2?'（帳單上 '+fmt(st.kwh)+' 度）':'')+'</div></div>'+
       '<div class="etile act"><div class="l">這期一起做一件事（'+esc(st.who)+'負責）</div><div class="v">'+esc(a[0])+'</div><div class="s">'+esc(a[1])+'</div></div>';
