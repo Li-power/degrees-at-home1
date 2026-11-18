@@ -1609,6 +1609,7 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 #fbAlt{text-align:center;margin-top:6px}
 
 /* v9.16 naming */
+.nmsub{margin:6px 0 0;color:var(--soft);font-size:var(--fs-s)}
 .nmgrid{display:grid;gap:14px;margin-top:12px}
 @media (min-width:760px){.nmgrid{grid-template-columns:1fr 1fr}}
 .nmcard{background:var(--elev);border-radius:22px;box-shadow:var(--card-sh);padding:18px 18px 8px}
@@ -1838,7 +1839,8 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
   </section>
 
   <section class="sec naming" id="naming">
-    <h2>這個名字，有兩層意思</h2>
+    <h2>主題名字由來</h2>
+    <p class="nmsub">「家裡幾度 C」和「省」，各有兩層意思。</p>
     <div class="nmgrid">
       <div class="nmcard">
         <p class="nmtitle">家裡<b>幾度 C</b></p>
@@ -2840,7 +2842,7 @@ var Sheet={cur:null,opener:null,
 /* =========================================================
    VIEW: dock + effects
    ========================================================= */
-var tTimer;function toast(t,good){var el=$('toast');el.textContent=L(t);el.classList.toggle('good',!!good);el.classList.add('show');clearTimeout(tTimer);tTimer=setTimeout(function(){el.classList.remove('show')},1900)}
+var tTimer;function toast(t,good,ms){var el=$('toast');el.textContent=L(t);el.classList.toggle('good',!!good);el.classList.add('show');clearTimeout(tTimer);tTimer=setTimeout(function(){el.classList.remove('show')},ms||1900)}
 function fly(cls,from,to,i,mid,dur,extra){var c=document.createElement('div');c.className='fx '+cls;if(extra)c.style.background=extra;document.body.appendChild(c);
   var anim=c.animate([{transform:'translate('+from[0]+'px,'+from[1]+'px)',opacity:1},{transform:'translate('+mid[0]+'px,'+mid[1]+'px) rotate(200deg)',opacity:1,offset:.6},{transform:'translate('+to[0]+'px,'+to[1]+'px) rotate(420deg)',opacity:cls==='bit'?0:.9}],{duration:dur,delay:i*60,easing:'cubic-bezier(.3,.1,.4,1)',fill:'forwards'});
   anim.onfinish=function(){c.remove()};setTimeout(function(){if(c.parentNode)c.remove()},dur+i*60+500)}
@@ -2921,7 +2923,7 @@ var Card={render:function(){var r=Model.compute(S),c=$('cv'),x=c.getContext&&c.g
 /* =========================================================
    THEME — follows the OS; tap to force light / dark
    ========================================================= */
-var Theme={modes:['auto','light','dark'],label:{auto:'跟隨系統',light:'淺色',dark:'深色'},
+var Theme={samsungHint:function(mode){try{if(mode==='light'&&/SamsungBrowser/i.test(navigator.userAgent)&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)toast(ZT('三星瀏覽器開著深色模式時，會強制把網頁變暗。要看淺色：點右下角 ⋮ 選單，關掉「深色模式」。','Samsung Internet forces pages dark while its dark mode is on. For light mode, open the ⋮ menu (bottom right) and turn off “Dark mode”.'),false,6500)}catch(e){}},modes:['auto','light','dark'],label:{auto:'跟隨系統',light:'淺色',dark:'深色'},
   ico:{auto:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>',
        light:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg>',
        dark:'<svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg>'},
@@ -2934,7 +2936,7 @@ var Theme={modes:['auto','light','dark'],label:{auto:'跟隨系統',light:'淺�
     $('themeIco').innerHTML=this.ico[mode];$('themeTxt').textContent=this.label[mode];$('theme').setAttribute('aria-label','顏色模式：'+this.label[mode]+'，點一下切換');
     var dark=mode==='dark'||(mode==='auto'&&mq('(prefers-color-scheme: dark)'));
     document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.setAttribute('content',dark?'#1F1D1A':'#F4EFE6')})},
-  bind:function(){var self=this;$('theme').addEventListener('click',function(){var i=self.modes.indexOf(S.theme);S.theme=self.modes[(i+1)%3];self.swap(S.theme,true);store.set(S)});
+  bind:function(){var self=this;$('theme').addEventListener('click',function(){var i=self.modes.indexOf(S.theme);S.theme=self.modes[(i+1)%3];self.swap(S.theme,true);store.set(S);self.samsungHint(S.theme)});
     if(window.matchMedia){var m=window.matchMedia('(prefers-color-scheme: dark)'),h=function(){if(S.theme==='auto')self.swap('auto',false)};if(m.addEventListener)m.addEventListener('change',h);else if(m.addListener)m.addListener(h)}
     this.apply(S.theme)}};
 
@@ -3028,7 +3030,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.16 (dah-v38)';
+var SITE_VER='9.17 (dah-v39)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -3135,6 +3137,7 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"這個網站的起因，是一堂企劃課。我們發現，收到電費單時，大家的第一個反應通常是「怎麼漲這麼多？」，或是「你是不是一直在浪費電？」": "This site began in a planning class. We noticed that when the bill arrives, the first reaction is usually “Why has it gone up so much?” or “Are you wasting power again?”", "嗨～遇到問題了嗎？請回報給我，謝謝您～": "Hi! Run into a problem? Please let me know — thank you!", "錯字、數字怪怪的、按了沒反應，或想要什麼功能，都可以寫在這裡。": "Typos, odd numbers, buttons that do nothing, or features you’d like — write it all here."});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"用 Email 寄給作者，不用登入、不會公開。請不要寫電號、地址或電話。": "Emailed to the author — no login, nothing public. Please don’t include your account number, address or phone.", "網站資訊": "Site info"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"這個名字，有兩層意思": "The name has two meanings", "家裡": "Home: ", "幾度 C": "what degree?", "家裡現在幾度 C": "How warm is home right now?", "夏天冷氣、空調開幾度，會直接反映在電費上。": "In summer, how cool you set the AC shows up straight on the bill.", "家裡的氣氛幾度 C": "How heated is the mood at home?", "一張電費單，常常讓一家人吵得火熱，或冷到不想說話。": "One bill can get a family arguing hotly — or going cold and silent.", "是": "Are we ", "「省」了沒？": "“saving” yet?", "反省的「省」，也是清醒的「醒」": "“Saving” as in reflecting — waking up to it", "帳單上的數字，你真的看懂了嗎？有沒有發現家裡真正的用電怪獸？": "Do you really understand the numbers on your bill? Have you found your home’s real power monster?", "去找用電怪獸": "Find the power monsters", "節省的「省」": "“Saving” as in spending less", "就是字面上的意思：真的有省到嗎？從最耗電的電器下手，最有感。": "The plain meaning: are you actually saving? Start with the biggest appliances — that’s where you’ll feel it.", "例：# 瓦的電器用 # 小時 → # × # ÷ # ＝ # 度": "e.g. an 800 W appliance for 1 hour → 800 × 1 ÷ 1,000 = 0.8 kWh", "例：800 瓦的電器用 1 小時 → 800 × 1 ÷ 1,000 ＝ 0.8 度": "e.g. an 800 W appliance for 1 hour → 800 × 1 ÷ 1,000 = 0.8 kWh"});
+(function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"主題名字由來": "Where the name comes from", "「家裡幾度 C」和「省」，各有兩層意思。": "“Degrees at home” and “saving” each have two meanings."});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -3517,7 +3520,7 @@ function ymText(ym){var m=String(ym||'').match(/^(\d{4})-(\d{2})/);return m?m[1]
 var Settings={
   bind:function(){
     $('setLang').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-sl]');if(!b)return;Lang.pick(b.dataset.sl);schedule()});
-    $('setTheme').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-stm]');if(!b)return;S.theme=b.dataset.stm;Theme.swap(S.theme,true);store.set(S);schedule()});
+    $('setTheme').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-stm]');if(!b)return;S.theme=b.dataset.stm;Theme.swap(S.theme,true);store.set(S);Theme.samsungHint(S.theme);schedule()});
     $('bkSave').addEventListener('click',function(){var d=new Date(),p=function(n){return (n<10?'0':'')+n},name='家裡幾度C-備份-'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'.json';
       var blob=new Blob([JSON.stringify({app:'degrees-at-home',v:1,saved:d.toISOString(),state:S},null,1)],{type:'application/json'});
       if(window.navigator&&navigator.msSaveBlob){navigator.msSaveBlob(blob,name);return}
