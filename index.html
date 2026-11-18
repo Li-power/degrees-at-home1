@@ -1646,38 +1646,107 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 .dmore summary .dchev{margin-left:auto;width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s}
 .dmore[open] summary .dchev{transform:rotate(-135deg)}
 .dmorein{padding-left:10px;border-left:2px solid var(--surface);margin-left:22px}
-/* easy mode */
+
+/* v9.20 easy mode (polished) */
 body.easymode .appbar .menu,body.easymode .potbtn,body.easymode .langwrap,body.easymode .bigbtn,body.easymode .theme,body.easymode .drawer,body.easymode .dscrim,body.easymode .sitefoot,body.easymode .dock{display:none!important}
 @media (min-width:1100px){body.easymode .appbar,body.easymode .page,body.easymode .dock{margin-left:0!important}}
-.easy{max-width:560px;margin:0 auto;padding:4px 4px 30px}
-.ezs{display:flex;flex-direction:column;gap:14px}
-.ezstep{margin:8px 0 0;font-weight:700;font-size:17px;color:var(--hot-t,#B5523B);letter-spacing:.04em}
-.ezh{font-family:var(--f-serif);font-size:clamp(28px,7.4vw,36px);line-height:1.3;margin:0}
-.ezp{font-size:20px;line-height:1.6;margin:0;color:var(--text)}
-.ezin{display:flex;align-items:baseline;gap:10px;background:var(--elev);border-radius:20px;box-shadow:var(--card-sh);padding:10px 18px}
-.ezin input{flex:1;min-width:0;border:0;background:transparent;font-size:46px;font-weight:700;color:var(--text);font-family:var(--f-num,inherit);outline:none;padding:6px 0}
-.ezin span{font-size:24px;color:var(--soft)}
+.page>.view.easy{max-width:600px;margin-left:auto;margin-right:auto}
+.easy{--z:1;padding:2px 2px 30px}
+.easy[data-fs="xl"]{--z:1.14}.easy[data-fs="xxl"]{--z:1.3}
+.eztop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 12px}
+.ezbrand{display:flex;align-items:center;gap:10px;font-size:calc(17px*var(--z))}
+.ezfs{display:flex;align-items:center;gap:4px;background:var(--elev);border-radius:999px;padding:4px 6px 4px 12px;box-shadow:var(--card-sh)}
+.ezfs>span{font-size:15px;color:var(--soft);margin-right:2px}
+.ezfs button{width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:var(--text);font-family:var(--f-serif);font-weight:700;cursor:pointer}
+.ezfs button:nth-of-type(1){font-size:16px}.ezfs button:nth-of-type(2){font-size:20px}.ezfs button:nth-of-type(3){font-size:25px}
+.ezfs button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.ezprog{list-style:none;margin:0 0 18px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.ezprog li{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;color:var(--faint);font-size:calc(15px*var(--z));font-weight:700}
+.ezprog li::before{content:"";position:absolute;top:18px;left:-50%;right:50%;height:4px;border-radius:4px;background:var(--surface);z-index:0}
+.ezprog li:first-child::before{display:none}
+.ezprog li.done::before,.ezprog li.cur::before{background:var(--hot-t,#B5523B)}
+.ezprog i{position:relative;z-index:1;font-style:normal;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--surface);color:var(--soft);font-size:18px;transition:background .25s,color .25s,transform .25s}
+.ezprog li.done i{background:var(--hot-t,#B5523B);color:#fff}
+.ezprog li.cur{color:var(--text)}
+.ezprog li.cur i{background:var(--hot-t,#B5523B);color:#fff;transform:scale(1.12);box-shadow:0 0 0 5px color-mix(in srgb,var(--hot-t,#B5523B) 22%,transparent)}
+.ezs{display:flex;flex-direction:column;gap:14px;animation:ezin .32s var(--ease) both}
+@keyframes ezin{from{opacity:0;transform:translate3d(0,8px,0)}}
+.ezh{font-family:var(--f-serif);font-size:calc(clamp(27px,7vw,34px)*var(--z));line-height:1.3;margin:0}
+.ezp{font-size:calc(20px*var(--z));line-height:1.6;margin:0}
+.ezsmall{margin:0;font-size:calc(15px*var(--z));line-height:1.6;color:var(--soft)}
+.ezq{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 0;font-size:calc(20px*var(--z));font-weight:700;color:var(--text)}
+.ezq i,.ezbill i{font-style:normal;color:var(--hot-t,#B5523B)}
+.ezq small{font-size:calc(15px*var(--z));font-weight:400;color:var(--soft)}
+.ezbill{margin:0;background:#FBF8F1;color:#3a332c;border-radius:14px;padding:12px 14px;box-shadow:0 1px 0 rgba(0,0,0,.04),0 8px 22px -12px rgba(60,40,20,.35);border:1px dashed #d8cfbf;font-size:calc(16px*var(--z))}
+.ezbill figcaption{font-size:calc(13px*var(--z));color:#8b8073;margin-bottom:6px;letter-spacing:.06em}
+.ezbrow{display:flex;justify-content:space-between;gap:10px;padding:7px 8px;border-top:1px solid #ece4d6}
+.ezbrow.hl1{background:#FBE3B8;border-radius:8px;border-color:transparent;font-weight:700}
+.ezbrow.hl2{background:#E6EFE0;border-radius:8px;border-color:transparent;font-weight:700}
+.ezbrow b{font-size:1.25em}
+.ezin{display:flex;align-items:baseline;gap:10px;background:var(--elev);border-radius:20px;box-shadow:var(--card-sh);padding:8px 18px;border:2px solid transparent}
+.ezin:focus-within{border-color:var(--hot-t,#B5523B)}
+.ezin input{flex:1;min-width:0;border:0;background:transparent;font-size:calc(44px*var(--z));font-weight:700;color:var(--text);outline:none;padding:6px 0}
+.ezin input::placeholder{font-size:calc(24px*var(--z));font-weight:400;color:var(--faint)}
+.ezin span{font-size:calc(22px*var(--z));color:var(--soft)}
+.ezdate{display:flex;align-items:center;gap:8px;font-size:calc(20px*var(--z))}
+.ezdate>span:first-child,.ezdate>span:nth-child(2){min-width:2.2em}
+.ezdate select{min-height:56px;min-width:80px;border-radius:14px;border:2px solid var(--line);background:var(--elev);color:var(--text);font:inherit;font-size:calc(22px*var(--z));font-weight:700;padding:0 10px}
 .ezseg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .ezopt{min-height:72px;border-radius:18px;border:2px solid var(--line);background:var(--elev);color:var(--text);font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
-.ezopt b{font-size:21px}.ezopt small{font-size:15px;color:var(--soft)}
+.ezopt b{font-size:calc(20px*var(--z))}.ezopt small{font-size:calc(14px*var(--z));color:var(--soft)}
 .ezopt[aria-pressed="true"]{border-color:var(--text);background:var(--text);color:var(--bg)}
 .ezopt[aria-pressed="true"] small{color:var(--bg);opacity:.8}
-.ezdate{display:flex;align-items:center;gap:8px;font-size:20px}
-.ezdate select{min-height:56px;min-width:76px;border-radius:14px;border:2px solid var(--line);background:var(--elev);color:var(--text);font:inherit;font-size:22px;font-weight:700;padding:0 10px;color-scheme:inherit}
-.ezhint{margin:0;font-size:16px;line-height:1.6;color:var(--soft)}
-.ezerr{margin:0;color:#C0392B;font-size:18px;font-weight:700;min-height:0}
+.ezerr{margin:0;color:#C0392B;font-size:calc(18px*var(--z));font-weight:700}
 .ezerr:empty{display:none}
-.ezgo{min-height:68px;border:0;border-radius:20px;background:var(--text);color:var(--bg);font:inherit;font-size:23px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;margin-top:6px}
-.ezalt{min-height:56px;border-radius:18px;border:2px solid var(--line);background:transparent;color:var(--text);font:inherit;font-size:19px;font-weight:700;cursor:pointer}
-.ezback{align-self:flex-start;border:0;background:transparent;color:var(--soft);font:inherit;font-size:19px;padding:10px 4px;cursor:pointer}
-.ezres{display:grid;gap:10px}
-.easy .mrow p{font-size:20px}
-.easy .mnote{font-size:15px}
-.ezmsg{white-space:pre-wrap;background:var(--elev);border-radius:18px;box-shadow:var(--card-sh);padding:14px 16px;font-size:18px;line-height:1.7;color:var(--soft)}
-.ezfoot{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:34px;padding-top:16px;border-top:1px solid var(--hair)}
-.page>.view.easy{max-width:560px;margin-left:auto;margin-right:auto}
-.ezin input::placeholder{font-size:26px;font-weight:400;color:var(--faint)}
-.ezlink{border:0;background:transparent;color:var(--soft);font:inherit;font-size:16px;text-decoration:underline;text-underline-offset:3px;padding:8px;cursor:pointer}
+.ezgo{min-height:68px;border:0;border-radius:20px;background:var(--text);color:var(--bg);font:inherit;font-size:calc(22px*var(--z));font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;margin-top:6px;transition:transform .15s}
+.ezgo:active,.ezalt:active,.ezopt:active{transform:scale(.98)}
+.ezalt{min-height:58px;border-radius:18px;border:2px solid var(--line);background:transparent;color:var(--text);font:inherit;font-size:calc(19px*var(--z));font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.ezalt svg{width:26px;height:26px}
+.ezspeak[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.ezback{align-self:flex-start;border:0;background:transparent;color:var(--soft);font:inherit;font-size:calc(19px*var(--z));padding:10px 4px;cursor:pointer}
+.ezbig{display:flex;flex-direction:column;align-items:center;gap:2px;padding:20px 16px;border-radius:24px;background:var(--text);color:var(--bg);text-align:center}
+.ezbig small{font-size:calc(17px*var(--z));opacity:.8}
+.ezbig b{font-size:calc(clamp(44px,13vw,58px)*var(--z));line-height:1.15;font-weight:900;letter-spacing:.01em;color:#F4C26B}
+.ezbig span{font-size:calc(18px*var(--z));opacity:.85}
+.ezcard{background:var(--elev);border-radius:22px;box-shadow:var(--card-sh);padding:16px 16px 14px}
+.ezcard h2{margin:0 0 10px;font-size:calc(20px*var(--z));font-weight:700}
+.ezcard h2 b{color:var(--hot-t,#B5523B)}
+.ezcard p{margin:8px 0 0;font-size:calc(18px*var(--z));line-height:1.6}
+.ezcard p b{color:var(--hot-t,#B5523B)}
+.ezstairs{display:flex;align-items:flex-end;gap:6px;height:96px}
+.ezstairs span{flex:1;background:var(--surface);border-radius:8px 8px 4px 4px;position:relative;display:flex;align-items:flex-end;justify-content:center}
+.ezstairs span i{font-style:normal;font-size:13px;color:var(--faint);padding-bottom:4px}
+.ezstairs span.on{background:color-mix(in srgb,var(--hot-t,#B5523B) 35%,var(--surface))}
+.ezstairs span.cur{background:var(--hot-t,#B5523B)}
+.ezstairs span.on i{color:#fff}
+.ezbar{display:grid;grid-template-columns:4.6em 1fr auto;align-items:center;gap:10px;margin:8px 0;font-size:calc(17px*var(--z))}
+.ezbar>div{height:18px;border-radius:9px;background:var(--surface);overflow:hidden}
+.ezbar i{display:block;height:100%;border-radius:9px;transition:width .4s var(--ease)}
+.ezbar.me i{background:var(--hot-t,#B5523B)}.ezbar.avg i{background:var(--faint)}
+.ezbar b{font-size:calc(16px*var(--z))}
+.eztop2{display:flex;gap:10px;flex-wrap:wrap}
+.ezmon{flex:1;min-width:120px;display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:16px;padding:8px 12px}
+.ezmon svg{width:52px;height:52px;flex:none}
+.ezmon b{font-size:calc(19px*var(--z))}
+.ezhow{margin:0;padding-left:1.4em;font-size:calc(19px*var(--z));line-height:1.8}
+.ezchat{background:#8CABD9;border-radius:20px;padding:16px 12px;display:flex;justify-content:flex-end}
+.ezbub{max-width:88%;background:#06C755;color:#fff;border-radius:18px 4px 18px 18px;padding:12px 14px;font-size:calc(17px*var(--z));line-height:1.65;white-space:pre-wrap;word-break:break-word;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.ezline{background:#06C755!important;color:#fff!important}
+.ezdone{display:flex;flex-direction:column;gap:4px;background:var(--elev);border-radius:18px;box-shadow:var(--card-sh);padding:14px 16px;font-size:calc(17px*var(--z));line-height:1.6}
+.ezdone b{font-size:calc(19px*var(--z))}
+.ezlink2{align-self:flex-start;color:var(--hot-t,#B5523B);font-weight:700;text-decoration:none;padding:4px 0}
+.ezfoot{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:34px;padding-top:16px;border-top:1px solid var(--hair);text-align:center}
+.ezlink{border:0;background:transparent;color:var(--soft);font:inherit;font-size:calc(16px*var(--z));text-decoration:underline;text-underline-offset:3px;padding:8px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.ezs{animation:none}.ezprog i,.ezbar i{transition:none}}
+/* v9.20 smoother motion on phones */
+@keyframes reveal{from{opacity:0;transform:translate3d(0,6px,0)}}
+@keyframes float{0%,100%{transform:translate(-50%,0) scale(1)}50%{transform:translate(-50%,-5px) scale(1)}}
+body::before{will-change:transform}
+@media (max-width:1099px),(pointer:coarse){
+  body::before{animation:none;will-change:auto}
+  :root body::after{mix-blend-mode:normal!important;opacity:.045!important}
+}
+.sfver{margin:6px 0 0;font-size:11px;letter-spacing:.06em;color:var(--faint);font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -1836,38 +1905,65 @@ body.easymode .appbar .menu,body.easymode .potbtn,body.easymode .langwrap,body.e
   </div>
 
 
-<div class="view easy" id="v-easy" data-title="簡單版" hidden>
+<div class="view easy" id="v-easy" data-title="簡單版" data-fs="l" hidden>
+  <div class="eztop">
+    <div class="ezbrand"><span class="hanko sm" aria-hidden="true">り</span><b>看懂電費，只要 3 步</b></div>
+    <div class="ezfs" role="group" aria-label="字的大小"><span aria-hidden="true">字</span><button type="button" data-ezfs="l" aria-label="字：大">A</button><button type="button" data-ezfs="xl" aria-label="字：更大">A</button><button type="button" data-ezfs="xxl" aria-label="字：特大">A</button></div>
+  </div>
+  <ol class="ezprog" aria-label="進度">
+    <li data-p="1"><i>1</i><span>打上度數</span></li>
+    <li data-p="2"><i>2</i><span>看結果</span></li>
+    <li data-p="3"><i>3</i><span>傳給家人</span></li>
+  </ol>
+
   <section class="ezs" data-ez="1">
-    <p class="ezstep">第 1 步，共 3 步</p>
-    <h1 class="ezh">拿出電費單，找到「計費度數」</h1>
-    <p class="ezp">把那個數字打在下面的格子裡。</p>
-    <div class="ezin"><label class="sr" for="ezK">計費度數</label><input id="ezK" type="number" inputmode="numeric" min="1" max="9999" placeholder="例如 640"><span>度</span></div>
-    <p class="ezp">這張電費單是：</p>
-    <div class="ezseg" role="group" aria-label="帳單是幾個月"><button type="button" class="ezopt" data-ezm="2"><b>兩個月一張</b><small>大部分家庭</small></button><button type="button" class="ezopt" data-ezm="1"><b>一個月一張</b></button></div>
-    <p class="ezp">計費期間（電費單上「計費期間」後面的日期）：</p>
+    <h1 class="ezh">拿出電費單，找到這兩個地方</h1>
+    <figure class="ezbill" aria-label="電費單示意圖">
+      <figcaption>電費通知單（示意圖）</figcaption>
+      <div class="ezbrow"><span>繳費期限</span><span data-noi18n>＊＊/＊＊</span></div>
+      <div class="ezbrow hl2"><span><i>②</i>計費期間</span><span data-noi18n>09/25～11/25</span></div>
+      <div class="ezbrow hl1"><span><i>①</i>計費度數</span><span><b>832</b> 度</span></div>
+      <div class="ezbrow"><span>應繳總金額</span><span>＊＊＊ 元</span></div>
+    </figure>
+    <label class="ezq" for="ezK"><i>①</i>計費度數</label>
+    <div class="ezin"><input id="ezK" type="number" inputmode="numeric" min="1" max="9999" placeholder="例如 832" autocomplete="off"><span>度</span></div>
+    <p class="ezq"><i>②</i>計費期間<small>找不到可以不填</small></p>
     <div class="ezdate"><span class="lang-zh" data-noi18n>從</span><span class="lang-en" data-noi18n>From</span><select id="ezSm" aria-label="開始月"><option value="">--</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><span data-noi18n>/</span><select id="ezSd" aria-label="開始日"><option value="">--</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select></div>
     <div class="ezdate"><span class="lang-zh" data-noi18n>到</span><span class="lang-en" data-noi18n>To</span><select id="ezEm" aria-label="結束月"><option value="">--</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><span data-noi18n>/</span><select id="ezEd" aria-label="結束日"><option value="">--</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select></div>
-    <p class="ezhint">夏天（6～9 月）電價比較貴，填了日期會算得比較準。找不到日期可以不填。</p>
+    <p class="ezq">這張電費單是</p>
+    <div class="ezseg" role="group" aria-label="帳單是幾個月"><button type="button" class="ezopt" data-ezm="2"><b>兩個月一張</b><small>大部分家庭</small></button><button type="button" class="ezopt" data-ezm="1"><b>一個月一張</b></button></div>
     <p class="ezerr" id="ezErr" aria-live="polite"></p>
-    <button type="button" class="ezgo" data-ezgo="2">下一步 ›</button>
+    <button type="button" class="ezgo" data-ezgo="2">下一步：看結果 ›</button>
   </section>
+
   <section class="ezs" data-ez="2" hidden>
-    <p class="ezstep">第 2 步，共 3 步</p>
     <h1 class="ezh">你家這期的電費</h1>
-    <div class="ezres" id="ezRes"></div>
+    <div class="ezbig"><small>這期電費大約</small><b id="ezBill">—</b><span id="ezPer"></span></div>
+    <div class="ezcard"><h2 id="ezTierH">在電價的第幾階？</h2><div class="ezstairs" id="ezStairs" aria-hidden="true"></div><p id="ezTierSay"></p></div>
+    <div class="ezcard"><h2>跟一般家庭比</h2><div class="ezcmp" id="ezCmp"></div></div>
+    <div class="ezcard" id="ezTopCard"><h2>最可能在吃電的</h2><div class="eztop2" id="ezTop"></div></div>
+    <p class="ezsmall" id="ezNote"></p>
+    <button type="button" class="ezalt ezspeak" id="ezSpeak" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor"/><path d="M15.5 9a4 4 0 010 6M17.8 6.6a7.4 7.4 0 010 10.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>唸給我聽</span></button>
     <button type="button" class="ezgo" data-ezgo="3">下一步：傳給家人 ›</button>
     <button type="button" class="ezback" data-ezgo="1">‹ 改數字</button>
   </section>
+
   <section class="ezs" data-ez="3" hidden>
-    <p class="ezstep">第 3 步，共 3 步</p>
     <h1 class="ezh">傳給家人看</h1>
-    <p class="ezp">按綠色按鈕，選家庭群組，再按「傳送」。</p>
-    <div class="ezmsg" id="ezMsg"></div>
+    <ol class="ezhow"><li>按下面綠色的「傳到 LINE」</li><li>選家庭群組</li><li>按「傳送」</li></ol>
+    <div class="ezchat" aria-label="要傳的訊息"><div class="ezbub" id="ezMsg"></div></div>
     <a class="ezgo ezline" id="ezLine" href="#" target="_blank" rel="noopener">傳到 LINE</a>
     <button type="button" class="ezalt" id="ezShare">用其他 App 分享</button>
+    <div class="ezdone"><b>傳好了！</b><span>想知道怎麼省？把網站給家人看，或看看「電費怪獸」。</span><a class="ezlink2" href="#decoder" data-route="decoder" data-ezfull>看電費怪獸 ›</a></div>
     <button type="button" class="ezback" data-ezgo="1">‹ 再算一次</button>
   </section>
-  <div class="ezfoot"><button type="button" class="ezlink" id="ezSend">把這個簡單版傳給爸媽、長輩</button><a class="ezlink" href="#decoder" data-route="decoder">看完整版網站</a></div>
+
+  <div class="ezfoot">
+    <button type="button" class="ezlink" id="ezSend">把這個簡單版傳給爸媽、長輩</button>
+    <a class="ezlink" href="#decoder" data-route="decoder" data-ezfull>看完整版網站</a>
+    <p class="ezsmall">下次打開網站，會直接回到簡單版。</p>
+    <p class="sfver" data-noi18n>Version <span class="siteVer"></span></p>
+  </div>
 </div>
 <div class="view readable" id="v-guide" data-title="使用說明" hidden>
   <section class="sec"><h1 class="vh">使用說明</h1>
@@ -2495,6 +2591,7 @@ body.easymode .appbar .menu,body.easymode .potbtn,body.easymode .langwrap,body.e
     <p class="sfsub">北科大文發系課堂作品・非台電官方網站</p>
     <nav class="sflinks" aria-label="網站資訊"><a href="#feedback" data-route="feedback">回報問題</a><a href="#privacy" data-route="privacy">隱私權政策</a><a href="#terms" data-route="terms">服務條款</a></nav>
     <p class="sfcopy">© 2026 Degrees at Home</p>
+    <p class="sfver" data-noi18n>Version <span class="siteVer"></span></p>
   </footer>
 </main>
 
@@ -2790,7 +2887,7 @@ function sanitize(raw){var d=defaultState();if(!raw||typeof raw!=='object')retur
   if(raw.pred&&isFinite(Number(raw.pred.kwh)))d.pred={kwh:clamp(raw.pred.kwh,0,CFG.kwhMax),at:String(raw.pred.at||'')};
   if(raw.missions&&typeof raw.missions==='object')MISSIONS.forEach(function(m){var r=raw.missions[m[0]];if(r)d.missions[m[0]]={done:!!r.done,who:whoList(d).indexOf(r.who)>=0?r.who:null}});
   if(Array.isArray(raw.qset)&&raw.qset.length===5&&raw.qset.every(function(i){return QUIZ[i]})){d.qset=raw.qset.slice();if(raw.quiz&&typeof raw.quiz==='object')d.qset.forEach(function(i){var a=raw.quiz[i];if(a===0||a===1)d.quiz[i]=a})}
-  d.esize=raw.esize==='xl'?'xl':'l';d.big=[0,1,2].indexOf(raw.big)>=0?raw.big:0;d.bseen=clamp(raw.bseen||0,0,6)|0;d.badges={};if(raw.badges&&typeof raw.badges==='object')['lamp','patrol','bill','quiz','tame','mission','lamp999'].forEach(function(k){if(raw.badges[k])d.badges[k]=true});d.patrolBest=clamp(raw.patrolBest||0,0,999)|0;d.patrolStars=clamp(raw.patrolStars||0,0,3)|0;d.ghWho=typeof raw.ghWho==='string'?raw.ghWho.slice(0,8):null;d.erate=raw.erate==='norm'?'norm':'slow';d.patrolBoard=(function(L){var m={};L.forEach(function(x){if(!m[x.w]||x.n>m[x.w].n)m[x.w]=x});return Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.n-a.n}).slice(0,5)})(Array.isArray(raw.patrolBoard)?raw.patrolBoard.filter(function(x){return x&&typeof x.w==='string'&&isFinite(x.n)&&/^\d{4}-\d\d-\d\d$/.test(x.d)}).slice(0,5).map(function(x){return{w:x.w.slice(0,8),n:clamp(Math.round(x.n),0,999),d:x.d}}):[]);d.whyReact=['shock','blame','pay','compare'].indexOf(raw.whyReact)>=0?raw.whyReact:null;d.seenHint=!!raw.seenHint;if(['zh','en'].indexOf(raw.lang)>=0)d.lang=raw.lang;d.lk=clamp(raw.lk==null?400:raw.lk,0,1200);if(['auto','light','dark'].indexOf(raw.theme)>=0)d.theme=raw.theme;if(PRESETS[raw.preset]||raw.preset===null)d.preset=raw.preset;if(!raw.home&&PRESETS[raw.preset])d.home.type=raw.preset;
+  d.esize=raw.esize==='xl'?'xl':'l';d.start=raw.start==='easy'?'easy':'';d.ezfs=['l','xl','xxl'].indexOf(raw.ezfs)>=0?raw.ezfs:'l';d.big=[0,1,2].indexOf(raw.big)>=0?raw.big:0;d.bseen=clamp(raw.bseen||0,0,6)|0;d.badges={};if(raw.badges&&typeof raw.badges==='object')['lamp','patrol','bill','quiz','tame','mission','lamp999'].forEach(function(k){if(raw.badges[k])d.badges[k]=true});d.patrolBest=clamp(raw.patrolBest||0,0,999)|0;d.patrolStars=clamp(raw.patrolStars||0,0,3)|0;d.ghWho=typeof raw.ghWho==='string'?raw.ghWho.slice(0,8):null;d.erate=raw.erate==='norm'?'norm':'slow';d.patrolBoard=(function(L){var m={};L.forEach(function(x){if(!m[x.w]||x.n>m[x.w].n)m[x.w]=x});return Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.n-a.n}).slice(0,5)})(Array.isArray(raw.patrolBoard)?raw.patrolBoard.filter(function(x){return x&&typeof x.w==='string'&&isFinite(x.n)&&/^\d{4}-\d\d-\d\d$/.test(x.d)}).slice(0,5).map(function(x){return{w:x.w.slice(0,8),n:clamp(Math.round(x.n),0,999),d:x.d}}):[]);d.whyReact=['shock','blame','pay','compare'].indexOf(raw.whyReact)>=0?raw.whyReact:null;d.seenHint=!!raw.seenHint;if(['zh','en'].indexOf(raw.lang)>=0)d.lang=raw.lang;d.lk=clamp(raw.lk==null?400:raw.lk,0,1200);if(['auto','light','dark'].indexOf(raw.theme)>=0)d.theme=raw.theme;if(PRESETS[raw.preset]||raw.preset===null)d.preset=raw.preset;if(!raw.home&&PRESETS[raw.preset])d.home.type=raw.preset;
   APPLIANCES.forEach(function(a){var r=raw.app&&raw.app[a.id];if(!r)return;var o=d.app[a.id];o.has=!!r.has;o.tamed=!!r.tamed&&o.has;
     a.opts.forEach(function(op){var k=op[0],vals=op[2];if(vals.some(function(v){return String(v)===String(r[k])}))o[k]=typeof vals[0]==='number'?Number(r[k]):r[k]})});
   return d}
@@ -3135,7 +3232,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.19 (dah-v41)';
+var SITE_VER='9.21 (dah-v43)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -3245,7 +3342,7 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"主題名字由來": "Where the name comes from", "「家裡幾度 C」和「省」，各有兩層意思。": "“Degrees at home” and “saving” each have two meanings."});
 (function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"從這裡開始": "Start here", "簡單版（給爸媽）": "Simple version (for parents)", "更多好玩的": "More to explore", "其他": "Other", "輸入度數": "Enter kWh", "看結果": "See results", "傳給家人": "Send to family", "三個步驟": "Three steps", "照上面 ① ② ③ 做就好。要給爸媽用，有更簡單的版本。": "Just follow ① ② ③ above. For parents, there’s an even simpler version.", "給爸媽的簡單版": "Simple version for parents", "只有 3 步，字大，一步一步帶著做": "Just 3 steps, big text, guided one at a time", "輸入電費單上的「計費度數」": "Enter the billed kWh from your bill", "把結果傳到家庭群組，大家一起看，比一個人猜「是誰在浪費電」有用多了。": "Send the result to your family group. Looking at it together beats guessing who’s wasting power.", "傳到 LINE": "Send on LINE", "其他分享方式": "Other ways to share", "複製文字": "Copy text", "想看更細的？往下看「電價像爬樓梯」和「家裡的電費怪獸」。": "Want details? Scroll down to “Prices climb like stairs” and “Power monsters at home”.", "簡單版": "Simple version", "第 1 步，共 3 步": "Step 1 of 3", "第 2 步，共 3 步": "Step 2 of 3", "第 3 步，共 3 步": "Step 3 of 3", "拿出電費單，找到「計費度數」": "Get your bill and find the “billed kWh”", "把那個數字打在下面的格子裡。": "Type that number in the box below.", "例如 640": "e.g. 640", "這張電費單是：": "This bill covers:", "兩個月一張": "Two months", "大部分家庭": "Most homes", "一個月一張": "One month", "下一步 ›": "Next ›", "你家這期的電費": "Your bill this period", "下一步：傳給家人 ›": "Next: send to family ›", "‹ 改數字": "‹ Change the number", "傳給家人看": "Show your family", "按綠色按鈕，選家庭群組，再按「傳送」。": "Tap the green button, pick your family group, then tap Send.", "用其他 App 分享": "Share with another app", "‹ 再算一次": "‹ Start over", "把這個簡單版傳給爸媽、長輩": "Send this simple version to parents and grandparents", "看完整版網站": "See the full site", "第一次來，照首頁的 ① 輸入度數 → ② 看結果 → ③ 傳給家人 就好。其他功能都收在選單的「更多好玩的」。": "First time? Just follow ① enter kWh → ② see results → ③ send to family on the home page. Everything else is under “More to explore” in the menu.", "① 從這裡開始": "① Start here", "輸入度數、看結果、傳給家人": "Enter kWh, see results, send to family", "② 更多好玩的": "② More to explore", "怪獸、分工挑戰、做卡片、記帳單、我家設定": "Monsters, family challenges, cards, bill log, household setup", "③ 其他": "③ Other", "資料來源、備份、回報問題": "Sources, backup, report a problem", "選單也照這三類排好了。要給爸媽用，直接傳「簡單版」給他們。": "The menu follows these three groups. For parents, just send them the simple version.", "電費大約多少、在第幾階、比一般家庭多還是少、最可能是哪台在吃電。想看更細，往下看「電價像爬樓梯」。": "Roughly what you’ll pay, which price step you’re on, how you compare with an average home, and which appliance is probably the biggest user. For details, scroll to “Prices climb like stairs”.", "按「傳到 LINE」，選家庭群組。大家一起看，比互相猜誰在浪費電有用。想再深入，就去找最吃電的怪獸、讓牠睡覺。": "Tap “Send on LINE” and pick your family group. Looking together beats guessing who’s wasting power. To go further, find the hungriest monster and put it to sleep."});
 (function(A){for(var k in A)I18N_DATA.D[k]=[A[k],'']})({"計費期間（電費單上「計費期間」後面的日期）：": "Billing period (the dates next to “計費期間” on the bill):", "夏天（6～9 月）電價比較貴，填了日期會算得比較準。找不到日期可以不填。": "Summer (Jun–Sep) rates are higher, so the dates make the estimate more accurate. Can’t find them? Leave them blank.", "開始月": "Start month", "開始日": "Start day", "結束月": "End month", "結束日": "End day"});
-I18N_DATA.D['夏天（#～# 月）電價比較貴，填了日期會算得比較準。找不到日期可以不填。']=['Summer (Jun–Sep) rates are higher, so the dates make the estimate more accurate. Can’t find them? Leave them blank.',''];I18N_DATA.D['計費期間（電費單上「計費期間」後面的日期）：']=['Billing period (the dates printed after “計費期間” on your bill):',''];I18N_DATA.D['第 # 步，共 # 步']=['Step # of #',''];
+I18N_DATA.D['夏天（#～# 月）電價比較貴，填了日期會算得比較準。找不到日期可以不填。']=['Summer (Jun–Sep) rates are higher, so the dates make the estimate more accurate. Can’t find them? Leave them blank.',''];I18N_DATA.D['計費期間（電費單上「計費期間」後面的日期）：']=['Billing period (the dates printed after “計費期間” on your bill):',''];(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],'']})({"看懂電費，只要 3 步": "Your power bill in 3 steps", "字的大小": "Text size", "字：大": "Text: large", "字：更大": "Text: larger", "字：特大": "Text: largest", "進度": "Progress", "打上度數": "Enter kWh", "拿出電費單，找到這兩個地方": "Get your bill and find these two spots", "電費單示意圖": "Sample bill", "電費通知單（示意圖）": "Electricity bill (sample)", "繳費期限": "Due date", "計費期間": "Billing period", "計費度數": "Billed kWh", "應繳總金額": "Amount due", "＊＊＊ 元": "NT$ ***", "例如 832": "e.g. 832", "找不到可以不填": "optional", "這張電費單是": "This bill covers", "下一步：看結果 ›": "Next: see results ›", "這期電費大約": "This bill is about", "在電價的第幾階？": "Which price step?", "跟一般家庭比": "Compared with an average home", "最可能在吃電的": "Probably using the most", "唸給我聽": "Read it to me", "按下面綠色的「傳到 LINE」": "Tap the green “Send on LINE” below", "選家庭群組": "Pick your family group", "按「傳送」": "Tap Send", "要傳的訊息": "Message to send", "傳好了！": "Sent!", "想知道怎麼省？把網站給家人看，或看看「電費怪獸」。": "Want to save? Show your family the site, or meet the power monsters.", "看電費怪獸 ›": "See the power monsters ›", "下次打開網站，會直接回到簡單版。": "Next time you open the site, it starts in the simple version."});I18N_DATA.D['看懂電費，只要 # 步']=['Your power bill in 3 steps',''];I18N_DATA.D['第 # 步，共 # 步']=['Step # of #',''];
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -3332,11 +3429,11 @@ var Router={cur:null,setTitle:function(){var v=$('v-'+this.cur);if(!v)return;var
     ROUTES.forEach(function(r){var v=$('v-'+r);if(v)v.hidden=r!==name});
     var nv=$('v-'+name);if(animate&&nv){nv.classList.remove('enter');void nv.offsetWidth;nv.classList.add('enter')}
     document.querySelectorAll('[data-route]').forEach(function(a){if(a.dataset.route===name)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
-    var v=$('v-'+name);this.setTitle();document.body.classList.toggle('easymode',name==='easy');var dm=document.querySelector('#drawer .dmore');if(dm&&dm.querySelector('[aria-current]'))dm.open=true;if(name==='easy'&&changed){Easy.step=1;document.querySelectorAll('#v-easy .ezs').forEach(function(x){x.hidden=x.dataset.ez!=='1'});if(S.kwh&&S.kwh!==1100)$('ezK').value=S.kwh}
+    var v=$('v-'+name);this.setTitle();document.body.classList.toggle('easymode',name==='easy');if(name==='easy'){if(S.start!=='easy'){S.start='easy';store.set(S)}}else{try{EzSpeak.stop()}catch(e){}if(changed&&this.prevEasy&&S.start==='easy'){S.start='';store.set(S)}}this.prevEasy=name==='easy';var dm=document.querySelector('#drawer .dmore');if(dm&&dm.querySelector('[aria-current]'))dm.open=true;if(name==='easy'&&changed){Easy.step=1;document.querySelectorAll('#v-easy .ezs').forEach(function(x){x.hidden=x.dataset.ez!=='1'});if(S.kwh&&S.kwh!==1100)$('ezK').value=S.kwh}
     document.body.classList.toggle('nodock',!(name==='decoder'||name==='monsters'));
     Drawer.close(false);try{Pot.close();Big.close();Lang.close();Polish.watch()}catch(e){}
     if(changed){window.scrollTo(0,0);if(animate){raf(function(){try{renderAll()}catch(e){}})}else{try{renderAll()}catch(e){}};if(focus&&v){var h=v.querySelector('h1');if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true})}catch(e){}}}}},
-  init:function(){window.Router=Router;var self=this;window.addEventListener('hashchange',function(){self.go(location.hash.slice(1),true)});this.go(location.hash.slice(1),false)}};
+  init:function(){window.Router=Router;var self=this;window.addEventListener('hashchange',function(){self.go(location.hash.slice(1),true)});this.go(location.hash.slice(1)||(S.start==='easy'?'easy':''),false)}};
 
 /* v9.18 main line + easy mode */
 var Share={url:function(easy){return location.origin+location.pathname+(easy?'#easy':'')},
@@ -3365,22 +3462,57 @@ var Easy={step:1,pd:null,
     var now=new Date(),ye=now.getFullYear();if(v[2]>now.getMonth()+2)ye--;var ys=v[0]>v[2]||(v[0]===v[2]&&v[1]>v[3])?ye-1:ye;
     var d0=Date.UTC(ys,v[0]-1,v[1]),d1=Date.UTC(ye,v[2]-1,v[3]);var days=Math.round((d1-d0)/864e5)+1;if(!(days>=20&&days<=75))return false;
     var sum=0;for(var t=d0;t<=d1;t+=864e5){var m=new Date(t).getUTCMonth()+1;if(m>=6&&m<=9)sum++}return{days:days,sum:sum}},
-  show:function(n){Easy.step=n;document.querySelectorAll('#v-easy .ezs').forEach(function(x){x.hidden=x.dataset.ez!==String(n)});window.scrollTo(0,0);var h=document.querySelector('#v-easy .ezs[data-ez="'+n+'"] .ezh');if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true})}catch(e){}}schedule()},
+  show:function(n){Easy.step=n;EzSpeak.stop();document.querySelectorAll('#v-easy .ezs').forEach(function(x){x.hidden=x.dataset.ez!==String(n)});
+    document.querySelectorAll('#v-easy .ezprog li').forEach(function(li){var p=Number(li.dataset.p);li.classList.toggle('done',p<n);li.classList.toggle('cur',p===n);if(p===n)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current')});
+    window.scrollTo(0,0);var h=document.querySelector('#v-easy .ezs[data-ez="'+n+'"] .ezh');if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true})}catch(e){}}schedule()},
+  next1:function(){var k=Number($('ezK').value);if(!$('ezK').value||!isFinite(k)||k<1||k>9999){$('ezErr').textContent=ZT('請先打上電費單上的「計費度數」，例如 832。','Type the billed kWh from your bill first, e.g. 832.');$('ezK').focus();return false}
+    var pd=Easy.period();if(pd===false){$('ezErr').textContent=ZT('日期要填完整（從幾月幾日到幾月幾日），或全部空著。','Fill in both dates completely, or leave them all blank.');return false}
+    $('ezErr').textContent='';S.kwh=Math.round(k);if(pd){S.months=pd.days>45?2:1;var P=S.months===2?62:31;if(pd.sum===0)S.season='n';else if(pd.sum>=pd.days)S.season='s';else{S.season='m';S.sd=Math.round(pd.sum/pd.days*P)}Easy.pd=pd}else Easy.pd=null;store.set(S);return true},
   bind:function(){var v=$('v-easy');
-    v.addEventListener('click',function(e){var m=e.target.closest&&e.target.closest('[data-ezm]');if(m){S.months=Number(m.dataset.ezm)===1?1:2;schedule();return}
-      var g=e.target.closest&&e.target.closest('[data-ezgo]');if(!g)return;var n=Number(g.dataset.ezgo);
-      if(n===2&&Easy.step===1){var k=Number($('ezK').value);if(!$('ezK').value||!isFinite(k)||k<1||k>9999){$('ezErr').textContent=ZT('請先打上電費單上的「計費度數」，例如 640。','Type the billed kWh from your bill first, e.g. 640.');$('ezK').focus();return}
-        var pd=Easy.period();if(pd===false){$('ezErr').textContent=ZT('日期要填完整（從幾月幾日到幾月幾日），或全部空著。','Fill in both dates completely, or leave them all blank.');return}
-        $('ezErr').textContent='';S.kwh=Math.round(k);if(pd){S.months=pd.days>45?2:1;var P=S.months===2?62:31;if(pd.sum===0)S.season='n';else if(pd.sum>=pd.days)S.season='s';else{S.season='m';S.sd=Math.round(pd.sum/pd.days*P)}Easy.pd=pd}else Easy.pd=null;store.set(S)}
+    v.addEventListener('click',function(e){var t=e.target.closest?e.target:null;if(!t)return;
+      var f=t.closest('[data-ezfs]');if(f){S.ezfs=f.dataset.ezfs;store.set(S);schedule();return}
+      var m=t.closest('[data-ezm]');if(m){S.months=Number(m.dataset.ezm)===1?1:2;schedule();return}
+      if(t.closest('[data-ezfull]')){S.start='';store.set(S);store.flush();return}
+      var g=t.closest('[data-ezgo]');if(!g)return;var n=Number(g.dataset.ezgo);
+      if(n===2&&Easy.step===1&&!Easy.next1())return;
       Easy.show(n)});
     v.addEventListener('change',function(){$('ezErr').textContent=''});
-    $('ezK').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();var b=v.querySelector('[data-ez="1"] .ezgo');if(b)b.click()}});
+    $('ezK').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();if(Easy.next1())Easy.show(2)}});
     $('ezShare').addEventListener('click',function(){Share.sys(Share.text(S,Model.compute(S)))});
+    $('ezSpeak').addEventListener('click',function(){if(EzSpeak.on)EzSpeak.stop();else EzSpeak.play(Easy.script(S,Model.compute(S)))});
     $('ezSend').addEventListener('click',function(){var t=ZT('這是看懂電費的簡單版，只要 3 步：拿出電費單、打上度數、看結果。','A simple 3-step page to understand your power bill: ')+Share.url(true);Share.sys(t)})},
-  render:function(st,r){if(Router.cur!=='easy')return;
+  facts:function(st,r){var avg=Share.avg(st),d=Math.round((r.m/avg-1)*100),top=Share.top(r),lim=CFG.tiers[r.ti-1]||0;return{avg:avg,d:d,top:top,lim:lim}},
+  script:function(st,r){var f=Easy.facts(st,r),E=I18N.lang==='en',o=[];
+    if(E){if(r.pay!=='rent')o.push('This bill is about '+fmt(r.billNow)+' dollars.');o.push('You use about '+fmt(r.m)+' kilowatt hours a month. That is price step '+(r.ti+1)+' of 6.');
+      o.push(Math.abs(f.d)<10?'That is about the same as an average home.':f.d>0?'That is '+f.d+' percent more than an average home.':'That is '+(-f.d)+' percent less than an average home.');if(f.top.length)o.push('The biggest users are probably the '+f.top.map(function(x){return NM(x.a.name)}).join(' and ')+'.');return o}
+    if(r.pay!=='rent')o.push('這期電費大約 NT$'+fmt(r.billNow)+'。');o.push('平均每個月用 '+fmt(r.m)+' 度，在電價的第 '+(r.ti+1)+' 階，一共有 6 階。');
+    o.push(Math.abs(f.d)<10?'跟全台一般家庭差不多。':f.d>0?'比全台一般家庭，多 '+f.d+'%。':'比全台一般家庭，少 '+(-f.d)+'%，很省喔。');
+    if(f.top.length)o.push('最可能吃電的是：'+f.top.map(function(x){return x.a.name}).join('、')+'。');return o.map(spokenZh)},
+  render:function(st,r){var v=$('v-easy');v.dataset.fs=st.ezfs||'l';
+    document.querySelectorAll('#v-easy [data-ezfs]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.ezfs===(st.ezfs||'l')))});
+    if(Router.cur!=='easy')return;
+    document.querySelectorAll('#v-easy .ezprog li').forEach(function(li){var p=Number(li.dataset.p);li.classList.toggle('done',p<Easy.step);li.classList.toggle('cur',p===Easy.step)});
     document.querySelectorAll('#v-easy [data-ezm]').forEach(function(b){b.setAttribute('aria-pressed',String(Number(b.dataset.ezm)===st.months))});
-    if(Easy.step>=2){var pd=Easy.pd,h=Share.rows(st,r);if(pd)h+='<p class="mnote">'+ZT('計費期間共 '+pd.days+' 天：夏月 '+pd.sum+' 天、非夏月 '+(pd.days-pd.sum)+' 天，已經按天數拆開算。','Billing period: '+pd.days+' days — '+pd.sum+' summer, '+(pd.days-pd.sum)+' non-summer, split by days.')+'</p>';else h+='<p class="mnote">'+ZT('沒有填日期，先用現在這個季節的電價估算。','No dates entered, so this uses the current season’s rates.')+'</p>';$('ezRes').innerHTML=h}
+    if(Easy.step>=2){var f=Easy.facts(st,r),pd=Easy.pd;
+      $('ezBill').textContent=r.pay==='rent'?ZT('包在房租裡','In your rent'):'NT$'+fmt(r.billNow);
+      $('ezPer').textContent=ZT('平均每個月 '+fmt(r.m)+' 度','About '+fmt(r.m)+' kWh a month');
+      $('ezTierH').innerHTML=ZT('在電價的<b>第 '+(r.ti+1)+' 階</b>（共 6 階）','<b>Step '+(r.ti+1)+'</b> of 6 on the price stairs');
+      var h='';for(var i=0;i<6;i++)h+='<span class="'+(i<r.ti?'on':i===r.ti?'on cur':'')+'" style="height:'+(26+i*13)+'%"><i>'+(i+1)+'</i></span>';$('ezStairs').innerHTML=h;
+      $('ezTierSay').textContent=r.ti<=1?ZT('用得不多，很省！','You use little — nicely done!'):r.ti===2?ZT('跟很多家庭一樣，在中間。','Right in the middle, like many homes.'):ZT('用得比較多。每個月超過 '+f.lim+' 度的部分，每度要 '+r.rate.toFixed(2)+' 元。','On the higher side. Each kWh over '+f.lim+' a month costs NT$'+r.rate.toFixed(2)+'.');
+      var mx=Math.max(r.m,f.avg)*1.08,bar=function(lab,val,cls){return '<div class="ezbar '+cls+'"><span>'+lab+'</span><div><i style="width:'+Math.max(6,Math.round(val/mx*100))+'%"></i></div><b>'+fmt(Math.round(val))+ZT(' 度',' kWh')+'</b></div>'};
+      $('ezCmp').innerHTML=bar(ZT('你家','You'),r.m,'me')+bar(ZT('一般家庭','Average'),f.avg,'avg')+'<p>'+(Math.abs(f.d)<10?ZT('差不多。','About the same.'):f.d>0?ZT('比一般家庭多 <b>'+f.d+'%</b>','<b>'+f.d+'% more</b> than average'):ZT('比一般家庭少 <b>'+(-f.d)+'%</b>，很省！','<b>'+(-f.d)+'% less</b> than average — nice!'))+'</p>';
+      $('ezTopCard').hidden=!f.top.length;$('ezTop').innerHTML=f.top.map(function(x){return '<div class="ezmon"><svg viewBox="-40 -40 80 80" aria-hidden="true">'+avatar(x.a,false)+'</svg><b>'+esc(I18N.lang==='en'?NM(x.a.name):x.a.name)+'</b></div>'}).join('');
+      $('ezNote').textContent=pd&&pd.sum===pd.days?ZT('計費期間共 '+pd.days+' 天，整期都在夏月（6～9 月），用夏月電價算。實際金額以台電帳單為準。','All '+pd.days+' days fall in summer (Jun–Sep), so summer rates apply. Your Taipower bill is the final word.'):pd&&pd.sum===0?ZT('計費期間共 '+pd.days+' 天，整期都不在夏月，用非夏月電價算。實際金額以台電帳單為準。','None of the '+pd.days+' days are in summer, so non-summer rates apply. Your Taipower bill is the final word.'):pd?ZT('計費期間共 '+pd.days+' 天：夏月 '+pd.sum+' 天、非夏月 '+(pd.days-pd.sum)+' 天，已經按天數拆開算。實際金額以台電帳單為準。','Billing period: '+pd.days+' days — '+pd.sum+' summer, '+(pd.days-pd.sum)+' non-summer, split by days. Your Taipower bill is the final word.'):ZT('沒有填日期，先用現在這個季節的電價估算。實際金額以台電帳單為準。','No dates entered, so this uses the current season’s rates. Your Taipower bill is the final word.')}
     if(Easy.step===3){var t=Share.text(st,r);$('ezMsg').textContent=t;$('ezLine').href=Share.line(t)}}};
+var EzSpeak={on:false,gen:0,
+  btn:function(on){var b=$('ezSpeak');if(!b)return;b.setAttribute('aria-pressed',String(on));b.querySelector('span').textContent=on?ZT('停止','Stop'):ZT('唸給我聽','Read it to me')},
+  play:function(list){if(!Speak.ok){toast(ZT('這支手機不支援朗讀','This device can’t read aloud'));return}try{Voice.pick()}catch(e){}var self=this,g=++this.gen,i=0,E=I18N.lang==='en';try{speechSynthesis.cancel()}catch(e){}
+    this.on=true;this.btn(true);
+    var next=function(){if(g!==self.gen)return;if(i>=list.length){self.stop();return}var u=new SpeechSynthesisUtterance(list[i++]);
+      if(E){u.lang='en-US';var ev=Voice.en();if(ev)u.voice=ev}else{u.lang=Voice.v?Voice.v.lang:'zh-TW';if(Voice.v)u.voice=Voice.v}
+      u.rate=E?.85:.78;u.onend=function(){setTimeout(next,320)};u.onerror=function(e){if(e&&(e.error==='interrupted'||e.error==='canceled'))return;setTimeout(next,60)};speechSynthesis.speak(u)};
+    try{speechSynthesis.resume()}catch(e){}next()},
+  stop:function(){this.gen++;if(this.on){try{speechSynthesis.cancel()}catch(e){}}this.on=false;this.btn(false)}};
 var Overlay={push:function(){try{history.pushState({ov:1},'')}catch(e){}},pop:function(){try{if(history.state&&history.state.ov)history.back()}catch(e){}}};
 window.addEventListener('popstate',function(){if(Lang.isOpen())Lang.close(true);else if(Big.isOpen())Big.close(true);else if(!$('outModal').hidden)Studio.closeOut(true);else if(!$('bModal').hidden)Badges.close(true);else if(Pot.isOpen())Pot.close(true);else if(Sheet.isOpen())Sheet.close(true);else if(Drawer.isOpen())Drawer.close(true,true)});
 var Drawer={open:function(){Overlay.push();$('menuDot').hidden=true;$('drawer').classList.add('open');$('dscrim').classList.add('open');$('menuBtn').setAttribute('aria-expanded','true');$('menuBtn').setAttribute('aria-label','關閉選單');
@@ -4220,13 +4352,19 @@ var BillCheck={
 var pending=false;
 function schedule(){if(pending)return;pending=true;raf(function(){pending=false;renderAll()})}
 function renderAll(){
-  try{var r=Model.compute(S),onDec=Router.cur==='decoder'||Router.cur===null;if(onDec){Meter.render(S,r);Stairs.render(S,r);Myth.render(S,r);House.render(S,r);Guess.render(S,r)}Dock.render(S,r);Dex.render(S,r);Learn.render(S);Challenge.render(S);Guide.render();Pick.render();Rank2.render(S,r);Feedback.render();try{Mainline.render(S,r);Easy.render(S,r)}catch(ex){if(window.console)console.error(ex)}document.querySelectorAll('.sflinks a').forEach(function(a){a.classList.toggle('on',a.dataset.route===Router.cur)});document.querySelectorAll('#dLang [data-dl]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.dl===(S.lang||'zh')))});React2.render(S);try{if(Router.cur==="challenge"&&!Patrol.on){Patrol.who();Patrol.board(-1)}}catch(e){}Unit.render(S,r);Steppers.sync();Stats.render(S,r);Badges.check(S);Badges.render(S);History.render(S);Elder.render(S,r);Home.render(S);Settings.render(S);Studio.render(S);if(Sheet.isOpen())Sheet.paint();
-    prev.ti=r.ti;prev.nti=r.nti;prev.save=r.save;store.set(S);}
-  catch(err){fail(err)}}
+  var r;try{r=Model.compute(S)}catch(err){fail(err);return}
+  var onDec=Router.cur==='decoder'||Router.cur===null,T=function(f){try{f()}catch(e){if(window.console)console.error(e)}};
+  if(onDec){T(function(){Meter.render(S,r)});T(function(){Stairs.render(S,r)});T(function(){Myth.render(S,r)});T(function(){House.render(S,r)});T(function(){Guess.render(S,r)})}
+  [function(){Dock.render(S,r)},function(){Dex.render(S,r)},function(){Learn.render(S)},function(){Challenge.render(S)},function(){Guide.render()},function(){Pick.render()},function(){Rank2.render(S,r)},function(){Feedback.render()},function(){Mainline.render(S,r)},function(){Easy.render(S,r)},
+   function(){document.querySelectorAll('.sflinks a').forEach(function(a){a.classList.toggle('on',a.dataset.route===Router.cur)})},
+   function(){document.querySelectorAll('#dLang [data-dl]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.dl===(S.lang||'zh')))})},
+   function(){React2.render(S)},function(){if(Router.cur==="challenge"&&!Patrol.on){Patrol.who();Patrol.board(-1)}},
+   function(){Unit.render(S,r)},function(){Steppers.sync()},function(){Stats.render(S,r)},function(){Badges.check(S)},function(){Badges.render(S)},function(){History.render(S)},function(){Elder.render(S,r)},function(){Home.render(S)},function(){Settings.render(S)},function(){Studio.render(S)},function(){if(Sheet.isOpen())Sheet.paint()}].forEach(T);
+  prev.ti=r.ti;prev.nti=r.nti;prev.save=r.save;store.set(S)}
 var failed=false;
 function fail(err){if(window.console)console.error(err);if(failed)return;failed=true;
   var b=$('banner');b.textContent='畫面出了點問題，已重設成預設值。';b.classList.add('show');setTimeout(function(){b.classList.remove('show')},4000);
-  S=defaultState();try{localStorage.removeItem(CFG.storeKey)}catch(e){}prev={ti:null,nti:null,save:0};
+  try{var bk=localStorage.getItem(CFG.storeKey);if(bk)localStorage.setItem(CFG.storeKey+'-backup',bk)}catch(e){}S=defaultState();try{localStorage.removeItem(CFG.storeKey)}catch(e){}prev={ti:null,nti:null,save:0};
   try{var r=Model.compute(S);Meter.render(S,r);Stairs.render(S,r);Myth.render(S,r);House.render(S,r);Dock.render(S,r)}catch(e2){}
   setTimeout(function(){failed=false},1000)}
 function setKwh(v){S.kwh=clamp(Math.round(v),CFG.kwhMin,CFG.kwhMax);schedule()}
@@ -4271,6 +4409,8 @@ window.addEventListener('error',function(e){fail(e.error||e.message)});
 try{$('langSel').value=S.lang;Lang.sync();$('langSel').addEventListener('change',function(){S.lang=this.value;Lang.sync();store.set(S);I18N.set(S.lang);try{schedule()}catch(e){}try{BillGuess.next()}catch(e){}try{if($('chkOut').innerHTML)BillCheck.run()}catch(e){}});Theme.bind();Meter.build();Stairs.build();House.build();Guess.build();Dex.build();Learn.bind();Challenge.bind();History.bind();Elder.bind();Drawer.bind();Egg.bind();document.querySelectorAll('svg[data-wart]').forEach(function(e){e.innerHTML=WART[e.getAttribute('data-wart')]||''});Ghost.build();BillCheck.bind();Home.bind();Guide.bind();Pick.bind();Steppers.bind();React2.bind();Basics.bind();Feedback.bind();Mainline.bind();Easy.bind();$('dLang').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-dl]');if(!b)return;var sel=$('langSel');if(sel.value===b.dataset.dl)return;sel.value=b.dataset.dl;var ev;try{ev=new Event('change',{bubbles:true})}catch(x){ev=document.createEvent('Event');ev.initEvent('change',true,true)}sel.dispatchEvent(ev)});Settings.bind();Studio.bind();WhoEdit.bind();Polish.bind();Pot.bind();Big.bind();Lang.bind();BillGuess.bind();bind();Router.init();renderAll();I18N.set(S.lang);Live.load(false)}catch(err){fail(err)}
 
 /* expose for testing only */
+try{window.addEventListener('pagehide',function(){store.flush()});document.addEventListener('visibilitychange',function(){if(document.hidden)store.flush()})}catch(e){}
+try{document.querySelectorAll('.siteVer').forEach(function(x){x.textContent=SITE_VER})}catch(e){}
 window.__DAH={Model:Model,state:function(){return S},cfg:CFG,go:function(n){location.hash=n}};
 })();
 try{if('serviceWorker' in navigator&&location.protocol==='https:'&&window.top===window.self){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}}catch(e){}
