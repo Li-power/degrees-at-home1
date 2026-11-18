@@ -1607,6 +1607,18 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 .sitefoot .sfcopy{display:block;margin:10px 0 0!important;font-size:11px;letter-spacing:.08em;color:var(--faint)}
 .fbnote{margin:-2px 0 0;font-size:12px;color:var(--faint);text-align:center;line-height:1.6}
 #fbAlt{text-align:center;margin-top:6px}
+
+/* v9.16 naming */
+.nmgrid{display:grid;gap:14px;margin-top:12px}
+@media (min-width:760px){.nmgrid{grid-template-columns:1fr 1fr}}
+.nmcard{background:var(--elev);border-radius:22px;box-shadow:var(--card-sh);padding:18px 18px 8px}
+.nmtitle{font-family:var(--f-serif);font-weight:700;font-size:clamp(22px,5.4vw,28px);margin:0 0 10px;color:var(--soft)}
+.nmtitle b{color:var(--hot-t)}
+.nmrow{display:grid;grid-template-columns:30px 1fr;gap:10px;padding:12px 0;border-top:1px solid var(--hair)}
+.nmno{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--text);color:var(--bg);font-weight:700;font-size:14px}
+.nmrow b{font-size:var(--fs-s)}
+.nmrow p{margin:4px 0 6px;font-size:var(--fs-s);color:var(--soft);line-height:1.7}
+.nmrow .gjump{margin:2px 0 6px}
 </style>
 </head>
 <body>
@@ -1825,6 +1837,22 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
     <p class="lead"><span>這個網站的起因，是一堂企劃課。我們發現，收到電費單時，大家的第一個反應通常是「怎麼漲這麼多？」，或是「你是不是一直在浪費電？」</span><span class="whystart">這，就是這個網站的開端。</span></p>
   </section>
 
+  <section class="sec naming" id="naming">
+    <h2>這個名字，有兩層意思</h2>
+    <div class="nmgrid">
+      <div class="nmcard">
+        <p class="nmtitle">家裡<b>幾度 C</b></p>
+        <div class="nmrow"><span class="nmno">1</span><div><b>家裡現在幾度 C</b><p>夏天冷氣、空調開幾度，會直接反映在電費上。</p></div></div>
+        <div class="nmrow"><span class="nmno">2</span><div><b>家裡的氣氛幾度 C</b><p>一張電費單，常常讓一家人吵得火熱，或冷到不想說話。</p></div></div>
+      </div>
+      <div class="nmcard">
+        <p class="nmtitle">是<b>「省」</b>了沒？</p>
+        <div class="nmrow"><span class="nmno">1</span><div><b>反省的「省」，也是清醒的「醒」</b><p>帳單上的數字，你真的看懂了嗎？有沒有發現家裡真正的用電怪獸？</p><button type="button" class="gjump" data-rxgo="decoder" data-rxto="guess">去找用電怪獸</button></div></div>
+        <div class="nmrow"><span class="nmno">2</span><div><b>節省的「省」</b><p>就是字面上的意思：真的有省到嗎？從最耗電的電器下手，最有感。</p><button type="button" class="gjump" data-rxgo="monsters">去讓怪獸睡覺</button></div></div>
+      </div>
+    </div>
+  </section>
+
   <section class="sec react" id="react">
     <h2>你家收到電費單，第一個反應是？</h2>
     <p class="lead">選一個最像你家的，看看下一步可以做什麼。你的選擇只存在這台手機。</p>
@@ -1959,7 +1987,7 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 
   <section class="sec bcard" id="b-unit"><h2>1 度是多少？</h2>
     <p><b>1 度 ＝ 1,000 瓦（1 kW）的電器，連續用 1 小時。</b>英文寫作 kWh（千瓦小時）。</p>
-    <p class="umix">「瓦」是電器<b>一下子有多耗電</b>，寫在電器背後的標籤上；「度」是<b>總共用了多少電</b>，電費就是照度數算的。<br>瓦數 × 使用小時 ÷ 1,000 ＝ 度數</p>
+    <p class="umix">「瓦」是電器<b>一下子有多耗電</b>，寫在電器背後的標籤上；「度」是<b>總共用了多少電</b>，電費就是照度數算的。<br>瓦數 × 使用小時 ÷ 1,000 ＝ 度數<br>例：800 瓦的電器用 1 小時 → 800 × 1 ÷ 1,000 ＝ 0.8 度</p>
     <div class="ugrid"><div><b>1,000 瓦</b><small>吹風機開強風</small><em>1 小時＝1 度</em></div><div><b>100 瓦</b><small>一台電視</small><em>10 小時＝1 度</em></div><div><b>20 瓦</b><small>一顆燈泡</small><em>50 小時＝1 度</em></div></div>
     <p class="umine" id="unitMine"></p>
     <a class="tplink" href="https://www.taipower.com.tw/1136/1149/2271/simpleList" target="_blank" rel="noopener">台電兒童網：什麼叫一度電</a>
@@ -2987,7 +3015,7 @@ var RX={shock:['很多人都是。先別急：電費單通常兩個月一張，�
   blame:['帳單看不到是誰、哪一台用的，所以大家容易互相猜。把每台電器變成一隻怪獸，全家一起看誰最會吃電，比找人怪有用。','The bill can’t show who or which appliance used the power, so families guess at each other. Turn each appliance into a monster and look together — it beats blaming someone.','decoder','guess'],
   pay:['最省事，但也最難省錢。每期只要記一筆度數，兩期以後就看得出有沒有變少。','Easiest — but hardest to save. Log the kWh each bill; after two bills you’ll see whether it’s going down.','history',null],
   compare:['好習慣！不過台電提醒：跟上一期比會受季節影響，跟「去年同一期」比才準。節電獎勵也是跟去年同期比。','Good habit! But Taipower notes that comparing with the last bill is skewed by season; compare with the same period last year. The saving reward works that way too.','history',null]};
-var React2={bind:function(){$('react').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-rx]');if(b){S.whyReact=b.dataset.rx;store.set(S);schedule();return}
+var React2={bind:function(){$('naming').addEventListener('click',function(e){var g=e.target.closest&&e.target.closest('[data-rxgo]');if(g)Guide.jump(g.dataset.rxgo,g.dataset.rxto||null)});$('react').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-rx]');if(b){S.whyReact=b.dataset.rx;store.set(S);schedule();return}
     var g=e.target.closest&&e.target.closest('[data-rxgo]');if(g)Guide.jump(g.dataset.rxgo,g.dataset.rxto||null)})},
   render:function(st){if(Router.cur!=='why')return;var k=st.whyReact;document.querySelectorAll('[data-rx]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.rx===k))});
     if(!k){$('rxOut').innerHTML='';return}var x=RX[k];$('rxOut').innerHTML='<p>'+ZT(x[0],x[1])+'</p><button type="button" class="gjump" data-rxgo="'+x[2]+'"'+(x[3]?' data-rxto="'+x[3]+'"':'')+'>'+ZT(x[2]==='history'?'去帳單紀錄':'去電費解碼器',x[2]==='history'?'Open the bill log':'Open the decoder')+'</button>'}};
@@ -3000,7 +3028,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.15 (dah-v37)';
+var SITE_VER='9.16 (dah-v38)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -3106,6 +3134,7 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"按下「送出回報」，內容會用 Email 寄給作者，不用登入、也不會公開。網站本身不會留存。請不要寫電號、地址或電話。": "Press “Send report” and it’s emailed to the author — no login, nothing public. The site keeps nothing. Please don’t include your account number, address or phone.", "本網站不需要註冊或登入，沒有會員系統，也沒有自己的伺服器或資料庫。唯一會送出資料的，是你主動按下的「回報問題」（見第五段）。": "No sign-up or login, no member system, and no server or database of our own. The only thing ever sent is a report you choose to send (see section 5)."});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"這個網站的起因，是一堂企劃課。我們發現，收到電費單時，大家的第一個反應通常是「怎麼漲這麼多？」，或是「你是不是一直在浪費電？」": "This site began in a planning class. We noticed that when the bill arrives, the first reaction is usually “Why has it gone up so much?” or “Are you wasting power again?”", "嗨～遇到問題了嗎？請回報給我，謝謝您～": "Hi! Run into a problem? Please let me know — thank you!", "錯字、數字怪怪的、按了沒反應，或想要什麼功能，都可以寫在這裡。": "Typos, odd numbers, buttons that do nothing, or features you’d like — write it all here."});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"用 Email 寄給作者，不用登入、不會公開。請不要寫電號、地址或電話。": "Emailed to the author — no login, nothing public. Please don’t include your account number, address or phone.", "網站資訊": "Site info"});
+(function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"這個名字，有兩層意思": "The name has two meanings", "家裡": "Home: ", "幾度 C": "what degree?", "家裡現在幾度 C": "How warm is home right now?", "夏天冷氣、空調開幾度，會直接反映在電費上。": "In summer, how cool you set the AC shows up straight on the bill.", "家裡的氣氛幾度 C": "How heated is the mood at home?", "一張電費單，常常讓一家人吵得火熱，或冷到不想說話。": "One bill can get a family arguing hotly — or going cold and silent.", "是": "Are we ", "「省」了沒？": "“saving” yet?", "反省的「省」，也是清醒的「醒」": "“Saving” as in reflecting — waking up to it", "帳單上的數字，你真的看懂了嗎？有沒有發現家裡真正的用電怪獸？": "Do you really understand the numbers on your bill? Have you found your home’s real power monster?", "去找用電怪獸": "Find the power monsters", "節省的「省」": "“Saving” as in spending less", "就是字面上的意思：真的有省到嗎？從最耗電的電器下手，最有感。": "The plain meaning: are you actually saving? Start with the biggest appliances — that’s where you’ll feel it.", "例：# 瓦的電器用 # 小時 → # × # ÷ # ＝ # 度": "e.g. an 800 W appliance for 1 hour → 800 × 1 ÷ 1,000 = 0.8 kWh", "例：800 瓦的電器用 1 小時 → 800 × 1 ÷ 1,000 ＝ 0.8 度": "e.g. an 800 W appliance for 1 hour → 800 × 1 ÷ 1,000 = 0.8 kWh"});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
