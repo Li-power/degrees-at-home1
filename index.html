@@ -1620,6 +1620,61 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 .nmrow b{font-size:var(--fs-s)}
 .nmrow p{margin:4px 0 6px;font-size:var(--fs-s);color:var(--soft);line-height:1.7}
 .nmrow .gjump{margin:2px 0 6px}
+
+/* v9.18 main line */
+.mline{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 4px;padding:0;counter-reset:none}
+.mline li{margin:0}
+.mline button{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:8px 6px;border:0;border-radius:16px;background:var(--elev);box-shadow:var(--card-sh);color:var(--text);font:inherit;font-weight:700;font-size:var(--fs-s);cursor:pointer;position:relative}
+.mline li:not(:last-child) button::after{content:'›';position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:var(--faint);font-weight:400;z-index:1}
+.mline b,.stepk b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--hot-t,#B5523B);color:#fff;font-size:14px;flex:none}
+.stepk{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-weight:700;font-size:var(--fs-m);color:var(--text)}
+.mres .mresg{display:grid;gap:10px}
+.mrow{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center;padding:12px 14px;border-radius:18px;background:var(--elev);box-shadow:var(--card-sh)}
+.mrow i{font-style:normal;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--surface);font-weight:900;font-size:14px;color:var(--soft)}
+.mrow p{margin:0;font-size:var(--fs-m);line-height:1.6}
+.mrow b{color:var(--hot-t,#B5523B)}
+.mnote{font-size:var(--fs-xs);color:var(--faint);margin:2px 0 0}
+.msh{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.msh .mk{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 22px}
+.mline-line,.ezline{background:#06C755!important;color:#fff!important}
+.mmore{font-size:var(--fs-s);color:var(--soft);margin-top:14px}
+/* drawer: more */
+.dmore{margin:2px 0}
+.dmore summary{display:flex;align-items:center;gap:12px;min-height:48px;padding:8px 12px;border-radius:16px;color:var(--soft);font-size:var(--fs-m);cursor:pointer;list-style:none}
+.dmore summary::-webkit-details-marker{display:none}
+.dmore summary svg{width:22px;height:22px;flex:none}
+.dmore summary .dchev{margin-left:auto;width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s}
+.dmore[open] summary .dchev{transform:rotate(-135deg)}
+.dmorein{padding-left:10px;border-left:2px solid var(--surface);margin-left:22px}
+/* easy mode */
+body.easymode .appbar .menu,body.easymode .potbtn,body.easymode .langwrap,body.easymode .bigbtn,body.easymode .theme,body.easymode .drawer,body.easymode .dscrim,body.easymode .sitefoot,body.easymode .dock{display:none!important}
+@media (min-width:1100px){body.easymode .appbar,body.easymode .page,body.easymode .dock{margin-left:0!important}}
+.easy{max-width:560px;margin:0 auto;padding:4px 4px 30px}
+.ezs{display:flex;flex-direction:column;gap:14px}
+.ezstep{margin:8px 0 0;font-weight:700;font-size:17px;color:var(--hot-t,#B5523B);letter-spacing:.04em}
+.ezh{font-family:var(--f-serif);font-size:clamp(28px,7.4vw,36px);line-height:1.3;margin:0}
+.ezp{font-size:20px;line-height:1.6;margin:0;color:var(--text)}
+.ezin{display:flex;align-items:baseline;gap:10px;background:var(--elev);border-radius:20px;box-shadow:var(--card-sh);padding:10px 18px}
+.ezin input{flex:1;min-width:0;border:0;background:transparent;font-size:46px;font-weight:700;color:var(--text);font-family:var(--f-num,inherit);outline:none;padding:6px 0}
+.ezin span{font-size:24px;color:var(--soft)}
+.ezseg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ezopt{min-height:72px;border-radius:18px;border:2px solid var(--line);background:var(--elev);color:var(--text);font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
+.ezopt b{font-size:21px}.ezopt small{font-size:15px;color:var(--soft)}
+.ezopt[aria-pressed="true"]{border-color:var(--text);background:var(--text);color:var(--bg)}
+.ezopt[aria-pressed="true"] small{color:var(--bg);opacity:.8}
+.ezerr{margin:0;color:#C0392B;font-size:18px;font-weight:700;min-height:0}
+.ezerr:empty{display:none}
+.ezgo{min-height:68px;border:0;border-radius:20px;background:var(--text);color:var(--bg);font:inherit;font-size:23px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;margin-top:6px}
+.ezalt{min-height:56px;border-radius:18px;border:2px solid var(--line);background:transparent;color:var(--text);font:inherit;font-size:19px;font-weight:700;cursor:pointer}
+.ezback{align-self:flex-start;border:0;background:transparent;color:var(--soft);font:inherit;font-size:19px;padding:10px 4px;cursor:pointer}
+.ezres{display:grid;gap:10px}
+.easy .mrow p{font-size:20px}
+.easy .mnote{font-size:15px}
+.ezmsg{white-space:pre-wrap;background:var(--elev);border-radius:18px;box-shadow:var(--card-sh);padding:14px 16px;font-size:18px;line-height:1.7;color:var(--soft)}
+.ezfoot{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:34px;padding-top:16px;border-top:1px solid var(--hair)}
+.page>.view.easy{max-width:560px;margin-left:auto;margin-right:auto}
+.ezin input::placeholder{font-size:26px;font-weight:400;color:var(--faint)}
+.ezlink{border:0;background:transparent;color:var(--soft);font:inherit;font-size:16px;text-decoration:underline;text-underline-offset:3px;padding:8px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -1652,7 +1707,7 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 <nav class="drawer" id="drawer" aria-label="主選單">
   <a class="brand" href="#why" data-route="why"><span class="bt">家裡幾度 C，<br>是「省」了沒？<i class="beta" data-noi18n>Beta</i></span><span class="bs">為什麼做這個網站</span></a>
   <div class="dlang" id="dLang" role="group" aria-label="語言 Language" data-noi18n><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>語言 Language</span><button type="button" data-dl="zh">中文</button><button type="button" data-dl="en">English</button></div>
-  <a href="#guide" data-route="guide" class="dguide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9.3a2.6 2.6 0 1 1 3.6 2.4c-.7.3-1.1.9-1.1 1.6v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/></svg><span>使用說明</span></a><p class="dgrp">看懂帳單</p><a href="#decoder" data-route="decoder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="15" width="18" height="5" rx="2" fill="currentColor"/></svg><span>電費解碼器</span></a><a href="#basics" data-route="basics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13z" fill="currentColor"/></svg><span>用電基本知識</span></a><a href="#learn" data-route="learn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h4v-4h4v-4h4V8h4V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg><span>電價小教室</span></a><p class="dgrp">設定我家</p><a href="#home" data-route="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></svg><span>我家設定</span></a><a href="#history" data-route="history"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="12" width="3" height="8" fill="currentColor"/><rect x="10.5" y="7" width="3" height="13" fill="currentColor"/><rect x="17" y="10" width="3" height="10" fill="currentColor"/></svg><span>帳單紀錄</span></a><p class="dgrp">一起省電</p><a href="#monsters" data-route="monsters"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="5" fill="currentColor"/><circle cx="9.5" cy="10" r="2" fill="var(--bg)"/><circle cx="14.5" cy="10" r="2" fill="var(--bg)"/></svg><span>怪獸圖鑑</span></a><a href="#challenge" data-route="challenge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l-2 4 2 4H5" fill="currentColor"/><path d="M5 3v18" stroke="currentColor" stroke-width="2"/></svg><span>家庭挑戰</span></a><a href="#studio" data-route="studio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path d="M4 18l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>卡片工作室</span></a><p class="dgrp">更多</p><a href="#elder" data-route="elder"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="14" font-weight="900" fill="currentColor">大</text><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>長輩版重點</span></a><a href="#about" data-route="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>資料來源與設定</span></a><a href="#feedback" data-route="feedback"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 8v4M12 14.2v.3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>回報問題</span></a>
+  <a href="#guide" data-route="guide" class="dguide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9.3a2.6 2.6 0 1 1 3.6 2.4c-.7.3-1.1.9-1.1 1.6v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/></svg><span>使用說明</span></a><p class="dgrp">從這裡開始</p><a href="#decoder" data-route="decoder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="15" width="18" height="5" rx="2" fill="currentColor"/></svg><span>電費解碼器</span></a><a href="#easy" data-route="easy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>簡單版（給爸媽）</span></a><a href="#basics" data-route="basics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13z" fill="currentColor"/></svg><span>用電基本知識</span></a><details class="dmore"><summary><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="18" cy="12" r="2" fill="currentColor"/></svg><span>更多好玩的</span><i class="dchev" aria-hidden="true"></i></summary><div class="dmorein"><a href="#monsters" data-route="monsters"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="5" fill="currentColor"/><circle cx="9.5" cy="10" r="2" fill="var(--bg)"/><circle cx="14.5" cy="10" r="2" fill="var(--bg)"/></svg><span>怪獸圖鑑</span></a><a href="#challenge" data-route="challenge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l-2 4 2 4H5" fill="currentColor"/><path d="M5 3v18" stroke="currentColor" stroke-width="2"/></svg><span>家庭挑戰</span></a><a href="#studio" data-route="studio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path d="M4 18l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>卡片工作室</span></a><a href="#history" data-route="history"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="12" width="3" height="8" fill="currentColor"/><rect x="10.5" y="7" width="3" height="13" fill="currentColor"/><rect x="17" y="10" width="3" height="10" fill="currentColor"/></svg><span>帳單紀錄</span></a><a href="#home" data-route="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></svg><span>我家設定</span></a><a href="#learn" data-route="learn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h4v-4h4v-4h4V8h4V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg><span>電價小教室</span></a><a href="#elder" data-route="elder"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="14" font-weight="900" fill="currentColor">大</text><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>長輩版重點</span></a></div></details><p class="dgrp">其他</p><a href="#about" data-route="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>資料來源與設定</span></a><a href="#feedback" data-route="feedback"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 8v4M12 14.2v.3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>回報問題</span></a>
   <div class="dfoot"><a class="dsign" href="#why" data-route="why" aria-label="關於作者與這個作品"><span class="hanko">り</span><span>2026<small>關於這個作品</small></span></a><button class="bdgbtn" id="bdgBtn" type="button" aria-label="我的徽章" aria-haspopup="dialog"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="none" stroke="var(--surface-hi)" stroke-width="4"/><circle id="bdgArc" cx="22" cy="22" r="19" fill="none" stroke="#E2A33B" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 22 22)"/></svg><span class="bi" id="bdgIco"></span><i class="dot" id="bdgDot" hidden></i></button></div>
 </nav>
 
@@ -1663,15 +1718,21 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
       <section class="hero" id="s-bill" aria-labelledby="t-hero">
         <h1 id="t-hero">家裡幾度 C，是<span class="q">「省」</span>了沒？</h1>
         <p class="lead">輸入電費單上的度數，看看你家電費在第幾階、哪台電器最耗電 <a class="howlink" href="#guide">怎麼用？</a></p>
+        <ol class="mline" id="mline" aria-label="三個步驟">
+          <li><button type="button" data-mgo="s-bill"><b>1</b><span>輸入度數</span></button></li>
+          <li><button type="button" data-mgo="s-result"><b>2</b><span>看結果</span></button></li>
+          <li><button type="button" data-mgo="s-share"><b>3</b><span>傳給家人</span></button></li>
+        </ol>
         <div class="start" id="hint" hidden>
-          <p class="sth2"><b>第一次來？</b>選一種開始</p>
+          <p class="sth2"><b>第一次來？</b>照上面 ① ② ③ 做就好。要給爸媽用，有更簡單的版本。</p>
           <div class="startbtns">
-            <button type="button" class="sbtn" data-gstart="quick"><i aria-hidden="true">1</i><span><b>1 分鐘看懂電費</b><small>輸入度數 → 看第幾階 → 找出最吃電的怪獸</small></span></button>
+            <button type="button" class="sbtn" data-gstart="easy"><i aria-hidden="true">✓</i><span><b>給爸媽的簡單版</b><small>只有 3 步，字大，一步一步帶著做</small></span></button>
             <button type="button" class="sbtn" data-gstart="full"><i aria-hidden="true">≡</i><span><b>完整使用說明</b><small>從我家設定到全家一起省，一步一步來</small></span></button>
-            <button type="button" class="sbtn" data-gstart="elder"><i aria-hidden="true">大</i><span><b>幫長輩看</b><small>大字、重點版、可以貼冰箱的卡</small></span></button>
+            
           </div>
           <button type="button" class="linkbtn" id="hintX">我會用了，收起來</button>
         </div>
+        <p class="stepk" id="stepk1"><b>1</b>輸入電費單上的「計費度數」</p>
         <div class="meter">
           <div class="brand">本期計費度數</div>
           <div class="odo" id="odo" role="img" aria-label="計費度數"></div>
@@ -1726,6 +1787,15 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
         </div>
       </section>
 
+      <section class="sec mres" id="s-result" aria-labelledby="t-res">
+        <p class="stepk"><b>2</b><span id="t-res">看結果</span></p>
+        <div class="mresg" id="mres" aria-live="polite"></div>
+        <p class="stepk" id="s-share"><b>3</b>傳給家人</p>
+        <p class="lead">把結果傳到家庭群組，大家一起看，比一個人猜「是誰在浪費電」有用多了。</p>
+        <div class="msh"><a class="mk mline-line" id="mLine" href="#" target="_blank" rel="noopener">傳到 LINE</a><button type="button" class="pill" id="mShare">其他分享方式</button><button type="button" class="pill" id="mCopy">複製文字</button></div>
+        <p class="mmore">想看更細的？往下看「電價像爬樓梯」和「家裡的電費怪獸」。</p>
+      </section>
+
       <section class="sec" id="s-stairs" aria-labelledby="t-stairs">
         <h2 id="t-stairs" style="font-size:var(--fs-h2)">電價像爬樓梯</h2>
         <p class="lead">電價分成 6 階：一個月用得越多，多出來的那些度數就越貴。全家的電是加在一起算的，拉拉上面的滑桿看看。</p>
@@ -1763,16 +1833,44 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
   </div>
 
 
+<div class="view easy" id="v-easy" data-title="簡單版" hidden>
+  <section class="ezs" data-ez="1">
+    <p class="ezstep">第 1 步，共 3 步</p>
+    <h1 class="ezh">拿出電費單，找到「計費度數」</h1>
+    <p class="ezp">把那個數字打在下面的格子裡。</p>
+    <div class="ezin"><label class="sr" for="ezK">計費度數</label><input id="ezK" type="number" inputmode="numeric" min="1" max="9999" placeholder="例如 640"><span>度</span></div>
+    <p class="ezp">這張電費單是：</p>
+    <div class="ezseg" role="group" aria-label="帳單是幾個月"><button type="button" class="ezopt" data-ezm="2"><b>兩個月一張</b><small>大部分家庭</small></button><button type="button" class="ezopt" data-ezm="1"><b>一個月一張</b></button></div>
+    <p class="ezerr" id="ezErr" aria-live="polite"></p>
+    <button type="button" class="ezgo" data-ezgo="2">下一步 ›</button>
+  </section>
+  <section class="ezs" data-ez="2" hidden>
+    <p class="ezstep">第 2 步，共 3 步</p>
+    <h1 class="ezh">你家這期的電費</h1>
+    <div class="ezres" id="ezRes"></div>
+    <button type="button" class="ezgo" data-ezgo="3">下一步：傳給家人 ›</button>
+    <button type="button" class="ezback" data-ezgo="1">‹ 改數字</button>
+  </section>
+  <section class="ezs" data-ez="3" hidden>
+    <p class="ezstep">第 3 步，共 3 步</p>
+    <h1 class="ezh">傳給家人看</h1>
+    <p class="ezp">按綠色按鈕，選家庭群組，再按「傳送」。</p>
+    <div class="ezmsg" id="ezMsg"></div>
+    <a class="ezgo ezline" id="ezLine" href="#" target="_blank" rel="noopener">傳到 LINE</a>
+    <button type="button" class="ezalt" id="ezShare">用其他 App 分享</button>
+    <button type="button" class="ezback" data-ezgo="1">‹ 再算一次</button>
+  </section>
+  <div class="ezfoot"><button type="button" class="ezlink" id="ezSend">把這個簡單版傳給爸媽、長輩</button><a class="ezlink" href="#decoder" data-route="decoder">看完整版網站</a></div>
+</div>
 <div class="view readable" id="v-guide" data-title="使用說明" hidden>
   <section class="sec"><h1 class="vh">使用說明</h1>
-    <p class="lead">網站分成四大塊。每一步都有「帶我去」，按了會直接跳到那個地方。</p>
+    <p class="lead">第一次來，照首頁的 ① 輸入度數 → ② 看結果 → ③ 傳給家人 就好。其他功能都收在選單的「更多好玩的」。</p>
     <div class="gmap" aria-label="網站地圖">
-      <div class="gm g1"><b>① 看懂帳單</b><small>度數、電價樓梯、季節，一次弄懂</small><div><button type="button" class="gjump" data-go="decoder">電費解碼器</button><button type="button" class="gjump" data-go="basics">用電基本知識</button><button type="button" class="gjump" data-go="learn">電價小教室</button></div></div>
-      <div class="gm g2"><b>② 設定我家</b><small>家裡有誰、電費怎麼付、每期記一筆</small><div><button type="button" class="gjump" data-go="home">我家設定</button><button type="button" class="gjump" data-go="history">帳單紀錄</button></div></div>
-      <div class="gm g3"><b>③ 一起省電</b><small>找出吃電怪獸、分工、做卡片傳給家人</small><div><button type="button" class="gjump" data-go="monsters">怪獸圖鑑</button><button type="button" class="gjump" data-go="challenge">家庭挑戰</button><button type="button" class="gjump" data-go="studio">卡片工作室</button></div></div>
-      <div class="gm g4"><b>④ 更多</b><small>給長輩的大字重點、資料來源、備份</small><div><button type="button" class="gjump" data-go="elder">長輩版重點</button><button type="button" class="gjump" data-go="about">資料來源與設定</button></div></div>
+      <div class="gm g1"><b>① 從這裡開始</b><small>輸入度數、看結果、傳給家人</small><div><button type="button" class="gjump" data-go="decoder">電費解碼器</button><button type="button" class="gjump" data-go="easy">簡單版（給爸媽）</button><button type="button" class="gjump" data-go="basics">用電基本知識</button></div></div>
+      <div class="gm g3"><b>② 更多好玩的</b><small>怪獸、分工挑戰、做卡片、記帳單、我家設定</small><div><button type="button" class="gjump" data-go="monsters">怪獸圖鑑</button><button type="button" class="gjump" data-go="challenge">家庭挑戰</button><button type="button" class="gjump" data-go="studio">卡片工作室</button><button type="button" class="gjump" data-go="history">帳單紀錄</button><button type="button" class="gjump" data-go="home">我家設定</button><button type="button" class="gjump" data-go="learn">電價小教室</button><button type="button" class="gjump" data-go="elder">長輩版重點</button></div></div>
+      <div class="gm g4"><b>③ 其他</b><small>資料來源、備份、回報問題</small><div><button type="button" class="gjump" data-go="about">資料來源與設定</button><button type="button" class="gjump" data-go="feedback">回報問題</button></div></div>
     </div>
-    <p class="gmapnote">選單也照這四類排好了。不知道從哪開始，就選下面一種方式。</p>
+    <p class="gmapnote">選單也照這三類排好了。要給爸媽用，直接傳「簡單版」給他們。</p>
     
     <div class="pills seg gtabs" id="gTabs" role="tablist" aria-label="使用方式">
       <button class="pill" type="button" role="tab" data-gt="quick">1 分鐘看懂</button>
@@ -1784,8 +1882,8 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
       <p class="gsum">只要一張電費單，三步就知道錢花在哪裡。</p>
       <ol class="gsteps">
         <li><b>輸入計費度數</b><span>電費單上寫「計費度數」的那個數字。拉電表下方的滑桿，或按「直接輸入度數」。手邊沒有帳單，可以先用台灣電力 App 查，或隨便拉拉看。不知道「度」是什麼，先看<button type="button" class="inl" data-go="basics">用電基本知識</button>。</span><button type="button" class="gjump" data-go="decoder" data-to="s-bill">帶我去</button></li>
-        <li><b>看你家在第幾階</b><span>電價像爬樓梯，用越多、多出來的每一度越貴。兩個月一張的帳單，網站會自動先除以 2。</span><button type="button" class="gjump" data-go="decoder" data-to="s-stairs">帶我去</button></li>
-        <li><b>找出最吃電的怪獸</b><span>先猜一隻，再看答案。點怪獸可以改使用時間，按「讓它睡覺」就會算出能省多少，存進右上角的火鍋基金。</span><button type="button" class="gjump" data-go="decoder" data-to="guess">帶我去</button></li>
+        <li><b>看結果</b><span>電費大約多少、在第幾階、比一般家庭多還是少、最可能是哪台在吃電。想看更細，往下看「電價像爬樓梯」。</span><button type="button" class="gjump" data-go="decoder" data-to="s-result">帶我去</button></li>
+        <li><b>傳給家人</b><span>按「傳到 LINE」，選家庭群組。大家一起看，比互相猜誰在浪費電有用。想再深入，就去找最吃電的怪獸、讓牠睡覺。</span><button type="button" class="gjump" data-go="decoder" data-to="s-share">帶我去</button></li>
       </ol>
       <p class="gdone">這樣就會了！想讓全家一起省，看 <button type="button" class="inl" data-gtab="full">完整說明書</button>。</p>
     </div>
@@ -2967,7 +3065,7 @@ var Guide={tab:'quick',
     if(location.hash.slice(1)===route){go();return}location.hash=route;setTimeout(go,420)},
   bind:function(){var self=this;
     $('hint').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-gstart]');if(!b)return;
-      if(b.dataset.gstart==='quick'){self.jump('decoder','s-bill');toast('先輸入電費單上的「計費度數」',true)}else self.open(b.dataset.gstart)});
+      if(b.dataset.gstart==='quick'){self.jump('decoder','s-bill');toast('先輸入電費單上的「計費度數」',true)}else if(b.dataset.gstart==='easy'){location.hash='easy'}else self.open(b.dataset.gstart)});
     $('gTabs').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-gt]');if(!b)return;self.tab=b.dataset.gt;schedule()});
     $('v-guide').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-go],[data-gtab],[data-big1]');if(!b)return;
       if(b.dataset.gtab){self.tab=b.dataset.gtab;schedule();window.scrollTo(0,0);return}
@@ -3030,7 +3128,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.17 (dah-v39)';
+var SITE_VER='9.18 (dah-v40)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -3138,6 +3236,8 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"用 Email 寄給作者，不用登入、不會公開。請不要寫電號、地址或電話。": "Emailed to the author — no login, nothing public. Please don’t include your account number, address or phone.", "網站資訊": "Site info"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"這個名字，有兩層意思": "The name has two meanings", "家裡": "Home: ", "幾度 C": "what degree?", "家裡現在幾度 C": "How warm is home right now?", "夏天冷氣、空調開幾度，會直接反映在電費上。": "In summer, how cool you set the AC shows up straight on the bill.", "家裡的氣氛幾度 C": "How heated is the mood at home?", "一張電費單，常常讓一家人吵得火熱，或冷到不想說話。": "One bill can get a family arguing hotly — or going cold and silent.", "是": "Are we ", "「省」了沒？": "“saving” yet?", "反省的「省」，也是清醒的「醒」": "“Saving” as in reflecting — waking up to it", "帳單上的數字，你真的看懂了嗎？有沒有發現家裡真正的用電怪獸？": "Do you really understand the numbers on your bill? Have you found your home’s real power monster?", "去找用電怪獸": "Find the power monsters", "節省的「省」": "“Saving” as in spending less", "就是字面上的意思：真的有省到嗎？從最耗電的電器下手，最有感。": "The plain meaning: are you actually saving? Start with the biggest appliances — that’s where you’ll feel it.", "例：# 瓦的電器用 # 小時 → # × # ÷ # ＝ # 度": "e.g. an 800 W appliance for 1 hour → 800 × 1 ÷ 1,000 = 0.8 kWh", "例：800 瓦的電器用 1 小時 → 800 × 1 ÷ 1,000 ＝ 0.8 度": "e.g. an 800 W appliance for 1 hour → 800 × 1 ÷ 1,000 = 0.8 kWh"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"主題名字由來": "Where the name comes from", "「家裡幾度 C」和「省」，各有兩層意思。": "“Degrees at home” and “saving” each have two meanings."});
+(function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"從這裡開始": "Start here", "簡單版（給爸媽）": "Simple version (for parents)", "更多好玩的": "More to explore", "其他": "Other", "輸入度數": "Enter kWh", "看結果": "See results", "傳給家人": "Send to family", "三個步驟": "Three steps", "照上面 ① ② ③ 做就好。要給爸媽用，有更簡單的版本。": "Just follow ① ② ③ above. For parents, there’s an even simpler version.", "給爸媽的簡單版": "Simple version for parents", "只有 3 步，字大，一步一步帶著做": "Just 3 steps, big text, guided one at a time", "輸入電費單上的「計費度數」": "Enter the billed kWh from your bill", "把結果傳到家庭群組，大家一起看，比一個人猜「是誰在浪費電」有用多了。": "Send the result to your family group. Looking at it together beats guessing who’s wasting power.", "傳到 LINE": "Send on LINE", "其他分享方式": "Other ways to share", "複製文字": "Copy text", "想看更細的？往下看「電價像爬樓梯」和「家裡的電費怪獸」。": "Want details? Scroll down to “Prices climb like stairs” and “Power monsters at home”.", "簡單版": "Simple version", "第 1 步，共 3 步": "Step 1 of 3", "第 2 步，共 3 步": "Step 2 of 3", "第 3 步，共 3 步": "Step 3 of 3", "拿出電費單，找到「計費度數」": "Get your bill and find the “billed kWh”", "把那個數字打在下面的格子裡。": "Type that number in the box below.", "例如 640": "e.g. 640", "這張電費單是：": "This bill covers:", "兩個月一張": "Two months", "大部分家庭": "Most homes", "一個月一張": "One month", "下一步 ›": "Next ›", "你家這期的電費": "Your bill this period", "下一步：傳給家人 ›": "Next: send to family ›", "‹ 改數字": "‹ Change the number", "傳給家人看": "Show your family", "按綠色按鈕，選家庭群組，再按「傳送」。": "Tap the green button, pick your family group, then tap Send.", "用其他 App 分享": "Share with another app", "‹ 再算一次": "‹ Start over", "把這個簡單版傳給爸媽、長輩": "Send this simple version to parents and grandparents", "看完整版網站": "See the full site", "第一次來，照首頁的 ① 輸入度數 → ② 看結果 → ③ 傳給家人 就好。其他功能都收在選單的「更多好玩的」。": "First time? Just follow ① enter kWh → ② see results → ③ send to family on the home page. Everything else is under “More to explore” in the menu.", "① 從這裡開始": "① Start here", "輸入度數、看結果、傳給家人": "Enter kWh, see results, send to family", "② 更多好玩的": "② More to explore", "怪獸、分工挑戰、做卡片、記帳單、我家設定": "Monsters, family challenges, cards, bill log, household setup", "③ 其他": "③ Other", "資料來源、備份、回報問題": "Sources, backup, report a problem", "選單也照這三類排好了。要給爸媽用，直接傳「簡單版」給他們。": "The menu follows these three groups. For parents, just send them the simple version.", "電費大約多少、在第幾階、比一般家庭多還是少、最可能是哪台在吃電。想看更細，往下看「電價像爬樓梯」。": "Roughly what you’ll pay, which price step you’re on, how you compare with an average home, and which appliance is probably the biggest user. For details, scroll to “Prices climb like stairs”.", "按「傳到 LINE」，選家庭群組。大家一起看，比互相猜誰在浪費電有用。想再深入，就去找最吃電的怪獸、讓牠睡覺。": "Tap “Send on LINE” and pick your family group. Looking together beats guessing who’s wasting power. To go further, find the hungriest monster and put it to sleep."});
+I18N_DATA.D['第 # 步，共 # 步']=['Step # of #',''];
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -3215,7 +3315,7 @@ I18N_OBS.observe(document.body,{subtree:true,childList:true,characterData:true,a
 /* =========================================================
    ROUTER — #decoder #monsters #learn #challenge #history #elder #about
    ========================================================= */
-window.Router=null;var ROUTES=['decoder','basics','privacy','terms','feedback','guide','home','why','monsters','learn','challenge','studio','history','elder','about'];
+window.Router=null;var ROUTES=['decoder','easy','basics','privacy','terms','feedback','guide','home','why','monsters','learn','challenge','studio','history','elder','about'];
 var Router={cur:null,setTitle:function(){var v=$('v-'+this.cur);if(!v)return;var t=v.getAttribute('data-i18n-data-title')||v.getAttribute('data-title');$('appTitle').textContent=L(t);document.title=L(t)+'｜'+L('家裡幾度 C，是「省」了沒？')},
   go:function(name,focus){if(ROUTES.indexOf(name)<0)name='decoder';var changed=name!==this.cur,first=this.cur===null,self=this;
     if(false&&changed&&!first&&!reduced()&&document.startViewTransition&&!mq('(pointer: coarse)')&&!mq('(max-width: 899px)')){document.startViewTransition(function(){self.swap(name,focus,changed,false)});return}
@@ -3224,11 +3324,49 @@ var Router={cur:null,setTitle:function(){var v=$('v-'+this.cur);if(!v)return;var
     ROUTES.forEach(function(r){var v=$('v-'+r);if(v)v.hidden=r!==name});
     var nv=$('v-'+name);if(animate&&nv){nv.classList.remove('enter');void nv.offsetWidth;nv.classList.add('enter')}
     document.querySelectorAll('[data-route]').forEach(function(a){if(a.dataset.route===name)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
-    var v=$('v-'+name);this.setTitle();
+    var v=$('v-'+name);this.setTitle();document.body.classList.toggle('easymode',name==='easy');var dm=document.querySelector('#drawer .dmore');if(dm&&dm.querySelector('[aria-current]'))dm.open=true;if(name==='easy'&&changed){Easy.step=1;document.querySelectorAll('#v-easy .ezs').forEach(function(x){x.hidden=x.dataset.ez!=='1'});if(S.kwh&&S.kwh!==1100)$('ezK').value=S.kwh}
     document.body.classList.toggle('nodock',!(name==='decoder'||name==='monsters'));
     Drawer.close(false);try{Pot.close();Big.close();Lang.close();Polish.watch()}catch(e){}
     if(changed){window.scrollTo(0,0);if(animate){raf(function(){try{renderAll()}catch(e){}})}else{try{renderAll()}catch(e){}};if(focus&&v){var h=v.querySelector('h1');if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true})}catch(e){}}}}},
   init:function(){window.Router=Router;var self=this;window.addEventListener('hashchange',function(){self.go(location.hash.slice(1),true)});this.go(location.hash.slice(1),false)}};
+
+/* v9.18 main line + easy mode */
+var Share={url:function(easy){return location.origin+location.pathname+(easy?'#easy':'')},
+  text:function(st,r){var top=Share.top(r),bill=r.pay==='rent'?null:r.billNow;
+    if(typeof I18N!=='undefined'&&I18N.lang==='en')return 'Our home used '+fmt(st.kwh)+' kWh this bill'+(bill!=null?', about NT$'+fmt(bill):'')+'. That’s '+fmt(r.m)+' kWh a month — price step '+(r.ti+1)+' of 6.'+(top.length?' Biggest user is probably the '+NM(top[0].a.name)+'.':'')+' Take a look: '+Share.url(false);
+    return '我們家這期用了 '+fmt(st.kwh)+' 度'+(bill!=null?'，電費大約 NT$'+fmt(bill):'')+'。平均每月 '+fmt(r.m)+' 度，在電價第 '+(r.ti+1)+' 階（共 6 階）。'+(top.length?'最可能吃電的是「'+top[0].a.name+'」。':'')+'一起來看看怎麼省：'+Share.url(false)},
+  top:function(r){return r.rows.filter(function(x){return x.base>0}).sort(function(a,b){return b.base-a.base}).slice(0,2)},
+  line:function(t){return 'https://line.me/R/share?text='+encodeURIComponent(t)},
+  sys:function(t){if(navigator.share){navigator.share({text:t}).catch(function(){});return}window.open(Share.line(t),'_blank','noopener')},
+  copy:function(t){try{navigator.clipboard.writeText(t).then(function(){toast(ZT('已複製，可以貼到群組','Copied — paste it in your group chat'),true)},function(){toast(t)})}catch(e){toast(t)}},
+  avg:function(st){return st.season==='s'?418:st.season==='n'?308:363},
+  rows:function(st,r){var avg=Share.avg(st),d=Math.round((r.m/avg-1)*100),top=Share.top(r),en=typeof I18N!=='undefined'&&I18N.lang==='en',o=[];
+    if(r.pay==='rent')o.push(['💡',ZT('電費包在房租裡，不用另外繳','Electricity is included in your rent')]);
+    else o.push(['NT$',ZT('這期電費大約 <b>NT$'+fmt(r.billNow)+'</b>','This bill is about <b>NT$'+fmt(r.billNow)+'</b>')]);
+    o.push([ZT('階','Step'),ZT('平均每月 '+fmt(r.m)+' 度，在電價的<b>第 '+(r.ti+1)+' 階</b>（共 6 階）','<b>Step '+(r.ti+1)+' of 6</b> — '+fmt(r.m)+' kWh a month')+(r.ti>=3?ZT('。多出來的度數，每度要 '+r.rate.toFixed(2)+' 元',' — extra kWh cost NT$'+r.rate.toFixed(2)+' each'):'')]);
+    o.push([ZT('比','Avg'),Math.abs(d)<10?ZT('跟全台一般家庭差不多（平均每月約 '+avg+' 度）','About the same as an average Taiwanese home ('+avg+' kWh a month)'):d>0?ZT('比全台一般家庭<b>多 '+d+'%</b>（平均每月約 '+avg+' 度）','<b>'+d+'% more</b> than an average home ('+avg+' kWh a month)'):ZT('比全台一般家庭<b>少 '+(-d)+'%</b>，很省了（平均每月約 '+avg+' 度）','<b>'+(-d)+'% less</b> than an average home ('+avg+' kWh a month) — nice')]);
+    if(top.length)o.push([ZT('怪','Top'),ZT('最可能吃電的：<b>'+top.map(function(x){return x.a.name}).join('、')+'</b>','Probably the biggest users: <b>'+top.map(function(x){return NM(x.a.name)}).join(', ')+'</b>')]);
+    return o.map(function(x){return '<div class="mrow"><i aria-hidden="true">'+x[0]+'</i><p>'+x[1]+'</p></div>'}).join('')+'<p class="mnote">'+ZT('以'+(st.season==='s'?'夏月':st.season==='n'?'非夏月':'夏月和非夏月混合的')+'電價估算，實際以台電帳單為準。','Estimated with '+(st.season==='s'?'summer':st.season==='n'?'non-summer':'mixed')+' rates; your Taipower bill is the final word.')+'</p>'}};
+var Mainline={bind:function(){
+    $('mline').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-mgo]');if(!b)return;var el=$(b.dataset.mgo);if(!el)return;try{el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'})}catch(x){el.scrollIntoView()}el.classList.remove('spot');void el.offsetWidth;el.classList.add('spot');setTimeout(function(){el.classList.remove('spot')},2200)});
+    $('mShare').addEventListener('click',function(){Share.sys(Share.text(S,Model.compute(S)))});
+    $('mCopy').addEventListener('click',function(){Share.copy(Share.text(S,Model.compute(S)))})},
+  render:function(st,r){if(Router.cur!=='decoder'&&Router.cur!==null)return;$('mres').innerHTML=Share.rows(st,r);$('mLine').href=Share.line(Share.text(st,r))}};
+var Easy={step:1,
+  show:function(n){Easy.step=n;document.querySelectorAll('#v-easy .ezs').forEach(function(x){x.hidden=x.dataset.ez!==String(n)});window.scrollTo(0,0);var h=document.querySelector('#v-easy .ezs[data-ez="'+n+'"] .ezh');if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true})}catch(e){}}schedule()},
+  bind:function(){var v=$('v-easy');
+    v.addEventListener('click',function(e){var m=e.target.closest&&e.target.closest('[data-ezm]');if(m){S.months=Number(m.dataset.ezm)===1?1:2;schedule();return}
+      var g=e.target.closest&&e.target.closest('[data-ezgo]');if(!g)return;var n=Number(g.dataset.ezgo);
+      if(n===2&&Easy.step===1){var k=Number($('ezK').value);if(!$('ezK').value||!isFinite(k)||k<1||k>9999){$('ezErr').textContent=ZT('請先打上電費單上的「計費度數」，例如 640。','Type the billed kWh from your bill first, e.g. 640.');$('ezK').focus();return}
+        $('ezErr').textContent='';S.kwh=Math.round(k);store.set(S)}
+      Easy.show(n)});
+    $('ezK').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();var b=v.querySelector('[data-ez="1"] .ezgo');if(b)b.click()}});
+    $('ezShare').addEventListener('click',function(){Share.sys(Share.text(S,Model.compute(S)))});
+    $('ezSend').addEventListener('click',function(){var t=ZT('這是看懂電費的簡單版，只要 3 步：拿出電費單、打上度數、看結果。','A simple 3-step page to understand your power bill: ')+Share.url(true);Share.sys(t)})},
+  render:function(st,r){if(Router.cur!=='easy')return;
+    document.querySelectorAll('#v-easy [data-ezm]').forEach(function(b){b.setAttribute('aria-pressed',String(Number(b.dataset.ezm)===st.months))});
+    if(Easy.step>=2){$('ezRes').innerHTML=Share.rows(st,r)}
+    if(Easy.step===3){var t=Share.text(st,r);$('ezMsg').textContent=t;$('ezLine').href=Share.line(t)}}};
 var Overlay={push:function(){try{history.pushState({ov:1},'')}catch(e){}},pop:function(){try{if(history.state&&history.state.ov)history.back()}catch(e){}}};
 window.addEventListener('popstate',function(){if(Lang.isOpen())Lang.close(true);else if(Big.isOpen())Big.close(true);else if(!$('outModal').hidden)Studio.closeOut(true);else if(!$('bModal').hidden)Badges.close(true);else if(Pot.isOpen())Pot.close(true);else if(Sheet.isOpen())Sheet.close(true);else if(Drawer.isOpen())Drawer.close(true,true)});
 var Drawer={open:function(){Overlay.push();$('menuDot').hidden=true;$('drawer').classList.add('open');$('dscrim').classList.add('open');$('menuBtn').setAttribute('aria-expanded','true');$('menuBtn').setAttribute('aria-label','關閉選單');
@@ -4068,7 +4206,7 @@ var BillCheck={
 var pending=false;
 function schedule(){if(pending)return;pending=true;raf(function(){pending=false;renderAll()})}
 function renderAll(){
-  try{var r=Model.compute(S),onDec=Router.cur==='decoder'||Router.cur===null;if(onDec){Meter.render(S,r);Stairs.render(S,r);Myth.render(S,r);House.render(S,r);Guess.render(S,r)}Dock.render(S,r);Dex.render(S,r);Learn.render(S);Challenge.render(S);Guide.render();Pick.render();Rank2.render(S,r);Feedback.render();document.querySelectorAll('.sflinks a').forEach(function(a){a.classList.toggle('on',a.dataset.route===Router.cur)});document.querySelectorAll('#dLang [data-dl]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.dl===(S.lang||'zh')))});React2.render(S);try{if(Router.cur==="challenge"&&!Patrol.on){Patrol.who();Patrol.board(-1)}}catch(e){}Unit.render(S,r);Steppers.sync();Stats.render(S,r);Badges.check(S);Badges.render(S);History.render(S);Elder.render(S,r);Home.render(S);Settings.render(S);Studio.render(S);if(Sheet.isOpen())Sheet.paint();
+  try{var r=Model.compute(S),onDec=Router.cur==='decoder'||Router.cur===null;if(onDec){Meter.render(S,r);Stairs.render(S,r);Myth.render(S,r);House.render(S,r);Guess.render(S,r)}Dock.render(S,r);Dex.render(S,r);Learn.render(S);Challenge.render(S);Guide.render();Pick.render();Rank2.render(S,r);Feedback.render();try{Mainline.render(S,r);Easy.render(S,r)}catch(ex){if(window.console)console.error(ex)}document.querySelectorAll('.sflinks a').forEach(function(a){a.classList.toggle('on',a.dataset.route===Router.cur)});document.querySelectorAll('#dLang [data-dl]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.dl===(S.lang||'zh')))});React2.render(S);try{if(Router.cur==="challenge"&&!Patrol.on){Patrol.who();Patrol.board(-1)}}catch(e){}Unit.render(S,r);Steppers.sync();Stats.render(S,r);Badges.check(S);Badges.render(S);History.render(S);Elder.render(S,r);Home.render(S);Settings.render(S);Studio.render(S);if(Sheet.isOpen())Sheet.paint();
     prev.ti=r.ti;prev.nti=r.nti;prev.save=r.save;store.set(S);}
   catch(err){fail(err)}}
 var failed=false;
@@ -4116,7 +4254,7 @@ if(window.Element&&!Element.prototype.closest)Element.prototype.closest=function
 if(window.Element&&!Element.prototype.remove)Element.prototype.remove=function(){if(this.parentNode)this.parentNode.removeChild(this)};
 
 window.addEventListener('error',function(e){fail(e.error||e.message)});
-try{$('langSel').value=S.lang;Lang.sync();$('langSel').addEventListener('change',function(){S.lang=this.value;Lang.sync();store.set(S);I18N.set(S.lang);try{schedule()}catch(e){}try{BillGuess.next()}catch(e){}try{if($('chkOut').innerHTML)BillCheck.run()}catch(e){}});Theme.bind();Meter.build();Stairs.build();House.build();Guess.build();Dex.build();Learn.bind();Challenge.bind();History.bind();Elder.bind();Drawer.bind();Egg.bind();document.querySelectorAll('svg[data-wart]').forEach(function(e){e.innerHTML=WART[e.getAttribute('data-wart')]||''});Ghost.build();BillCheck.bind();Home.bind();Guide.bind();Pick.bind();Steppers.bind();React2.bind();Basics.bind();Feedback.bind();$('dLang').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-dl]');if(!b)return;var sel=$('langSel');if(sel.value===b.dataset.dl)return;sel.value=b.dataset.dl;var ev;try{ev=new Event('change',{bubbles:true})}catch(x){ev=document.createEvent('Event');ev.initEvent('change',true,true)}sel.dispatchEvent(ev)});Settings.bind();Studio.bind();WhoEdit.bind();Polish.bind();Pot.bind();Big.bind();Lang.bind();BillGuess.bind();bind();Router.init();renderAll();I18N.set(S.lang);Live.load(false)}catch(err){fail(err)}
+try{$('langSel').value=S.lang;Lang.sync();$('langSel').addEventListener('change',function(){S.lang=this.value;Lang.sync();store.set(S);I18N.set(S.lang);try{schedule()}catch(e){}try{BillGuess.next()}catch(e){}try{if($('chkOut').innerHTML)BillCheck.run()}catch(e){}});Theme.bind();Meter.build();Stairs.build();House.build();Guess.build();Dex.build();Learn.bind();Challenge.bind();History.bind();Elder.bind();Drawer.bind();Egg.bind();document.querySelectorAll('svg[data-wart]').forEach(function(e){e.innerHTML=WART[e.getAttribute('data-wart')]||''});Ghost.build();BillCheck.bind();Home.bind();Guide.bind();Pick.bind();Steppers.bind();React2.bind();Basics.bind();Feedback.bind();Mainline.bind();Easy.bind();$('dLang').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-dl]');if(!b)return;var sel=$('langSel');if(sel.value===b.dataset.dl)return;sel.value=b.dataset.dl;var ev;try{ev=new Event('change',{bubbles:true})}catch(x){ev=document.createEvent('Event');ev.initEvent('change',true,true)}sel.dispatchEvent(ev)});Settings.bind();Studio.bind();WhoEdit.bind();Polish.bind();Pot.bind();Big.bind();Lang.bind();BillGuess.bind();bind();Router.init();renderAll();I18N.set(S.lang);Live.load(false)}catch(err){fail(err)}
 
 /* expose for testing only */
 window.__DAH={Model:Model,state:function(){return S},cfg:CFG,go:function(n){location.hash=n}};
