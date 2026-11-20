@@ -1903,6 +1903,20 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
 .pwbtns{grid-template-columns:repeat(auto-fit,minmax(min(100%,8.6em),1fr))}
 .pwbtns b{white-space:nowrap}
 @media (max-width:699px){.pwbtns{grid-template-columns:1fr}.pwbtns button{flex-direction:row;justify-content:space-between;align-items:center;min-height:54px;padding:10px 16px}.pwbtns small{text-align:right}}
+
+/* v9.33 saving reward input */
+.rwline{display:block;font-style:normal;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(255,255,255,.3);font-size:var(--fs-s);opacity:.95}
+.ezbig .rwline b,.rwline b{color:#F4C26B;font-size:1.25em!important;line-height:1.3;letter-spacing:0;font-weight:900}
+.ezbig .rwline{font-size:calc(15px*var(--z,1));color:inherit}
+.rwbox{display:grid;gap:10px;background:var(--elev);border-radius:18px;box-shadow:var(--card-sh);padding:14px;margin:8px 0;text-align:left}
+.rwbox .rwh{margin:0;font-size:var(--fs-s);color:var(--soft);line-height:1.6}
+.rwbox label{display:grid;gap:6px;font-size:var(--fs-s);font-weight:700}
+.rwin{display:flex;align-items:center;gap:8px}
+.rwin input{flex:1;min-width:0;min-height:48px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--text);font:inherit;font-size:var(--fs-m);padding:0 12px}
+.rwin i{font-style:normal;color:var(--soft)}
+.rwout{margin:0;font-size:var(--fs-s)}.rwout .rwline{border:0;padding:0;margin:0}.rwout .rwline b{color:var(--hot-t,#B5523B)}
+.ezrw{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.ezq2{font-size:calc(17px*var(--z))!important;margin-top:2px!important}
 </style>
 </head>
 <body>
@@ -1980,7 +1994,14 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
           <button class="pm" id="plus" type="button" aria-label="增加 50 度">+</button>
         </div>
         <a class="basicslink" href="#basics" data-route="basics">不知道 1 度是多少？看「用電基本知識」</a>
-        <div class="qlinks"><button class="linkbtn" id="exactBtn" type="button" aria-expanded="false" aria-controls="exactBox">直接輸入度數</button><button class="linkbtn" id="chkBtn" type="button" aria-expanded="false" aria-controls="chkBox">照帳單算一次</button></div>
+        <div class="qlinks"><button class="linkbtn" id="exactBtn" type="button" aria-expanded="false" aria-controls="exactBox">直接輸入度數</button><button class="linkbtn" id="chkBtn" type="button" aria-expanded="false" aria-controls="chkBox">照帳單算一次</button><button class="linkbtn" id="rwBtn" type="button" aria-expanded="false" aria-controls="rwBox">節電獎勵</button></div>
+        <form class="rwbox" id="rwBox" hidden novalidate>
+          <p class="rwh">節電獎勵：跟去年同一期比，每少用 1 度回饋 0.6 元（要先登錄）。填一個就好，結果會自動扣掉。</p>
+          <label>去年同一期用了幾度（帳單上有印）<span class="rwin"><input id="rwLy" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 900"><i>度</i></span></label>
+          <label>或：帳單上扣掉的節電獎勵<span class="rwin"><input id="rwAmt" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 84"><i><span class="lang-zh" data-noi18n>元</span><span class="lang-en" data-noi18n>NT$</span></i></span></label>
+          <p class="rwout" id="rwOut" aria-live="polite"></p>
+          <button class="linkbtn" type="button" id="rwClear" style="padding-left:0">清除</button>
+        </form>
         <form class="exact" id="exactBox" hidden novalidate>
           <label class="sr" for="exact">計費度數</label>
           <input id="exact" type="number" inputmode="numeric" min="0" max="9999" step="1" value="1100">
@@ -2105,12 +2126,18 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
     <div class="ezdate"><span class="lang-zh" data-noi18n>到</span><span class="lang-en" data-noi18n>To</span><select id="ezEm" aria-label="結束月"><option value="">--</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><span data-noi18n>/</span><select id="ezEd" aria-label="結束日"><option value="">--</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select></div>
     <p class="ezq">這張電費單是</p>
     <div class="ezseg" role="group" aria-label="帳單是幾個月"><button type="button" class="ezopt" data-ezm="2"><b>兩個月一張</b><small>大部分家庭</small></button><button type="button" class="ezopt" data-ezm="1"><b>一個月一張</b></button></div>
-    <details class="ezmore" id="ezMore"><summary><b>想算得更準？多答 2 題</b><small>可以跳過</small></summary>
+
+    <div class="ezrw"><p class="ezq"><i>③</i>節電獎勵<small>可以不填</small></p>
+      <p class="ezsmall">跟去年同一期比，每少用 1 度回饋 0.6 元（要先登錄）。下面兩個填一個就好。</p>
+      <label class="ezq ezq2" for="ezLy">去年同一期用了幾度？<small>電費單上有印</small></label>
+      <div class="ezin"><input id="ezLy" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 900" autocomplete="off"><span>度</span></div>
+      <label class="ezq ezq2" for="ezRw">或：帳單上扣掉的節電獎勵</label>
+      <div class="ezin"><input id="ezRw" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 84" autocomplete="off"><span>元</span></div>
+    </div>
+    <details class="ezmore" id="ezMore"><summary><b>想算得更準？多答 1 題</b><small>可以跳過</small></summary>
       <p class="ezq">家裡有這些電器嗎？<small>按一下是「有」，再按一下取消</small></p>
       <div class="ezapps" id="ezApps" role="group" aria-label="家裡有的電器"></div>
       <p class="ezsmall">這裡選的，「電費怪獸」也會跟著改。</p>
-      <label class="ezq" for="ezLy">去年同一期用了幾度？<small>電費單上有「去年同期」的度數</small></label>
-      <div class="ezin"><input id="ezLy" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 900" autocomplete="off"><span>度</span></div>
     </details>
     <p class="ezerr" id="ezErr" aria-live="polite"></p>
     <button type="button" class="ezgo" data-ezgo="2">下一步：看結果 ›</button>
@@ -2118,7 +2145,7 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
 
   <section class="ezs" data-ez="2" hidden>
     <h1 class="ezh">你家這期的電費</h1>
-    <div class="ezbig"><small>這期電費大約</small><b id="ezBill">—</b><span id="ezPer"></span></div>
+    <div class="ezbig"><small>這期電費大約</small><b id="ezBill">—</b><span id="ezPer"></span><span id="ezRwL"></span></div>
     <div class="ezcard"><h2 id="ezTierH">在電價的第幾階？</h2><div class="ezstairs" id="ezStairs" aria-hidden="true"></div><p id="ezTierSay"></p></div>
     <div class="ezcard"><h2>跟一般家庭比</h2><div class="ezcmp" id="ezCmp"></div></div>
     <div class="ezcard" id="ezLyCard" hidden><h2>跟去年同一期比</h2><div id="ezLyOut"></div></div>
@@ -3083,7 +3110,7 @@ var Model={
    STATE — validated, persisted
    ========================================================= */
 function defaultState(){var app={};APPLIANCES.forEach(function(a){var o={tamed:false};for(var k in a.def)o[k]=a.def[k];app[a.id]=o});
-  return {kwh:1100,months:2,season:(function(){var m=new Date().getMonth()+1;return m>=6&&m<=9?'s':'n'})(),app:app,who:'阿公',lamps:0,guess:null,lastYear:null,newBill:null,theme:'auto',preset:'big',seenHint:false,lang:(function(){var n=(navigator.language||'zh').toLowerCase();return n.indexOf('en')===0?'en':'zh'})(),badges:{},patrolBest:0,history:[],pred:null,missions:{},quiz:{},esize:'l',lk:400,bseen:0,big:0,sd:31,qset:pickQuiz(),home:{type:'big',pay:'own',rate:5,touched:false,cname:'',oname:'',ocalc:'tier'},members:['阿公','阿嬤','爸爸','媽媽','我'],studio:{size:'p',tpl:'note',color:0,fs:'m',show:{line:true,who:true,save:true},ft:stuFt(),title:null,body:null,stk:[{k:'b_tame',x:.86,y:.075,s:.15,r:.12}],z:1,ox:0,oy:0}}}
+  return {kwh:1100,months:2,season:(function(){var m=new Date().getMonth()+1;return m>=6&&m<=9?'s':'n'})(),app:app,who:'阿公',lamps:0,guess:null,lastYear:null,newBill:null,rwAmt:null,theme:'auto',preset:'big',seenHint:false,lang:(function(){var n=(navigator.language||'zh').toLowerCase();return n.indexOf('en')===0?'en':'zh'})(),badges:{},patrolBest:0,history:[],pred:null,missions:{},quiz:{},esize:'l',lk:400,bseen:0,big:0,sd:31,qset:pickQuiz(),home:{type:'big',pay:'own',rate:5,touched:false,cname:'',oname:'',ocalc:'tier'},members:['阿公','阿嬤','爸爸','媽媽','我'],studio:{size:'p',tpl:'note',color:0,fs:'m',show:{line:true,who:true,save:true},ft:stuFt(),title:null,body:null,stk:[{k:'b_tame',x:.86,y:.075,s:.15,r:.12}],z:1,ox:0,oy:0}}}
 function sanitize(raw){var d=defaultState();if(!raw||typeof raw!=='object')return d;
   d.kwh=isFinite(Number(raw.kwh))&&raw.kwh!==''&&raw.kwh!==null?clamp(raw.kwh,CFG.kwhMin,CFG.kwhMax):1100;d.months=raw.months===1?1:2;d.season=raw.season==='n'?'n':raw.season==='m'?'m':'s';d.sd=raw.sd==null?(d.months===2?31:15):clamp(raw.sd,0,d.months===2?62:31)|0;
   if(raw.home&&typeof raw.home==='object'){if(HMEM[raw.home.type])d.home.type=raw.home.type;if(PAYS.some(function(p){return p[0]===raw.home.pay}))d.home.pay=raw.home.pay;d.home.cname=cleanName(raw.home.cname||'');d.home.oname=cleanName(raw.home.oname||'');if(['tier','rate','none'].indexOf(raw.home.ocalc)>=0)d.home.ocalc=raw.home.ocalc;if(isFinite(Number(raw.home.rate)))d.home.rate=Math.round(clamp(raw.home.rate,0,15)*10)/10;d.home.touched=!!raw.home.touched;d.members=HMEM[d.home.type].slice()}
@@ -3093,7 +3120,7 @@ function sanitize(raw){var d=defaultState();if(!raw||typeof raw!=='object')retur
     ['title','body'].forEach(function(k){if(typeof r0[k]==='string'&&!Mod.check(r0[k]))ds[k]=r0[k].slice(0,60)});ds.z=clamp(r0.z||1,1,3);ds.ox=clamp(r0.ox||0,-1,1);ds.oy=clamp(r0.oy||0,-1,1);
     if(Array.isArray(r0.stk))ds.stk=r0.stk.filter(function(t){return t&&STK.some(function(k){return k[0]===t.k})}).slice(0,12).map(function(t){return{k:t.k,x:clamp(t.x,0,1),y:clamp(t.y,0,1),s:clamp(t.s,.06,.9),r:Number(t.r)||0}})}
   if(APPLIANCES.some(function(a){return a.id===raw.guess}))d.guess=raw.guess;
-  ['lastYear','newBill'].forEach(function(k){if(raw[k]!=null&&isFinite(Number(raw[k])))d[k]=clamp(raw[k],0,CFG.kwhMax)});
+  ['lastYear','newBill','rwAmt'].forEach(function(k){if(raw[k]!=null&&isFinite(Number(raw[k])))d[k]=clamp(raw[k],0,CFG.kwhMax)});
   d.lamps=clamp(raw.lamps,0,999)|0;d.checkEdited=!!raw.checkEdited;
   if(Array.isArray(raw.history))d.history=raw.history.filter(function(h){return h&&/^\d{4}-\d{2}$/.test(h.ym)&&isFinite(Number(h.kwh))}).slice(0,60).map(function(h){return{ym:h.ym,kwh:clamp(h.kwh,0,CFG.kwhMax),months:h.months===1?1:2,reward:clamp(Math.round(Number(h.reward)||0),0,9999)}});
   if(raw.pred&&isFinite(Number(raw.pred.kwh)))d.pred={kwh:clamp(raw.pred.kwh,0,CFG.kwhMax),at:String(raw.pred.at||'')};
@@ -3455,7 +3482,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.32 (dah-v53)';
+var SITE_VER='9.33 (dah-v54)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -3581,6 +3608,7 @@ I18N_DATA.D['夏天（#～# 月）電價比較貴，填了日期會算得比較�
 I18N_DATA.D['有沒有比較省']=['Did we save?',''];I18N_DATA.D['給爸媽與其他']=['For parents & more',''];I18N_DATA.D['簡單版、資料來源、回報']=['Simple version, sources, feedback',''];I18N_DATA.D['選單也照這個順序排好了：每一頁最下面都有「下一步」，照著按就會走完四步。要給爸媽用，直接傳「簡單版」給他們。']=['The menu follows the same order, and every page ends with a “Next” button that walks you through all four steps. For parents, just send them the simple version.',''];I18N_DATA.D['先猜哪台最吃電，再看答案。到「② 我家電器」把電器改成你家的情況，按「讓它睡覺」看能省多少。']=['Guess which appliance uses the most, then check. In “② My appliances”, match them to your home and tap “Put it to sleep” to see the savings.',''];
 (function(A){for(var k in A)I18N_DATA.D[k]=[A[k],'']})({"電費單一來，家裡就開始猜：": "When the bill arrives, the guessing starts:", "「到底是誰用最多電？」": "“Who used the most power?”", "拿出電費單，從這裡開始": "Grab your bill and start here", "四步驟看懂電費": "Your bill in four steps", "① 看懂 → ② 找出 → ③ 一起做 → ④ 下期比": "① Understand → ② Find → ③ Together → ④ Compare", "輸入度數，看第幾階": "Enter kWh, see your step", "哪台電器最吃電": "Which appliance uses most", "傳給家人、分工": "Share and split tasks", "有沒有比較省": "Did we save?", "用越多，多出來的度數越貴；全家的電是加在一起算的。": "The more you use, the pricier the extra kWh — and the whole household’s use counts together."});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],''];var n=k.replace(/\d+/g,'#');if(n!==k)I18N_DATA.D[n]=[A[k],'']}})({"你家的電費單，在誰手上？": "Who has your household’s power bill?", "你家的電費單在誰手上": "Who has the bill", "在我手上": "I do", "直接輸入度數": "Enter the kWh", "在爸媽那": "My parents", "我幫忙看懂": "I’ll help read it", "我在租屋": "I rent", "房東收電費": "Landlord charges me", "帳單在爸媽手上的話，你可以：": "If your parents have the bill, you can:", "把「簡單版」傳給爸媽": "Send them the simple version", "只有 3 步、字很大，他們自己就能看懂": "3 steps, big text — they can read it on their own", "請爸媽拍帳單給你，你來輸入": "Ask for a photo of the bill and enter it yourself", "看懂之後，再把結果傳回家庭群組": "Then share the result back to the family group"});
+(function(A){for(var k in A){I18N_DATA.D[k]=[A[k],''];var n=k.replace(/\d+(?:\.\d+)?/g,'#');if(n!==k)I18N_DATA.D[n]=[A[k],'']}})({"節電獎勵": "Saving reward", "節電獎勵：跟去年同一期比，每少用 1 度回饋 0.6 元（要先登錄）。填一個就好，結果會自動扣掉。": "Saving reward: NT$0.6 back for every kWh you use less than the same period last year (sign-up required). Fill in either one and the result will deduct it.", "去年同一期用了幾度（帳單上有印）": "Last year’s kWh for the same period (printed on the bill)", "或：帳單上扣掉的節電獎勵": "Or: the reward deducted on your bill", "清除": "Clear", "例如 900": "e.g. 900", "例如 84": "e.g. 84", "可以不填": "optional", "跟去年同一期比，每少用 1 度回饋 0.6 元（要先登錄）。下面兩個填一個就好。": "Compared with the same period last year, every kWh less earns NT$0.6 (sign-up required). Fill in just one below.", "去年同一期用了幾度？": "Last year’s kWh, same period?", "電費單上有印": "It’s on the bill", "想算得更準？多答 1 題": "Want more accuracy? One more question"});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -3700,15 +3728,26 @@ var Who={go:function(id){var el=$(id);if(!el)return;try{el.scrollIntoView({behav
     $('pwSend').addEventListener('click',function(){Share.sys(ZT('爸媽，這是看懂電費的簡單版，只要 3 步：拿出電費單、打上度數、看結果。','Mom, Dad — a simple 3-step page to understand our power bill: ')+Share.url(true))});
     $('pwSelf').addEventListener('click',function(){Who.go('stepk1')})},
   render:function(st){var w=$('pWho');if(!w)return;var c=Who.cur(st);w.querySelectorAll('[data-who]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.who===c))});if(c!=='family')$('pwFam').hidden=true}};
-var Mainline={bind:function(){Who.bind();var pg=$('pGo');if(pg)pg.addEventListener('click',function(){var el=$('stepk1');try{el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'})}catch(x){el.scrollIntoView()}});
+var RwBox={bind:function(){var b=$('rwBtn');if(!b)return;
+    b.addEventListener('click',function(){var x=$('rwBox');x.hidden=!x.hidden;b.setAttribute('aria-expanded',String(!x.hidden));if(!x.hidden)$('rwLy').focus()});
+    var up=function(){var a=$('rwLy').value,c=$('rwAmt').value;S.lastYear=a===''||!isFinite(Number(a))?null:clamp(Number(a),0,9999);S.rwAmt=c===''||!isFinite(Number(c))?null:clamp(Number(c),0,9999);store.set(S);schedule()};
+    $('rwLy').addEventListener('input',up);$('rwAmt').addEventListener('input',up);
+    $('rwClear').addEventListener('click',function(){$('rwLy').value='';$('rwAmt').value='';up()});
+    $('rwBox').addEventListener('submit',function(e){e.preventDefault()})},
+  render:function(st,r){if(!$('rwBox'))return;var a=$('rwLy'),c=$('rwAmt');if(document.activeElement!==a)a.value=st.lastYear!=null?st.lastYear:'';if(document.activeElement!==c)c.value=st.rwAmt!=null?st.rwAmt:'';
+    var w=rwOf(st);$('rwOut').innerHTML=w?rwLine(st,r):(st.lastYear!=null?ZT('比去年同期沒有少用，這期拿不到節電獎勵。','Not less than last year — no reward this time.'):'')}};
+var Mainline={bind:function(){Who.bind();RwBox.bind();var pg=$('pGo');if(pg)pg.addEventListener('click',function(){var el=$('stepk1');try{el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'})}catch(x){el.scrollIntoView()}});
     $('mline').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-mgo]');if(!b)return;var el=$(b.dataset.mgo);if(!el)return;try{el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'})}catch(x){el.scrollIntoView()}el.classList.remove('spot');void el.offsetWidth;el.classList.add('spot');setTimeout(function(){el.classList.remove('spot')},2200)});
     $('mShare').addEventListener('click',function(){Share.sys(Share.text(S,Model.compute(S)))});
     $('mCopy').addEventListener('click',function(){Share.copy(Share.text(S,Model.compute(S)))})},
-  render:function(st,r){if(Router.cur!=='decoder'&&Router.cur!==null)return;Who.render(st);$('mres').innerHTML=Easy.visual(st,r);$('mLine').href=Share.line(Share.text(st,r))}};
+  render:function(st,r){if(Router.cur!=='decoder'&&Router.cur!==null)return;Who.render(st);RwBox.render(st,r);$('mres').innerHTML=Easy.visual(st,r);$('mLine').href=Share.line(Share.text(st,r))}};
 function bar0(lab,val,cls,mx){mx=mx*1.08;return '<div class="ezbar '+cls+'"><span>'+lab+'</span><div><i style="width:'+Math.max(6,Math.round(val/mx*100))+'%"></i></div><b>'+fmt(Math.round(val))+ZT(' 度',' kWh')+'</b></div>'}
+function rwOf(st){if(st.rwAmt!=null&&st.rwAmt>0)return{amt:Math.round(st.rwAmt),src:'bill'};if(st.lastYear!=null&&st.lastYear>st.kwh)return{amt:Math.round((st.lastYear-st.kwh)*0.6),src:'est',dd:st.lastYear-st.kwh};return null}
+function rwLine(st,r){var w=rwOf(st);if(!w||r.pay==='rent')return '';var net=Math.max(0,r.billNow-w.amt);
+  return '<em class="rwline">'+(w.src==='bill'?ZT('扣掉節電獎勵 NT$'+fmt(w.amt)+'，實付約 <b>NT$'+fmt(net)+'</b>','After the NT$'+fmt(w.amt)+' saving reward: about <b>NT$'+fmt(net)+'</b>'):ZT('比去年同期少 '+fmt(w.dd)+' 度，有登錄節電獎勵約折 NT$'+fmt(w.amt)+'，實付約 <b>NT$'+fmt(net)+'</b>',fmt(w.dd)+' kWh less than last year: if registered, about NT$'+fmt(w.amt)+' off — about <b>NT$'+fmt(net)+'</b>'))+'</em>'}
 var Easy={step:1,pd:null,
   visual:function(st,r){var f=Easy.facts(st,r),h='',i,mx=Math.max(r.m,f.avg)*1.08;
-    h+='<div class="ezbig"><small>'+ZT('這期電費大約','This bill is about')+'</small><b>'+(r.pay==='rent'?ZT('包在房租裡','In your rent'):'NT$'+fmt(r.billNow))+'</b><span>'+ZT('平均每個月 '+fmt(r.m)+' 度','About '+fmt(r.m)+' kWh a month')+'</span></div>';
+    h+='<div class="ezbig"><small>'+ZT('這期電費大約','This bill is about')+'</small><b>'+(r.pay==='rent'?ZT('包在房租裡','In your rent'):'NT$'+fmt(r.billNow))+'</b><span>'+ZT('平均每個月 '+fmt(r.m)+' 度','About '+fmt(r.m)+' kWh a month')+'</span>'+rwLine(st,r)+'</div>';
     var stp='';for(i=0;i<6;i++)stp+='<span class="'+(i<r.ti?'on':i===r.ti?'on cur':'')+'" style="height:'+(26+i*13)+'%"><i>'+(i+1)+'</i></span>';
     h+='<div class="ezcard"><h2>'+ZT('在電價的<b>第 '+(r.ti+1)+' 階</b>（共 6 階）','<b>Step '+(r.ti+1)+'</b> of 6 on the price stairs')+'</h2><div class="ezstairs" aria-hidden="true">'+stp+'</div><p>'+(r.ti<=1?ZT('用得不多，很省！','You use little — nicely done!'):r.ti===2?ZT('跟很多家庭一樣，在中間。','Right in the middle, like many homes.'):ZT('用得比較多。每個月超過 '+f.lim+' 度的部分，每度要 '+r.rate.toFixed(2)+' 元。','On the higher side. Each kWh over '+f.lim+' a month costs NT$'+r.rate.toFixed(2)+'.'))+'</p></div>';
     var bar=function(lab,val,cls){return '<div class="ezbar '+cls+'"><span>'+lab+'</span><div><i style="width:'+Math.max(6,Math.round(val/mx*100))+'%"></i></div><b>'+fmt(Math.round(val))+ZT(' 度',' kWh')+'</b></div>'};
@@ -3726,8 +3765,8 @@ var Easy={step:1,pd:null,
     window.scrollTo(0,0);var h=document.querySelector('#v-easy .ezs[data-ez="'+n+'"] .ezh');if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true})}catch(e){}}schedule()},
   next1:function(){var k=Number($('ezK').value);if(!$('ezK').value||!isFinite(k)||k<1||k>9999){$('ezErr').textContent=ZT('請先打上電費單上的「計費度數」，例如 832。','Type the billed kWh from your bill first, e.g. 832.');$('ezK').focus();return false}
     var pd=Easy.period();if(pd===false){$('ezErr').textContent=ZT('日期要填完整（從幾月幾日到幾月幾日），或全部空著。','Fill in both dates completely, or leave them all blank.');return false}
-    var lyv=$('ezLy').value,ly=Number(lyv);if(lyv!==''&&(!isFinite(ly)||ly<1||ly>9999)){$('ezErr').textContent=ZT('去年同期的度數看起來不對，可以改一下或空著。','Last year’s kWh doesn’t look right. Fix it or leave it blank.');$('ezLy').focus();return false}S.lastYear=lyv===''?null:Math.round(ly);$('ezErr').textContent='';S.kwh=Math.round(k);if(pd){S.months=pd.days>45?2:1;var P=S.months===2?62:31;if(pd.sum===0)S.season='n';else if(pd.sum>=pd.days)S.season='s';else{S.season='m';S.sd=Math.round(pd.sum/pd.days*P)}Easy.pd=pd}else Easy.pd=null;store.set(S);return true},
-  apps:function(){var h='';['ac1','ac2','ket','wh','dh','stb','rc'].forEach(function(id){var a=APPLIANCES.filter(function(x){return x.id===id})[0],on=!!S.app[id].has;h+='<button type="button" class="ezchip" data-ezapp="'+id+'" aria-pressed="'+on+'"><i aria-hidden="true">'+(on?'✓':'+')+'</i>'+esc(I18N.lang==='en'?NM(a.name):a.name)+'</button>'});$('ezApps').innerHTML=h;var ly=$('ezLy');if(document.activeElement!==ly)ly.value=S.lastYear!=null?S.lastYear:''},
+    var lyv=$('ezLy').value,ly=Number(lyv);if(lyv!==''&&(!isFinite(ly)||ly<1||ly>9999)){$('ezErr').textContent=ZT('去年同期的度數看起來不對，可以改一下或空著。','Last year’s kWh doesn’t look right. Fix it or leave it blank.');$('ezLy').focus();return false}S.lastYear=lyv===''?null:Math.round(ly);var rwv=$('ezRw').value,rw=Number(rwv);if(rwv!==''&&(!isFinite(rw)||rw<0||rw>9999)){$('ezErr').textContent=ZT('節電獎勵的金額看起來不對，可以改一下或空著。','The reward amount doesn’t look right. Fix it or leave it blank.');$('ezRw').focus();return false}S.rwAmt=rwv===''?null:Math.round(rw);$('ezErr').textContent='';S.kwh=Math.round(k);if(pd){S.months=pd.days>45?2:1;var P=S.months===2?62:31;if(pd.sum===0)S.season='n';else if(pd.sum>=pd.days)S.season='s';else{S.season='m';S.sd=Math.round(pd.sum/pd.days*P)}Easy.pd=pd}else Easy.pd=null;store.set(S);return true},
+  apps:function(){var h='';['ac1','ac2','ket','wh','dh','stb','rc'].forEach(function(id){var a=APPLIANCES.filter(function(x){return x.id===id})[0],on=!!S.app[id].has;h+='<button type="button" class="ezchip" data-ezapp="'+id+'" aria-pressed="'+on+'"><i aria-hidden="true">'+(on?'✓':'+')+'</i>'+esc(I18N.lang==='en'?NM(a.name):a.name)+'</button>'});$('ezApps').innerHTML=h;var ly=$('ezLy');if(document.activeElement!==ly)ly.value=S.lastYear!=null?S.lastYear:'';var rwI=$('ezRw');if(rwI&&document.activeElement!==rwI)rwI.value=S.rwAmt!=null?S.rwAmt:''},
   bind:function(){var v=$('v-easy');
     v.addEventListener('click',function(e){var t=e.target.closest?e.target:null;if(!t)return;
       var f=t.closest('[data-ezfs]');if(f){S.ezfs=f.dataset.ezfs;store.set(S);schedule();return}
@@ -3758,7 +3797,7 @@ var Easy={step:1,pd:null,
     if(Easy.step===1)Easy.apps();
     if(Easy.step>=2){var f=Easy.facts(st,r),pd=Easy.pd;var lyC=$('ezLyCard');lyC.hidden=st.lastYear==null;if(st.lastYear!=null){var dd=st.lastYear-st.kwh;$('ezLyOut').innerHTML='<div class="ezcmp">'+bar0(ZT('去年','Last yr'),st.lastYear,'avg',Math.max(st.lastYear,st.kwh))+bar0(ZT('今年','This yr'),st.kwh,'me',Math.max(st.lastYear,st.kwh))+'</div><p>'+(dd>0?ZT('少用了 <b>'+fmt(dd)+' 度</b>。有登錄台電節電獎勵的話，大約可以折 <b>NT$'+fmt(Math.round(dd*0.6))+'</b>（每少 1 度 0.6 元）。','<b>'+fmt(dd)+' kWh less</b>. If you signed up for Taipower’s saving reward, that’s about <b>NT$'+fmt(Math.round(dd*0.6))+'</b> off (NT$0.6 per kWh).'):dd===0?ZT('跟去年一樣多。','Same as last year.'):ZT('多用了 <b>'+fmt(-dd)+' 度</b>，這期拿不到節電獎勵。看看下面最吃電的是哪一台。','<b>'+fmt(-dd)+' kWh more</b> — no saving reward this time. See which appliance uses the most below.'))+'</p><p class="ezsmall">'+ZT('節電獎勵要先登錄，2026 年 12 月 17 日前。用度數直接比，實際以台電帳單為準。','You must sign up for the reward by 17 Dec 2026. This compares kWh directly; your Taipower bill is the final word.')+'</p>'}
       $('ezBill').textContent=r.pay==='rent'?ZT('包在房租裡','In your rent'):'NT$'+fmt(r.billNow);
-      $('ezPer').textContent=ZT('平均每個月 '+fmt(r.m)+' 度','About '+fmt(r.m)+' kWh a month');
+      $('ezPer').textContent=ZT('平均每個月 '+fmt(r.m)+' 度','About '+fmt(r.m)+' kWh a month');$('ezRwL').innerHTML=rwLine(st,r);
       $('ezTierH').innerHTML=ZT('在電價的<b>第 '+(r.ti+1)+' 階</b>（共 6 階）','<b>Step '+(r.ti+1)+'</b> of 6 on the price stairs');
       var h='';for(var i=0;i<6;i++)h+='<span class="'+(i<r.ti?'on':i===r.ti?'on cur':'')+'" style="height:'+(26+i*13)+'%"><i>'+(i+1)+'</i></span>';$('ezStairs').innerHTML=h;
       $('ezTierSay').textContent=r.ti<=1?ZT('用得不多，很省！','You use little — nicely done!'):r.ti===2?ZT('跟很多家庭一樣，在中間。','Right in the middle, like many homes.'):ZT('用得比較多。每個月超過 '+f.lim+' 度的部分，每度要 '+r.rate.toFixed(2)+' 元。','On the higher side. Each kWh over '+f.lim+' a month costs NT$'+r.rate.toFixed(2)+'.');
