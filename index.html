@@ -542,7 +542,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .bdg i{display:grid;place-items:center;width:56px;height:56px;margin:0 auto 6px;border-radius:50%;font-style:normal;font-family:var(--f-serif);font-weight:900;font-size:24px;background:var(--surface-hi);color:var(--faint)}
 .bdg.on i{background:#E2A33B;color:#2E2A26;box-shadow:0 0 0 4px color-mix(in srgb,#E2A33B 30%,transparent)}
 .bdg b{display:block;font-size:var(--fs-s)}
-.bdg small{display:block;font-size:var(--fs-xs);color:var(--faint);line-height:1.5}.blearn{display:block;margin-top:6px;font-style:normal;font-size:var(--fs-xs);line-height:1.5;color:var(--mint-t);font-weight:700}
+.bdg small{display:block;font-size:var(--fs-xs);color:var(--faint);line-height:1.5}
 .guessbill{background:linear-gradient(180deg,var(--glass-hi),transparent 46%),var(--surface);border:1px solid var(--glass-edge);border-radius:var(--radius-l);padding:16px;box-shadow:var(--lift)}
 .gq{font-family:var(--f-serif);font-weight:700;font-size:var(--fs-m);margin-bottom:6px}
 .guessbill input[type=range]{width:100%}
@@ -1259,19 +1259,14 @@ html.zooming *,html.zooming *::before,html.zooming *::after{transition:none!impo
 .rknote b{color:var(--accent-t)}
 .stats{margin:6px 0 22px}
 .sth{font-weight:700;font-size:var(--fs-s);color:var(--soft);margin:0 0 8px}
-.stg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stg>.stt:last-child:nth-child(odd){grid-column:1/-1;min-height:0}
-.cmpbig{margin:4px 0 22px;padding:18px;border-radius:22px;background:var(--elev);box-shadow:var(--card-sh);border:2px solid color-mix(in srgb,var(--hot-t,#B5523B) 35%,transparent)}
-.cbh{margin:0 0 4px;font-size:var(--fs-h2);font-weight:900;font-family:var(--f-head,inherit)}.cbsub{margin:0 0 10px;color:var(--soft);font-size:var(--fs-s)}
-.cbrow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 0;border-top:1px solid var(--line)}.cbrow span{font-weight:700}.cbrow b{font-size:clamp(20px,5.5vw,26px);font-weight:900;text-align:right;font-variant-numeric:tabular-nums}
-.cbrow small{grid-column:1/-1;color:var(--soft);font-size:var(--fs-xs)}.cbrow.ok b{color:var(--mint-t)}.cbrow.warn b{color:var(--hot-t)}
-.cbnote{margin:10px 0 0;font-size:var(--fs-xs);color:var(--soft);line-height:1.6}
+.stg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stt{display:flex;flex-direction:column;gap:2px;padding:14px;border-radius:18px;background:var(--elev);box-shadow:var(--card-sh);color:var(--text);text-decoration:none;min-height:104px}
 .stt .k{font-size:var(--fs-xs);color:var(--faint);font-weight:700}
 .stt b{font-family:var(--f-num,inherit);font-size:clamp(22px,6vw,30px);font-weight:900;line-height:1.2;font-variant-numeric:tabular-nums}
 .stt small{font-size:var(--fs-xs);color:var(--soft);line-height:1.5}
 .stt.ok b{color:var(--mint-t)}.stt.warn b{color:var(--hot-t)}
 a.stt{border:1.5px dashed var(--line)}
-@media (min-width:760px){.stg{grid-template-columns:repeat(3,1fr)}.stg>.stt:last-child:nth-child(odd){grid-column:auto;min-height:104px}}
+@media (min-width:760px){.stg{grid-template-columns:repeat(4,1fr)}}
 
 /* v8.1 guide + start card */
 .howlink{white-space:nowrap;font-weight:700;color:var(--accent-t);text-decoration:underline;text-underline-offset:3px;margin-left:4px}
@@ -1290,7 +1285,7 @@ a.stt{border:1.5px dashed var(--line)}
 .gsteps{list-style:none;padding:0;margin:0;counter-reset:gs;display:grid;gap:10px}
 .gsteps li{counter-increment:gs;position:relative;display:grid;grid-template-columns:36px 1fr;column-gap:12px;row-gap:4px;padding:14px;border-radius:18px;background:var(--elev);box-shadow:var(--card-sh)}
 .gsteps li::before{content:counter(gs);grid-row:1/4;width:32px;height:32px;border-radius:50%;background:var(--accent-t);color:var(--bg);display:grid;place-items:center;font-weight:900}
-.gsteps b{font-size:var(--fs-m)}.gsteps.nonum li{grid-template-columns:minmax(0,1fr)}.gsteps.nonum li::before{display:none}
+.gsteps b{font-size:var(--fs-m)}
 .gsteps span{font-size:var(--fs-s);color:var(--soft);line-height:1.7}
 .gjump{justify-self:start;margin-top:4px;min-height:40px;padding:6px 16px;border-radius:999px;border:1.5px solid var(--accent-t);background:transparent;color:var(--accent-t);font-weight:700;font-size:var(--fs-xs)}
 .gjump::after{content:" ›"}
@@ -1423,10 +1418,6 @@ html[lang="en"] .cites-zh,html:not([lang="en"]) .cites-en{display:none}
 .btoc{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .btoc a{padding:8px 14px;border-radius:99px;background:var(--elev);box-shadow:var(--card-sh);font-size:var(--fs-s);color:var(--text);text-decoration:none}
 .bcard{background:var(--elev);border-radius:22px;box-shadow:var(--card-sh);padding:20px;margin-bottom:16px;scroll-margin-top:90px}
-.bdet>summary{list-style:none;cursor:pointer;display:block;position:relative;padding-right:4px}.bdet>summary::-webkit-details-marker{display:none}
-.bdet>summary h2{display:inline;margin:0}.bkey{display:block;margin:8px 0 0;font-size:var(--fs-s);line-height:1.7;color:var(--text);font-weight:600}
-.bmore{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:var(--fs-xs,13px);font-weight:700;color:var(--accent-t)}.bmore::after{content:'▾';transition:transform .2s}
-.bdet[open] .bmore::after{transform:rotate(180deg)}.bdet[open] .bbody{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line,rgba(0,0,0,.12))}
 .bcard h2{font-size:var(--fs-h2);margin-bottom:8px}
 .bcard p{font-size:var(--fs-s);line-height:1.8;margin:0 0 8px}
 .bcard .umix{color:var(--soft);font-size:var(--fs-xs)}
@@ -1646,14 +1637,6 @@ sup.beta{vertical-align:super;font-size:12px;margin-left:6px;position:relative;t
 .msh{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .msh .mk{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 22px}
 .mline-line,.ezline{background:#06C755!important;color:#fff!important}
-.mline.m4{grid-template-columns:repeat(4,1fr);gap:6px}
-.mline.m4 button{flex-direction:column;gap:4px;min-height:60px;padding:8px 2px;font-size:var(--fs-xs,13px)}
-.mline.m4 li:not(:last-child) button::after{right:-6px}
-.easyl{margin:10px 0 0;font-size:var(--fs-s)}.easyl a{color:var(--accent-t);font-weight:700;text-decoration:underline;text-underline-offset:3px}
-.resh{margin:18px 0 8px;font-size:var(--fs-m);font-weight:800}
-.stno{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--hot-t,#B5523B);color:#fff;font-size:16px;margin-right:8px;vertical-align:3px;font-family:inherit}
-.nextone{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-top:14px;min-height:56px;padding:12px 16px;border-radius:16px;background:var(--elev);box-shadow:var(--card-sh);color:var(--text);text-decoration:none;line-height:1.45}
-.nextone b{display:block;color:var(--hot-t,#B5523B)}.nextone small{color:var(--soft);font-size:var(--fs-s)}.nextone i{font-style:normal;color:var(--faint);font-size:22px}
 .mmore{font-size:var(--fs-s);color:var(--soft);margin-top:14px}
 /* drawer: more */
 .dmore{margin:2px 0}
@@ -1713,13 +1696,6 @@ body.easymode .appbar .menu,body.easymode .potbtn,body.easymode .langwrap,body.e
 .ezopt b{font-size:calc(20px*var(--z))}.ezopt small{font-size:calc(14px*var(--z));color:var(--soft)}
 .ezopt[aria-pressed="true"]{border-color:var(--text);background:var(--text);color:var(--bg)}
 .ezopt[aria-pressed="true"] small{color:var(--bg);opacity:.8}
-.ezmore{border-radius:20px;background:var(--elev);box-shadow:var(--card-sh);padding:4px 16px}
-.ezmore>summary{list-style:none;cursor:pointer;min-height:60px;display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;font-size:calc(19px*var(--z))}.ezmore>summary::-webkit-details-marker{display:none}
-.ezmore>summary::after{content:'▾';margin-left:auto;color:var(--soft)}.ezmore[open]>summary::after{transform:rotate(180deg)}
-.ezmore>summary small{font-size:calc(15px*var(--z));color:var(--soft)}.ezmore[open]{padding-bottom:16px;display:grid;grid-template-columns:minmax(0,1fr);gap:10px}.ezmore .ezin{min-width:0;padding:4px 14px}.ezmore .ezin input{font-size:calc(34px*var(--z));width:100%}
-.ezapps{display:flex;flex-wrap:wrap;gap:8px}
-.ezchip{min-height:50px;padding:0 13px;max-width:100%;border-radius:99px;border:2px solid var(--line);background:var(--bg);color:var(--text);font:inherit;font-size:calc(18px*var(--z));font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
-.ezchip i{font-style:normal}.ezchip[aria-pressed="true"]{border-color:var(--text);background:var(--text);color:var(--bg)}
 .ezerr{margin:0;color:#C0392B;font-size:calc(18px*var(--z));font-weight:700}
 .ezerr:empty{display:none}
 .ezgo{min-height:68px;border:0;border-radius:20px;background:var(--text);color:var(--bg);font:inherit;font-size:calc(22px*var(--z));font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;margin-top:6px;transition:transform .15s}
@@ -1796,6 +1772,47 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
 .bdiv{margin:26px 0 4px;padding:12px 0 0;border-top:1px solid var(--hair)}
 .bdiv b{display:block;font-size:var(--fs-m);font-weight:800}
 .bdiv span{font-size:var(--fs-s);color:var(--soft)}
+
+/* v9.24 calmer home */
+#hint{display:none!important}
+.mline.jline{grid-template-columns:repeat(4,1fr);gap:6px}
+.mline.jline button{flex-direction:column;gap:4px;min-height:64px;font-size:var(--fs-s)}
+.mline.jline li:not(:last-child) button::after{right:-6px}
+.easyln{margin:10px 0 0;text-align:center;font-size:var(--fs-s)}
+.easyln a{color:var(--soft);text-decoration:underline;text-underline-offset:3px}
+.stepk.sub{margin-top:6px;color:var(--soft)}
+#s-share .nextpath,#s-next .nextpath{margin-top:12px}
+
+/* v9.25 */
+#v-basics .bcard.adv:not(.open) .bmore{display:none}
+.bmorebtn{margin-top:10px;border:0;background:transparent;color:var(--hot-t,#B5523B);font:inherit;font-weight:700;font-size:var(--fs-s);padding:6px 0;cursor:pointer}
+.ezprog.ez4{grid-template-columns:repeat(4,1fr)}
+.ezprog.ez4 li{font-size:calc(13px*var(--z))}
+.ezqcard{background:var(--elev);border-radius:20px;box-shadow:var(--card-sh);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.ezqcard .ezq{margin:0}
+.ezwhy{margin:0;font-size:calc(15px*var(--z));line-height:1.6;color:var(--soft)}
+.ezchips{display:flex;flex-wrap:wrap;gap:8px}
+.ezchip{min-height:52px;padding:8px 16px;border-radius:16px;border:2px solid var(--line);background:transparent;color:var(--text);font:inherit;font-size:calc(18px*var(--z));font-weight:700;cursor:pointer}
+.ezchip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.ezin.sm input{font-size:calc(32px*var(--z))}
+.ghgoal{margin:0 0 10px;color:#F4E3B5;font-size:var(--fs-s);line-height:1.6}
+.ghlearn{text-align:left;font-size:var(--fs-s);line-height:1.65;max-width:34em}
+.ghlearn ul{margin:6px 0 0;padding-left:1.2em}.ghlearn li{margin:3px 0}
+#stats{grid-template-columns:repeat(3,1fr)}@media (max-width:420px){#stats{grid-template-columns:1fr 1fr}}
+.cmptop{background:var(--elev);border-radius:22px;box-shadow:var(--card-sh);padding:16px 18px;margin:12px 0 16px}
+.cmptop h2{margin:0 0 6px;font-size:var(--fs-m)}
+.cmptop p{margin:4px 0;line-height:1.6}
+.cmpbig{font-size:clamp(24px,6vw,30px);font-weight:900}.cmpbig.good{color:#4F8A4B}.cmpbig.bad{color:var(--hot-t,#B5523B)}
+.cmpbig small{font-size:.55em;font-weight:700;margin-left:4px}
+.cmpgo{display:inline-block;margin-top:6px;color:var(--hot-t,#B5523B);font-weight:700;text-decoration:none}
+/* softer motion */
+::view-transition-old(root){animation:vtout .28s cubic-bezier(.4,0,.2,1) both}
+::view-transition-new(root){animation:vtin .5s cubic-bezier(.22,1,.36,1) both}
+@keyframes vtin{from{opacity:0;transform:translate3d(0,4px,0)}}
+@keyframes reveal{from{opacity:0;transform:translate3d(0,4px,0)}}
+.qz .ex,.gres,.verdict{animation-duration:.6s!important;animation-timing-function:cubic-bezier(.22,1,.36,1)!important}
+.ezs{animation:ezin .5s cubic-bezier(.22,1,.36,1) both}
+@keyframes ezin{from{opacity:0;transform:translate3d(0,4px,0)}}
 </style>
 </head>
 <body>
@@ -1838,13 +1855,22 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
       <section class="hero" id="s-bill" aria-labelledby="t-hero">
         <h1 id="t-hero">家裡幾度 C，是<span class="q">「省」</span>了沒？</h1>
         <p class="pain">電費單一來，家裡就開始猜：「到底是誰用最多電？」</p>
-        <ol class="mline m4" id="mline" aria-label="四個步驟">
-          <li><button type="button" data-mgo="s-bill"><b>1</b><span>看懂</span></button></li>
+        <ol class="mline jline" id="mline" aria-label="四個步驟">
+          <li><button type="button" data-mgo="stepk1"><b>1</b><span>看懂</span></button></li>
           <li><button type="button" data-mgo="s-house"><b>2</b><span>找出</span></button></li>
           <li><button type="button" data-mgo="s-share"><b>3</b><span>一起做</span></button></li>
           <li><button type="button" data-mgo="s-next"><b>4</b><span>下期比</span></button></li>
         </ol>
-        <p class="easyl" id="hint"><a href="#easy" data-route="easy">給爸媽用？簡單版只有 3 步、字很大 ›</a></p>
+        <p class="easyln"><a href="#easy" data-route="easy">給爸媽用？簡單版只有 3 步、字很大 ›</a></p>
+        <div class="start" id="hint" hidden>
+          <p class="sth2"><b>第一次來？</b>照上面 ① ② ③ 做就好。要給爸媽用，有更簡單的版本。</p>
+          <div class="startbtns">
+            <button type="button" class="sbtn" data-gstart="easy"><i aria-hidden="true">✓</i><span><b>給爸媽的簡單版</b><small>只有 3 步，字大，一步一步帶著做</small></span></button>
+            <button type="button" class="sbtn" data-gstart="full"><i aria-hidden="true">≡</i><span><b>完整使用說明</b><small>從我家設定到全家一起省，一步一步來</small></span></button>
+            
+          </div>
+          <button type="button" class="linkbtn" id="hintX">我會用了，收起來</button>
+        </div>
         <p class="stepk" id="stepk1"><b>1</b>看懂：輸入電費單上的「計費度數」</p>
         <div class="meter">
           <div class="brand">本期計費度數</div>
@@ -1901,9 +1927,9 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
       </section>
 
       <section class="sec mres" id="s-result" aria-labelledby="t-res">
-        <h3 class="resh" id="t-res">你家這期的結果</h3>
+        <p class="stepk sub"><span id="t-res">你家這期的結果</span></p>
         <div class="mresg" id="mres" aria-live="polite"></div>
-        <p class="mmore">為什麼越用越貴？往下看「電價像爬樓梯」。</p>
+        <p class="mmore">為什麼越用越貴？下面這張「電價樓梯」一看就懂。</p>
       </section>
 
       <section class="sec" id="s-stairs" aria-labelledby="t-stairs">
@@ -1914,11 +1940,13 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
         <div class="say" id="say" aria-live="polite"></div>
       </section>
 
+      
     </div>
 
     <div class="col side">
       <section class="sec" id="s-house" aria-labelledby="t-house">
-        <h2 id="t-house" style="font-size:var(--fs-h2)"><b class="stno">2</b>找出：家裡的電費怪獸</h2>
+        <p class="stepk"><b>2</b>找出：家裡哪台最吃電</p>
+        <h2 id="t-house" style="font-size:var(--fs-h2)">家裡的電費怪獸</h2>
         <p class="lead">每台電器都是一隻怪獸，越大隻越耗電。點一隻，改成你家的情況，再按「讓它睡覺」看能省多少。</p>
         <button type="button" class="homecard" id="homeCard"><span class="hico" id="homeIco"></span><span class="ht"><i>我家</i><b id="homeT"></b><small id="homeS"></small></span><span class="chev" aria-hidden="true">›</span></button>
         <div class="guess" id="guess"><p><b>先猜猜看：</b>你覺得家裡哪一隻最會吃電？</p><div class="chips" id="guessChips"></div><p class="gres" id="gres" aria-live="polite"></p></div>
@@ -1927,10 +1955,9 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
         <p class="tip">這些數字是依台電公開的平均值估算的。家裡有智慧電表的話，台灣電力 App 的「住宅用電分析」會更準。</p>
         <div class="rank" id="rank" data-lock="先在上面猜一隻，答案就會在這裡揭曉"></div>
       </section>
-
       <section class="sec" id="s-myth" aria-labelledby="t-myth">
         <h2 id="t-myth" style="font-size:var(--fs-h2)">「隨手關燈」能省多少？</h2>
-        <p class="lead">每按一下，就是多一盞燈每天早關 1 小時。按按看就知道：比起關燈，冷氣、熱水瓶這些大怪獸才是重點。</p>
+        <p class="lead">這是大家最常被念的省電方法。每按一下開關，就當作多一盞燈每天早關 1 小時。按按看就知道：比起關燈，冷氣、熱水瓶這些大怪獸才是重點。</p>
         <div class="myth">
           <button class="switch" id="sw" type="button" aria-pressed="false" aria-label="多關一盞燈"><span></span></button>
           <div aria-live="polite"><div class="n" id="mythN">0 盞</div><div class="v" id="mythV">每月省 NT$0</div><p id="mythP">按按看，要關幾盞燈才省得到一頓火鍋？</p></div>
@@ -1938,17 +1965,18 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
       </section>
 
       <section class="sec" id="s-share" aria-labelledby="t-share">
-        <h2 id="t-share" style="font-size:var(--fs-h2)"><b class="stno">3</b>一起做：傳給家人、分工</h2>
-        <p class="lead">把結果傳到家庭群組，一起看，比互相猜「是誰在浪費電」有用。</p>
+        <p class="stepk" id="t-share"><b>3</b>一起做：傳給家人、分工</p>
+        <p class="lead">把結果傳到家庭群組，大家看著同一組數字討論，比互相猜「是誰在浪費電」有用。</p>
         <div class="msh"><a class="mk mline-line" id="mLine" href="#" target="_blank" rel="noopener">傳到 LINE</a><button type="button" class="pill" id="mShare">其他分享方式</button><button type="button" class="pill" id="mCopy">複製文字</button></div>
-        <a class="nextone" href="#challenge" data-route="challenge"><span><b>分配省電小任務</b><small>六件設定一次就一直省的事，分給家人負責</small></span><i aria-hidden="true">›</i></a>
+        <div class="nextpath"><a href="#challenge" data-route="challenge"><b>分配省電小任務</b><span>例如冷氣設 26–28°C、熱水瓶設定時，交給家人去做，做完打勾</span><i aria-hidden="true">›</i></a></div>
       </section>
 
       <section class="sec" id="s-next" aria-labelledby="t-next">
-        <h2 id="t-next" style="font-size:var(--fs-h2)"><b class="stno">4</b>下期回來比</h2>
-        <p class="lead">記下這期度數，下張帳單來了就知道有沒有省。比去年同一期每少用 1 度，台電的節電獎勵回饋 0.6 元。</p>
-        <a class="nextone" href="#history" data-route="history"><span><b>記下這期帳單</b><small>記兩期以上，就看得出有沒有變少</small></span><i aria-hidden="true">›</i></a>
+        <p class="stepk" id="t-next"><b>4</b>下期回來比</p>
+        <p class="lead">下一張帳單來了，記下度數，就知道這兩個月有沒有比上期省、能不能拿到節電獎勵（每少用 1 度回饋 0.6 元）。</p>
+        <div class="nextpath"><a href="#history" data-route="history"><b>記下這期帳單</b><span>只存在這支手機裡，下期直接比較</span><i aria-hidden="true">›</i></a></div>
       </section>
+
     </div>
   </div>
 
@@ -1959,13 +1987,14 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
 
 <div class="view easy" id="v-easy" data-title="簡單版" data-fs="l" hidden>
   <div class="eztop">
-    <div class="ezbrand"><span class="hanko sm" aria-hidden="true">り</span><b>看懂電費，只要 3 步</b></div>
+    <div class="ezbrand"><span class="hanko sm" aria-hidden="true">り</span><b>看懂電費，只要 4 步</b></div>
     <div class="ezfs" role="group" aria-label="字的大小"><span aria-hidden="true">字</span><button type="button" data-ezfs="l" aria-label="字：大">A</button><button type="button" data-ezfs="xl" aria-label="字：更大">A</button><button type="button" data-ezfs="xxl" aria-label="字：特大">A</button></div>
   </div>
-  <ol class="ezprog" aria-label="進度">
+  <ol class="ezprog ez4" aria-label="進度">
     <li data-p="1"><i>1</i><span>打上度數</span></li>
-    <li data-p="2"><i>2</i><span>看結果</span></li>
-    <li data-p="3"><i>3</i><span>傳給家人</span></li>
+    <li data-p="2"><i>2</i><span>你家情況</span></li>
+    <li data-p="3"><i>3</i><span>看結果</span></li>
+    <li data-p="4"><i>4</i><span>傳給家人</span></li>
   </ol>
 
   <section class="ezs" data-ez="1">
@@ -1984,31 +2013,37 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
     <div class="ezdate"><span class="lang-zh" data-noi18n>到</span><span class="lang-en" data-noi18n>To</span><select id="ezEm" aria-label="結束月"><option value="">--</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select><span data-noi18n>/</span><select id="ezEd" aria-label="結束日"><option value="">--</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select></div>
     <p class="ezq">這張電費單是</p>
     <div class="ezseg" role="group" aria-label="帳單是幾個月"><button type="button" class="ezopt" data-ezm="2"><b>兩個月一張</b><small>大部分家庭</small></button><button type="button" class="ezopt" data-ezm="1"><b>一個月一張</b></button></div>
-    <details class="ezmore" id="ezMore"><summary><b>想算得更準？多答 2 題</b><small>可以跳過</small></summary>
-      <p class="ezq">家裡有這些電器嗎？<small>按一下是「有」，再按一下取消</small></p>
-      <div class="ezapps" id="ezApps" role="group" aria-label="家裡有的電器"></div>
-      <p class="ezsmall">這裡選的，「電費怪獸」也會跟著改。</p>
-      <label class="ezq" for="ezLy">去年同一期用了幾度？<small>電費單上有「去年同期」的度數</small></label>
-      <div class="ezin"><input id="ezLy" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 900" autocomplete="off"><span>度</span></div>
-    </details>
     <p class="ezerr" id="ezErr" aria-live="polite"></p>
-    <button type="button" class="ezgo" data-ezgo="2">下一步：看結果 ›</button>
+    <button type="button" class="ezgo" data-ezgo="2">下一步：你家的情況 ›</button>
   </section>
 
   <section class="ezs" data-ez="2" hidden>
+    <h1 class="ezh">你家的情況</h1>
+    <p class="ezp">回答越多，結果越準。不確定的可以直接跳過。</p>
+    <div class="ezqcard"><p class="ezq">家裡住幾個人？</p><p class="ezwhy">人越多，冰箱、熱水、洗衣用得越多。</p><div class="ezchips" data-ezq="ppl"><button type="button" class="ezchip" data-v="1">1 人</button><button type="button" class="ezchip" data-v="2">2 人</button><button type="button" class="ezchip" data-v="3">3–4 人</button><button type="button" class="ezchip" data-v="5">5 人以上</button></div></div>
+    <div class="ezqcard"><p class="ezq">冷氣有幾台？</p><p class="ezwhy">冷氣是夏天電費最大的來源。</p><div class="ezchips" data-ezq="ac"><button type="button" class="ezchip" data-v="0">沒有</button><button type="button" class="ezchip" data-v="1">1 台</button><button type="button" class="ezchip" data-v="2">2 台以上</button></div></div>
+    <div class="ezqcard"><p class="ezq">家裡有這些嗎？<small>可以選好幾個</small></p><p class="ezwhy">這幾台都很耗電，有沒有差很多。</p><div class="ezchips" data-ezq="big" data-multi="1"><button type="button" class="ezchip" data-v="wh">電熱水器</button><button type="button" class="ezchip" data-v="ket">熱水瓶</button><button type="button" class="ezchip" data-v="dh">除濕機</button></div></div>
+    <div class="ezqcard"><p class="ezq">電費怎麼付？</p><p class="ezwhy">房東按度數收的話，計算方式跟台電不一樣。</p><div class="ezchips" data-ezq="pay"><button type="button" class="ezchip" data-v="own">自己或家人繳台電</button><button type="button" class="ezchip" data-v="landlord">房東按度數收</button><button type="button" class="ezchip" data-v="rent">包在房租裡</button></div></div>
+    <div class="ezqcard"><p class="ezq">去年同一期用了幾度？<small>可以不填</small></p><p class="ezwhy">比去年同期少用，每少 1 度台電回饋 0.6 元（節電獎勵）。帳單上通常印有去年同期度數。</p>
+      <div class="ezin sm"><label class="sr" for="ezLY">去年同期度數</label><input id="ezLY" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 900" autocomplete="off"><span>度</span></div></div>
+    <button type="button" class="ezgo" data-ezgo="3">下一步：看結果 ›</button>
+    <button type="button" class="ezback" data-ezgo="1">‹ 上一步</button>
+  </section>
+
+  <section class="ezs" data-ez="3" hidden>
     <h1 class="ezh">你家這期的電費</h1>
     <div class="ezbig"><small>這期電費大約</small><b id="ezBill">—</b><span id="ezPer"></span></div>
     <div class="ezcard"><h2 id="ezTierH">在電價的第幾階？</h2><div class="ezstairs" id="ezStairs" aria-hidden="true"></div><p id="ezTierSay"></p></div>
     <div class="ezcard"><h2>跟一般家庭比</h2><div class="ezcmp" id="ezCmp"></div></div>
-    <div class="ezcard" id="ezLyCard" hidden><h2>跟去年同一期比</h2><div id="ezLyOut"></div></div>
+    <div class="ezcard" id="ezRwCard" hidden><h2>節電獎勵</h2><p id="ezRw"></p></div>
     <div class="ezcard" id="ezTopCard"><h2>最可能在吃電的</h2><div class="eztop2" id="ezTop"></div></div>
     <p class="ezsmall" id="ezNote"></p>
     <button type="button" class="ezalt ezspeak" id="ezSpeak" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor"/><path d="M15.5 9a4 4 0 010 6M17.8 6.6a7.4 7.4 0 010 10.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>唸給我聽</span></button>
-    <button type="button" class="ezgo" data-ezgo="3">下一步：傳給家人 ›</button>
+    <button type="button" class="ezgo" data-ezgo="4">下一步：傳給家人 ›</button>
     <button type="button" class="ezback" data-ezgo="1">‹ 改數字</button>
   </section>
 
-  <section class="ezs" data-ez="3" hidden>
+  <section class="ezs" data-ez="4" hidden>
     <h1 class="ezh">傳給家人看</h1>
     <ol class="ezhow"><li>按下面綠色的「傳到 LINE」</li><li>選家庭群組</li><li>按「傳送」</li></ol>
     <div class="ezchat" aria-label="要傳的訊息"><div class="ezbub" id="ezMsg"></div></div>
@@ -2027,7 +2062,7 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
 </div>
 <div class="view readable" id="v-guide" data-title="使用說明" hidden>
   <section class="sec"><h1 class="vh">使用說明</h1>
-    <p class="lead">這個網站分四步：① 看懂電費、② 找出最吃電的那台、③ 全家一起做、④ 下期回來比。首頁和選單都照這個順序。</p>
+    <p class="lead">這個網站幫你看懂電費單、找出家裡最吃電的那台、全家一起把下一期省下來。第一次來，照首頁的 ① 看懂 → ② 找出 → ③ 一起做 → ④ 下期回來比 走一次就好。</p>
     <div class="gmap" aria-label="網站地圖">
       <div class="gm g1"><b>① 看懂</b><small>電費怎麼算、為什麼越用越貴</small><div><button type="button" class="gjump" data-go="decoder">電費解碼器</button><button type="button" class="gjump" data-go="basics">用電基本知識</button><button type="button" class="gjump" data-go="learn">電價小教室</button></div></div>
       <div class="gm g3"><b>② 找出</b><small>家裡哪台最吃電、一個月多少錢</small><div><button type="button" class="gjump" data-go="monsters">怪獸圖鑑</button></div></div>
@@ -2038,47 +2073,47 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
     <p class="gmapnote">選單也照這個順序排好了。要給爸媽用，直接傳「簡單版」給他們。</p>
     
     <div class="pills seg gtabs" id="gTabs" role="tablist" aria-label="使用方式">
-      <button class="pill" type="button" role="tab" data-gt="quick">1 分鐘看懂</button>
+      <button class="pill" type="button" role="tab" data-gt="quick">① → ④ 怎麼走</button>
       <button class="pill" type="button" role="tab" data-gt="full">完整說明書</button>
       <button class="pill" type="button" role="tab" data-gt="elder">幫長輩看</button>
     </div>
 
     <div class="gpane" data-gp="quick">
-      <p class="gsum">一張電費單、四步，就知道錢花在哪裡、怎麼一起省。</p>
-      <ol class="gsteps nonum">
-        <li><b>① 看懂：輸入計費度數</b><span>電費單上「計費度數」那個數字，拉滑桿或按「直接輸入度數」。馬上看到電費大約多少、在電價第幾階、比一般家庭多還是少。</span><button type="button" class="gjump" data-go="decoder" data-to="s-bill">帶我去</button></li>
-        <li><b>② 找出：最吃電的怪獸</b><span>先猜哪台最吃電，再看答案。點怪獸改成你家的情況，按「讓它睡覺」看能省多少。</span><button type="button" class="gjump" data-go="decoder" data-to="s-house">帶我去</button></li>
-        <li><b>③ 一起做：傳給家人、分工</b><span>按「傳到 LINE」傳到家庭群組，再到家庭挑戰，把六件省電設定分給家人。</span><button type="button" class="gjump" data-go="decoder" data-to="s-share">帶我去</button></li>
-        <li><b>④ 下期比：記下這期帳單</b><span>下張帳單來了，跟上一期、跟去年同一期比，就知道有沒有省。</span><button type="button" class="gjump" data-go="history">帶我去</button></li>
+      <p class="gsum">只要一張電費單。照首頁的 ① → ④ 走一次，每一步都告訴你「要做什麼、會知道什麼」。</p>
+      <ol class="gsteps">
+        <li><b>① 看懂</b><span><em>要做：</em>輸入電費單上的「計費度數」，選一個月或兩個月一期。<br><em>會知道：</em>這期大約多少錢、在電價第幾階、比全台一般家庭多還是少。</span><button type="button" class="gjump" data-go="decoder" data-to="s-bill">帶我去</button></li>
+        <li><b>② 找出</b><span><em>要做：</em>先猜家裡哪台最吃電，再點怪獸，改成你家的使用時間。<br><em>會知道：</em>每台電器一個月大約幾度、多少錢，哪一台最值得先改。</span><button type="button" class="gjump" data-go="decoder" data-to="s-house">帶我去</button></li>
+        <li><b>③ 一起做</b><span><em>要做：</em>把結果傳到家庭群組，再把省電小任務分給家人。<br><em>會知道：</em>全家一起看同一組數字，不用再猜「是誰在浪費電」。</span><button type="button" class="gjump" data-go="decoder" data-to="s-share">帶我去</button></li>
+        <li><b>④ 下期回來比</b><span><em>要做：</em>下一張帳單來了，到「帳單紀錄」記一筆。<br><em>會知道：</em>有沒有比上期省、能不能拿到節電獎勵。</span><button type="button" class="gjump" data-go="history">帶我去</button></li>
       </ol>
-      <p class="gdone">這樣就會了！給爸媽用，傳「簡單版」就好：只有 3 步、字很大。<button type="button" class="gjump" data-go="easy">打開簡單版</button></p>
+      <p class="gdone">要給爸媽用，直接傳「簡單版」：<button type="button" class="inl" data-go="easy">打開簡單版</button>。想知道每個功能的細節，看 <button type="button" class="inl" data-gtab="full">完整說明書</button>。</p>
     </div>
 
     <div class="gpane" data-gp="full" hidden>
-      <p class="gsum">第一次照順序做，大約 10 分鐘。之後每次收到帳單，只要做 ① 和 ④。</p>
-      <ol class="gsteps nonum">
-        <li><b>先告訴網站你家的狀況</b><span>選家庭型態和電費怎麼付（自己繳、家人繳、房東按度數收⋯⋯），怪獸、分工和卡片都會跟著變。</span><button type="button" class="gjump" data-go="home">帶我去</button></li>
-        <li><b>① 輸入帳單，選對期別和季節</b><span>選「兩個月一期」或「一個月一期」。帳單跨過 6/1 或 9/30 就選「兩季都有」。想對到一塊錢，用「照帳單算一次」。</span><button type="button" class="gjump" data-go="decoder" data-to="s-bill">帶我去</button></li>
-        <li><b>① 看懂電價樓梯</b><span>看你家在第幾階、離下一階還差幾度。名詞看不懂，「用電基本知識」每段先給一句重點。</span><button type="button" class="gjump" data-go="decoder" data-to="s-stairs">帶我去</button></li>
-        <li><b>② 找出最吃電的怪獸</b><span>把怪獸的時數、年份改成你家的，數字才準；怪獸圖鑑有每隻的省電方法和每月約多少錢。</span><button type="button" class="gjump" data-go="monsters">帶我去</button></li>
-        <li><b>③ 傳給家人、分工</b><span>六件「做一次就一直省」的事，每件交給一位家人，做完打勾。</span><button type="button" class="gjump" data-go="challenge">帶我去</button></li>
-        <li><b>③ 做一張省電卡</b><span>放一張全家的照片，做成卡片傳到家庭群組；給長輩可以印冰箱卡。</span><button type="button" class="gjump" data-go="studio">帶我去</button></li>
-        <li><b>④ 每期記一筆帳單</b><span>收到新帳單就記一筆，有節電獎勵也一起填。兩筆以上就看得出有沒有變少。</span><button type="button" class="gjump" data-go="history">帶我去</button></li>
+      <p class="gsum">照順序做一次大約 10 分鐘，之後每次收到帳單只要做第 6 步。</p>
+      <ol class="gsteps">
+        <li><b>先懂幾個名詞</b><span>1 度是多少、為什麼越用越貴、夏天為什麼比較貴、節電獎勵怎麼算，「用電基本知識」一頁看完。</span><button type="button" class="gjump" data-go="basics">帶我去</button></li>
+        <li><b>告訴網站你家的狀況</b><span>選家庭型態（一個人住、三代同堂、宿舍⋯⋯）和電費怎麼付（自己繳、家人繳、房東按度數收⋯⋯），再改成家裡人的稱呼。怪獸、分工和卡片都會跟著變。</span><button type="button" class="gjump" data-go="home">帶我去</button></li>
+        <li><b>輸入帳單，選對期別和季節</b><span>輸入計費度數，選「兩個月一期」或「一個月一期」。帳單跨過 6/1 或 9/30 就選「兩季都有」，再看範例數夏月天數。想對到一塊錢，用「照帳單算一次」輸入日期。</span><button type="button" class="gjump" data-go="decoder" data-to="s-bill">帶我去</button></li>
+        <li><b>看懂電價樓梯</b><span>看你家在第幾階、離下一階還差幾度，以及和全台住家平均比起來是多還是少。</span><button type="button" class="gjump" data-go="decoder" data-to="s-stairs">帶我去</button></li>
+        <li><b>調整怪獸，讓牠們睡覺</b><span>先猜最吃電的是誰。再點每隻怪獸，改成你家真實的時數和年份，數字才會準。按「讓它睡覺」看能省多少；怪獸圖鑑裡有每隻的省電方法。</span><button type="button" class="gjump" data-go="decoder" data-to="guess">帶我去</button></li>
+        <li><b>分工：家庭挑戰</b><span>六件「做一次就一直省」的事，每件指定給一位家人。上面有「我們家的成績」、跟全台住家比落在哪一群，以及誰負責哪幾件；下面的抓吸電鬼小遊戲，可以選誰在玩，比比看誰上排行榜。</span><button type="button" class="gjump" data-go="challenge">帶我去</button></li>
+        <li><b>每期記一筆帳單</b><span>收到新帳單就到帳單紀錄記一筆，帳單上有節電獎勵也一起填。記兩筆以上就看得出有沒有變少；有去年同一期的紀錄，還會幫你估節電獎勵。</span><button type="button" class="gjump" data-go="history">帶我去</button></li>
+        <li><b>分享給家人</b><span>在卡片工作室放一張全家的照片，做成省電卡傳到家庭群組；要給長輩，就印冰箱卡。</span><button type="button" class="gjump" data-go="studio">帶我去</button></li>
         <li><b>換手機前先備份</b><span>資料只存在這台裝置。到「資料來源與設定」下載備份檔，新手機再還原。</span><button type="button" class="gjump" data-go="about">帶我去</button></li>
       </ol>
     </div>
 
     <div class="gpane" data-gp="elder" hidden>
-      <p class="gsum">幫爸媽、阿公阿嬤設定一次，之後他們自己就會用。</p>
+      <p class="gsum">幫爸媽、阿公阿嬤設定一次，之後他們只要看重點就好。</p>
       <ol class="gsteps">
-        <li><b>傳「簡單版」給爸媽</b><span>只有 3 步：打上度數、看結果、傳給家人。字很大，還能按「唸給我聽」。</span><button type="button" class="gjump" data-go="easy">打開簡單版</button></li>
         <li><b>把字放大</b><span>按右上角的「大」，選「大字」或「特大字」，整個網站都會放大。</span><button type="button" class="gjump" data-big1="1">現在就放大</button></li>
+        <li><b>打開長輩版重點</b><span>只有最重要的幾件事，還可以按喇叭念出來。</span><button type="button" class="gjump" data-go="elder">帶我去</button></li>
         <li><b>印一張冰箱卡</b><span>白底大字、沒有專有名詞，下面留了空格，每期親手寫上新帳單的度數。</span><button type="button" class="gjump" data-go="elder">帶我去</button></li>
       </ol>
     </div>
 
     <h2 class="h2 setH">常見問題</h2>
-    <details class="acc gq"><summary>為什麼要跟「去年同一期」比？</summary><p>夏天（6–9 月）電價比較貴、冷氣也開得多，跟上一期比很容易誤會。台電也建議跟去年同一期比，節電獎勵就是這樣算的。</p></details>
     <details class="acc gq"><summary>我的資料會被上傳嗎？</summary><p>不會。度數、家人稱呼、照片都只存在這台手機或電腦的瀏覽器裡，網站作者也看不到。</p></details>
     <details class="acc gq"><summary>數字準嗎？</summary><p>電價、階梯和「照帳單算一次」照台電公告的算法；每隻怪獸的度數是依台電和政府公開資料估算，把怪獸的時數、年份改成你家的，就會更接近。</p></details>
     <details class="acc gq"><summary>計費度數在帳單哪裡？</summary><p>紙本帳單和台灣電力 App 都有「計費度數」，是這一期總共用了幾度。注意不是「電號」，也不是「應繳金額」。</p></details>
@@ -2196,36 +2231,36 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
 </div>
 
 <div class="view readable" id="v-challenge" data-title="家庭挑戰" hidden>
-  <section class="sec"><h1 class="vh">家庭挑戰</h1><p class="lead">省電只靠一個人念，很容易變成吵架。</p><ul class="pgoal"><li><b>你要做的</b><span>下面六件事，各設定一次就會一直省。分給家人負責，做完打勾。</span></li><li><b>你會知道</b><span>這期比上一期、比去年同一期有沒有省；全家一起大約能省多少。六件都完成，就一起去吃火鍋。</span></li></ul>
-    <div class="cmpbig" id="cmpBig" aria-live="polite"></div>
+  <section class="sec"><h1 class="vh">家庭挑戰</h1><p class="lead">省電只靠一個人念，很容易變成吵架。</p><ul class="pgoal"><li><b>你要做的</b><span>下面六件事，每件只要設定一次就會一直省電。分給家人各自負責，做完就打勾。</span></li><li><b>你會知道</b><span>全家一起大約能省多少。六件都完成，就一起去吃火鍋。</span></li></ul>
+    <div class="cmptop" id="cmpTop" aria-live="polite"></div>
     <div class="stats" id="stats" aria-label="我們家的成績"></div>
     <div class="rank2" id="rank2"></div>
     <div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--surface)" stroke-width="14"/><circle id="ringArc" cx="60" cy="60" r="50" fill="none" stroke="var(--mint)" stroke-width="14" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314" transform="rotate(-90 60 60)"/></svg><div><b id="ringN">0 / 6</b><p id="ringP">還沒開始</p></div></div>
     <div class="missions" id="missions"></div>
   </section>
-  <section class="sec"><h2>抓吸電鬼</h2><p class="lead">待機電力約占家庭用電 7.4%。半夜沒人用、卻插著電的電器，就是「吸電鬼」。20 秒內看你能抓幾隻，但冰箱、路由器這些要一直開著的別關。</p>
+  <section class="sec"><h2>抓吸電鬼</h2><p class="lead">半夜沒人用的電器，常被「待機吸電鬼」附身偷吃電。20 秒內，看你能抓幾隻。</p>
     <div class="gh" id="gh">
       <div class="ghbar"><div class="ghtime" aria-hidden="true"><i id="ghT"></i></div><div class="ghstat" aria-live="polite"><b id="ghN">0</b><span>隻</span></div></div>
       <div class="ghroom" id="ghRoom"></div>
       <div class="ghcd" id="ghCd" aria-live="assertive" hidden></div>
-      <div class="ghov" id="ghIntro"><h3>凌晨兩點，全家都睡了</h3>
-        <div class="ghrules"><div><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M10 31a20 20 0 0 1 40 0v21l-6.7-5-6.6 5-6.7-5-6.7 5-6.6-5-6.7 5z" fill="#9B8AC4"/><circle cx="23" cy="30" r="3.4" fill="#2E2A26"/><circle cx="37" cy="30" r="3.4" fill="#2E2A26"/></svg><span>紫色小鬼冒出來，<b>馬上點它</b></span></div>
-        <div><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="20" fill="none" stroke="#8DB487" stroke-width="4"/><circle cx="36" cy="26" r="12" fill="#211E2B"/><circle cx="28" cy="30" r="12" fill="#A8C9A0"/><circle cx="34" cy="26" r="11" fill="#2a2636"/></svg><span>綠框是<b>守夜電器</b>：冰箱、有人在睡的冷氣、路由器，點了會扣分</span></div>
+      <div class="ghov" id="ghIntro"><h3>凌晨兩點，哪些電器還在偷吃電？</h3><p class="ghgoal">玩完你會知道：哪些電器睡前可以關，哪些一定不能關。</p>
+        <div class="ghrules"><div><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M10 31a20 20 0 0 1 40 0v21l-6.7-5-6.6 5-6.7-5-6.7 5-6.6-5-6.7 5z" fill="#9B8AC4"/><circle cx="23" cy="30" r="3.4" fill="#2E2A26"/><circle cx="37" cy="30" r="3.4" fill="#2E2A26"/></svg><span>紫色小鬼＝<b>待機偷吃電的電器</b>（機上盒、電視、電鍋保溫…），點它就是幫它關掉</span></div>
+        <div><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="20" fill="none" stroke="#8DB487" stroke-width="4"/><circle cx="36" cy="26" r="12" fill="#211E2B"/><circle cx="28" cy="30" r="12" fill="#A8C9A0"/><circle cx="34" cy="26" r="11" fill="#2a2636"/></svg><span>綠框＝<b>不能關的守夜電器</b>：冰箱、有人在睡的冷氣、路由器。點了會扣分</span></div>
         <div><svg viewBox="0 0 60 60" aria-hidden="true"><text x="30" y="40" text-anchor="middle" font-size="26" font-weight="900" fill="#F3E3B5" font-family="sans-serif">×3</text></svg><span>連續快速抓到，<b>每隻多加 1 分</b></span></div><div><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M10 31a20 20 0 0 1 40 0v21l-6.7-5-6.6 5-6.7-5-6.7 5-6.6-5-6.7 5z" fill="#E2A33B"/><circle cx="23" cy="30" r="3.4" fill="#2E2A26"/><circle cx="37" cy="30" r="3.4" fill="#2E2A26"/></svg><span>後半場偶爾會冒出<b>金色大吸電鬼</b>，抓到 +3</span></div></div>
         <div class="ghwho" id="ghWho" role="group" aria-label="誰在玩"></div><button class="mk" type="button" id="ghGo">開始抓鬼</button><small id="ghBest"></small></div>
-      <div class="ghov" id="ghEnd" hidden><div class="ghstars" id="ghStars"></div><h3 id="ghEndT"></h3><p id="ghRes"></p><small id="ghEndBest"></small><button class="mk" type="button" id="ghAgain">再抓一次</button></div>
+      <div class="ghov" id="ghEnd" hidden><div class="ghstars" id="ghStars"></div><h3 id="ghEndT"></h3><div class="ghlearn" id="ghRes"></div><small id="ghEndBest"></small><button class="mk" type="button" id="ghAgain">再抓一次</button></div>
     </div>
     <div class="ghboard" id="ghBoard" aria-live="polite"></div>
   </section>
   <section class="sec"><button type="button" class="bdgrow" id="chBadges" aria-haspopup="dialog"><span class="bi" id="chBdgIco"></span><span class="rt"><b>我的徽章</b><small id="chBdgN"></small></span><span class="chev" aria-hidden="true">›</span></button></section>
-  <section class="sec"><h2 class="h2">猜下期度數</h2><p class="lead">猜得準，代表你真的知道家裡用多少電。先猜下一張帳單是幾度，收到帳單後到「帳單紀錄」記一筆，就會自動對答案。</p>
+  <section class="sec"><h2 class="h2">猜下期度數</h2><p class="lead">先猜下一張電費單會是幾度。收到帳單後，到「帳單紀錄」記下實際度數，就會告訴你猜得多準。</p>
     <form class="predict" id="predict" novalidate><label>我猜下一期是<input id="predIn" type="number" inputmode="numeric" min="0" max="9999"><span>度</span></label><button class="pill" type="submit" aria-pressed="true">存下來</button></form>
     <p class="say" id="predSay"></p>
   </section>
 </div>
 
 <div class="view readable" id="v-history" data-title="帳單紀錄" hidden>
-  <section class="sec"><h1 class="vh">帳單紀錄</h1><p class="lead">只看一張帳單，很難知道到底有沒有省下來。</p><ul class="pgoal"><li><b>你要做的</b><span>每次收到電費單，就把度數記一筆。</span></li><li><b>你會知道</b><span>這期比上一期、比去年同一期是多還是少；有去年同期的紀錄，還能估節電獎勵。</span></li></ul><p class="tip">每根柱子是那一期平均每個月用的度數；虛線是 500 度，超過這條線，多用的電會貴很多。</p>
+  <section class="sec"><h1 class="vh">帳單紀錄</h1><p class="lead">只看一張帳單，很難知道到底有沒有省下來。</p><ul class="pgoal"><li><b>你要做的</b><span>每次收到電費單，就把度數記一筆。</span></li><li><b>你會知道</b><span>這期和上期比是多了還是少了。</span></li></ul><p class="tip">每根柱子是那一期平均每個月用的度數；虛線是 500 度，超過這條線，多用的電會貴很多。</p>
     <form class="addbill" id="addbill" novalidate>
       <div class="ympick"><span class="flab">帳單月份</span><input type="hidden" id="hYm">
         <div class="ynav"><button type="button" class="pm sm" data-yy="-1" aria-label="前一年">‹</button><b id="hYY" aria-live="polite"></b><button type="button" class="pm sm" data-yy="1" aria-label="下一年">›</button></div>
@@ -2248,55 +2283,49 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
 
 <div class="view readable" id="v-basics" data-title="用電基本知識" hidden>
   <section class="sec"><h1 class="vh">用電基本知識</h1>
-    <p class="lead">看不懂電費單，就不知道該從哪裡省。</p><ul class="pgoal"><li><b>你要做的</b><span>每段先看一句重點，想知道細節再點開。先看「基本」4 段就夠了。</span></li><li><b>你會知道</b><span>1 度電是多少、為什麼越用越貴、為什麼夏天比較貴。</span></li></ul>
+    <p class="lead">看不懂電費單，就不知道該從哪裡省。</p><ul class="pgoal"><li><b>你要做的</b><span>先看「基本」4 段，每段都很短、附例子；其他的等需要時再看。</span></li><li><b>你會知道</b><span>1 度電是多少、為什麼越用越貴、為什麼夏天比較貴。</span></li></ul>
     <nav class="btoc2" aria-label="這一頁的內容"><div class="bgrp base"><p><b>基本</b><span>每個人都該知道，先看這 4 段</span></p><div class="btoc"><a href="#b-unit" data-bjump="b-unit">1 度是多少</a><a href="#b-stairs" data-bjump="b-stairs">為什麼越用越貴</a><a href="#b-season" data-bjump="b-season">夏天比較貴</a><a href="#b-two" data-bjump="b-two">兩個月一張帳單</a></div></div><div class="bgrp"><p><b>進階：省錢與權益</b><span>能領的錢、租屋族的權利</span></p><div class="btoc"><a href="#b-reward" data-bjump="b-reward">節電獎勵</a><a href="#b-rent" data-bjump="b-rent">租屋的電費</a><a href="#b-meter" data-bjump="b-meter">智慧電表</a></div></div><div class="bgrp"><p><b>進階：家電與安全</b><span>買電器、沒開也在吃電、插座安全</span></p><div class="btoc"><a href="#b-label" data-bjump="b-label">能源效率標示</a><a href="#b-standby" data-bjump="b-standby">待機電力</a><a href="#b-safe" data-bjump="b-safe">用電安全</a></div></div><div class="bgrp"><p><b>想再多看</b><span>台電官方的知識補充</span></p><div class="btoc"><a href="#b-read" data-bjump="b-read">台電官方補充</a></div></div></nav>
   </section>
 
-  <section class="sec bcard" id="b-unit"><details class="bdet"><summary><h2>1 度是多少？</h2><span class="bkey">1 度 ＝ 1,000 瓦的電器用 1 小時，電費就是照「度」算的。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard" id="b-unit"><h2>1 度是多少？</h2>
     <p><b>1 度 ＝ 1,000 瓦（1 kW）的電器，連續用 1 小時。</b>英文寫作 kWh（千瓦小時）。</p>
     <p class="umix">「瓦」是電器<b>一下子有多耗電</b>，寫在電器背後的標籤上；「度」是<b>總共用了多少電</b>，電費就是照度數算的。<br>瓦數 × 使用小時 ÷ 1,000 ＝ 度數<br>例：800 瓦的電器用 1 小時 → 800 × 1 ÷ 1,000 ＝ 0.8 度</p>
     <div class="ugrid"><div><b>1,000 瓦</b><small>吹風機開強風</small><em>1 小時＝1 度</em></div><div><b>100 瓦</b><small>一台電視</small><em>10 小時＝1 度</em></div><div><b>20 瓦</b><small>一顆燈泡</small><em>50 小時＝1 度</em></div></div>
     <p class="umine" id="unitMine"></p>
     <a class="tplink" href="https://www.taipower.com.tw/1136/1149/2271/simpleList" target="_blank" rel="noopener">台電兒童網：什麼叫一度電</a>
-  </div></details>
   </section>
 
-  <section class="sec bcard" id="b-stairs"><details class="bdet"><summary><h2>為什麼越用越貴？</h2><span class="bkey">電價分 6 階，用越多，多出來的度數每度越貴；全家的電加在一起算。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard" id="b-stairs"><h2>為什麼越用越貴？</h2>
     <p>住家電價是<b>累進</b>的，像爬樓梯一樣分成 6 階：前 120 度最便宜，用得越多，<b>多出來的那幾度</b>就算越貴的價錢。</p>
     <p>全家的電是加在一起算的，所以不是「誰用比較多誰付比較貴」，而是全家一起爬上了比較高的階。</p>
     <button type="button" class="gjump" data-bgo="decoder" data-bto="s-stairs">看你家在第幾階</button>
     <a class="tplink" href="https://www.taipower.com.tw/1136/1149/2271/3119/normalPost" target="_blank" rel="noopener">台電兒童網：一度電多少錢（附現行電價表）</a>
-  </div></details>
   </section>
 
-  <section class="sec bcard" id="b-season"><details class="bdet"><summary><h2>夏天比較貴</h2><span class="bkey">6/1–9/30 是夏月，120 度以上的每一階都比較貴。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard" id="b-season"><h2>夏天比較貴</h2>
     <p><b>6 月 1 日到 9 月 30 日是「夏月」</b>，120 度以上的每一階都比其他月份貴。帳單如果剛好跨到夏天，會按天數拆開算。</p>
     <p>所以夏天電費變多，不一定是用得比較兇，也可能只是電價變貴了。</p>
     <button type="button" class="gjump" data-bgo="learn">去電價小教室玩玩看</button>
-  </div></details>
   </section>
 
-  <section class="sec bcard" id="b-two"><details class="bdet"><summary><h2>兩個月一張帳單</h2><span class="bkey">大部分家庭兩個月一張帳單，度數除以 2 才是一個月。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard" id="b-two"><h2>兩個月一張帳單</h2>
     <p>大部分住家<b>兩個月才收到一張電費單</b>，上面的度數是兩個月加起來的。想知道「一個月用多少」，先除以 2。</p>
     <p>兩個月一期時，每一階的度數上限也跟著乘 2，例如第一階變成 240 度。網站會自動幫你換算。</p>
     <a class="tplink" href="https://www.taipower.com.tw/1136/1149/2271/3120/normalPost" target="_blank" rel="noopener">台電兒童網：電費是怎麼計算的呢？（兩個月一期的算法）</a>
-  </div></details>
   </section>
 
   <div class="bdiv"><b>進階：省錢與權益</b><span>基本的看完了。接下來是能領的錢、租屋族的權利。</span></div>
-  <section class="sec bcard" id="b-reward"><details class="bdet"><summary><h2>節電獎勵</h2><span class="bkey">跟去年同一期比，每少用 1 度扣 0.6 元；要在 2026/12/17 前登錄。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard adv" id="b-reward"><h2>節電獎勵</h2>
     <p>台電的節電獎勵是<b>跟「去年同一期」比</b>，不是跟上一期比：每少用 1 度，扣 0.6 元，直接從帳單扣。</p>
     <p>要先登錄才算（2026 年 12 月 17 日前，可上網、到櫃台或打 1911）。2026 年起取消每期 84 元的保底。</p>
     <p class="umix">節電量 ＝（去年同期每天平均度數 － 這期每天平均度數）× 這期天數</p>
     <button type="button" class="gjump" data-bgo="history">去帳單紀錄記一筆</button>
-  </div></details>
   </section>
 
-  <section class="sec bcard" id="b-rent"><details class="bdet"><summary><h2>租屋的電費</h2><span class="bkey">2024/7/15 後簽的租約，房東每度收費不能超過當期平均電價。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard adv" id="b-rent"><h2>租屋的電費</h2>
     <p>2024 年 7 月 15 日以後簽的租約，房東如果<b>按度數收電費</b>，每度不能超過那一期帳單的「每度平均電價」（總電費 ÷ 總度數）。覺得收太多，可以打 1996 內政部專線問。</p>
-  </div></details>
   </section>
-  <section class="sec bcard" id="b-meter"><details class="bdet"><summary><h2>你家是智慧電表嗎？看得到的資訊差很多</h2><span class="bkey">智慧電表看得到每 15 分鐘用多少；傳統電表只看得到總度數。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard adv" id="b-meter"><h2>你家是智慧電表嗎？看得到的資訊差很多</h2>
 
       <div class="mtwo">
         <div><b>傳統電表</b><ul><li>只記錄總共用了幾度，看不出是什麼時候用的</li><li>靠人工抄表，大多兩個月才收到一張帳單</li><li>台灣電力 App 認證後，可以查兩年內的帳單和用電圖表</li></ul></div>
@@ -2305,33 +2334,29 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
       <p><b>怎麼知道？</b>電表是數字液晶螢幕的電子式電表，或打開台灣電力 App 有「AMI 用電專區」，就可能已經換好了。換裝後要等通訊設定完成，App 才看得到資料。</p>
       <p><b>可以申請嗎？</b>一般住家是台電依計畫分批換裝：2024 年 6 月已超過 300 萬具、涵蓋全台約 8 成用電，之後每年再裝約 100 萬具，目標 2035 年前全部換完。想知道你家什麼時候換，可以打台電客服 1911 問。</p>
     
-  </div></details>
   </section>
 
   <div class="bdiv"><b>進階：家電與安全</b><span>買電器怎麼挑、沒開也在吃電、插座怎麼插才安全。</span></div>
-  <section class="sec bcard" id="b-label"><details class="bdet"><summary><h2>買電器，看能源效率標示</h2><span class="bkey">能源效率分 1～5 級，數字越小越省電，1 級最省。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard adv" id="b-label"><h2>買電器，看能源效率標示</h2>
     <p>冷氣、冰箱、除濕機等電器上，會貼一張像溫度計的<b>能源效率分級標示</b>，分成 1 到 5 級，<b>數字越小越省電</b>，1 級最省。標示上還會寫「每年耗電量」，可以直接拿來比較。</p>
     <p>另一個是<b>節能標章</b>，代表能源效率比國家標準高 10%～50%。</p>
     <p class="umix">要買之前，可以到經濟部能源署的「能源效率分級標示管理系統」用型號查等級，因為分級標準改了，舊標示的級數可能已經不同。</p>
     <a class="tplink" href="https://ranking.energylabel.org.tw/" target="_blank" rel="noopener">能源效率分級標示查詢（能源署）</a>
-  </div></details>
   </section>
 
-  <section class="sec bcard" id="b-standby"><details class="bdet"><summary><h2>沒開也在吃電：待機電力</h2><span class="bkey">待機電力約占家庭用電 7.4%，但不是每台都該拔插頭。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard adv" id="b-standby"><h2>沒開也在吃電：待機電力</h2>
     <p>依工研院的統計，<b>待機電力約占家庭用電的 7.4%</b>。分辨方法很簡單：插著電會<b>亮小燈、有顯示螢幕、能用遙控器開</b>的電器，大多有待機電力。</p>
     <div class="ugrid"><div><b>35.5 度</b><small>洗衣機</small><em>每年待機</em></div><div><b>33.2 度</b><small>微波爐</small><em>每年待機</em></div><div><b>26.3 度</b><small>電視機</small><em>每年待機</em></div></div>
     <p>但<b>不是每台都該拔插頭</b>：冰箱、路由器要一直開著；吹風機、檯燈這類關掉就不耗電的，拔不拔都一樣。每天要開關的影音設備，能源署和台電建議改用<b>有獨立開關的延長線</b>，按一下就好。</p>
     <a class="tplink" href="https://udn.com/news/story/7266/9665533" target="_blank" rel="noopener">台電與能源署：默默吃電小怪獸（聯合新聞網）</a>
-  </div></details>
   </section>
 
-  <section class="sec bcard" id="b-safe"><details class="bdet"><summary><h2>用電安全：一個插座能插多少？</h2><span class="bkey">15 安培的插座最多 1,650 瓦，高瓦數電器要用獨立插座。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard adv" id="b-safe"><h2>用電安全：一個插座能插多少？</h2>
     <p>一般 15 安培的插座，最多只能用 <b>15 安培 × 110 伏特 ＝ 1,650 瓦</b>。一台 1,200 瓦的電暖器插上去，同一個迴路只剩 450 瓦，再插吹風機就會超過負載。</p>
     <ul><li>電暖器、吹風機、電鍋這類<b>高瓦數電器用獨立插座</b>，不要接在延長線上。</li><li>除濕機離牆 50 公分，<b>不要在睡覺或沒人在家時開</b>，也不要拿來烘衣服。</li><li>插頭積灰塵容易起火；長時間不用的插座可以加保護蓋。</li></ul>
     <a class="tplink" href="https://www.taipower.com.tw/1136/1150/2277/3221/normalPost" target="_blank" rel="noopener">台電兒童網：電暖器為什麼要用獨立插座</a><a class="tplink" href="https://www.taipower.com.tw/1136/1150/2277/3217/normalPost" target="_blank" rel="noopener">台電兒童網：除濕機這樣用才安全</a>
-  </div></details>
   </section>
-  <section class="sec bcard" id="b-read"><details class="bdet"><summary><h2>台電官方的知識補充</h2><span class="bkey">台電兒童網把用電知識寫得很白話，這裡挑了最相關的幾篇。</span><span class="bmore" aria-hidden="true">看細節</span></summary><div class="bbody">
+  <section class="sec bcard adv" id="b-read"><h2>台電官方的知識補充</h2>
     <p>台電的「台電兒童網」用很白話的方式寫了很多用電知識，給小朋友看，大人看也剛好。下面是和這個網站最相關的幾篇，點了會開新分頁。</p>
     <p class="umix">最後整理：2026 年 11 月 17 日。台電網站改版時連結可能會變，發現打不開歡迎回報。</p>
     <div class="tpgrid">
@@ -2339,7 +2364,6 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
       <div class="tpg"><b>電器節電</b><a href="https://www.taipower.com.tw/1136/1149/2273/3157/normalPost" target="_blank" rel="noopener">冷氣機<small>設定溫度每提高 1°C 約省 6%，濾網兩週清一次</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3158/normalPost" target="_blank" rel="noopener">電冰箱<small>背面離牆 10 公分，放太滿耗電多 4%～5%</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3160/normalPost" target="_blank" rel="noopener">照明燈具<small>優先選 LED，燈具定期清潔</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3161/normalPost" target="_blank" rel="noopener">電熱水器<small>儲熱式加定時器，洗澡前 30 分鐘再開</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3165/normalPost" target="_blank" rel="noopener">電視機<small>離牆 10 公分散熱，長時間外出拔插頭</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3155/normalPost" target="_blank" rel="noopener">電熱水瓶<small>保溫設 90°C 比 98°C 約省 25% 電費</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3159/normalPost" target="_blank" rel="noopener">洗衣機<small>累積到 7～8 分滿再洗，脫水 3 分鐘就夠</small></a><a href="https://www.taipower.com.tw/1136/1149/2273/3163/normalPost" target="_blank" rel="noopener">電暖器<small>不同種類適合的空間大小，濾網半年清一次</small></a></div>
       <div class="tpg"><b>節電撇步</b><a href="https://www.taipower.com.tw/1136/1149/2272/simpleList" target="_blank" rel="noopener">隔熱降溫的方法<small>窗戶做好隔熱，室內可降 3～5 度</small></a></div>
     </div>
-  </div></details>
   </section>
   <p class="tip" style="text-align:center">每一段的出處都列在「資料來源與設定」的「引用來源」。</p>
 </div>
@@ -3228,29 +3252,19 @@ var Stats={render:function(st,r){if(Router.cur!=='challenge')return;
   var has=APPLIANCES.filter(function(a){return st.app[a.id].has}),sl=has.filter(function(a){return st.app[a.id].tamed}).length;
   var cutY=r.cut*12,days=r.m>0?cutY/(r.m/30):0,done=MISSIONS.filter(function(x){return st.missions[x[0]]&&st.missions[x[0]].done}).length;
   var who={};MISSIONS.forEach(function(x){var o=st.missions[x[0]];if(o&&o.who)who[o.who]=1});var nw=Object.keys(who).length;
-  var money=r.pay==='rent'?null:r.save*(12/st.months);
+  var money=r.pay==='rent'?null:r.save*(12/st.months),hist=(st.history||[]).slice(-2),cmp=null;
+  if(hist.length===2){var a=hist[0].kwh/hist[0].months,b=hist[1].kwh/hist[1].months;cmp=Math.round(b-a)}
   var T=function(k,v,sub,cls,go){return '<'+(go?'a href="#'+go+'"':'div')+' class="stt'+(cls?' '+cls:'')+'"><span class="k">'+k+'</span><b>'+v+'</b><small>'+sub+'</small></'+(go?'a':'div')+'>'};
   $('stats').innerHTML='<p class="sth">'+ZT('我們家的成績','Our scoreboard')+'</p><div class="stg">'+
     T(ZT('睡著的怪獸','Monsters asleep'),sl+' / '+has.length,sl?ZT('每月少用 '+fmt(r.cut)+' 度',fmt(r.cut)+' kWh less a month'):ZT('到電費解碼器點怪獸，讓牠睡覺','Tap a monster in the decoder and put it to sleep'),sl?'ok':'',sl?null:'decoder')+
     T(ZT('一年可以省','Saved per year'),money!=null?'NT$'+fmt(money):fmt(cutY*CFG.co2)+ZT(' 公斤',' kg'),sl?(money!=null?ZT('相當於全家 '+fmt(days)+' 天的電','Equal to '+fmt(days)+' days of your home’s power'):ZT('少排的二氧化碳','CO₂ avoided')):ZT('還沒開始','Not started yet'),sl?'ok':'')+
     T(ZT('一次搞定的事','One-time fixes'),done+' / '+MISSIONS.length,nw?ZT(nw+' 位家人有分工',nw+' family member'+(nw>1?'s':'')+' helping'):ZT('下面每件都能指定給家人','Assign each one below to someone'),done?'ok':'')+
-    '</div>';Stats.cmp(st)},
-  cmp:function(st){var H=(st.history||[]).slice().sort(function(a,b){return a.ym<b.ym?-1:a.ym>b.ym?1:0}),last=H[H.length-1],prev=H[H.length-2],ly=null,h;
-    var row=function(lab,d,sub){var cls=d==null?'':d<=0?'ok':'warn';return '<div class="cbrow '+cls+'"><span>'+lab+'</span><b>'+(d==null?'—':d===0?ZT('一樣','Same'):(d<0?ZT('少 ',''):ZT('多 ','+'))+fmt(Math.abs(d))+ZT(' 度',d<0?' kWh less':' kWh more'))+'</b><small>'+sub+'</small></div>'};
-    h='<p class="cbh">'+ZT('這期有沒有比較省？','Did this bill go down?')+'</p>';
-    if(last){if(prev)var dp=Math.round(last.kwh/last.months-prev.kwh/prev.months);H.forEach(function(x){if(x.ym===ymAdd(last.ym,-12))ly=x});
-      h+='<p class="cbsub">'+ZT('最新一筆：'+ymText(last.ym)+'，'+fmt(last.kwh)+' 度','Latest: '+last.ym+', '+fmt(last.kwh)+' kWh')+'</p>';
-      h+=row(ZT('和上一期比','vs last bill'),prev?dp:null,prev?ZT('每個月平均','monthly average'):ZT('再記一筆就能比','log one more bill to compare'));
-      h+=row(ZT('和去年同一期比','vs same period last year'),ly?Math.round(last.kwh-ly.kwh):null,ly?(last.kwh<ly.kwh?ZT('有登錄的話，節電獎勵約 NT$'+fmt(Math.round((ly.kwh-last.kwh)*0.6)),'with sign-up, reward ≈ NT$'+fmt(Math.round((ly.kwh-last.kwh)*0.6))):ZT('節電獎勵就是跟這個比','the saving reward uses this one')):ZT('記下去年同一期的帳單就能比','log last year’s bill for the same months'))}
-    else if(st.lastYear!=null){h+=row(ZT('和去年同一期比','vs same period last year'),Math.round(st.kwh-st.lastYear),ZT('用你在簡單版填的度數','from the numbers you entered in the simple version'))}
-    else h+='<p class="cbsub">'+ZT('還沒有帳單紀錄。記下這期度數，下期回來就能比。','No bills logged yet. Log this one, then compare when the next arrives.')+'</p>';
-    h+='<p class="cbnote">'+ZT('台電建議跟「去年同一期」比：夏天（6–9 月）電價和用電本來就比較高，跟上一期比容易誤會。','Taipower suggests comparing with the same period last year: summer (Jun–Sep) prices and use are naturally higher, so comparing with the last bill can mislead.')+'</p><a class="nextone" href="#history" data-route="history"><span><b>'+ZT('記一筆帳單','Log a bill')+'</b><small>'+ZT('收到新帳單就記，兩期以上就看得出變化','Log each new bill; after two you’ll see the trend')+'</small></span><i aria-hidden="true">›</i></a>';
-    $('cmpBig').innerHTML=h}};
+    ''+'</div>'}};
 
 /* v8.1: guide */
 var Guide={tab:'quick',
   open:function(tab){this.tab=tab||'quick';if(location.hash==='#guide')schedule();else location.hash='guide'},
-  jump:function(route,to){var go=function(){var el=to&&$(to);if(!el){window.scrollTo(0,0);return}var dd=el.querySelector&&el.querySelector('details.bdet');if(dd)dd.open=true;
+  jump:function(route,to){var go=function(){var el=to&&$(to);if(!el){window.scrollTo(0,0);return}
       try{el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'})}catch(e){el.scrollIntoView()}
       el.classList.remove('spot');void el.offsetWidth;el.classList.add('spot');setTimeout(function(){el.classList.remove('spot')},2600)};
     if(location.hash.slice(1)===route){go();return}location.hash=route;setTimeout(go,420)},
@@ -3315,12 +3329,19 @@ var Unit={render:function(st,r){var d=r.m/30;if(!$('unitMine'))return;
     if($('unitSum'))$('unitSum').textContent=ZT('你家每天約 '+fmt1(d)+' 度電・','About '+fmt1(d)+' kWh a day · ');
     $('unitMine').innerHTML=ZT('你家每天約 <b>'+fmt1(d)+' 度</b>，等於一台 1,000 瓦的吹風機每天開 <b>'+fmt1(d)+' 小時</b>，或一顆 20 瓦燈泡亮 <b>'+fmt(d*50)+' 小時</b>。','Your home uses about <b>'+fmt1(d)+' kWh</b> a day — like a 1,000 W hair dryer running <b>'+fmt1(d)+' hours</b>, or a 20 W bulb lit for <b>'+fmt(d*50)+' hours</b>.')}};
 function fmt1(x){return (Math.round(x*10)/10).toLocaleString('en-US',{maximumFractionDigits:1})}
-var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){var j=e.target.closest&&e.target.closest('[data-bjump]');
-    if(j){e.preventDefault();var t=$(j.dataset.bjump);if(t){var dd=t.querySelector('details.bdet');if(dd)dd.open=true}if(t)t.scrollIntoView({behavior:reduced()?'auto':'smooth'});return}
+function CmpTop(st){var h=(st.history||[]).slice().sort(function(a,b){return a.ym<b.ym?1:-1}),el=$('cmpTop');
+  if(h.length<2){el.innerHTML='<h2>'+ZT('和上一期比','Compared with last bill')+'</h2><p>'+ZT('還沒辦法比。收到下一張帳單時，到「帳單紀錄」記一筆，這裡就會告訴你有沒有比上期省。','Not yet. When your next bill arrives, log it in Bill log and you’ll see here whether you saved.')+'</p><a class="cmpgo" href="#history" data-route="history">'+ZT('去記這期帳單 ›','Log this bill ›')+'</a>';return}
+  var pm=function(x){return x.kwh/(x.months||2)},c=pm(h[0]),p=pm(h[1]),d=Math.round(p-c),pc=p?Math.round(Math.abs(d)/p*100):0;
+  el.innerHTML='<h2>'+ZT('和上一期比','Compared with last bill')+'</h2><p class="cmpbig '+(d>0?'good':d<0?'bad':'')+'">'+(d>0?ZT('每月少用 '+fmt(d)+' 度','Down '+fmt(d)+' kWh a month'):d<0?ZT('每月多用 '+fmt(-d)+' 度','Up '+fmt(-d)+' kWh a month'):ZT('跟上期一樣','Same as last time'))+(d?'<small>（'+pc+'%）</small>':'')+'</p><p>'+ZT(h[0].ym+' 這期平均每月 '+fmt(Math.round(c))+' 度；上一期（'+h[1].ym+'）每月 '+fmt(Math.round(p))+' 度。','This bill ('+h[0].ym+'): '+fmt(Math.round(c))+' kWh/month; previous ('+h[1].ym+'): '+fmt(Math.round(p))+'.')+(d>0?ZT('全家一起做的有效果！','Your family’s effort is paying off!'):d<0?ZT('夏天冷氣多開是常見原因，看看下面哪件事還沒做。','Summer AC is a common reason — check which task below is still open.'):'')+'</p>'}
+var Basics={open:function(c,on){if(!c||!c.classList.contains('adv'))return;c.classList.toggle('open',on);var b=c.querySelector('.bmorebtn');if(b){b.setAttribute('aria-expanded',String(on));b.textContent=on?ZT('收起 ▴','Show less ▴'):ZT('看完整說明 ▾','Read more ▾')}},
+  prep:function(){document.querySelectorAll('#v-basics .bcard.adv').forEach(function(c){if(c.querySelector('.bmorebtn'))return;var kids=[].slice.call(c.children),h=c.querySelector('h2'),keep=[h];var first=kids.filter(function(x){return x!==h&&x.tagName==='P'})[0];if(first)keep.push(first);var box=document.createElement('div');box.className='bmore';kids.forEach(function(x){if(keep.indexOf(x)<0)box.appendChild(x)});c.appendChild(box);var b=document.createElement('button');b.type='button';b.className='bmorebtn';b.setAttribute('aria-expanded','false');b.textContent=ZT('看完整說明 ▾','Read more ▾');c.appendChild(b)})},
+  bind:function(){Basics.prep();$('v-basics').addEventListener('click',function(e){var j=e.target.closest&&e.target.closest('[data-bjump]');
+    if(j){e.preventDefault();var t=$(j.dataset.bjump);if(t){Basics.open(t,true);t.scrollIntoView({behavior:reduced()?'auto':'smooth'})}return}
+    var tg=e.target.closest&&e.target.closest('.bmorebtn');if(tg){var c=tg.closest('.bcard');Basics.open(c,!c.classList.contains('open'));return}
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.25 (dah-v46)';
+var SITE_VER='9.25 (dah-v47)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -3428,19 +3449,16 @@ function NM(n){return typeof I18N!=='undefined'&&I18N.lang==='en'?(L(n)||n):n}
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"用 Email 寄給作者，不用登入、不會公開。請不要寫電號、地址或電話。": "Emailed to the author — no login, nothing public. Please don’t include your account number, address or phone.", "網站資訊": "Site info"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"這個名字，有兩層意思": "The name has two meanings", "家裡": "Home: ", "幾度 C": "what degree?", "家裡現在幾度 C": "How warm is home right now?", "夏天冷氣、空調開幾度，會直接反映在電費上。": "In summer, how cool you set the AC shows up straight on the bill.", "家裡的氣氛幾度 C": "How heated is the mood at home?", "一張電費單，常常讓一家人吵得火熱，或冷到不想說話。": "One bill can get a family arguing hotly — or going cold and silent.", "是": "Are we ", "「省」了沒？": "“saving” yet?", "反省的「省」，也是清醒的「醒」": "“Saving” as in reflecting — waking up to it", "帳單上的數字，你真的看懂了嗎？有沒有發現家裡真正的用電怪獸？": "Do you really understand the numbers on your bill? Have you found your home’s real power monster?", "去找用電怪獸": "Find the power monsters", "節省的「省」": "“Saving” as in spending less", "就是字面上的意思：真的有省到嗎？從最耗電的電器下手，最有感。": "The plain meaning: are you actually saving? Start with the biggest appliances — that’s where you’ll feel it.", "例：# 瓦的電器用 # 小時 → # × # ÷ # ＝ # 度": "e.g. an 800 W appliance for 1 hour → 800 × 1 ÷ 1,000 = 0.8 kWh", "例：800 瓦的電器用 1 小時 → 800 × 1 ÷ 1,000 ＝ 0.8 度": "e.g. an 800 W appliance for 1 hour → 800 × 1 ÷ 1,000 = 0.8 kWh"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],'']}})({"主題名字由來": "Where the name comes from", "「家裡幾度 C」和「省」，各有兩層意思。": "“Degrees at home” and “saving” each have two meanings."});
-(function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"從這裡開始": "Start here", "簡單版（給爸媽）": "Simple version (for parents)", "更多好玩的": "More to explore", "其他": "Other", "輸入度數": "Enter kWh", "看結果": "See results", "傳給家人": "Send to family", "三個步驟": "Three steps", "照上面 ① ② ③ 做就好。要給爸媽用，有更簡單的版本。": "Just follow ① ② ③ above. For parents, there’s an even simpler version.", "給爸媽的簡單版": "Simple version for parents", "只有 3 步，字大，一步一步帶著做": "Just 3 steps, big text, guided one at a time", "輸入電費單上的「計費度數」": "Enter the billed kWh from your bill", "把結果傳到家庭群組，大家一起看，比一個人猜「是誰在浪費電」有用多了。": "Send the result to your family group. Looking at it together beats guessing who’s wasting power.", "傳到 LINE": "Send on LINE", "其他分享方式": "Other ways to share", "複製文字": "Copy text", "想看更細的？往下看「電價像爬樓梯」和「家裡的電費怪獸」。": "Want details? Scroll down to “Prices climb like stairs” and “Power monsters at home”.", "簡單版": "Simple version", "第 1 步，共 3 步": "Step 1 of 3", "第 2 步，共 3 步": "Step 2 of 3", "第 3 步，共 3 步": "Step 3 of 3", "拿出電費單，找到「計費度數」": "Get your bill and find the “billed kWh”", "把那個數字打在下面的格子裡。": "Type that number in the box below.", "例如 640": "e.g. 640", "這張電費單是：": "This bill covers:", "兩個月一張": "Two months", "大部分家庭": "Most homes", "一個月一張": "One month", "下一步 ›": "Next ›", "你家這期的電費": "Your bill this period", "下一步：傳給家人 ›": "Next: send to family ›", "‹ 改數字": "‹ Change the number", "傳給家人看": "Show your family", "按綠色按鈕，選家庭群組，再按「傳送」。": "Tap the green button, pick your family group, then tap Send.", "用其他 App 分享": "Share with another app", "‹ 再算一次": "‹ Start over", "把這個簡單版傳給爸媽、長輩": "Send this simple version to parents and grandparents", "看完整版網站": "See the full site", "第一次來，照首頁的 ① 輸入度數 → ② 看結果 → ③ 傳給家人 就好。其他功能都收在選單的「更多好玩的」。": "First time? Just follow ① enter kWh → ② see results → ③ send to family on the home page. Everything else is under “More to explore” in the menu.", "① 從這裡開始": "① Start here", "輸入度數、看結果、傳給家人": "Enter kWh, see results, send to family", "② 更多好玩的": "② More to explore", "怪獸、分工挑戰、做卡片、記帳單、我家設定": "Monsters, family challenges, cards, bill log, household setup", "③ 其他": "③ Other", "資料來源、備份、回報問題": "Sources, backup, report a problem", "選單也照這三類排好了。要給爸媽用，直接傳「簡單版」給他們。": "The menu follows these three groups. For parents, just send them the simple version.", "電費大約多少、在第幾階、比一般家庭多還是少、最可能是哪台在吃電。想看更細，往下看「電價像爬樓梯」。": "Roughly what you’ll pay, which price step you’re on, how you compare with an average home, and which appliance is probably the biggest user. For details, scroll to “Prices climb like stairs”.", "按「傳到 LINE」，選家庭群組。大家一起看，比互相猜誰在浪費電有用。想再深入，就去找最吃電的怪獸、讓牠睡覺。": "Tap “Send on LINE” and pick your family group. Looking together beats guessing who’s wasting power. To go further, find the hungriest monster and put it to sleep."});
+(function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"從這裡開始": "Start here", "簡單版（給爸媽）": "Simple version (for parents)", "更多好玩的": "More to explore", "其他": "Other", "輸入度數": "Enter kWh", "看結果": "See results", "傳給家人": "Send to family", "三個步驟": "Three steps", "照上面 ① ② ③ 做就好。要給爸媽用，有更簡單的版本。": "Just follow ① ② ③ above. For parents, there’s an even simpler version.", "給爸媽的簡單版": "Simple version for parents", "只有 3 步，字大，一步一步帶著做": "Just 3 steps, big text, guided one at a time", "輸入電費單上的「計費度數」": "Enter the billed kWh from your bill", "把結果傳到家庭群組，大家一起看，比一個人猜「是誰在浪費電」有用多了。": "Send the result to your family group. Looking at it together beats guessing who’s wasting power.", "傳到 LINE": "Send on LINE", "其他分享方式": "Other ways to share", "複製文字": "Copy text", "想看更細的？往下看「電價像爬樓梯」和「家裡的電費怪獸」。": "Want details? Scroll down to “Prices climb like stairs” and “Power monsters at home”.", "簡單版": "Simple version", "第 1 步，共 3 步": "Step 1 of 3", "第 2 步，共 3 步": "Step 2 of 3", "第 3 步，共 3 步": "Step 3 of 3", "拿出電費單，找到「計費度數」": "Get your bill and find the “billed kWh”", "把那個數字打在下面的格子裡。": "Type that number in the box below.", "例如 640": "e.g. 640", "這張電費單是：": "This bill covers:", "兩個月一張": "Two months", "大部分家庭": "Most homes", "一個月一張": "One month", "下一步 ›": "Next ›", "你家這期的電費": "Your bill this period", "下一步：傳給家人 ›": "Next: send to family ›", "‹ 改數字": "‹ Change the number", "傳給家人看": "Show your family", "按綠色按鈕，選家庭群組，再按「傳送」。": "Tap the green button, pick your family group, then tap Send.", "用其他 App 分享": "Share with another app", "‹ 再算一次": "‹ Start over", "把這個簡單版傳給爸媽、長輩": "Send this simple version to parents and grandparents", "看完整版網站": "See the full site", "第一次來，照首頁的 ① 看懂 → ② 找出 → ③ 一起做 → ④ 下期回來比 走一次就好。其他功能都收在選單的「更多好玩的」。": "First time? Just follow ① enter kWh → ② see results → ③ send to family on the home page. Everything else is under “More to explore” in the menu.", "① 從這裡開始": "① Start here", "輸入度數、看結果、傳給家人": "Enter kWh, see results, send to family", "② 更多好玩的": "② More to explore", "怪獸、分工挑戰、做卡片、記帳單、我家設定": "Monsters, family challenges, cards, bill log, household setup", "③ 其他": "③ Other", "資料來源、備份、回報問題": "Sources, backup, report a problem", "選單也照這三類排好了。要給爸媽用，直接傳「簡單版」給他們。": "The menu follows these three groups. For parents, just send them the simple version.", "電費大約多少、在第幾階、比一般家庭多還是少、最可能是哪台在吃電。想看更細，往下看「電價像爬樓梯」。": "Roughly what you’ll pay, which price step you’re on, how you compare with an average home, and which appliance is probably the biggest user. For details, scroll to “Prices climb like stairs”.", "按「傳到 LINE」，選家庭群組。大家一起看，比互相猜誰在浪費電有用。想再深入，就去找最吃電的怪獸、讓牠睡覺。": "Tap “Send on LINE” and pick your family group. Looking together beats guessing who’s wasting power. To go further, find the hungriest monster and put it to sleep."});
 (function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,"#");I18N_DATA.D[k]=[A[k],""];I18N_DATA.D[n]=[A[k],""]}})({"點一隻怪獸的「調整」，把每天開幾小時、用了幾年改成你家的；家裡沒有的就設成沒有。": "Tap “Adjust” on a monster and set the hours per day and age to match your home. Mark the ones you don’t have as not in your home.", "金額用你家現在那一階的每度電價估算：少開這台，每少用 1 度，就省下這個價錢。": "Costs use the price per kWh at your home’s current tier: every kWh you cut from this appliance saves that much.", "約 # 度 / 月，約 NT$#": "About # kWh / month, about NT$#", "：美國電力公司會在帳單裡附上「你家和鄰居比」的報告。研究發現，這樣平均只讓家庭少用約 2% 的電。所以本站只拿「全台平均」給你參考，重點放在冷氣溫度、熱水瓶定時這類「設定一次就一直省」的方法。": ": US utilities add a “you vs. your neighbors” report to the bill. Research found this only cuts household use by about 2% on average. So this site shows the Taiwan average just for reference, and focuses on set-once fixes such as the AC temperature and a timer on the hot water dispenser.", "台電常見問答：請問電費如何計算？（現行住宅電價）": "Taipower FAQ: How is my bill calculated? (current residential rates)", "台電各類電價表及計算範例（113 年 4 月起，舊電價，PDF）": "Taipower rate tables and examples (from Apr 2024, old rates, PDF)", "收到帳單，多數人只看總金額。這個網站把度數翻成白話：你家在電價第幾階、再多用 # 度要多少錢。例如非夏月每月 # 度，最後那幾度每度 # 元，是最便宜那階（# 元）的將近 # 倍。": "Most people only look at the total. This site puts the kWh into plain words: which price tier you’re in and what one more kWh costs. For example, at 400 kWh a month outside summer, the last few kWh cost NT$3.13 each, nearly 2× the cheapest tier (NT$1.78).", "一直叫大家「隨手關燈」，效果其實很小：國外研究發現，光是提醒，平均只能少用約 #% 的電。所以這裡只推「設定一次就一直省」的方法，例如冷氣設 #–#°C、熱水瓶加定時器，設好之後每天都在省，不用靠記性。": "Telling everyone to “switch off the lights” does little: studies abroad found reminders alone cut use by only about 2%. So this site only recommends set-once fixes, like setting the AC to 26–28°C or putting a timer on the hot water dispenser. Once set, they save every day without anyone having to remember.", "電費單一來，常變成「是誰在浪費電？」。這裡把它換成「我們一起做什麼」：把省電設定分給家人負責，下期帳單來了一起比有沒有少，省下來的錢當全家的火鍋基金。": "A bill often turns into “Who’s wasting power?” Here it becomes “What can we do together?”: give each saving setup to a family member, compare when the next bill comes, and put the savings into the family hot pot fund.", "基本": "Basics", "每個人都該知道，先看這 # 段": "Everyone should know these. Start with these 4.", "進階：省錢與權益": "More: money & your rights", "能領的錢、租屋族的權利": "Rewards you can claim, renters’ rights", "進階：家電與安全": "More: appliances & safety", "買電器、沒開也在吃電、插座安全": "Buying appliances, standby power, socket safety", "想再多看": "Want more?", "台電官方的知識補充": "Taipower’s own explainers", "基本的看完了。接下來是能領的錢、租屋族的權利。": "That’s the basics. Next: rewards you can claim and renters’ rights.", "買電器怎麼挑、沒開也在吃電、插座怎麼插才安全。": "How to pick appliances, power used while off, and safe socket use.", "先看「基本」# 段，每段都很短、附例子；其他的等需要時再看。": "Read the 4 “Basics” first. Each is short with an example; read the rest when you need it."});
-(function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,"#");I18N_DATA.D[k]=[A[k],""];I18N_DATA.D[n]=[A[k],""]}})({"電費單一來，家裡就開始猜：「到底是誰用最多電？」": "The power bill arrives and everyone starts guessing: “Who used all that electricity?”", "這個網站幫你做三件事：": "This site helps you do three things: ", "看懂": "Understand", "電費怎麼算、": " how the bill is calculated, ", "找出": "Find", "家裡最吃電的那台、": " the appliance that uses the most, and ", "全家一起": "Work together", "把下一期省下來。": " as a family to save on the next bill.", "接下來可以做什麼": "What to do next", "做完 ①②③，接下來：": "Done with ①②③? Next:", "看家裡每台電器一個月大約多少錢、哪台最花錢": "See roughly what each appliance costs per month, and which costs the most", "把省電的小任務分給家人，做完打勾": "Split small saving tasks among family members and tick them off", "記下這期度數，下張帳單來了比比看有沒有省": "Log this bill’s kWh, then compare when the next bill arrives", "想先弄懂為什麼越用越貴？往下看「電價像爬樓梯」。": "Want to know why each extra kWh costs more? Scroll down to “Prices go up like stairs”.", "① 看懂": "① Understand", "電費怎麼算": "How the bill works", "② 找出": "② Find", "哪台最吃電": "What uses the most", "③ 一起做": "③ Together", "分工、傳給家人": "Share tasks with family", "④ 下期回來比": "④ Compare next time", "有沒有比上期省": "Did you save vs. last bill?", "給爸媽": "For parents", "字大、只有 3 步": "Big text, just 3 steps", "設定與其他": "Settings & more", "你要做的": "What you do", "你會知道": "What you learn", "電費單只告訴你全家用了多少電，不會告訴你是哪一台用的。": "The bill tells you how much the whole home used, not which appliance used it.", "點一隻怪獸，把每天用幾小時、用了幾年改成你家的；家裡有別的電器，也可以自己加。": "Tap a monster and change the hours per day and age to match your home. You can also add your own appliances.", "每台電器一個月大約幾度、多少錢，還有台電建議怎麼省。": "Roughly how many kWh and how much money each appliance costs per month, plus Taipower’s tips to save.", "明明只多用一點電，電費卻多出很多？": "Used just a little more power, but the bill jumped?", "拖動滑桿，讓一個月的度數慢慢增加。": "Drag the slider to raise the monthly kWh bit by bit.", "電費是怎麼一階一階加上去的，以及為什麼最後那幾度最貴。": "How the bill climbs tier by tier, and why the last few kWh cost the most.", "省電只靠一個人念，很容易變成吵架。": "When only one person nags about saving power, it easily turns into an argument.", "下面六件事，每件只要設定一次就會一直省電。分給家人各自負責，做完就打勾。": "Each of the six tasks below only needs to be set up once and keeps saving. Assign them to family members and tick them off when done.", "全家一起大約能省多少。六件都完成，就一起去吃火鍋。": "Roughly how much the family can save together. Finish all six and go out for hot pot.", "只看一張帳單，很難知道到底有沒有省下來。": "With just one bill, it’s hard to tell whether you actually saved.", "每次收到電費單，就把度數記一筆。": "Each time a bill arrives, log its kWh here.", "這期和上期比是多了還是少了。": "Whether this bill is higher or lower than the last one.", "看不懂電費單，就不知道該從哪裡省。": "If you can’t read the bill, you won’t know where to start saving.", "從最前面幾段開始看，每段都很短，附例子。": "Start with the first few sections. Each one is short and comes with an example.", "1 度電是多少、為什麼越用越貴、為什麼夏天比較貴。": "What 1 kWh is, why more use costs more per kWh, and why summer is pricier.", "每個家的人數、電器、繳費方式都不一樣。": "Every home differs in size, appliances and how the bill is paid.", "選最像你家的狀況。": "Pick the options closest to your home.", "整個網站的估算、分工和卡片，都會改成你家的版本，算得更準。": "Estimates, tasks and cards across the site switch to your home’s version and get more accurate.", "叫家人省電，用講的常常沒人聽。": "Telling family to save power often goes unheard.", "放一張家人的照片、選版型、貼上家裡的怪獸。": "Add a family photo, pick a layout, and stick on your home’s monsters.", "做出一張可以傳到家庭群組的省電卡。照片只在這台手機裡處理，不會上傳。": "You get a saving card to send to the family group chat. The photo stays on this phone and is never uploaded.", "這個網站幫你看懂電費單、找出家裡最吃電的那台、全家一起把下一期省下來。第一次來，照首頁的 ① 輸入度數 → ② 看結果 → ③ 傳給家人 就好。": "This site helps you understand your power bill, find the appliance that uses the most, and save on the next bill as a family. First time here? Just follow ① Enter kWh → ② See results → ③ Send to family on the home page.", "電費怎麼算、為什麼越用越貴": "How the bill works and why more use costs more", "家裡哪台最吃電、一個月多少錢": "Which appliance uses the most and what it costs", "把省電任務分給家人、傳卡片": "Share saving tasks and send cards to family", "記下每期度數，看有沒有省": "Log each bill and see if you saved", "給爸媽與設定": "For parents & settings", "簡單版、我家設定、資料來源、回報": "Simple version, my home, sources, feedback", "選單也照這個順序排好了。要給爸媽用，直接傳「簡單版」給他們。": "The menu follows the same order. For parents, just send them the “Simple version”."});
+(function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,"#");I18N_DATA.D[k]=[A[k],""];I18N_DATA.D[n]=[A[k],""]}})({"電費單一來，家裡就開始猜：「到底是誰用最多電？」": "The power bill arrives and everyone starts guessing: “Who used all that electricity?”", "這個網站幫你做三件事：": "This site helps you do three things: ", "看懂": "Understand", "電費怎麼算、": " how the bill is calculated, ", "找出": "Find", "家裡最吃電的那台、": " the appliance that uses the most, and ", "全家一起": "Work together", "把下一期省下來。": " as a family to save on the next bill.", "接下來可以做什麼": "What to do next", "做完 ①②③，接下來：": "Done with ①②③? Next:", "看家裡每台電器一個月大約多少錢、哪台最花錢": "See roughly what each appliance costs per month, and which costs the most", "把省電的小任務分給家人，做完打勾": "Split small saving tasks among family members and tick them off", "記下這期度數，下張帳單來了比比看有沒有省": "Log this bill’s kWh, then compare when the next bill arrives", "想先弄懂為什麼越用越貴？往下看「電價像爬樓梯」。": "Want to know why each extra kWh costs more? Scroll down to “Prices go up like stairs”.", "① 看懂": "① Understand", "電費怎麼算": "How the bill works", "② 找出": "② Find", "哪台最吃電": "What uses the most", "③ 一起做": "③ Together", "分工、傳給家人": "Share tasks with family", "④ 下期回來比": "④ Compare next time", "有沒有比上期省": "Did you save vs. last bill?", "給爸媽": "For parents", "字大、只有 3 步": "Big text, just 3 steps", "設定與其他": "Settings & more", "你要做的": "What you do", "你會知道": "What you learn", "電費單只告訴你全家用了多少電，不會告訴你是哪一台用的。": "The bill tells you how much the whole home used, not which appliance used it.", "點一隻怪獸，把每天用幾小時、用了幾年改成你家的；家裡有別的電器，也可以自己加。": "Tap a monster and change the hours per day and age to match your home. You can also add your own appliances.", "每台電器一個月大約幾度、多少錢，還有台電建議怎麼省。": "Roughly how many kWh and how much money each appliance costs per month, plus Taipower’s tips to save.", "明明只多用一點電，電費卻多出很多？": "Used just a little more power, but the bill jumped?", "拖動滑桿，讓一個月的度數慢慢增加。": "Drag the slider to raise the monthly kWh bit by bit.", "電費是怎麼一階一階加上去的，以及為什麼最後那幾度最貴。": "How the bill climbs tier by tier, and why the last few kWh cost the most.", "省電只靠一個人念，很容易變成吵架。": "When only one person nags about saving power, it easily turns into an argument.", "下面六件事，每件只要設定一次就會一直省電。分給家人各自負責，做完就打勾。": "Each of the six tasks below only needs to be set up once and keeps saving. Assign them to family members and tick them off when done.", "全家一起大約能省多少。六件都完成，就一起去吃火鍋。": "Roughly how much the family can save together. Finish all six and go out for hot pot.", "只看一張帳單，很難知道到底有沒有省下來。": "With just one bill, it’s hard to tell whether you actually saved.", "每次收到電費單，就把度數記一筆。": "Each time a bill arrives, log its kWh here.", "這期和上期比是多了還是少了。": "Whether this bill is higher or lower than the last one.", "看不懂電費單，就不知道該從哪裡省。": "If you can’t read the bill, you won’t know where to start saving.", "從最前面幾段開始看，每段都很短，附例子。": "Start with the first few sections. Each one is short and comes with an example.", "1 度電是多少、為什麼越用越貴、為什麼夏天比較貴。": "What 1 kWh is, why more use costs more per kWh, and why summer is pricier.", "每個家的人數、電器、繳費方式都不一樣。": "Every home differs in size, appliances and how the bill is paid.", "選最像你家的狀況。": "Pick the options closest to your home.", "整個網站的估算、分工和卡片，都會改成你家的版本，算得更準。": "Estimates, tasks and cards across the site switch to your home’s version and get more accurate.", "叫家人省電，用講的常常沒人聽。": "Telling family to save power often goes unheard.", "放一張家人的照片、選版型、貼上家裡的怪獸。": "Add a family photo, pick a layout, and stick on your home’s monsters.", "做出一張可以傳到家庭群組的省電卡。照片只在這台手機裡處理，不會上傳。": "You get a saving card to send to the family group chat. The photo stays on this phone and is never uploaded.", "這個網站幫你看懂電費單、找出家裡最吃電的那台、全家一起把下一期省下來。第一次來，照首頁的 ① 看懂 → ② 找出 → ③ 一起做 → ④ 下期回來比 走一次就好。": "This site helps you understand your power bill, find the appliance that uses the most, and save on the next bill as a family. First time here? Just follow ① Enter kWh → ② See results → ③ Send to family on the home page.", "電費怎麼算、為什麼越用越貴": "How the bill works and why more use costs more", "家裡哪台最吃電、一個月多少錢": "Which appliance uses the most and what it costs", "把省電任務分給家人、傳卡片": "Share saving tasks and send cards to family", "記下每期度數，看有沒有省": "Log each bill and see if you saved", "給爸媽與設定": "For parents & settings", "簡單版、我家設定、資料來源、回報": "Simple version, my home, sources, feedback", "選單也照這個順序排好了。要給爸媽用，直接傳「簡單版」給他們。": "The menu follows the same order. For parents, just send them the “Simple version”."});
 (function(A){for(var k in A)I18N_DATA.D[k]=[A[k],'']})({"計費期間（電費單上「計費期間」後面的日期）：": "Billing period (the dates next to “計費期間” on the bill):", "夏天（6～9 月）電價比較貴，填了日期會算得比較準。找不到日期可以不填。": "Summer (Jun–Sep) rates are higher, so the dates make the estimate more accurate. Can’t find them? Leave them blank.", "開始月": "Start month", "開始日": "Start day", "結束月": "End month", "結束日": "End day"});
 I18N_DATA.D['夏天（#～# 月）電價比較貴，填了日期會算得比較準。找不到日期可以不填。']=['Summer (Jun–Sep) rates are higher, so the dates make the estimate more accurate. Can’t find them? Leave them blank.',''];I18N_DATA.D['計費期間（電費單上「計費期間」後面的日期）：']=['Billing period (the dates printed after “計費期間” on your bill):',''];(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],'']})({"看懂電費，只要 3 步": "Your power bill in 3 steps", "字的大小": "Text size", "字：大": "Text: large", "字：更大": "Text: larger", "字：特大": "Text: largest", "進度": "Progress", "打上度數": "Enter kWh", "拿出電費單，找到這兩個地方": "Get your bill and find these two spots", "電費單示意圖": "Sample bill", "電費通知單（示意圖）": "Electricity bill (sample)", "繳費期限": "Due date", "計費期間": "Billing period", "計費度數": "Billed kWh", "應繳總金額": "Amount due", "＊＊＊ 元": "NT$ ***", "例如 832": "e.g. 832", "找不到可以不填": "optional", "這張電費單是": "This bill covers", "下一步：看結果 ›": "Next: see results ›", "這期電費大約": "This bill is about", "在電價的第幾階？": "Which price step?", "跟一般家庭比": "Compared with an average home", "最可能在吃電的": "Probably using the most", "唸給我聽": "Read it to me", "按下面綠色的「傳到 LINE」": "Tap the green “Send on LINE” below", "選家庭群組": "Pick your family group", "按「傳送」": "Tap Send", "要傳的訊息": "Message to send", "傳好了！": "Sent!", "想知道怎麼省？把網站給家人看，或看看「電費怪獸」。": "Want to save? Show your family the site, or meet the power monsters.", "看電費怪獸 ›": "See the power monsters ›", "下次打開網站，會直接回到簡單版。": "Next time you open the site, it starts in the simple version."});I18N_DATA.D['看懂電費，只要 # 步']=['Your power bill in 3 steps',''];I18N_DATA.D['第 # 步，共 # 步']=['Step # of #',''];
-(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],""]})({"四個步驟": "Four steps", "看懂": "Understand", "找出": "Find", "一起做": "Together", "下期比": "Compare", "給爸媽用？簡單版只有 # 步、字很大 ›": "For parents? The simple version has # steps and big text ›", "看懂：輸入電費單上的「計費度數」": "Understand: enter the “billed kWh” on your bill", "你家這期的結果": "This bill at a glance", "為什麼越用越貴？往下看「電價像爬樓梯」。": "Why does more use cost more per kWh? See “Prices go up like stairs” below.", "「隨手關燈」能省多少？": "How much does “switching off lights” save?", "每按一下，就是多一盞燈每天早關 # 小時。按按看就知道：比起關燈，冷氣、熱水瓶這些大怪獸才是重點。": "Each tap = one more lamp switched off # hour earlier each day. Try it: compared with lights, the big monsters like the AC and hot-water pot matter far more.", "一起做：傳給家人、分工": "Together: share it and split the jobs", "把結果傳到家庭群組，一起看，比互相猜「是誰在浪費電」有用。": "Send the result to your family group. Looking at it together beats guessing who’s wasting power.", "分配省電小任務": "Hand out saving tasks", "六件設定一次就一直省的事，分給家人負責": "Six set-once savers, each with a family member in charge", "下期回來比": "Next bill: compare", "記下這期度數，下張帳單來了就知道有沒有省。比去年同一期每少用 # 度，台電的節電獎勵回饋 # 元。": "Log this bill’s kWh and you’ll see whether the next one is lower. For every # kWh below the same period last year, Taipower’s saving reward pays back NT$#.", "記下這期帳單": "Log this bill", "記兩期以上，就看得出有沒有變少": "After two bills you can see the trend", "找出：家裡的電費怪獸": "Find: the power monsters at home"});/*v46 home*/
-(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],""]})({"# 度 ＝ # 瓦的電器用 # 小時，電費就是照「度」算的。": "# kWh = a #-watt appliance running for # hour. Your bill is charged by the kWh.", "電價分 # 階，用越多，多出來的度數每度越貴；全家的電加在一起算。": "Prices come in # steps: the more you use, the more each extra kWh costs. The whole home counts together.", "#/#–#/# 是夏月，# 度以上的每一階都比較貴。": "#/#–#/# is the summer season: every step above # kWh costs more.", "大部分家庭兩個月一張帳單，度數除以 # 才是一個月。": "Most homes get a bill every two months — divide the kWh by # for one month.", "跟去年同一期比，每少用 # 度扣 # 元；要在 #/#/# 前登錄。": "Every # kWh below the same period last year takes NT$# off. Sign up by #/#/#.", "#/#/# 後簽的租約，房東每度收費不能超過當期平均電價。": "Leases signed after #/#/#: landlords can’t charge more per kWh than the bill’s average price.", "智慧電表看得到每 # 分鐘用多少；傳統電表只看得到總度數。": "A smart meter shows use every # minutes; an old meter only shows the total.", "能源效率分 #～# 級，數字越小越省電，# 級最省。": "Energy grades run #–#: the smaller the number, the more efficient. Grade # is best.", "待機電力約占家庭用電 #%，但不是每台都該拔插頭。": "Standby power is about #% of home use — but not everything should be unplugged.", "# 安培的插座最多 # 瓦，高瓦數電器要用獨立插座。": "A # A socket handles up to # W. High-wattage appliances need their own socket.", "台電兒童網把用電知識寫得很白話，這裡挑了最相關的幾篇。": "Taipower’s kids’ site explains power in plain words. Here are the most relevant pages.", "看細節": "Details", "每段先看一句重點，想知道細節再點開。先看「基本」# 段就夠了。": "Each part starts with one key line — tap for details. The # “Basics” are enough to start."});/*basics 2 layers*/
-(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],""]})({"想算得更準？多答 # 題": "Want it more accurate? # more questions", "可以跳過": "optional", "家裡有這些電器嗎？": "Do you have these at home?", "按一下是「有」，再按一下取消": "tap = yes, tap again to undo", "家裡有的電器": "Appliances at home", "這裡選的，「電費怪獸」也會跟著改。": "What you pick here also updates the power monsters.", "去年同一期用了幾度？": "kWh in the same period last year?", "電費單上有「去年同期」的度數": "your bill shows last year’s figure", "例如 #": "e.g. #", "跟去年同一期比": "Compared with the same period last year"});/*easy asks more*/
-(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],""]})({"這期比上一期、比去年同一期有沒有省；全家一起大約能省多少。六件都完成，就一起去吃火鍋。": "Whether this bill beat the last one and the same period last year, and roughly how much the family can save. Finish all six and it’s hotpot night."});/*challenge compare*/
-(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],""]})({"① 看懂：輸入計費度數": "① Understand: enter your billed kWh", "電費單上「計費度數」那個數字，拉滑桿或按「直接輸入度數」。馬上看到電費大約多少、在電價第幾階、比一般家庭多還是少。": "The “billed kWh” number on your bill — drag the slider or tap “Type the kWh”. You’ll see the rough bill, your price step, and how you compare with an average home.", "② 找出：最吃電的怪獸": "② Find: the hungriest monster", "先猜哪台最吃電，再看答案。點怪獸改成你家的情況，按「讓它睡覺」看能省多少。": "Guess which appliance uses the most, then see the answer. Tap a monster, match it to your home, and tap “Put it to sleep” to see the saving.", "③ 一起做：傳給家人、分工": "③ Together: share and split the jobs", "按「傳到 LINE」傳到家庭群組，再到家庭挑戰，把六件省電設定分給家人。": "Tap “Send on LINE” to your family group, then hand out the six set-once savers in the family challenge.", "④ 下期比：記下這期帳單": "④ Compare: log this bill", "下張帳單來了，跟上一期、跟去年同一期比，就知道有沒有省。": "When the next bill comes, compare it with the last one and the same period last year to see if you saved.", "先告訴網站你家的狀況": "Tell the site about your home", "選家庭型態和電費怎麼付（自己繳、家人繳、房東按度數收⋯⋯），怪獸、分工和卡片都會跟著變。": "Pick your household type and how you pay (your own bill, family, landlord per kWh…). Monsters, tasks and cards all adjust.", "① 輸入帳單，選對期別和季節": "① Enter the bill, pick the period and season", "選「兩個月一期」或「一個月一期」。帳單跨過 #/# 或 #/# 就選「兩季都有」。想對到一塊錢，用「照帳單算一次」。": "Choose two-month or one-month bills. If the period crosses #/# or #/# pick “Both seasons”. To match to the dollar, use “Check against my bill”.", "① 看懂電價樓梯": "① Read the price stairs", "看你家在第幾階、離下一階還差幾度。名詞看不懂，「用電基本知識」每段先給一句重點。": "See which step you’re on and how far the next one is. Unsure of a term? Each part of “Power basics” starts with one key line.", "② 找出最吃電的怪獸": "② Find the hungriest monsters", "把怪獸的時數、年份改成你家的，數字才準；怪獸圖鑑有每隻的省電方法和每月約多少錢。": "Set each monster’s hours and age to match your home for accurate numbers. The monster guide shows how to save and the monthly cost of each.", "③ 傳給家人、分工": "③ Share and split the jobs", "六件「做一次就一直省」的事，每件交給一位家人，做完打勾。": "Six set-once savers — give each to a family member and tick it off when done.", "③ 做一張省電卡": "③ Make a saving card", "放一張全家的照片，做成卡片傳到家庭群組；給長輩可以印冰箱卡。": "Add a family photo, turn it into a card for the family group, or print a fridge card for grandparents.", "④ 每期記一筆帳單": "④ Log every bill", "收到新帳單就記一筆，有節電獎勵也一起填。兩筆以上就看得出有沒有變少。": "Log each new bill, with any saving reward. After two you can see whether use is going down.", "換手機前先備份": "Back up before changing phones", "資料只存在這台裝置。到「資料來源與設定」下載備份檔，新手機再還原。": "Data stays on this device only. Download a backup in “Sources & settings” and restore it on the new phone.", "傳「簡單版」給爸媽": "Send parents the simple version", "只有 # 步：打上度數、看結果、傳給家人。字很大，還能按「唸給我聽」。": "Just # steps: enter kWh, see results, send to family. Big text, plus “Read it to me”.", "把字放大": "Make the text bigger", "按右上角的「大」，選「大字」或「特大字」，整個網站都會放大。": "Tap “大” at the top right and choose Large or Extra large. The whole site gets bigger.", "印一張冰箱卡": "Print a fridge card", "白底大字、沒有專有名詞，下面留了空格，每期親手寫上新帳單的度數。": "Big text on white, no jargon, with blanks to write in each new bill’s kWh by hand.", "一張電費單、四步，就知道錢花在哪裡、怎麼一起省。": "One bill, four steps: see where the money goes and how to save together.", "這樣就會了！給爸媽用，傳「簡單版」就好：只有 # 步、字很大。": "That’s it! For parents, just send the simple version: # steps, big text.", "打開簡單版": "Open the simple version", "第一次照順序做，大約 # 分鐘。之後每次收到帳單，只要做 ① 和 ④。": "The first time takes about # minutes in order. After that, each new bill only needs ① and ④.", "幫爸媽、阿公阿嬤設定一次，之後他們自己就會用。": "Set it up once for parents or grandparents and they can use it on their own.", "這個網站分四步：① 看懂電費、② 找出最吃電的那台、③ 全家一起做、④ 下期回來比。首頁和選單都照這個順序。": "The site has four steps: ① understand the bill, ② find the hungriest appliance, ③ act together, ④ compare next time. The home page and menu follow this order.", "為什麼要跟「去年同一期」比？": "Why compare with the same period last year?", "夏天（#–# 月）電價比較貴、冷氣也開得多，跟上一期比很容易誤會。台電也建議跟去年同一期比，節電獎勵就是這樣算的。": "Summer (Jun–Sep) prices are higher and the AC runs more, so comparing with the last bill can mislead. Taipower also suggests comparing with the same period last year — that’s how the saving reward works."});/*guide rewrite*/
-(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],""]})({"一個家庭在夏月，一個月用了 # 度電，要付多少？": "A family used # kWh in a summer month. How much do they pay?", "一個家庭在非夏月，一個月用了 # 度電，要付多少？": "A family used # kWh in a non-summer month. How much do they pay?", "關燈省很少，大電器才是重點": "Lights save little; big appliances matter", "待機也吃電，但冰箱、路由器不能關": "Standby uses power — but keep the fridge and router on", "用越多，多出來的每度越貴": "The more you use, the more each extra kWh costs", "看得懂電費單上的重點": "You can read the key parts of a bill", "每台大電器各有一招省電法": "Each big appliance has its own trick", "設定一次，就會一直省": "Set it once, keep saving", "小測驗 # 題全對": "All # quiz answers right", "待機電力約占家庭用電 #%。半夜沒人用、卻插著電的電器，就是「吸電鬼」。# 秒內看你能抓幾隻，但冰箱、路由器這些要一直開著的別關。": "Standby power is about #% of home use. Appliances plugged in with no one using them at night are the “standby ghosts”. Catch as many as you can in # seconds — but leave the fridge and router alone.", "猜得準，代表你真的知道家裡用多少電。先猜下一張帳單是幾度，收到帳單後到「帳單紀錄」記一筆，就會自動對答案。": "A good guess means you really know your home’s use. Guess the next bill’s kWh; when it arrives, log it in “Bill log” to check your answer."});/*games knowledge*/
-(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],""]})({"這期比上一期、比去年同一期是多還是少；有去年同期的紀錄，還能估節電獎勵。": "Whether this bill is up or down on the last one and on the same period last year — with last year’s bill logged, it also estimates your saving reward.", "下面六件事，各設定一次就會一直省。分給家人負責，做完打勾。": "Each of the six below only needs setting once to keep saving. Give each to a family member and tick it off.", "每根柱子是那一期平均每個月用的度數；虛線是 # 度，超過這條線，多用的電會貴很多。": "Each bar is that bill’s average kWh per month. The dashed line is # kWh — above it, extra power costs a lot more.", "開除濕機時關好門窗": "Close doors and windows while the dehumidifier runs", "英文寫作 kWh（千瓦小時）。": "Written as kWh (kilowatt-hour); in Taiwan it’s called a “degree”."});/*copy + v46*/
-(function(A){for(var k in A)I18N_DATA.D[k]=[A[k],""]})({"每月約 # 度・開除濕機時關好門窗": "About # kWh a month · Close doors and windows while the dehumidifier runs"});/*elder en*/
+(function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"四個步驟": "Four steps", "看懂": "Understand", "找出": "Find", "一起做": "Together", "下期比": "Compare", "給爸媽用？簡單版只有 3 步、字很大 ›": "For parents? The simple version has just 3 steps and big text ›", "看懂：輸入電費單上的「計費度數」": "Understand: enter the billed kWh from your bill", "你家這期的結果": "Your result this period", "為什麼越用越貴？下面這張「電價樓梯」一看就懂。": "Why does more use cost more per kWh? The price stairs below show it at a glance.", "找出：家裡哪台最吃電": "Find: which appliance uses the most", "「隨手關燈」能省多少？": "How much does switching off lights save?", "這是大家最常被念的省電方法。每按一下開關，就當作多一盞燈每天早關 1 小時。按按看就知道：比起關燈，冷氣、熱水瓶這些大怪獸才是重點。": "It’s the tip everyone gets nagged about. Each tap = one more light off an hour earlier every day. Try it — you’ll see the AC and the hot-water dispenser matter far more.", "一起做：傳給家人、分工": "Together: share with family and split tasks", "把結果傳到家庭群組，大家看著同一組數字討論，比互相猜「是誰在浪費電」有用。": "Send the result to your family group. Talking over the same numbers beats guessing who’s wasting power.", "分配省電小任務": "Hand out saving tasks", "例如冷氣設 26–28°C、熱水瓶設定時，交給家人去做，做完打勾": "e.g. set the AC to 26–28°C or put the hot-water dispenser on a timer — give each to someone and tick it off", "下期回來比": "Compare next time", "下一張帳單來了，記下度數，就知道這兩個月有沒有比上期省、能不能拿到節電獎勵（每少用 1 度回饋 0.6 元）。": "When the next bill arrives, log the kWh to see whether you saved and whether you qualify for the saving reward (NT$0.6 back per kWh saved).", "記下這期帳單": "Log this bill", "只存在這支手機裡，下期直接比較": "Saved only on this phone, ready to compare next time"});
+I18N_DATA.D['每根柱子是那一期平均每個月用的度數；虛線是 # 度，超過這條線，多用的電會貴很多。']=['Each bar is that bill’s average kWh per month. The dashed line is 500 kWh — above it, extra power gets much pricier.',''];
+(function(A){for(var k in A){var n=k.replace(/\d[\d,]*(?:\.\d+)?/g,'#');I18N_DATA.D[k]=[A[k],''];if(!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"看完整說明 ▾": "Read more ▾", "收起 ▴": "Show less ▴", "看懂電費，只要 # 步": "Your power bill in 4 steps", "看懂電費，只要 4 步": "Your power bill in 4 steps", "你家情況": "Your home", "下一步：你家的情況 ›": "Next: your home ›", "你家的情況": "Your home", "回答越多，結果越準。不確定的可以直接跳過。": "The more you answer, the more accurate it gets. Skip anything you’re unsure about.", "家裡住幾個人？": "How many people live with you?", "人越多，冰箱、熱水、洗衣用得越多。": "More people means more fridge, hot water and laundry.", "1 人": "1", "2 人": "2", "3–4 人": "3–4", "5 人以上": "5+", "冷氣有幾台？": "How many air conditioners?", "冷氣是夏天電費最大的來源。": "AC is the biggest cost in summer.", "沒有": "None", "1 台": "1", "2 台以上": "2 or more", "家裡有這些嗎？": "Do you have these?", "可以選好幾個": "pick any", "這幾台都很耗電，有沒有差很多。": "These use a lot, so they make a big difference.", "電熱水器": "Electric water heater", "熱水瓶": "Hot-water dispenser", "除濕機": "Dehumidifier", "電費怎麼付？": "How do you pay for power?", "房東按度數收的話，計算方式跟台電不一樣。": "If your landlord charges per kWh, the math differs from Taipower’s.", "自己或家人繳台電": "We pay Taipower", "房東按度數收": "Landlord charges per kWh", "包在房租裡": "Included in rent", "去年同一期用了幾度？": "kWh in the same period last year?", "可以不填": "optional", "比去年同期少用，每少 1 度台電回饋 0.6 元（節電獎勵）。帳單上通常印有去年同期度數。": "Use less than last year and Taipower pays back NT$0.6 per kWh. Your bill usually shows last year’s figure.", "去年同期度數": "Last year’s kWh", "例如 900": "e.g. 900", "下一步：看結果 ›": "Next: see results ›", "‹ 上一步": "‹ Back", "節電獎勵": "Saving reward", "凌晨兩點，哪些電器還在偷吃電？": "2 a.m. — which appliances are still sipping power?", "玩完你會知道：哪些電器睡前可以關，哪些一定不能關。": "You’ll learn which appliances can go off at night — and which must stay on.", "點它就是幫它關掉": "tap to switch it off", "待機偷吃電的電器": "appliances wasting standby power", "（機上盒、電視、電鍋保溫…），點它就是幫它關掉": " (set-top box, TV, rice-cooker keep-warm…) — tap to switch it off", "紫色小鬼＝": "Purple ghost = ", "綠框＝": "Green frame = ", "不能關的守夜電器": "night-shift appliances that must stay on", "：冰箱、有人在睡的冷氣、路由器。點了會扣分": ": fridge, the AC someone sleeps with, the router. Tapping costs points", "和上一期比": "Compared with last bill", "① → ④ 怎麼走": "How ① → ④ works", "只要一張電費單。照首頁的 ① → ④ 走一次，每一步都告訴你「要做什麼、會知道什麼」。": "All you need is one bill. Follow ① → ④ on the home page; each step says what to do and what you’ll learn.", "① 看懂": "① Understand", "② 找出": "② Find", "③ 一起做": "③ Together", "④ 下期回來比": "④ Compare next time", "要做：": "Do: ", "會知道：": "Learn: ", "輸入電費單上的「計費度數」，選一個月或兩個月一期。": "Enter the billed kWh and pick a one- or two-month bill.", "這期大約多少錢、在電價第幾階、比全台一般家庭多還是少。": "Roughly what you’ll pay, your price step, and how you compare with an average home.", "先猜家裡哪台最吃電，再點怪獸，改成你家的使用時間。": "Guess the hungriest appliance, then tap each monster and set your real hours.", "每台電器一個月大約幾度、多少錢，哪一台最值得先改。": "Each appliance’s monthly kWh and cost, and which one to fix first.", "把結果傳到家庭群組，再把省電小任務分給家人。": "Share the result with your family group and hand out saving tasks.", "全家一起看同一組數字，不用再猜「是誰在浪費電」。": "Everyone sees the same numbers — no more guessing who’s wasting power.", "下一張帳單來了，到「帳單紀錄」記一筆。": "When the next bill comes, log it in Bill log.", "有沒有比上期省、能不能拿到節電獎勵。": "Whether you saved and whether you get the saving reward.", "要給爸媽用，直接傳「簡單版」：": "For parents, just send the simple version: ", "打開簡單版": "Open simple version", "。想知道每個功能的細節，看 ": ". For details on every feature, see ", "完整說明書": "Full guide"});
+I18N_DATA.D['第一次來，照首頁的 ① 看懂 → ② 找出 → ③ 一起做 → ④ 下期回來比 走一次就好。']=['First time? Just follow ① Understand → ② Find → ③ Together → ④ Compare next time on the home page.',''];
+I18N_DATA.D['。想知道每個功能的細節，看']=['. For details on every feature, see',''];I18N_DATA.D['（#%）']=['(#%)',''];
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -3555,8 +3573,17 @@ var Mainline={bind:function(){
     $('mShare').addEventListener('click',function(){Share.sys(Share.text(S,Model.compute(S)))});
     $('mCopy').addEventListener('click',function(){Share.copy(Share.text(S,Model.compute(S)))})},
   render:function(st,r){if(Router.cur!=='decoder'&&Router.cur!==null)return;$('mres').innerHTML=Share.rows(st,r);$('mLine').href=Share.line(Share.text(st,r))}};
-function bar0(lab,val,cls,mx){mx=mx*1.08;return '<div class="ezbar '+cls+'"><span>'+lab+'</span><div><i style="width:'+Math.max(6,Math.round(val/mx*100))+'%"></i></div><b>'+fmt(Math.round(val))+ZT(' 度',' kWh')+'</b></div>'}
 var Easy={step:1,pd:null,
+  ppl:function(st){var t=st.home.type,m=(HMEM[t]||[]).length;return m<=1?'1':m===2?'2':m<=4?'3':'5'},
+  fillHome:function(st){var cur={ppl:st.home.touched?Easy.ppl(st):'',ac:st.app.ac2.has?'2':st.app.ac1.has?'1':'0',pay:['landlord','rent'].indexOf(st.home.pay)>=0?st.home.pay:'own'};
+    document.querySelectorAll('#v-easy [data-ezq]').forEach(function(g){var q=g.dataset.ezq;g.querySelectorAll('.ezchip').forEach(function(b){var on=q==='big'?!!(st.app[b.dataset.v]&&st.app[b.dataset.v].has):cur[q]===b.dataset.v;b.setAttribute('aria-pressed',String(on))})});
+    if(st.lastYear!=null&&!$('ezLY').value&&document.activeElement!==$('ezLY'))$('ezLY').value=st.lastYear},
+  saveHome:function(){var v=function(q){var b=document.querySelector('#v-easy [data-ezq="'+q+'"] .ezchip[aria-pressed="true"]');return b?b.dataset.v:null};
+    var p=v('ppl');if(p){var t={'1':'solo','2':'couple','3':'small','5':'big'}[p];if(S.home.type!==t){S.home.type=t;S.members=HMEM[t].slice();S.who=S.members[0]}S.home.touched=true}
+    var a=v('ac');if(a!==null){S.app.ac1.has=a!=='0';S.app.ac2.has=a==='2'}
+    document.querySelectorAll('#v-easy [data-ezq="big"] .ezchip').forEach(function(b){S.app[b.dataset.v].has=b.getAttribute('aria-pressed')==='true'});
+    var pay=v('pay');if(pay)S.home.pay=pay;
+    var ly=$('ezLY').value;S.lastYear=ly!==''&&isFinite(Number(ly))?clamp(Number(ly),0,CFG.kwhMax):null;store.set(S)},
   period:function(){var v=['ezSm','ezSd','ezEm','ezEd'].map(function(i){return $(i).value});var n=v.filter(Boolean).length;if(n===0)return null;if(n<4)return false;v=v.map(Number);
     var now=new Date(),ye=now.getFullYear();if(v[2]>now.getMonth()+2)ye--;var ys=v[0]>v[2]||(v[0]===v[2]&&v[1]>v[3])?ye-1:ye;
     var d0=Date.UTC(ys,v[0]-1,v[1]),d1=Date.UTC(ye,v[2]-1,v[3]);var days=Math.round((d1-d0)/864e5)+1;if(!(days>=20&&days<=75))return false;
@@ -3566,16 +3593,15 @@ var Easy={step:1,pd:null,
     window.scrollTo(0,0);var h=document.querySelector('#v-easy .ezs[data-ez="'+n+'"] .ezh');if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true})}catch(e){}}schedule()},
   next1:function(){var k=Number($('ezK').value);if(!$('ezK').value||!isFinite(k)||k<1||k>9999){$('ezErr').textContent=ZT('請先打上電費單上的「計費度數」，例如 832。','Type the billed kWh from your bill first, e.g. 832.');$('ezK').focus();return false}
     var pd=Easy.period();if(pd===false){$('ezErr').textContent=ZT('日期要填完整（從幾月幾日到幾月幾日），或全部空著。','Fill in both dates completely, or leave them all blank.');return false}
-    var lyv=$('ezLy').value,ly=Number(lyv);if(lyv!==''&&(!isFinite(ly)||ly<1||ly>9999)){$('ezErr').textContent=ZT('去年同期的度數看起來不對，可以改一下或空著。','Last year’s kWh doesn’t look right. Fix it or leave it blank.');$('ezLy').focus();return false}S.lastYear=lyv===''?null:Math.round(ly);$('ezErr').textContent='';S.kwh=Math.round(k);if(pd){S.months=pd.days>45?2:1;var P=S.months===2?62:31;if(pd.sum===0)S.season='n';else if(pd.sum>=pd.days)S.season='s';else{S.season='m';S.sd=Math.round(pd.sum/pd.days*P)}Easy.pd=pd}else Easy.pd=null;store.set(S);return true},
-  apps:function(){var h='';['ac1','ac2','ket','wh','dh','stb','rc'].forEach(function(id){var a=APPLIANCES.filter(function(x){return x.id===id})[0],on=!!S.app[id].has;h+='<button type="button" class="ezchip" data-ezapp="'+id+'" aria-pressed="'+on+'"><i aria-hidden="true">'+(on?'✓':'+')+'</i>'+esc(I18N.lang==='en'?NM(a.name):a.name)+'</button>'});$('ezApps').innerHTML=h;var ly=$('ezLy');if(document.activeElement!==ly)ly.value=S.lastYear!=null?S.lastYear:''},
+    $('ezErr').textContent='';S.kwh=Math.round(k);if(pd){S.months=pd.days>45?2:1;var P=S.months===2?62:31;if(pd.sum===0)S.season='n';else if(pd.sum>=pd.days)S.season='s';else{S.season='m';S.sd=Math.round(pd.sum/pd.days*P)}Easy.pd=pd}else Easy.pd=null;store.set(S);return true},
   bind:function(){var v=$('v-easy');
     v.addEventListener('click',function(e){var t=e.target.closest?e.target:null;if(!t)return;
       var f=t.closest('[data-ezfs]');if(f){S.ezfs=f.dataset.ezfs;store.set(S);schedule();return}
       var m=t.closest('[data-ezm]');if(m){S.months=Number(m.dataset.ezm)===1?1:2;schedule();return}
-      var ap=t.closest('[data-ezapp]');if(ap){var o=S.app[ap.dataset.ezapp];o.has=!o.has;if(!o.has)o.tamed=false;S.home.touched=true;schedule();return}
+      var ch=t.closest('.ezchip');if(ch){var grp=ch.closest('[data-ezq]'),on=ch.getAttribute('aria-pressed')!=='true';if(!grp.dataset.multi)grp.querySelectorAll('.ezchip').forEach(function(b){b.setAttribute('aria-pressed','false')});ch.setAttribute('aria-pressed',String(on));return}
       if(t.closest('[data-ezfull]')){S.start='';store.set(S);store.flush();return}
       var g=t.closest('[data-ezgo]');if(!g)return;var n=Number(g.dataset.ezgo);
-      if(n===2&&Easy.step===1&&!Easy.next1())return;
+      if(n===2&&Easy.step===1&&!Easy.next1())return;if(n===3&&Easy.step===2)Easy.saveHome();
       Easy.show(n)});
     v.addEventListener('change',function(){$('ezErr').textContent=''});
     $('ezK').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();if(Easy.next1())Easy.show(2)}});
@@ -3585,18 +3611,17 @@ var Easy={step:1,pd:null,
   facts:function(st,r){var avg=Share.avg(st),d=Math.round((r.m/avg-1)*100),top=Share.top(r),lim=CFG.tiers[r.ti-1]||0;return{avg:avg,d:d,top:top,lim:lim}},
   script:function(st,r){var f=Easy.facts(st,r),E=I18N.lang==='en',o=[];
     if(E){if(r.pay!=='rent')o.push('This bill is about '+fmt(r.billNow)+' dollars.');o.push('You use about '+fmt(r.m)+' kilowatt hours a month. That is price step '+(r.ti+1)+' of 6.');
-      if(st.lastYear!=null){var dy2=st.lastYear-st.kwh;o.push(dy2>0?'That is '+fmt(dy2)+' kilowatt hours less than the same period last year.':dy2<0?'That is '+fmt(-dy2)+' kilowatt hours more than the same period last year.':'That is the same as last year.')}o.push(Math.abs(f.d)<10?'That is about the same as an average home.':f.d>0?'That is '+f.d+' percent more than an average home.':'That is '+(-f.d)+' percent less than an average home.');if(f.top.length)o.push('The biggest users are probably the '+f.top.map(function(x){return NM(x.a.name)}).join(' and ')+'.');return o}
+      o.push(Math.abs(f.d)<10?'That is about the same as an average home.':f.d>0?'That is '+f.d+' percent more than an average home.':'That is '+(-f.d)+' percent less than an average home.');if(f.top.length)o.push('The biggest users are probably the '+f.top.map(function(x){return NM(x.a.name)}).join(' and ')+'.');return o}
     if(r.pay!=='rent')o.push('這期電費大約 NT$'+fmt(r.billNow)+'。');o.push('平均每個月用 '+fmt(r.m)+' 度，在電價的第 '+(r.ti+1)+' 階，一共有 6 階。');
     o.push(Math.abs(f.d)<10?'跟全台一般家庭差不多。':f.d>0?(f.d>=100?'大約是全台一般家庭的 '+XT(f.d)+' 倍。':'比全台一般家庭，多 '+f.d+'%。'):'比全台一般家庭，少 '+(-f.d)+'%，很省喔。');
-    if(st.lastYear!=null){var dy=st.lastYear-st.kwh;o.push(dy>0?'比去年同一期少用 '+fmt(dy)+' 度，有登錄節電獎勵的話，大約可以折 '+fmt(Math.round(dy*0.6))+' 元。':dy<0?'比去年同一期多用 '+fmt(-dy)+' 度。':'跟去年同一期一樣多。')}
     if(f.top.length)o.push('最可能吃電的是：'+f.top.map(function(x){return x.a.name}).join('、')+'。');return o.map(spokenZh)},
   render:function(st,r){var v=$('v-easy');v.dataset.fs=st.ezfs||'l';
     document.querySelectorAll('#v-easy [data-ezfs]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.ezfs===(st.ezfs||'l')))});
     if(Router.cur!=='easy')return;
     document.querySelectorAll('#v-easy .ezprog li').forEach(function(li){var p=Number(li.dataset.p);li.classList.toggle('done',p<Easy.step);li.classList.toggle('cur',p===Easy.step)});
     document.querySelectorAll('#v-easy [data-ezm]').forEach(function(b){b.setAttribute('aria-pressed',String(Number(b.dataset.ezm)===st.months))});
-    if(Easy.step===1)Easy.apps();
-    if(Easy.step>=2){var f=Easy.facts(st,r),pd=Easy.pd;var lyC=$('ezLyCard');lyC.hidden=st.lastYear==null;if(st.lastYear!=null){var dd=st.lastYear-st.kwh;$('ezLyOut').innerHTML='<div class="ezcmp">'+bar0(ZT('去年','Last yr'),st.lastYear,'avg',Math.max(st.lastYear,st.kwh))+bar0(ZT('今年','This yr'),st.kwh,'me',Math.max(st.lastYear,st.kwh))+'</div><p>'+(dd>0?ZT('少用了 <b>'+fmt(dd)+' 度</b>。有登錄台電節電獎勵的話，大約可以折 <b>NT$'+fmt(Math.round(dd*0.6))+'</b>（每少 1 度 0.6 元）。','<b>'+fmt(dd)+' kWh less</b>. If you signed up for Taipower’s saving reward, that’s about <b>NT$'+fmt(Math.round(dd*0.6))+'</b> off (NT$0.6 per kWh).'):dd===0?ZT('跟去年一樣多。','Same as last year.'):ZT('多用了 <b>'+fmt(-dd)+' 度</b>，這期拿不到節電獎勵。看看下面最吃電的是哪一台。','<b>'+fmt(-dd)+' kWh more</b> — no saving reward this time. See which appliance uses the most below.'))+'</p><p class="ezsmall">'+ZT('節電獎勵要先登錄，2026 年 12 月 17 日前。用度數直接比，實際以台電帳單為準。','You must sign up for the reward by 17 Dec 2026. This compares kWh directly; your Taipower bill is the final word.')+'</p>'}
+    if(Easy.step===2)Easy.fillHome(st);
+    if(Easy.step>=3){var f=Easy.facts(st,r),pd=Easy.pd;
       $('ezBill').textContent=r.pay==='rent'?ZT('包在房租裡','In your rent'):'NT$'+fmt(r.billNow);
       $('ezPer').textContent=ZT('平均每個月 '+fmt(r.m)+' 度','About '+fmt(r.m)+' kWh a month');
       $('ezTierH').innerHTML=ZT('在電價的<b>第 '+(r.ti+1)+' 階</b>（共 6 階）','<b>Step '+(r.ti+1)+'</b> of 6 on the price stairs');
@@ -3604,9 +3629,10 @@ var Easy={step:1,pd:null,
       $('ezTierSay').textContent=r.ti<=1?ZT('用得不多，很省！','You use little — nicely done!'):r.ti===2?ZT('跟很多家庭一樣，在中間。','Right in the middle, like many homes.'):ZT('用得比較多。每個月超過 '+f.lim+' 度的部分，每度要 '+r.rate.toFixed(2)+' 元。','On the higher side. Each kWh over '+f.lim+' a month costs NT$'+r.rate.toFixed(2)+'.');
       var mx=Math.max(r.m,f.avg)*1.08,bar=function(lab,val,cls){return '<div class="ezbar '+cls+'"><span>'+lab+'</span><div><i style="width:'+Math.max(6,Math.round(val/mx*100))+'%"></i></div><b>'+fmt(Math.round(val))+ZT(' 度',' kWh')+'</b></div>'};
       $('ezCmp').innerHTML=bar(ZT('你家','You'),r.m,'me')+bar(ZT('一般家庭','Average'),f.avg,'avg')+'<p>'+(Math.abs(f.d)<10?ZT('差不多。','About the same.'):f.d>0?ZT(f.d>=100?'大約是一般家庭的 <b>'+XT(f.d)+' 倍</b>':'比一般家庭多 <b>'+f.d+'%</b>',f.d>=100?'About <b>'+XT(f.d)+'×</b> the average':'<b>'+f.d+'% more</b> than average'):ZT('比一般家庭少 <b>'+(-f.d)+'%</b>，很省！','<b>'+(-f.d)+'% less</b> than average — nice!'))+'</p>';
+      var ly=st.lastYear;$('ezRwCard').hidden=ly==null;if(ly!=null){var dd=Math.round(ly-st.kwh);$('ezRw').innerHTML=dd>0?ZT('比去年同期<b>少用 '+fmt(dd)+' 度</b>，可能拿到約 <b>NT$'+fmt(Math.round(dd*0.6))+'</b> 的節電獎勵。記得先到台電網站或 App 登錄（2026/12/17 前）。實際以台電計算為準。','You used <b>'+fmt(dd)+' kWh less</b> than the same period last year — about <b>NT$'+fmt(Math.round(dd*0.6))+'</b> in saving rewards. Register with Taipower first (by 2026/12/17).'):dd===0?ZT('跟去年同期一樣，這期沒有節電獎勵。','Same as last year, so no saving reward this time.'):ZT('比去年同期<b>多用 '+fmt(-dd)+' 度</b>，這期拿不到節電獎勵。下期少用一點就有機會。','You used <b>'+fmt(-dd)+' kWh more</b> than last year, so no reward this time.')}
       $('ezTopCard').hidden=!f.top.length;$('ezTop').innerHTML=f.top.map(function(x){return '<div class="ezmon"><svg viewBox="-40 -40 80 80" aria-hidden="true">'+avatar(x.a,false)+'</svg><b>'+esc(I18N.lang==='en'?NM(x.a.name):x.a.name)+'</b></div>'}).join('');
       $('ezNote').textContent=pd&&pd.sum===pd.days?ZT('計費期間共 '+pd.days+' 天，整期都在夏月（6～9 月），用夏月電價算。實際金額以台電帳單為準。','All '+pd.days+' days fall in summer (Jun–Sep), so summer rates apply. Your Taipower bill is the final word.'):pd&&pd.sum===0?ZT('計費期間共 '+pd.days+' 天，整期都不在夏月，用非夏月電價算。實際金額以台電帳單為準。','None of the '+pd.days+' days are in summer, so non-summer rates apply. Your Taipower bill is the final word.'):pd?ZT('計費期間共 '+pd.days+' 天：夏月 '+pd.sum+' 天、非夏月 '+(pd.days-pd.sum)+' 天，已經按天數拆開算。實際金額以台電帳單為準。','Billing period: '+pd.days+' days — '+pd.sum+' summer, '+(pd.days-pd.sum)+' non-summer, split by days. Your Taipower bill is the final word.'):ZT('沒有填日期，先用現在這個季節的電價估算。實際金額以台電帳單為準。','No dates entered, so this uses the current season’s rates. Your Taipower bill is the final word.')}
-    if(Easy.step===3){var t=Share.text(st,r);$('ezMsg').textContent=t;$('ezLine').href=Share.line(t)}}};
+    if(Easy.step===4){var t=Share.text(st,r);$('ezMsg').textContent=t;$('ezLine').href=Share.line(t)}}};
 var EzSpeak={on:false,gen:0,
   btn:function(on){var b=$('ezSpeak');if(!b)return;b.setAttribute('aria-pressed',String(on));b.querySelector('span').textContent=on?ZT('停止','Stop'):ZT('唸給我聽','Read it to me')},
   play:function(list){if(!Speak.ok){toast(ZT('這支手機不支援朗讀','This device can’t read aloud'));return}try{Voice.pick()}catch(e){}var self=this,g=++this.gen,i=0,E=I18N.lang==='en';try{speechSynthesis.cancel()}catch(e){}
@@ -3812,7 +3838,7 @@ var Elder={tip:(function(){var d=new Date(),o=Math.floor((d-new Date(d.getFullYe
 /* =========================================================
    GAMES: easter egg, night patrol, bill guess, badges
    ========================================================= */
-var BADGES=[['lamp','燈','關燈大師','把隨手關燈按到追平熱水瓶'],['patrol','巡','深夜巡邏隊','巡邏拿到 10 分以上'],['bill','算','電費神算','猜電費誤差 5% 以內'],['quiz','答','滿分學霸','小測驗全對'],['tame','睡','怪獸馴服師','讓所有怪獸睡著'],['mission','火','火鍋達人','六件挑戰全部完成']];
+var BADGES=[['lamp','燈','關燈大師','做到：關燈關到追平熱水瓶。學到：關燈省很少，熱水瓶加定時器省更多。'],['patrol','巡','深夜抓鬼隊','做到：抓吸電鬼 10 隻以上。學到：哪些電器睡前可以關、哪些不能關。'],['bill','算','電費神算','做到：猜電費誤差 5% 以內。學到：電費是一階一階往上算的。'],['quiz','答','滿分學霸','做到：小測驗全對。學到：看懂電費單的基本知識。'],['tame','睡','怪獸馴服師','做到：讓所有怪獸睡著。學到：家裡每台大電器各自怎麼省。'],['mission','火','火鍋達人','做到：六件挑戰全部完成。學到：設定一次就一直省，比天天提醒有用。']];
 function award(id,label){S.badges=S.badges||{};if(S.badges[id])return;S.badges[id]=true;store.set(S);toast('獲得徽章：'+label,true);celebrate()}
 var Egg={mode:'lamp',show:function(n){Egg.mode='lamp';$('eggArt').innerHTML=art('lamp','eggart');$('eggK').textContent='隱藏成就解鎖';$('eggT').textContent='關燈大師';$('eggS').textContent='徽章已收進「家庭挑戰」的徽章牆。';$('eggX').textContent='好啦，我去裝定時器';$('eggP').textContent='你真的開關了 '+n+' 次。這麼努力，省下的電跟「熱水瓶晚上睡覺」一個月差不多——而它只要一個 200 元的定時器。';$('egg').hidden=false;celebrate();setTimeout(function(){try{$('eggX').focus()}catch(e){}},300)},
   hide:function(go){$('egg').hidden=true;if(go&&Egg.mode==='all'){location.hash='studio';S.studio.tpl='gold';return}try{$('sw').focus()}catch(e){}},bind:function(){$('eggX').addEventListener('click',function(){Egg.hide(true)});$('egg').addEventListener('click',function(e){if(e.target===$('egg'))Egg.hide()})}};
@@ -3847,10 +3873,10 @@ window.Patrol=null;var Patrol={on:false,score:0,t:0,timers:[],lit:{},
 window.Patrol=Patrol;
 var BillGuess={q:null,
   next:function(){var k=Math.round((150+Math.random()*750)/10)*10,se=Math.random()<.5?'s':'n';this.q={k:k,se:se,ans:Model.monthBill(k,se)};
-    $('gbQ').textContent=se==='s'?'一個家庭在夏月，一個月用了 '+fmt(k)+' 度電，要付多少？':'一個家庭在非夏月，一個月用了 '+fmt(k)+' 度電，要付多少？';$('gbSay').hidden=true;$('gbR').value=1000;try{Steppers.sync()}catch(e){}$('gbV').textContent='NT$1,000';$('gbGo').disabled=false},
+    $('gbQ').textContent='一個家庭'+(se==='s'?'夏天（6–9 月）':'冬天')+'一個月用了 '+fmt(k)+' 度電，要付多少？';$('gbSay').hidden=true;$('gbR').value=1000;try{Steppers.sync()}catch(e){}$('gbV').textContent='NT$1,000';$('gbGo').disabled=false},
   go:function(){var g=Number($('gbR').value),a=this.q.ans,err=Math.abs(g-a)/a,pct=Math.max(0,Math.round((1-err)*100));
-    var line=err<=.05?ZT('太神了！','Spot on! '):err<=.15?ZT('很接近！','Close! '):err<=.35?ZT('有點差距。','A bit off. '):ZT('差很多喔。','Way off. ');var ti=Model.tierOf(this.q.k),R=CFG.rate[this.q.se];
-    $('gbSay').hidden=false;$('gbSay').innerHTML=line+ZT('正確答案是 <em>NT$'+fmt(a)+'</em>，你猜 NT$'+fmt(g)+'，準確度 <em>'+pct+'%</em>。','The answer is <em>NT$'+fmt(a)+'</em>; you guessed NT$'+fmt(g)+' — <em>'+pct+'%</em> accurate. ')+'<br><b>'+ZT('學到：','Takeaway: ')+'</b>'+(ti===0?ZT('120 度以內都是最便宜的第 1 階，每度 '+R[0]+' 元。','Everything up to 120 kWh is on the cheapest step 1, NT$'+R[0]+' per kWh.'):ZT('前 120 度每度只要 '+R[0]+' 元，這一家最後那幾度在第 '+(ti+1)+' 階，每度 '+R[ti]+' 元。用越多，多出來的每度越貴。','The first 120 kWh cost only NT$'+R[0]+' each; this family’s last few kWh are on step '+(ti+1)+' at NT$'+R[ti]+'. The more you use, the more each extra kWh costs.'));
+    var line=err<=.05?'太神了！':err<=.15?'很接近！':err<=.35?'有點差距。':'差很多喔。';
+    $('gbSay').hidden=false;$('gbSay').innerHTML=line+'正確答案是 <em>NT$'+fmt(a)+'</em>，你猜 NT$'+fmt(g)+'，準確度 <em>'+pct+'%</em>。'+(this.q.k>500?'超過 500 度的部分，每度要 '+CFG.rate[this.q.se][Model.tierOf(this.q.k)]+' 元，所以總價會比想像中高。':'');
     $('gbGo').disabled=true;if(err<=.05)award('bill','電費神算')},
   bind:function(){var self=this;$('gbR').addEventListener('input',function(e){$('gbV').textContent='NT$'+fmt(e.target.value)});$('gbGo').addEventListener('click',function(){self.go()});$('gbNext').addEventListener('click',function(){self.next()});this.next()}};
 
@@ -4000,7 +4026,7 @@ var WART={
   remote:SH+'<rect x="32" y="8" width="36" height="80" rx="16" fill="#E9E2D4" stroke="#B5AB9A" stroke-width="2.5"/><rect x="38" y="16" width="24" height="16" rx="4" fill="#2E2A26"/><text x="50" y="28.5" text-anchor="middle" font-size="11" font-weight="900" fill="#8DB487" font-family="sans-serif">27°</text>'+face(50,46,.7)+'<circle cx="42" cy="66" r="4" fill="#E2A33B"/><circle cx="58" cy="66" r="4" fill="#B5AB9A"/><circle cx="42" cy="77" r="4" fill="#B5AB9A"/><circle cx="58" cy="77" r="4" fill="#C8504A"/><rect x="62" y="38" width="22" height="12" rx="2" fill="#F7D57E" transform="rotate(12 73 44)"/><text x="73" y="47" text-anchor="middle" font-size="7" font-weight="900" fill="#2E2A26" font-family="sans-serif" transform="rotate(12 73 44)">+風扇</text>',
   down:SH+'<rect x="14" y="28" width="16" height="54" rx="4" fill="#E3A69E"/><rect x="36" y="42" width="16" height="40" rx="4" fill="#E2A33B"/><rect x="58" y="56" width="16" height="26" rx="4" fill="#8DB487"/><path d="M20 20Q52 26 80 54" stroke="#3E5C8A" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="1 0"/><path d="M72 56l10 0-2-10" stroke="#3E5C8A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+face(66,70,.55)};
 function art(id,cls){return '<svg class="'+(cls||'art')+'" viewBox="0 0 100 100" aria-hidden="true">'+(ART[id]||'')+'</svg>'}
-BADGES=[['lamp','關燈大師','把隨手關燈按到追平熱水瓶','關燈省很少，大電器才是重點'],['patrol','深夜抓鬼隊','一場抓到 10 隻吸電鬼','待機也吃電，但冰箱、路由器不能關'],['bill','電費神算','猜電費誤差 5% 以內','用越多，多出來的每度越貴'],['quiz','滿分學霸','小測驗 5 題全對','看得懂電費單上的重點'],['tame','怪獸馴服師','讓所有怪獸睡著','每台大電器各有一招省電法'],['mission','火鍋達人','六件挑戰全部完成','設定一次，就會一直省']];
+BADGES=[['lamp','關燈大師','把隨手關燈按到追平熱水瓶'],['patrol','深夜抓鬼隊','一場抓到 10 隻吸電鬼'],['bill','電費神算','猜電費誤差 5% 以內'],['quiz','滿分學霸','小測驗全對'],['tame','怪獸馴服師','讓所有怪獸睡著'],['mission','火鍋達人','六件挑戰全部完成']];
 function badgeCount(st){var b=st.badges||{};return BADGES.filter(function(x){return b[x[0]]}).length}
 function allBadges(st){return badgeCount(st)===BADGES.length}
 award=function(id,label){S.badges=S.badges||{};if(S.badges[id])return;S.badges[id]=true;Badges.fresh=id;store.set(S);schedule();
@@ -4011,15 +4037,15 @@ Badges.chrome=function(st){var b=st.badges||{},n=badgeCount(st),last=null;BADGES
   if(this.lastIc!==ic){this.lastIc=ic;$('bdgIco').innerHTML=ic;$('chBdgIco').innerHTML=ic}$('bdgArc').setAttribute('stroke-dashoffset',String(119.4*(1-n/BADGES.length)));
   var unseen=n>(st.bseen||0);$('bdgDot').hidden=!unseen;$('menuDot').hidden=!unseen||Drawer.isOpen();$('bdgBtn').setAttribute('aria-label','我的徽章：'+n+' / '+BADGES.length+(unseen?'，有新徽章':''));
   $('chBdgN').textContent='已收集 '+n+' / '+BADGES.length+(unseen?'・有新徽章':'')};
-Badges.render=function(st){this.chrome(st);if($('bModal').hidden)return;var b=st.badges||{},n=badgeCount(st),f=this.fresh;this.fresh=null;
+Badges.render=function(st){if(Router.cur==='challenge'){try{CmpTop(st)}catch(e){}}this.chrome(st);if($('bModal').hidden)return;var b=st.badges||{},n=badgeCount(st),f=this.fresh;this.fresh=null;
   var h='<div class="bhead"><div class="bbar"><i style="width:'+(n/BADGES.length*100)+'%"></i></div><b>'+n+' / '+BADGES.length+'</b></div>';
   if(n===BADGES.length)h+='<div class="ballc">'+art('crown')+'<h3>全收集！電力家族到齊</h3><p>六枚徽章都到手了。牠們都變成卡片工作室裡的貼紙，還送你一個金框版型。</p><a class="mk" href="#studio" data-route="studio" style="display:inline-grid;place-items:center;text-decoration:none">去做一張金框卡</a></div>';
-  h+='<div class="badges">'+BADGES.map(function(x){var on=!!b[x[0]];return '<div class="bdg'+(on?' on':'')+(f===x[0]?' fresh':'')+'">'+art(x[0])+(on?'':'<svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="3" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.4" fill="none"/></svg>')+'<b>'+(on?x[1]:'尚未解鎖')+'</b><small>'+x[2]+'</small><em class="blearn">'+ZT('學到：','Learn: ')+x[3]+'</em></div>'}).join('')+'</div>';
-  if(b.lamp999)h+='<div class="bsecret">'+art('lamp')+'<div><small>'+ZT('隱藏成就・不算在收集裡','Hidden achievement · not part of the collection')+'</small><b>'+ZT('關燈關到 999 次','999 switch-offs')+'</b><span>'+ZT('按了 999 次才確定：省電要從冷氣、熱水瓶這些大電器下手。','999 taps to be sure: real savings start with big appliances like the AC and hot-water pot.')+'</span></div></div>';
+  h+='<div class="badges">'+BADGES.map(function(x){var on=!!b[x[0]];return '<div class="bdg'+(on?' on':'')+(f===x[0]?' fresh':'')+'">'+art(x[0])+(on?'':'<svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="3" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.4" fill="none"/></svg>')+'<b>'+(on?x[1]:'尚未解鎖')+'</b><small>'+x[2]+'</small></div>'}).join('')+'</div>';
+  if(b.lamp999)h+='<div class="bsecret">'+art('lamp')+'<div><small>'+ZT('隱藏成就・不算在收集裡','Hidden achievement · not part of the collection')+'</small><b>'+ZT('比作者還有毅力','More patient than the author')+'</b><span>'+ZT('隨手關燈按到 999 次','Flipped the light switch 999 times')+'</span></div></div>';
   $('badges').innerHTML=h};
-Egg.s999=function(){Egg.mode='s999';$('eggArt').innerHTML=art('lamp','eggart');$('eggK').textContent=ZT('真正的隱藏成就','A truly hidden achievement');$('eggT').textContent=ZT('關燈關到 999 次','999 switch-offs');
-  $('eggP').textContent=ZT('按了 999 次，你應該已經發現：一盞一盞關燈很累，大電器設定一次，省得更多也更輕鬆。','999 taps later you’ve probably noticed: switching off lamp by lamp is tiring, while setting a big appliance once saves more with less effort.');
-  $('eggS').textContent=ZT('學到：省電要從大電器下手。這個成就不算進徽章收集。','Takeaway: real savings start with big appliances. This one doesn’t count toward your badge collection.');$('eggX').textContent=ZT('知道了','Got it');$('egg').hidden=false;celebrate();setTimeout(function(){try{$('eggX').focus()}catch(e){}},300)};
+Egg.s999=function(){Egg.mode='s999';$('eggArt').innerHTML=art('lamp','eggart');$('eggK').textContent=ZT('真正的隱藏成就','A truly hidden achievement');$('eggT').textContent=ZT('比作者還有毅力','More patient than the author');
+  $('eggP').textContent=ZT('哇……作者甚至都沒按到這裡，你竟然有毅力可以關這麼多次電燈！','Wow… even the author never got this far. You actually had the patience to flip the light switch 999 times!');
+  $('eggS').textContent=ZT('這個成就不算進徽章收集，只是想跟你說：手指辛苦了。','This one doesn’t count toward your badge collection — it’s just to say: your finger deserves a rest.');$('eggX').textContent=ZT('讓手指休息一下','Give my finger a rest');$('egg').hidden=false;celebrate();setTimeout(function(){try{$('eggX').focus()}catch(e){}},300)};
 Egg.all=function(){$('eggArt').innerHTML=art('crown','eggart');$('eggK').textContent='全收集';$('eggT').textContent='電力家族到齊';
   $('eggP').textContent='六枚徽章全部到手。每一枚都是你家真的做過、想過的一件事。';$('eggS').textContent='卡片工作室解鎖了金框版型和全部貼紙。';$('eggX').textContent='去做一張金框卡';Egg.mode='all';
   $('egg').hidden=false;celebrate();setTimeout(function(){try{$('eggX').focus()}catch(e){}},300)};
@@ -4066,7 +4092,7 @@ var Ghost={on:false,n:0,miss:0,left:20,timers:[],live:{},lastHit:0,combo:0,
     $('ghRoom').querySelectorAll('.gt').forEach(function(t){t.classList.remove('haunt','gold');t.dataset.gold=''})},
   end:function(){this.clear();this.on=false;$('gh').classList.remove('playing');var n=this.n,st=n>=16?3:n>=10?2:n>=4?1:0;
     $('ghStars').innerHTML='★★★'.slice(0,st)+'<i>'+'★★★'.slice(st)+'</i>';
-    $('ghEndT').textContent='抓到 '+n+' 隻吸電鬼';$('ghRes').textContent=(this.miss?'跑掉 '+this.miss+' 隻。':'')+'真實的吸電鬼不會跑：機上盒待機一年約 131 度。一條有開關的延長線，睡前按一下，就能一次抓光。';
+    $('ghEndT').textContent='抓到 '+n+' 隻吸電鬼';$('ghRes').innerHTML=(this.miss?'<p>'+ZT('跑掉 '+this.miss+' 隻。','Missed '+this.miss+'.')+'</p>':'')+ZT('<b>你剛剛學到</b><ul><li>待機電力約占家裡用電 7.4%。機上盒待機一年約 131 度。</li><li>睡前可以關：機上盒、電視、電鍋保溫、沒人的燈和電風扇。熱水瓶改用定時。</li><li>不能關：冰箱、有人在睡的冷氣、路由器。</li><li>最省事：有開關的延長線，睡前按一下就全關。</li></ul>','<b>What you just learned</b><ul><li>Standby power is about 7.4% of home use. A set-top box on standby uses about 131 kWh a year.</li><li>Fine to switch off at night: set-top box, TV, rice-cooker keep-warm, lights and fans in empty rooms. Put the hot-water dispenser on a timer.</li><li>Leave on: fridge, the AC someone is sleeping with, the router.</li><li>Easiest fix: a power strip with a switch — one tap at bedtime.</li></ul>');
     var best=Math.max(S.patrolBest||0,n);$('ghEndBest').textContent=n>=(S.patrolBest||0)&&n>0?'新紀錄！':'最佳紀錄：'+best+' 隻';S.patrolBest=best;var B=(S.patrolBoard||[]).slice(),rec={w:S.ghWho||'我',n:n,d:new Date().toISOString().slice(0,10)},pos=-1;
     if(n>0){var old=B.filter(function(x){return x.w===rec.w})[0];if(old){if(n>old.n){old.n=n;old.d=rec.d}rec=old}else B.push(rec);B.sort(function(a,b){return b.n-a.n});B=B.slice(0,5);pos=B.indexOf(rec)}S.patrolBoard=B;store.set(S);this.board(pos);if(pos===0&&B.length>1)toast(ZT(NM(rec.w)+' 拿下第一名！',NM(rec.w)+' takes first place!'),true);
     $('ghEnd').hidden=false;if(n>=10)award('patrol','深夜抓鬼隊');try{$('ghAgain').focus({preventScroll:true})}catch(e){}},
@@ -4499,7 +4525,7 @@ function bind(){
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){box.hidden=true;toast('已複製，貼到家庭群組',true)},fallback)}else fallback()});
   var armed=false;$('reset').addEventListener('click',function(){if(!armed){armed=true;this.textContent='再按一次，確定清除';this.classList.add('armed');var b=this;setTimeout(function(){armed=false;b.textContent='清除資料';b.classList.remove('armed')},4000);return}
     try{store._v=undefined;localStorage.removeItem(CFG.storeKey)}catch(e){}S=defaultState();prev={ti:null,nti:null,save:0};Theme.apply(S.theme);armed=false;this.textContent='清除資料';this.classList.remove('armed');try{Big.apply(S.big||0,false)}catch(x){}$('cardImg').hidden=true;schedule();toast('已重新開始',true);window.scrollTo(0,0)});
-  $('hint').hidden=false;
+  $('hint').hidden=!!S.seenHint;$('hintX').addEventListener('click',function(){S.seenHint=true;$('hint').hidden=true;store.set(S)});
   window.addEventListener('pageshow',function(e){if(e.persisted)schedule()});
 }
 
