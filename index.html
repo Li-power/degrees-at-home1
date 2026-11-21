@@ -1917,6 +1917,45 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
 .rwout{margin:0;font-size:var(--fs-s)}.rwout .rwline{border:0;padding:0;margin:0}.rwout .rwline b{color:var(--hot-t,#B5523B)}
 .ezrw{display:flex;flex-direction:column;gap:10px;margin-top:6px}
 .ezq2{font-size:calc(17px*var(--z))!important;margin-top:2px!important}
+
+/* v9.34 input blocks */
+.ibox{background:var(--elev);border-radius:22px;box-shadow:var(--card-sh);padding:14px 14px 16px;margin:12px 0;text-align:left;border-left:6px solid var(--hot-t,#B5523B)}
+#iboxB{border-left-color:#7FA06B}#iboxC{border-left-color:#D9A441}
+.ibh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px;font-weight:900;font-size:var(--fs-m)}
+.ibh i{font-style:normal;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--text);color:var(--bg);font-size:15px}
+.ibh small{font-weight:400;font-size:var(--fs-xs);color:var(--soft)}
+.ibox .meter{margin-left:auto;margin-right:auto}
+.qhide{display:none!important}
+.exrow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+.exrow>span{font-size:var(--fs-s);color:var(--soft)}
+.exrow .exact{margin:0}
+.pdates{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pdates label{display:flex;flex-direction:column;gap:4px;font-size:var(--fs-s);font-weight:700}
+.pdates input{min-height:48px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--text);font:inherit;padding:0 10px;width:100%}
+.pdout{margin:8px 0 0;font-size:var(--fs-s)}.pdout:empty{display:none}
+.ibsub{margin:12px 0 6px;font-size:var(--fs-xs);color:var(--soft)}
+#iboxB .segrow{justify-content:flex-start}
+#iboxC .rwbox{box-shadow:none;background:transparent;padding:0;margin:0}
+.chklink{display:block;margin:4px auto 0}
+/* v9.34 rank rows */
+.rk2q{margin:14px 0 8px;font-size:var(--fs-s);font-weight:700}
+.rk2rows{display:grid;gap:6px}
+.rk2row{display:grid;grid-template-columns:6.2em 1fr auto;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;position:relative}
+.rk2row .rl{font-size:var(--fs-s)}
+.rk2row .rb{height:14px;border-radius:7px;background:var(--surface);overflow:hidden}
+.rk2row .rb i{display:block;height:100%;border-radius:7px;background:var(--faint)}
+.rk2row b{font-size:var(--fs-s);white-space:nowrap}
+.rk2row.on{background:color-mix(in srgb,var(--hot-t,#B5523B) 12%,transparent);outline:2px solid var(--hot-t,#B5523B)}
+.rk2row.on .rb i{background:var(--hot-t,#B5523B)}
+.rk2row.on b,.rk2row.on .rl{color:var(--hot-t,#B5523B);font-weight:900}
+.rk2row em{grid-column:1/-1;font-style:normal;font-size:var(--fs-xs);font-weight:900;color:var(--hot-t,#B5523B);margin-top:-2px}
+/* v9.34 key words */
+.view p b,.view p strong,.view li b,.view small b{color:var(--hot-t,#B5523B);font-weight:800;background:linear-gradient(transparent 64%,rgba(244,194,107,.42) 0);padding:0 .06em;border-radius:2px}
+.ezbig b,.ezbig span b,.pwbtns b,.rbtn b,.nmrow>div>b,.fcard>div>b,.aim>b,.kcard>div>b,.mrow i,.ezopt b{background:none}
+.ezbig .rwline b{background:none}
+.view p b,.view p strong,.view small b,.view li b{display:inline!important;font-size:inherit!important;line-height:inherit!important;font-family:inherit!important;margin:0!important}
+.view .stepk b,.view p.ibh i,.view .stepk b{background:var(--hot-t,#B5523B)!important;color:#fff!important;display:inline-grid!important;width:26px;height:26px;font-size:14px!important;padding:0;border-radius:50%}
+.ezbig .rwline b{font-size:1.25em!important}
 </style>
 </head>
 <body>
@@ -1981,7 +2020,8 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
           <li><button type="button" data-mgo="s-next"><b>4</b><span>下期比<small>有沒有比較省</small></span></button></li>
         </ol></details>
         <p class="easyl" id="hint"><a href="#easy" data-route="easy">給爸媽用？簡單版只有 3 步、字很大 ›</a></p>
-        <p class="stepk" id="stepk1"><b>1</b>看懂：輸入電費單上的「計費度數」</p>
+        <p class="stepk" id="stepk1"><b>1</b>看懂：照電費單填三樣東西</p>
+        <div class="ibox" id="iboxA"><p class="ibh"><i>A</i>計費度數<small>拉滑桿或直接打數字</small></p>
         <div class="meter">
           <div class="brand">本期計費度數</div>
           <div class="odo" id="odo" role="img" aria-label="計費度數"></div>
@@ -1994,19 +2034,13 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
           <button class="pm" id="plus" type="button" aria-label="增加 50 度">+</button>
         </div>
         <a class="basicslink" href="#basics" data-route="basics">不知道 1 度是多少？看「用電基本知識」</a>
-        <div class="qlinks"><button class="linkbtn" id="exactBtn" type="button" aria-expanded="false" aria-controls="exactBox">直接輸入度數</button><button class="linkbtn" id="chkBtn" type="button" aria-expanded="false" aria-controls="chkBox">照帳單算一次</button><button class="linkbtn" id="rwBtn" type="button" aria-expanded="false" aria-controls="rwBox">節電獎勵</button></div>
-        <form class="rwbox" id="rwBox" hidden novalidate>
-          <p class="rwh">節電獎勵：跟去年同一期比，每少用 1 度回饋 0.6 元（要先登錄）。填一個就好，結果會自動扣掉。</p>
-          <label>去年同一期用了幾度（帳單上有印）<span class="rwin"><input id="rwLy" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 900"><i>度</i></span></label>
-          <label>或：帳單上扣掉的節電獎勵<span class="rwin"><input id="rwAmt" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 84"><i><span class="lang-zh" data-noi18n>元</span><span class="lang-en" data-noi18n>NT$</span></i></span></label>
-          <p class="rwout" id="rwOut" aria-live="polite"></p>
-          <button class="linkbtn" type="button" id="rwClear" style="padding-left:0">清除</button>
-        </form>
-        <form class="exact" id="exactBox" hidden novalidate>
+        <div class="exrow"><span>或直接打：</span><form class="exact" id="exactBox" novalidate>
           <label class="sr" for="exact">計費度數</label>
           <input id="exact" type="number" inputmode="numeric" min="0" max="9999" step="1" value="1100">
           <button class="pill" type="submit" aria-pressed="true">好</button>
-        </form>
+        </form></div>
+        </div>
+        <div class="qlinks qhide"><button class="linkbtn" id="exactBtn" type="button" aria-expanded="false" aria-controls="exactBox">直接輸入度數</button><button class="linkbtn" id="chkBtn" type="button" aria-expanded="false" aria-controls="chkBox">照帳單算一次</button><button class="linkbtn" id="rwBtn" type="button" aria-expanded="false" aria-controls="rwBox">節電獎勵</button></div>
         <form class="chk" id="chkBox" hidden novalidate>
           <p class="chkh">照台電的算法，一筆一筆算給你看。帳單上的民國年加 1911 就是西元年（113 年＝2024 年）。</p>
           <div class="chkg">
@@ -2020,6 +2054,10 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
           <div class="chkout" id="chkOut" aria-live="polite"></div>
         </form>
         
+        <div class="ibox" id="iboxB"><p class="ibh"><i>B</i>計費期間<small>照帳單填日期，下面會自動選好</small></p>
+        <div class="pdates"><label>從<input type="date" id="pdS"></label><label>到<input type="date" id="pdE"></label></div>
+        <p class="pdout" id="pdOut" aria-live="polite"></p>
+        <p class="ibsub">或自己選：</p>
         <div class="segrow"><div class="pills seg" role="group" aria-label="帳單是幾個月">
           <button class="pill" type="button" data-months="2">兩個月一期</button>
           <button class="pill" type="button" data-months="1">一個月一期</button>
@@ -2041,6 +2079,18 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
             <div id="egBody"></div>
           </div>
         </div>
+        </div>
+        <div class="ibox" id="iboxC"><p class="ibh"><i>C</i>節電獎勵<small>可以不填</small></p>
+        <form class="rwbox" id="rwBox" novalidate>
+          <p class="rwh">跟去年同一期比，每少用 1 度回饋 0.6 元（要先登錄）。填一個就好，結果會自動扣掉。</p>
+          <label>去年同一期用了幾度（帳單上有印）<span class="rwin"><input id="rwLy" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 900"><i>度</i></span></label>
+          <label>或：帳單上扣掉的節電獎勵<span class="rwin"><input id="rwAmt" type="number" inputmode="numeric" min="0" max="9999" placeholder="例如 84"><i><span class="lang-zh" data-noi18n>元</span><span class="lang-en" data-noi18n>NT$</span></i></span></label>
+          <p class="rwout" id="rwOut" aria-live="polite"></p>
+          <button class="linkbtn" type="button" id="rwClear" style="padding-left:0">清除</button>
+        </form>
+        </div>
+        <button class="linkbtn chklink" type="button" id="chkBtn2">想一筆一筆對帳？照帳單算一次 ›</button>
+      
       </section>
 
       <section class="sec mres" id="s-result" aria-labelledby="t-res">
@@ -2282,28 +2332,28 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
   <section class="sec">
     <h2>我們發現的三個問題</h2>
     <div class="fcards">
-      <div class="fcard"><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="14" y="8" width="52" height="64" rx="8" fill="#F6F1E7" stroke="#CBBFA9" stroke-width="2"/><rect x="22" y="18" width="24" height="5" rx="2.5" fill="#CBBFA9"/><text x="40" y="50" text-anchor="middle" font-size="17" font-weight="900" fill="#2E2A26" font-family="Noto Serif TC,serif">1,100</text><text x="62" y="20" font-size="16" font-weight="900" fill="#C8504A" font-family="sans-serif">?</text><text x="8" y="68" font-size="13" font-weight="900" fill="#C8504A" font-family="sans-serif">?</text></svg><div><b>帳單只有一個數字</b><p>只告訴你用了多少、要付多少。是誰、什麼時候、哪一台電器用的，都看不到，只能用猜的。</p></div></div>
-      <div class="fcard"><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="10" y="34" width="22" height="34" rx="8" fill="#C8504A"/><circle cx="17" cy="46" r="2.6" fill="#fff"/><circle cx="25" cy="46" r="2.6" fill="#fff"/><path d="M44 30h22l-6 14H50z" fill="#F7D57E"/><rect x="53" y="44" width="4" height="16" fill="#B5AB9A"/><rect x="46" y="60" width="18" height="4" rx="2" fill="#B5AB9A"/><circle cx="56" cy="22" r="13" fill="none" stroke="#2E2A26" stroke-width="3.5"/><path d="M47 31l-8 8" stroke="#2E2A26" stroke-width="4" stroke-linecap="round"/></svg><div><b>大家抓錯了怪獸</b><p>大家都在念「隨手關燈」，但它一個月只省幾塊錢。真正吃電的，是冷氣設太低、用很久的老電器，和 24 小時都在保溫、卻沒人注意的熱水瓶。</p></div></div>
-      <div class="fcard"><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="8" y="58" width="12" height="14" rx="2" fill="#8DB487"/><rect x="22" y="50" width="12" height="22" rx="2" fill="#B9D3AE"/><rect x="36" y="40" width="12" height="32" rx="2" fill="#E2A33B"/><rect x="50" y="30" width="12" height="42" rx="2" fill="#D9774E"/><rect x="64" y="18" width="12" height="54" rx="2" fill="#C8504A"/><circle cx="42" cy="20" r="9" fill="#F6F1E7" stroke="#2E2A26" stroke-width="2"/><text x="42" y="25" text-anchor="middle" font-size="13" font-weight="900" fill="#2E2A26" font-family="sans-serif">?</text></svg><div><b>電價規則看不懂</b><p>電價分 6 階、按每個月算，帳單卻兩個月才來一張。全家的電加起來才決定價錢，結果最後開冷氣的人，就被當成兇手。</p></div></div>
+      <div class="fcard"><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="14" y="8" width="52" height="64" rx="8" fill="#F6F1E7" stroke="#CBBFA9" stroke-width="2"/><rect x="22" y="18" width="24" height="5" rx="2.5" fill="#CBBFA9"/><text x="40" y="50" text-anchor="middle" font-size="17" font-weight="900" fill="#2E2A26" font-family="Noto Serif TC,serif">1,100</text><text x="62" y="20" font-size="16" font-weight="900" fill="#C8504A" font-family="sans-serif">?</text><text x="8" y="68" font-size="13" font-weight="900" fill="#C8504A" font-family="sans-serif">?</text></svg><div><b>帳單只有一個數字</b><p><span class="lang-zh" data-noi18n>電費單只寫<b>全家總共用了幾度、要付多少錢</b>。哪一台電器、哪個時段、誰用的，帳單上都沒有，所以家人只能互相猜。</span><span class="lang-en" data-noi18n>The bill only shows <b>the household total and the amount due</b>. Which appliance, what time and who used it aren’t on it, so families end up guessing at each other.</span></p></div></div>
+      <div class="fcard"><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="10" y="34" width="22" height="34" rx="8" fill="#C8504A"/><circle cx="17" cy="46" r="2.6" fill="#fff"/><circle cx="25" cy="46" r="2.6" fill="#fff"/><path d="M44 30h22l-6 14H50z" fill="#F7D57E"/><rect x="53" y="44" width="4" height="16" fill="#B5AB9A"/><rect x="46" y="60" width="18" height="4" rx="2" fill="#B5AB9A"/><circle cx="56" cy="22" r="13" fill="none" stroke="#2E2A26" stroke-width="3.5"/><path d="M47 31l-8 8" stroke="#2E2A26" stroke-width="4" stroke-linecap="round"/></svg><div><b>大家抓錯了怪獸</b><p><span class="lang-zh" data-noi18n>大家最常念的是「隨手關燈」。但一盞 10 瓦的 LED 燈，每天少開 1 小時，一個月只少用 0.3 度，<b>不到 1 塊錢</b>。真正吃電的，是<b>冷氣溫度設太低</b>、用了很多年的老冰箱，和 <b>24 小時都在保溫的熱水瓶</b>。</span><span class="lang-en" data-noi18n>Everyone says “turn off the lights”. But a 10 W LED switched off one hour a day saves just 0.3 kWh a month — <b>under NT$1</b>. The real power users are <b>AC set too cold</b>, old fridges, and <b>water dispensers keeping warm 24/7</b>.</span></p></div></div>
+      <div class="fcard"><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="8" y="58" width="12" height="14" rx="2" fill="#8DB487"/><rect x="22" y="50" width="12" height="22" rx="2" fill="#B9D3AE"/><rect x="36" y="40" width="12" height="32" rx="2" fill="#E2A33B"/><rect x="50" y="30" width="12" height="42" rx="2" fill="#D9774E"/><rect x="64" y="18" width="12" height="54" rx="2" fill="#C8504A"/><circle cx="42" cy="20" r="9" fill="#F6F1E7" stroke="#2E2A26" stroke-width="2"/><text x="42" y="25" text-anchor="middle" font-size="13" font-weight="900" fill="#2E2A26" font-family="sans-serif">?</text></svg><div><b>電價規則看不懂</b><p><span class="lang-zh" data-noi18n>住家電價分成 <b>6 階</b>，用得越多，多出來的度數越貴；每一階是用「一個月」來算，但帳單通常<b>兩個月才來一張</b>，所以要先除以 2 才看得懂。而且價錢是<b>全家的電加在一起</b>算的，誰也不能說「那幾度是你用的」。</span><span class="lang-en" data-noi18n>Home electricity has <b>6 price steps</b> — the more you use, the pricier the extra kWh. Steps are counted per month, but bills usually come <b>every two months</b>, so halve the number first. And the price depends on <b>the whole household’s use added together</b>, so no one can say “those kWh were yours”.</span></p></div></div>
     </div>
   </section>
 
   <section class="sec">
     <h2>想做到的三件事</h2>
     <div class="aims">
-      <div class="aim"><svg data-wart="look" class="aart" viewBox="0 0 100 100" aria-hidden="true"></svg><b>看懂</b><p>收到帳單，多數人只看總金額。這個網站把度數翻成白話：你家在電價第幾階、再多用 1 度要多少錢。例如非夏月每月 400 度，最後那幾度每度 3.13 元，是最便宜那階（1.78 元）的將近 2 倍。</p></div>
-      <div class="aim"><svg data-wart="timer" class="aart" viewBox="0 0 100 100" aria-hidden="true"></svg><b>做到</b><p>一直叫大家「隨手關燈」，效果其實很小：國外研究發現，光是提醒，平均只能少用約 2% 的電。所以這裡只推「設定一次就一直省」的方法，例如冷氣設 26–28°C、熱水瓶加定時器，設好之後每天都在省，不用靠記性。</p></div>
-      <div class="aim"><svg data-wart="family" class="aart" viewBox="0 0 100 100" aria-hidden="true"></svg><b>一起</b><p>電費單一來，常變成「是誰在浪費電？」。這裡把它換成「我們一起做什麼」：把省電設定分給家人負責，下期帳單來了一起比有沒有少，省下來的錢當全家的火鍋基金。</p></div>
+      <div class="aim"><svg data-wart="look" class="aart" viewBox="0 0 100 100" aria-hidden="true"></svg><b>看懂</b><p><span class="lang-zh" data-noi18n>多數人收到帳單只看總金額。這個網站把度數翻成白話：<b>你家在電價第幾階</b>、<b>再多用 1 度要多少錢</b>。例如非夏月每個月用 400 度，超過 330 度的那 70 度，每度是 <b>3.13 元</b>，大約是第一階（1.78 元）的 <b>1.8 倍</b>。</span><span class="lang-en" data-noi18n>Most people only look at the total. This site turns kWh into plain words: <b>which price step you’re on</b> and <b>what one more kWh costs</b>. For example, at 400 kWh a month outside summer, the 70 kWh above 330 cost <b>NT$3.13</b> each — about <b>1.8×</b> the first step (NT$1.78).</span></p></div>
+      <div class="aim"><svg data-wart="timer" class="aart" viewBox="0 0 100 100" aria-hidden="true"></svg><b>做到</b><p><span class="lang-zh" data-noi18n>只靠提醒，能省的有限：美國電力公司寄給家庭「你家和鄰居比」的用電報告，研究發現<b>平均只讓用電少了約 2%</b>。所以這個網站把重點放在<b>設定一次就會一直有效</b>的做法，例如冷氣設在 26–28°C、熱水瓶加定時器。設好以後每天都在省，不用每次靠人記得。</span><span class="lang-en" data-noi18n>Reminders alone go only so far: US utilities mailed households reports comparing their use with their neighbours’, and research found they <b>cut use by only about 2% on average</b>. So this site focuses on <b>changes you set once that keep working</b> — AC at 26–28°C, a timer on the water dispenser. Once set, they save every day without anyone having to remember.</span></p></div>
+      <div class="aim"><svg data-wart="family" class="aart" viewBox="0 0 100 100" aria-hidden="true"></svg><b>一起</b><p><span class="lang-zh" data-noi18n>電費單一來，常常變成「是誰在浪費電？」。這個網站想把問題換成<b>「我們一起做什麼？」</b>：把幾件省電設定分給家人各自負責，下一期帳單來了，<b>跟去年同一期比</b>有沒有少，省下來的錢就當全家的火鍋基金。</span><span class="lang-en" data-noi18n>When the bill arrives, it often turns into “who’s wasting power?”. This site changes the question to <b>“what can we do together?”</b>: hand out a few one-time fixes, and when the next bill comes, <b>compare it with the same period last year</b>. Whatever you save goes into the family hot-pot fund.</span></p></div>
     </div>
   </section>
 
   <section class="sec">
-    <h2>怎麼知道有沒有用</h2>
-    <p class="lead">不看有多少人瀏覽，看真的改變了什麼。</p>
+    <h2>怎麼知道這個網站有沒有用</h2>
+    <p class="lead"><span class="lang-zh" data-noi18n>做為一份企劃，我們不用「有多少人看過」來判斷成效，而是看用過的家庭<b>真的做了什麼改變</b>。下面是三個檢查的方法：</span><span class="lang-en" data-noi18n>As a proposal, we don’t judge success by page views but by <b>what families who used it actually changed</b>. Here are three checks:</span></p>
     <div class="kcards">
-      <div class="kcard k1"><svg data-wart="phone" class="kart" viewBox="0 0 100 100" aria-hidden="true"></svg><div><b>登錄了嗎？</b><p>12/17 前登錄台電節電獎勵的家庭有幾戶。</p></div><span class="ktag">第一步</span></div>
-      <div class="kcard k2"><svg data-wart="remote" class="kart" viewBox="0 0 100 100" aria-hidden="true"></svg><div><b>設定了嗎？</b><p>裝上定時器、遙控器貼上 27°C 的電器有幾台。</p></div><span class="ktag">做一次就好</span></div>
-      <div class="kcard k3"><svg data-wart="down" class="kart" viewBox="0 0 100 100" aria-hidden="true"></svg><div><b>真的少用了嗎？</b><p>下一期比去年同一期少了幾度，和台電發獎勵的算法一樣。</p></div><span class="ktag">看結果</span></div>
+      <div class="kcard k1"><svg data-wart="phone" class="kart" viewBox="0 0 100 100" aria-hidden="true"></svg><div><b>有去登錄節電獎勵嗎？</b><p><span class="lang-zh" data-noi18n>台電的節電獎勵<b>要先登錄才拿得到</b>（2026 年 12 月 17 日前）。我們會看，用過網站的家庭裡，有多少戶真的去登錄了。</span><span class="lang-en" data-noi18n>Taipower’s saving reward <b>requires sign-up</b> (by 17 Dec 2026). We’ll check how many households that used the site actually signed up.</span></p></div><span class="ktag">第一步</span></div>
+      <div class="kcard k2"><svg data-wart="remote" class="kart" viewBox="0 0 100 100" aria-hidden="true"></svg><div><b>有做好省電設定嗎？</b><p><span class="lang-zh" data-noi18n>例如熱水瓶<b>裝上定時器</b>、冷氣遙控器<b>貼上「27°C」提醒貼紙</b>。我們會請家庭回報，總共設定好了幾台電器。</span><span class="lang-en" data-noi18n>For example <b>a timer on the water dispenser</b> or <b>a “27°C” sticker on the AC remote</b>. We’ll ask families how many appliances they set up.</span></p></div><span class="ktag">做一次就好</span></div>
+      <div class="kcard k3"><svg data-wart="down" class="kart" viewBox="0 0 100 100" aria-hidden="true"></svg><div><b>電真的用得比較少嗎？</b><p><span class="lang-zh" data-noi18n>等下一期帳單來，拿它<b>跟去年同一期的度數比</b>，看少了幾度。這也是台電計算節電獎勵的方法，所以最公平。</span><span class="lang-en" data-noi18n>When the next bill comes, <b>compare its kWh with the same period last year</b>. That’s also how Taipower calculates the reward, so it’s the fairest test.</span></p></div><span class="ktag">看結果</span></div>
     </div>
   </section>
 
@@ -3451,8 +3501,8 @@ function pctOf(m){if(m>=1000)return 97.6;for(var i=1;i<RANKP.length;i++){var a=R
 var Rank2={render:function(st,r){if(Router.cur!=='challenge')return;var m=r.m,p=pctOf(m),pos=Math.max(1,Math.min(100,Math.round(p))),h;
   var B=[[ZT('120 度以下','≤120'),30],[ZT('121–330','121–330'),40],[ZT('331–700','331–700'),23],[ZT('701–1,000','701–1,000'),4.6],[ZT('1,000 以上','1,000+'),2.4]],cut=[120,330,700,1000,1e9],mine=0;while(m>cut[mine])mine++;
   h='<p class="sth">'+ZT('跟全台住家比，你家落在哪一群？','Compared with Taiwan homes, which group are you in?')+'</p>';
-  h+='<div class="rk2card"><div class="rk2top"><b>'+ZT('每月 '+(mine===0?'120 度以下':mine===4?'1,000 度以上':B[mine][0]+' 度')+'這一群','The '+B[mine][0]+' kWh/month group')+'</b><small>'+ZT('你家每月約 '+fmt(m)+' 度。全台約 '+B[mine][1]+'% 的住家在這一群。','About '+fmt(m)+' kWh a month. Roughly '+B[mine][1]+'% of Taiwan homes are in this group.')+'</small></div>';
-  h+='<div class="rk2bar">'+B.map(function(b,i){return '<i class="'+(i===mine?'on':'')+'" style="flex:'+b[1]+'">'+(b[1]>=10?'<span>'+b[0]+'</span>':'')+'<em>'+(b[1]>=10?Math.round(b[1])+'%':'')+'</em></i>'}).join('')+'</div><p class="rk2leg">'+ZT('右邊兩小格：701–1,000 度約 4.6%、1,000 度以上約 2.4%','Two thin bars on the right: 701–1,000 kWh ≈ 4.6%, over 1,000 ≈ 2.4%')+ZT('（深色那格是你家）',' (the dark bar is you)')+'</p>';
+  h+='<div class="rk2card"><div class="rk2top"><b>'+ZT('每月 '+(mine===0?'120 度以下':mine===4?'1,000 度以上':B[mine][0]+' 度')+'這一群','The '+B[mine][0]+' kWh/month group')+'</b><small>'+ZT('你家每月約 <b>'+fmt(m)+' 度</b>。全台大約每 100 戶，就有 <b>'+Math.round(B[mine][1])+' 戶</b>跟你家在同一群。','About <b>'+fmt(m)+' kWh</b> a month. Roughly <b>'+Math.round(B[mine][1])+' in 100</b> Taiwan homes are in this group.')+'</small></div>';
+  h+='<p class="rk2q">'+ZT('如果全台只有 <b>100 戶</b>住家，每一群大約有幾戶？','If Taiwan had just <b>100 homes</b>, how many would be in each group?')+'</p><div class="rk2rows">'+B.map(function(b,i){var n=b[1]>=10?Math.round(b[1]):Math.round(b[1]*10)/10;return '<div class="rk2row'+(i===mine?' on':'')+'"><span class="rl">'+b[0]+(i===0||i===4?'':ZT(' 度',''))+'</span><span class="rb"><i style="width:'+Math.max(3,b[1]/40*100)+'%"></i></span><b>'+ZT('約 '+(b[1]<10?Math.round(b[1]):n)+' 戶','≈'+(b[1]<10?Math.round(b[1]):n))+'</b>'+(i===mine?'<em>'+ZT('你家在這','You')+'</em>':'')+'</div>'}).join('')+'</div>';
   h+='<p class="rk2src">'+ZT('用台電公布的用電級距估算（2026 年 6 月：120 度以下約 3 成、121–330 度約 4 成、超過 1,000 度約 2.4%；2024 年經濟部：700 度以下約 93%）。網站沒有收集任何人的資料，所以這個比較只在你的手機上算。','Estimated from Taipower’s published brackets (June 2026: about 30% under 120 kWh, 40% at 121–330, 2.4% over 1,000; MOEA 2024: about 93% under 700). The site collects no one’s data, so this comparison is worked out on your phone.')+'</p></div>';
   var who=st.members.slice(),cnt={};who.forEach(function(w){cnt[w]={d:0,a:0}});
   MISSIONS.forEach(function(x){var o=st.missions[x[0]];if(o&&o.who&&cnt[o.who]){cnt[o.who].a++;if(o.done)cnt[o.who].d++}});
@@ -3482,7 +3532,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.33 (dah-v54)';
+var SITE_VER='9.34 (dah-v55)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -3609,6 +3659,7 @@ I18N_DATA.D['有沒有比較省']=['Did we save?',''];I18N_DATA.D['給爸媽與�
 (function(A){for(var k in A)I18N_DATA.D[k]=[A[k],'']})({"電費單一來，家裡就開始猜：": "When the bill arrives, the guessing starts:", "「到底是誰用最多電？」": "“Who used the most power?”", "拿出電費單，從這裡開始": "Grab your bill and start here", "四步驟看懂電費": "Your bill in four steps", "① 看懂 → ② 找出 → ③ 一起做 → ④ 下期比": "① Understand → ② Find → ③ Together → ④ Compare", "輸入度數，看第幾階": "Enter kWh, see your step", "哪台電器最吃電": "Which appliance uses most", "傳給家人、分工": "Share and split tasks", "有沒有比較省": "Did we save?", "用越多，多出來的度數越貴；全家的電是加在一起算的。": "The more you use, the pricier the extra kWh — and the whole household’s use counts together."});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],''];var n=k.replace(/\d+/g,'#');if(n!==k)I18N_DATA.D[n]=[A[k],'']}})({"你家的電費單，在誰手上？": "Who has your household’s power bill?", "你家的電費單在誰手上": "Who has the bill", "在我手上": "I do", "直接輸入度數": "Enter the kWh", "在爸媽那": "My parents", "我幫忙看懂": "I’ll help read it", "我在租屋": "I rent", "房東收電費": "Landlord charges me", "帳單在爸媽手上的話，你可以：": "If your parents have the bill, you can:", "把「簡單版」傳給爸媽": "Send them the simple version", "只有 3 步、字很大，他們自己就能看懂": "3 steps, big text — they can read it on their own", "請爸媽拍帳單給你，你來輸入": "Ask for a photo of the bill and enter it yourself", "看懂之後，再把結果傳回家庭群組": "Then share the result back to the family group"});
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],''];var n=k.replace(/\d+(?:\.\d+)?/g,'#');if(n!==k)I18N_DATA.D[n]=[A[k],'']}})({"節電獎勵": "Saving reward", "節電獎勵：跟去年同一期比，每少用 1 度回饋 0.6 元（要先登錄）。填一個就好，結果會自動扣掉。": "Saving reward: NT$0.6 back for every kWh you use less than the same period last year (sign-up required). Fill in either one and the result will deduct it.", "去年同一期用了幾度（帳單上有印）": "Last year’s kWh for the same period (printed on the bill)", "或：帳單上扣掉的節電獎勵": "Or: the reward deducted on your bill", "清除": "Clear", "例如 900": "e.g. 900", "例如 84": "e.g. 84", "可以不填": "optional", "跟去年同一期比，每少用 1 度回饋 0.6 元（要先登錄）。下面兩個填一個就好。": "Compared with the same period last year, every kWh less earns NT$0.6 (sign-up required). Fill in just one below.", "去年同一期用了幾度？": "Last year’s kWh, same period?", "電費單上有印": "It’s on the bill", "想算得更準？多答 1 題": "Want more accuracy? One more question"});
+(function(A){for(var k in A){I18N_DATA.D[k]=[A[k],''];var n=k.replace(/\d+(?:[.,]\d+)*/g,'#');if(n!==k)I18N_DATA.D[n]=[A[k],'']}})({"電費單只寫全家總共用了幾度、要付多少錢。哪一台電器、哪個時段、誰用的，帳單上都沒有，所以家人只能互相猜。": "The bill only shows <b>the household total and the amount due</b>. Which appliance, what time and who used it aren’t on it, so families end up guessing at each other.", "大家最常念的是「隨手關燈」。但一盞 10 瓦的 LED 燈，每天少開 1 小時，一個月只少用 0.3 度，不到 1 塊錢。真正吃電的，是冷氣溫度設太低、用了很多年的老冰箱，和 24 小時都在保溫的熱水瓶。": "Everyone says “turn off the lights”. But a 10 W LED switched off one hour a day saves just 0.3 kWh a month — <b>under NT$1</b>. The real power users are <b>AC set too cold</b>, old fridges, and <b>water dispensers keeping warm 24/7</b>.", "住家電價分成 6 階，用得越多，多出來的度數越貴；每一階是用「一個月」來算，但帳單通常兩個月才來一張，所以要先除以 2 才看得懂。而且價錢是全家的電加在一起算的，誰也不能說「那幾度是你用的」。": "Home electricity has <b>6 price steps</b> — the more you use, the pricier the extra kWh. Steps are counted per month, but bills usually come <b>every two months</b>, so halve the number first. And the price depends on <b>the whole household’s use added together</b>, so no one can say “those kWh were yours”.", "多數人收到帳單只看總金額。這個網站把度數翻成白話：你家在電價第幾階、再多用 1 度要多少錢。例如非夏月每個月用 400 度，超過 330 度的那 70 度，每度是 3.13 元，大約是第一階（1.78 元）的 1.8 倍。": "Most people only look at the total. This site turns kWh into plain words: <b>which price step you’re on</b> and <b>what one more kWh costs</b>. For example, at 400 kWh a month outside summer, the 70 kWh above 330 cost <b>NT$3.13</b> each — about <b>1.8×</b> the first step (NT$1.78).", "只靠提醒，能省的有限：美國電力公司寄給家庭「你家和鄰居比」的用電報告，研究發現平均只讓用電少了約 2%。所以這個網站把重點放在設定一次就會一直有效的做法，例如冷氣設在 26–28°C、熱水瓶加定時器。設好以後每天都在省，不用每次靠人記得。": "Reminders alone go only so far: US utilities mailed households reports comparing their use with their neighbours’, and research found they <b>cut use by only about 2% on average</b>. So this site focuses on <b>changes you set once that keep working</b> — AC at 26–28°C, a timer on the water dispenser. Once set, they save every day without anyone having to remember.", "電費單一來，常常變成「是誰在浪費電？」。這個網站想把問題換成「我們一起做什麼？」：把幾件省電設定分給家人各自負責，下一期帳單來了，跟去年同一期比有沒有少，省下來的錢就當全家的火鍋基金。": "When the bill arrives, it often turns into “who’s wasting power?”. This site changes the question to <b>“what can we do together?”</b>: hand out a few one-time fixes, and when the next bill comes, <b>compare it with the same period last year</b>. Whatever you save goes into the family hot-pot fund.", "怎麼知道這個網站有沒有用": "How we’ll know whether this site works", "做為一份企劃，我們不用「有多少人看過」來判斷成效，而是看用過的家庭真的做了什麼改變。下面是三個檢查的方法：": "As a proposal, we don’t judge success by page views but by what families who used it actually changed. Here are three checks:", "有去登錄節電獎勵嗎？": "Did they sign up for the saving reward?", "台電的節電獎勵要先登錄才拿得到（2026 年 12 月 17 日前）。我們會看，用過網站的家庭裡，有多少戶真的去登錄了。": "Taipower’s saving reward requires sign-up (by 17 Dec 2026). We’ll check how many households that used the site actually signed up.", "有做好省電設定嗎？": "Did they set things up?", "例如熱水瓶裝上定時器、冷氣遙控器貼上「27°C」提醒貼紙。我們會請家庭回報，總共設定好了幾台電器。": "For example a timer on the water dispenser, or a “27°C” sticker on the AC remote. We’ll ask families how many appliances they set up.", "電真的用得比較少嗎？": "Did they really use less?", "等下一期帳單來，拿它跟去年同一期的度數比，看少了幾度。這也是台電計算節電獎勵的方法，所以最公平。": "When the next bill comes, compare its kWh with the same period last year. That’s also how Taipower calculates the reward, so it’s the fairest test.", "大家最常念的是「隨手關燈」。但一盞 # 瓦的 LED 燈，每天少開 # 小時，一個月只少用 # 度，不到 # 塊錢。真正吃電的，是冷氣溫度設太低、用了很多年的老冰箱，和 # 小時都在保溫的熱水瓶。": "Everyone says “turn off the lights”. But a 10 W LED switched off one hour a day saves just 0.3 kWh a month — <b>under NT$1</b>. The real power users are <b>AC set too cold</b>, old fridges, and <b>water dispensers keeping warm 24/7</b>.", "住家電價分成 # 階，用得越多，多出來的度數越貴；每一階是用「一個月」來算，但帳單通常兩個月才來一張，所以要先除以 # 才看得懂。而且價錢是全家的電加在一起算的，誰也不能說「那幾度是你用的」。": "Home electricity has <b>6 price steps</b> — the more you use, the pricier the extra kWh. Steps are counted per month, but bills usually come <b>every two months</b>, so halve the number first. And the price depends on <b>the whole household’s use added together</b>, so no one can say “those kWh were yours”.", "多數人收到帳單只看總金額。這個網站把度數翻成白話：你家在電價第幾階、再多用 # 度要多少錢。例如非夏月每個月用 # 度，超過 # 度的那 # 度，每度是 # 元，大約是第一階（# 元）的 # 倍。": "Most people only look at the total. This site turns kWh into plain words: <b>which price step you’re on</b> and <b>what one more kWh costs</b>. For example, at 400 kWh a month outside summer, the 70 kWh above 330 cost <b>NT$3.13</b> each — about <b>1.8×</b> the first step (NT$1.78).", "只靠提醒，能省的有限：美國電力公司寄給家庭「你家和鄰居比」的用電報告，研究發現平均只讓用電少了約 #%。所以這個網站把重點放在設定一次就會一直有效的做法，例如冷氣設在 #–#°C、熱水瓶加定時器。設好以後每天都在省，不用每次靠人記得。": "Reminders alone go only so far: US utilities mailed households reports comparing their use with their neighbours’, and research found they <b>cut use by only about 2% on average</b>. So this site focuses on <b>changes you set once that keep working</b> — AC at 26–28°C, a timer on the water dispenser. Once set, they save every day without anyone having to remember.", "台電的節電獎勵要先登錄才拿得到（# 年 # 月 # 日前）。我們會看，用過網站的家庭裡，有多少戶真的去登錄了。": "Taipower’s saving reward requires sign-up (by 17 Dec 2026). We’ll check how many households that used the site actually signed up.", "例如熱水瓶裝上定時器、冷氣遙控器貼上「#°C」提醒貼紙。我們會請家庭回報，總共設定好了幾台電器。": "For example a timer on the water dispenser, or a “27°C” sticker on the AC remote. We’ll ask families how many appliances they set up.", "看懂：照電費單填三樣東西": "Understand: fill in three things from your bill", "計費度數": "Billed kWh", "拉滑桿或直接打數字": "Drag the slider or type it", "或直接打：": "Or type it:", "計費期間": "Billing period", "照帳單填日期，下面會自動選好": "Enter the dates from your bill and we’ll pick the rest", "從": "From", "到": "To", "或自己選：": "Or choose yourself:", "可以不填": "optional", "跟去年同一期比，每少用 1 度回饋 0.6 元（要先登錄）。填一個就好，結果會自動扣掉。": "Compared with the same period last year, every kWh less earns NT$0.6 (sign-up required). Fill in either one and the result deducts it.", "想一筆一筆對帳？照帳單算一次 ›": "Want to check line by line? Calculate from your bill ›"});
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
     document.documentElement.lang=this.lang==='zh'?'zh-Hant-TW':this.lang;
@@ -3728,15 +3779,23 @@ var Who={go:function(id){var el=$(id);if(!el)return;try{el.scrollIntoView({behav
     $('pwSend').addEventListener('click',function(){Share.sys(ZT('爸媽，這是看懂電費的簡單版，只要 3 步：拿出電費單、打上度數、看結果。','Mom, Dad — a simple 3-step page to understand our power bill: ')+Share.url(true))});
     $('pwSelf').addEventListener('click',function(){Who.go('stepk1')})},
   render:function(st){var w=$('pWho');if(!w)return;var c=Who.cur(st);w.querySelectorAll('[data-who]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.who===c))});if(c!=='family')$('pwFam').hidden=true}};
+var PD={bind:function(){var a=$('pdS'),b=$('pdE');if(!a)return;var go=function(){if(!a.value||!b.value){$('pdOut').textContent='';return}
+      var d0=new Date(a.value+'T00:00:00Z'),d1=new Date(b.value+'T00:00:00Z'),days=Math.round((d1-d0)/864e5)+1;
+      if(!(days>=20&&days<=75)){$('pdOut').textContent=ZT('日期看起來不對：帳單通常是一個月或兩個月一期。','These dates look off: bills usually cover one or two months.');return}
+      var sum=0;for(var t=d0.getTime();t<=d1.getTime();t+=864e5){var mm=new Date(t).getUTCMonth()+1;if(mm>=6&&mm<=9)sum++}
+      S.months=days>45?2:1;var P=S.months===2?62:31;if(sum===0)S.season='n';else if(sum>=days)S.season='s';else{S.season='m';S.sd=Math.round(sum/days*P)}store.set(S);schedule();
+      $('pdOut').innerHTML=ZT('共 <b>'+days+' 天</b>：'+(S.months===2?'兩個月一期':'一個月一期')+'，夏月 <b>'+sum+'</b> 天、非夏月 <b>'+(days-sum)+'</b> 天。已經幫你選好了。','<b>'+days+' days</b>: '+(S.months===2?'two-month bill':'one-month bill')+', <b>'+sum+'</b> summer and <b>'+(days-sum)+'</b> non-summer days. Selected for you.')};
+    a.addEventListener('change',go);b.addEventListener('change',go);
+    var c=$('chkBtn2');if(c)c.addEventListener('click',function(){$('chkBtn').click();var x=$('chkBox');if(x&&!x.hidden){try{x.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'})}catch(e){}}})}};
 var RwBox={bind:function(){var b=$('rwBtn');if(!b)return;
     b.addEventListener('click',function(){var x=$('rwBox');x.hidden=!x.hidden;b.setAttribute('aria-expanded',String(!x.hidden));if(!x.hidden)$('rwLy').focus()});
     var up=function(){var a=$('rwLy').value,c=$('rwAmt').value;S.lastYear=a===''||!isFinite(Number(a))?null:clamp(Number(a),0,9999);S.rwAmt=c===''||!isFinite(Number(c))?null:clamp(Number(c),0,9999);store.set(S);schedule()};
     $('rwLy').addEventListener('input',up);$('rwAmt').addEventListener('input',up);
     $('rwClear').addEventListener('click',function(){$('rwLy').value='';$('rwAmt').value='';up()});
     $('rwBox').addEventListener('submit',function(e){e.preventDefault()})},
-  render:function(st,r){if(!$('rwBox'))return;var a=$('rwLy'),c=$('rwAmt');if(document.activeElement!==a)a.value=st.lastYear!=null?st.lastYear:'';if(document.activeElement!==c)c.value=st.rwAmt!=null?st.rwAmt:'';
+  render:function(st,r){var ex=$('exact');if(ex&&document.activeElement!==ex)ex.value=st.kwh;if(!$('rwBox'))return;var a=$('rwLy'),c=$('rwAmt');if(document.activeElement!==a)a.value=st.lastYear!=null?st.lastYear:'';if(document.activeElement!==c)c.value=st.rwAmt!=null?st.rwAmt:'';
     var w=rwOf(st);$('rwOut').innerHTML=w?rwLine(st,r):(st.lastYear!=null?ZT('比去年同期沒有少用，這期拿不到節電獎勵。','Not less than last year — no reward this time.'):'')}};
-var Mainline={bind:function(){Who.bind();RwBox.bind();var pg=$('pGo');if(pg)pg.addEventListener('click',function(){var el=$('stepk1');try{el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'})}catch(x){el.scrollIntoView()}});
+var Mainline={bind:function(){Who.bind();RwBox.bind();PD.bind();var pg=$('pGo');if(pg)pg.addEventListener('click',function(){var el=$('stepk1');try{el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'})}catch(x){el.scrollIntoView()}});
     $('mline').addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-mgo]');if(!b)return;var el=$(b.dataset.mgo);if(!el)return;try{el.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'})}catch(x){el.scrollIntoView()}el.classList.remove('spot');void el.offsetWidth;el.classList.add('spot');setTimeout(function(){el.classList.remove('spot')},2200)});
     $('mShare').addEventListener('click',function(){Share.sys(Share.text(S,Model.compute(S)))});
     $('mCopy').addEventListener('click',function(){Share.copy(Share.text(S,Model.compute(S)))})},
