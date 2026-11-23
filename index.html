@@ -719,7 +719,7 @@ html.vt-theme::view-transition-old(appbar),html.vt-theme::view-transition-new(ap
 /* =========================================================
    11. Preferences & fallbacks
    ========================================================= */
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
 @media (forced-colors:active){.st.on,.pill[aria-pressed="true"],.chip[aria-pressed="true"]{forced-color-adjust:none;outline:3px solid CanvasText}}
 @media (hover:hover){.mon:hover .body{filter:brightness(1.12)} .pill:hover,.chip:hover{border-color:var(--focus)}}
 @media (max-width:340px){.pill{padding:6px 10px}.dock .lvl{display:none}}
@@ -1769,7 +1769,7 @@ body.easymode .appbar .menu,body.easymode .potbtn,body.easymode .langwrap,body.e
 .ezlink2{align-self:flex-start;color:var(--hot-t,#B5523B);font-weight:700;text-decoration:none;padding:4px 0}
 .ezfoot{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:34px;padding-top:16px;border-top:1px solid var(--hair);text-align:center}
 .ezlink{border:0;background:transparent;color:var(--soft);font:inherit;font-size:calc(16px*var(--z));text-decoration:underline;text-underline-offset:3px;padding:8px;cursor:pointer}
-@media (prefers-reduced-motion:reduce){.ezs{animation:none}.ezprog i,.ezbar i{transition:none}}
+
 /* v9.20 smoother motion on phones */
 @keyframes reveal{from{opacity:0;transform:translate3d(0,6px,0)}}
 @keyframes float{0%,100%{transform:translate(-50%,0) scale(1)}50%{transform:translate(-50%,-5px) scale(1)}}
@@ -1816,7 +1816,7 @@ html[lang="en"] .pgoal li{grid-template-columns:7.5em 1fr}html[lang="en"] .nextp
 .qz .ex,.gres,.verdict{animation-duration:.6s!important;animation-timing-function:cubic-bezier(.22,1,.36,1)!important}
 .ezs{animation:ezin2 .5s cubic-bezier(.22,1,.36,1) both}
 @keyframes ezin2{from{opacity:0;transform:translate3d(0,4px,0)}}
-@media (prefers-reduced-motion:reduce){.ezs{animation:none}}
+
 
 /* v9.28 merge */
 .mergesec{margin-top:26px;padding-top:18px;border-top:2px dashed var(--line)}
@@ -1854,7 +1854,7 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
 .pgo{align-self:flex-start;margin-top:22px;border:0;border-radius:999px;background:var(--text);color:var(--bg);font:inherit;font-weight:900;font-size:var(--fs-m);padding:16px 24px;display:inline-flex;gap:10px;align-items:center;cursor:pointer;box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
 .pgo i{font-style:normal;animation:pgob 1.8s var(--ease) infinite}
 @keyframes pgob{50%{transform:translateY(3px)}}
-@media (prefers-reduced-motion:reduce){.pgo i{animation:none}}
+
 .pt3{white-space:nowrap}
 @media (min-width:1100px){.poster{min-height:auto;padding:30px 0 26px}.pbill{bottom:6%}.pt1{font-size:40px}.pt2{font-size:118px}.pt3{font-size:56px}}
 .poster,.stepdd{text-align:left}
@@ -1975,7 +1975,7 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
 .gchip{display:inline-flex;align-items:center;gap:7px}
 .gface{width:26px;height:26px;flex:none}
 .gchip[aria-pressed="true"] .gface rect,.gchip[aria-pressed="true"] .gface path{stroke:#2a2420;stroke-width:1.5}
-@media (prefers-reduced-motion:reduce){.qstick{transition:none}}
+
 /* v9.34 key words */
 .view p b:not(#mixRow *):not(#chkOut *):not(.egcalc *):not(.rwbox *):not(.pdout *):not(.ezbig *):not(.mrow *):not(.ezcard *):not(.rk2rows *),.view p strong:not(#mixRow *):not(#chkOut *):not(.egcalc *):not(.rwbox *):not(.pdout *):not(.ezbig *):not(.mrow *):not(.ezcard *):not(.rk2rows *),.view li b:not(#mixRow *):not(#chkOut *):not(.egcalc *):not(.rwbox *):not(.pdout *):not(.ezbig *):not(.mrow *):not(.ezcard *):not(.rk2rows *),.view small b:not(#mixRow *):not(#chkOut *):not(.egcalc *):not(.rwbox *):not(.pdout *):not(.ezbig *):not(.mrow *):not(.ezcard *):not(.rk2rows *){color:var(--hot-t,#B5523B);font-weight:800}
 .ezbig b,.ezbig span b,.pwbtns b,.rbtn b,.nmrow>div>b,.fcard>div>b,.aim>b,.kcard>div>b,.mrow i,.ezopt b{background:none}
@@ -2022,6 +2022,63 @@ html[lang="en"] .pt3{font-size:clamp(30px,9vw,56px)}
 .bmget>div{background:var(--surface);border-radius:14px;padding:10px 12px;font-size:var(--fs-s);line-height:1.7}
 .bmget>div b{display:block}
 html[data-theme="dark"] .billmock{box-shadow:4px 4px 0 rgba(0,0,0,.35)}
+/* v9.40: sources page — no red bold */
+#v-about b,#v-about strong{color:var(--text)!important}
+
+/* ================= v9.41 design layer: one card style, one label style, calmer colour, motion ================= */
+/* key words: bold ink, not red (red is kept for the 你要做的/你會知道 labels, step badges and "你家在這") */
+.view p b:not(#mixRow *):not(#chkOut *):not(.egcalc *):not(.rwbox *):not(.pdout *):not(.ezbig *):not(.mrow *):not(.ezcard *):not(.rk2rows *),.view p strong:not(#mixRow *):not(#chkOut *):not(.egcalc *):not(.rwbox *):not(.pdout *):not(.ezbig *):not(.mrow *):not(.ezcard *):not(.rk2rows *),.view li b:not(#mixRow *):not(#chkOut *):not(.egcalc *):not(.rwbox *):not(.pdout *):not(.ezbig *):not(.mrow *):not(.ezcard *):not(.rk2rows *),.view small b:not(#mixRow *):not(#chkOut *):not(.egcalc *):not(.rwbox *):not(.pdout *):not(.ezbig *):not(.mrow *):not(.ezcard *):not(.rk2rows *){color:inherit}
+.view .pgoal li>b{color:var(--hot-t,#B5523B)!important}
+
+/* one paper-card surface instead of the old frosted-glass gradient */
+.say,.mis,.mcard,.aim,.guess,.lesson,.qz,.myth,.chart,.guessbill,#v-history label.hl,
+#v-elder .etile.act,#v-elder .ecall,#v-elder .etip,#v-elder .it{
+  background:var(--elev)!important;background-image:none!important;
+  border:1px solid var(--hair)!important;box-shadow:var(--card-sh)!important;border-radius:22px!important}
+.guess{border-style:dashed!important;border-color:var(--line)!important;box-shadow:none!important}
+/* one radius scale: 22 big cards / 16 inner tiles / 14 inputs */
+.ibox,.bcard,.ezcard,.nmcard,.fcard,.cmpbig,.ghboard,.gm,.ebill{border-radius:22px!important}
+.stt,.rk2card,.gbjump,.nextone,.homecard,.hopt,.bdgrow,.grp,.ezmon,.tpg{border-radius:16px!important}
+.view input:not([type=checkbox]):not([type=radio]):not([type=range]),.view select,.view textarea{border-radius:14px}
+/* one small-section label ("我們家的成績", "已經睡著的怪獸", …) */
+.sth,.secsub.dexh,.houseHead>span:first-child,.pwq{
+  font-family:var(--f-body);font-weight:800;font-size:var(--fs-s);letter-spacing:.02em;color:var(--text);
+  display:flex;align-items:center;gap:8px;text-transform:none}
+.sth::before,.secsub.dexh::before,.houseHead>span:first-child::before,.pwq::before{
+  content:"";flex:none;width:14px;height:4px;border-radius:4px;background:var(--volt)}
+.secsub.dexh{margin:26px 2px 10px}
+.sth{margin:0 0 10px}
+/* page title: same rhythm on every page */
+.view h1.vh{letter-spacing:.01em}
+.view h1.vh+.lede,.view h1.vh~p.lede{max-width:40em}
+
+/* ---------- texture & depth ---------- */
+:root{--card-sh-hi:0 2px 2px rgba(70,55,35,.06),0 18px 36px -18px rgba(70,55,35,.45)}
+:root[data-theme="dark"]{--card-sh-hi:0 2px 2px rgba(0,0,0,.2),0 18px 36px -16px rgba(0,0,0,.7)}
+/* interactive cards lift a little */
+a.nextone,button.homecard,button.hopt,a.gbjump,button.bdgrow,a.stt,.btoc a,.mcard,.rk2card{
+  transition:transform .28s var(--spring),box-shadow .28s var(--ease),background-color .2s}
+@media (hover:hover){
+  a.nextone:hover,button.homecard:hover,button.hopt:hover,a.gbjump:hover,button.bdgrow:hover,a.stt:hover,.mcard:hover{transform:translateY(-3px);box-shadow:var(--card-sh-hi)!important}
+  .btoc a:hover{transform:translateY(-2px)}
+}
+/* buttons press in */
+.mk,.pill,.gjump,.whob,.speak,.btoc a,button.hopt,.chips button{transition:transform .18s var(--spring),box-shadow .2s,background-color .2s,color .2s}
+.mk:active,.pill:active,.gjump:active,.whob:active,.speak:active,.btoc a:active,button.hopt:active,.chips button:active,button.homecard:active,a.nextone:active{transform:scale(.97)}
+/* stickers next to titles wobble gently when the page opens */
+@keyframes stickin{0%{opacity:0;rotate:-14deg;scale:.6}60%{opacity:1;rotate:6deg;scale:1.06}100%{rotate:0deg;scale:1}}
+.view.enter .pstick,.view.enter .qstick{animation:stickin .7s var(--spring) .12s both}
+/* dark theme: stickers get a die-cut paper edge so the black ink lines stay visible */
+:root[data-theme="dark"] .qstick svg,:root[data-theme="dark"] .stepk svg,:root[data-theme="dark"] .s4 svg{
+  filter:drop-shadow(0 0 .6px #EDE5D6) drop-shadow(0 0 .6px #EDE5D6) drop-shadow(0 0 .6px #EDE5D6) drop-shadow(0 0 .6px #EDE5D6)}
+/* accordion bodies slide open */
+@keyframes accin{from{opacity:0;transform:translateY(-6px)}}
+details[open]>:not(summary){animation:accin .32s var(--ease) both}
+
+/* ---------- scroll reveal (only added by JS, so nothing hides if JS fails) ---------- */
+.rv{opacity:0;transform:translate3d(0,18px,0);transition:opacity .55s var(--ease),transform .65s var(--ease);transition-delay:var(--rvd,0s)}
+.rv.rvin{opacity:1;transform:none}
+@media print{.rv{opacity:1!important;transform:none!important}}
 </style>
 </head>
 <body>
@@ -3193,7 +3250,7 @@ var NFMT=null;try{NFMT=new Intl.NumberFormat('zh-TW')}catch(e){}
 function fmt(n){n=Math.round(Number(n)||0);if(NFMT)return NFMT.format(n);return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',')}
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 var mq=window.matchMedia?function(q){return window.matchMedia(q).matches}:function(){return false};
-function reduced(){return mq('(prefers-reduced-motion: reduce)')}
+function reduced(){return false} /* v9.41: animations on every system */
 var canAnimate=typeof Element!=='undefined'&&!!Element.prototype.animate;
 var raf=window.requestAnimationFrame?window.requestAnimationFrame.bind(window):function(f){return setTimeout(function(){f(Date.now())},16)};
 var now=window.performance&&performance.now?function(){return performance.now()}:function(){return Date.now()};
@@ -3632,7 +3689,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.39 (dah-v60)';
+var SITE_VER='9.41 (dah-v62)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -4889,6 +4946,24 @@ try{document.querySelectorAll('.siteVer').forEach(function(x){x.textContent=SITE
 window.__DAH={Model:Model,state:function(){return S},cfg:CFG,go:function(n){location.hash=n}};
 })();
 try{if('serviceWorker' in navigator&&location.protocol==='https:'&&window.top===window.self){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}}catch(e){}
+</script>
+<script>
+/* v9.41: scroll reveal for cards — runs on every route change */
+(function(){if(!('IntersectionObserver' in window))return;
+  var SEL='.view:not([hidden]) :is(.sec>.pgoal>li,.ibox,.bcard,.ezcard,.nmcard,.fcard,.kcard,.mcard,.mis,.stt,.rk2card,.gm,.say,.lesson,.qz,.myth,.chart,.cmpbig,.ghboard,.gh,.acc,.billmock,.grp,.etile,.ebill,.homecard,.nextone,.aim,.rk2wrap)';
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rvin');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:.06});
+  function scan(){var list;try{list=document.querySelectorAll(SEL)}catch(x){return}
+    var vh=window.innerHeight,k=0;
+    list.forEach(function(el){if(el.classList.contains('rv')||el.closest('.rv:not(.rvin)'))return;
+      var r=el.getBoundingClientRect();if(r.width===0&&r.height===0)return;
+      if(r.top<vh*0.98&&r.bottom>0){el.style.setProperty('--rvd',Math.min(k++,6)*0.06+'s')}else el.style.removeProperty('--rvd');
+      el.classList.add('rv');io.observe(el)})}
+  function later(){setTimeout(scan,60);setTimeout(scan,700)}
+  window.addEventListener('hashchange',later);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',later);else later();
+  /* safety: anything still hidden after 4 s on screen is shown */
+  setInterval(function(){document.querySelectorAll('.rv:not(.rvin)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('rvin')})},1500);
+})();
 </script>
 </body>
 </html>
