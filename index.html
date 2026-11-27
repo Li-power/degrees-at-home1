@@ -2328,6 +2328,76 @@ html[lang="en"] .view .pgoal li{grid-template-columns:34px 1fr!important}
 
 /* --- menu: the current step is a soft tinted pill, no side strip --- */
 .drawer a.dstep[aria-current="page"]{box-shadow:none!important}
+
+/* ================= v9.45 home = monster picture book ================= */
+:root{--ink:#2A2420;--ink-soft:rgba(42,36,32,.16)}
+:root[data-theme="dark"]{--ink:#EDE5D6;--ink-soft:rgba(0,0,0,.45)}
+
+/* ---- each step is one page of the book: its own colour, rounded paper ---- */
+#s-one,#s-stairs{--band:var(--s1)}#s-house,#s-myth{--band:var(--s2)}#s-share{--band:var(--s3)}#s-next{--band:var(--s4)}
+#s-one,#s-stairs,#s-house,#s-myth,#s-share,#s-next{
+  background:color-mix(in srgb,var(--band) 11%,var(--bg))!important;border:0!important;box-shadow:none!important;
+  margin:0!important;padding:30px clamp(14px,3.5vw,32px) 28px!important;border-radius:0!important}
+:root[data-theme="dark"] :is(#s-one,#s-stairs,#s-house,#s-myth,#s-share,#s-next){background:color-mix(in srgb,var(--band) 10%,var(--bg))!important}
+/* first part of a page: rounded top; last part: rounded bottom; space between pages */
+#s-one,#s-house,#s-share,#s-next{border-top-left-radius:30px!important;border-top-right-radius:30px!important;margin-top:22px!important}
+#s-stairs,#s-myth,#s-share,#s-next{border-bottom-left-radius:30px!important;border-bottom-right-radius:30px!important}
+#s-stairs,#s-myth{padding-top:6px!important}
+#s-one>#s-bill,#s-one>#s-result{background:none!important;padding-top:0!important;padding-left:0!important;padding-right:0!important}
+/* ---- chapter title: big coloured number, short title, one line underneath, monster sticker ---- */
+h2.chh{display:grid!important;grid-template-columns:auto 1fr;align-items:center;gap:12px;margin:0 0 14px!important;padding-right:78px;font-size:clamp(26px,6.4vw,34px)!important;line-height:1.15}
+h2.chh .stno{width:46px!important;height:46px!important;font-size:22px!important;margin:0!important;vertical-align:0!important;background:var(--band)!important;
+  border:2.5px solid var(--ink);box-shadow:2px 2px 0 var(--ink);border-radius:50% 46% 52% 48%/48% 52% 46% 50%!important;font-family:var(--f-serif)}
+h2.chh .cht{display:flex;flex-direction:column;gap:4px;min-width:0}
+h2.chh .cht small{font-family:var(--f-body);font-size:var(--fs-s);font-weight:700;color:var(--soft);letter-spacing:0;line-height:1.4}
+h2.chh .qstick{width:68px!important;height:68px!important;right:2px}
+.hbill>.billhelp{margin-left:58px!important}
+
+/* ---- one button family: stickers (ink outline + hard shadow), pressing pushes them in ---- */
+.view .mk,.msh .pill,.nextone,.pwbtns button,.hbill .chkgo,#chkBtn2,.gbjump{
+  border:2px solid var(--ink)!important;box-shadow:3px 3px 0 var(--ink)!important;
+  border-radius:16px 14px 17px 13px/14px 17px 13px 16px!important;transition:transform .12s ease,box-shadow .12s ease,background-color .2s!important}
+.view .mk:active,.msh .pill:active,.nextone:active,.pwbtns button:active,#chkBtn2:active,.gbjump:active{transform:translate(2px,2px)!important;box-shadow:1px 1px 0 var(--ink)!important}
+@media (hover:hover){.view .mk:hover,.msh .pill:hover,.nextone:hover,.pwbtns button:hover,.gbjump:hover{transform:translate(-1px,-1px) rotate(-.6deg)!important;box-shadow:4px 4px 0 var(--ink)!important}}
+.view .mk{background:var(--volt)!important;color:#2A2420!important}
+.msh .mk.mline-line{background:#06C755!important;color:#fff!important}
+.msh .pill,.nextone{background:var(--elev)!important;color:var(--text)!important}
+.msh{display:flex;flex-wrap:wrap;gap:10px 10px;align-items:center}
+.nextone{margin-top:16px!important;padding:14px 16px!important}
+.nextone>i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--band,var(--volt));color:#fff;font-style:normal;font-size:22px;border:2px solid var(--ink)}
+/* hero: who holds the bill */
+.pwbtns{gap:10px!important}
+.pwbtns button{background:var(--elev)!important;color:var(--text)!important}
+.pwbtns button[aria-pressed="true"],.pwbtns button.on{background:var(--volt)!important;color:#2A2420!important}
+.pwbtns button[aria-pressed="true"] small,.pwbtns button.on small{color:#2A2420!important;opacity:.75}
+/* "猜電費" ticket keeps its punched ends but gets the ink outline through a drop shadow */
+.gbjump{-webkit-mask:none!important;mask:none!important}
+
+/* ---- picture-book cards: ink outline, soft hard shadow ---- */
+.billstub,#mres .ezcard,#s-house .guess,#s-house #homeCard,.myth,#rank:not(.hide){
+  border:2px solid var(--ink)!important;box-shadow:4px 4px 0 var(--ink-soft)!important;border-radius:22px 20px 23px 19px/20px 23px 19px 22px!important}
+#s-house .guess{border-style:solid!important;background:var(--elev)!important}
+.billstub>.ibox+.ibox{border-top:2px dashed color-mix(in srgb,var(--ink) 35%,transparent)!important}
+.billstub>.ibox+.ibox::before,.billstub>.ibox+.ibox::after{background:color-mix(in srgb,var(--s1) 11%,var(--bg));border:2px solid var(--ink);top:-13px}
+.billstub>.ibox+.ibox::before{clip-path:inset(0 0 0 50%)}.billstub>.ibox+.ibox::after{clip-path:inset(0 50% 0 0)}
+#mres .ezcard:first-child{border-color:var(--ink)!important}
+
+/* ---- A / B / C: clear labels ---- */
+.billstub .ibh{font-size:var(--fs-m)!important;gap:10px}
+.billstub .ibox .ibh>i{width:34px!important;height:34px!important;border-radius:50%!important;background:var(--s1)!important;color:#2A2420!important;border:2px solid var(--ink);font-family:var(--f-serif);font-size:17px!important;font-weight:900}
+.billstub .ibh small{display:block;width:100%;margin:2px 0 0 44px;font-weight:500}
+.billstub .ibh{flex-wrap:wrap}
+
+/* ---- desktop: ③ and ④ become full pages too ---- */
+@media (min-width:900px){
+  .hgrid{grid-template-areas:"top top" "one one" "stairs stairs" "house house" "myth myth" "share share" "next next"!important}
+  #s-share,#s-next{padding:34px 32px 30px!important}
+  #s-share{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(28px,4vw,56px);align-items:center}
+  #s-share>h2,#s-share>.lead{grid-column:1}#s-share>.msh,#s-share>.nextone{grid-column:2}
+  #s-share>.msh{grid-row:1}#s-share>.nextone{grid-row:2;align-self:start}
+  #s-next{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(28px,4vw,56px);align-items:center}
+  #s-next>h2,#s-next>.lead{grid-column:1}#s-next>.nextone{grid-column:2;grid-row:1 / span 2;align-self:center}
+}
 </style>
 </head>
 <body>
@@ -2396,7 +2466,7 @@ html[lang="en"] .view .pgoal li{grid-template-columns:34px 1fr!important}
       <div class="hone" id="s-one">
       <section class="hero hbill" id="s-bill" aria-labelledby="stepk1">
         
-        <h2 id="stepk1" style="font-size:var(--fs-h2)" class="hstick stepk1"><b class="stno">1</b>看懂：照電費單填三樣東西<span class="qstick" aria-hidden="true"><svg viewBox="0 0 70 70"><rect x="9" y="7" width="38" height="50" rx="5" fill="#fff" stroke="#2a2420" stroke-width="2.2" transform="rotate(-6 28 32)"/><g transform="rotate(-6 28 32)" stroke-linecap="round"><path d="M16 18h22" stroke="#2a2420" stroke-width="2.4"/><path d="M16 27h16M16 35h20" stroke="var(--hot-t,#B5523B)" stroke-width="3"/><path d="M16 44h10" stroke="#2a2420" stroke-width="2.4"/></g><circle cx="46" cy="45" r="12" fill="#F4C26B" fill-opacity=".6" stroke="#2a2420" stroke-width="2.6"/><path d="M55 54l8 8" stroke="#2a2420" stroke-width="4.5" stroke-linecap="round"/></svg></span></h2>
+        <h2 id="stepk1" class="chh hstick stepk1"><b class="stno">1</b><span class="cht">看懂<small>照電費單填三樣東西</small></span><span class="qstick" aria-hidden="true"><svg viewBox="0 0 70 70"><rect x="9" y="7" width="38" height="50" rx="5" fill="#fff" stroke="#2a2420" stroke-width="2.2" transform="rotate(-6 28 32)"/><g transform="rotate(-6 28 32)" stroke-linecap="round"><path d="M16 18h22" stroke="#2a2420" stroke-width="2.4"/><path d="M16 27h16M16 35h20" stroke="var(--hot-t,#B5523B)" stroke-width="3"/><path d="M16 44h10" stroke="#2a2420" stroke-width="2.4"/></g><circle cx="46" cy="45" r="12" fill="#F4C26B" fill-opacity=".6" stroke="#2a2420" stroke-width="2.6"/><path d="M55 54l8 8" stroke="#2a2420" stroke-width="4.5" stroke-linecap="round"/></svg></span></h2>
         <button type="button" class="billhelp" data-gj="basics" data-gjto="b-bill">電費單上找不到這三樣？看「怎麼看電費單」</button>
         <div class="billstub"><div class="ibox" id="iboxA"><p class="ibh"><i>A</i>計費度數<small>拉滑桿或直接打數字</small></p>
         <div class="meter">
@@ -2486,7 +2556,7 @@ html[lang="en"] .view .pgoal li{grid-template-columns:34px 1fr!important}
         <div class="say" id="say" aria-live="polite"></div>
       </section>
       <section class="sec" id="s-house" aria-labelledby="t-house">
-        <h2 id="t-house" style="font-size:var(--fs-h2)" class="hstick"><b class="stno">2</b>找出：家裡的電費怪獸<span class="qstick" aria-hidden="true"><svg viewBox="0 0 70 70"><rect x="12" y="20" width="40" height="42" rx="14" fill="var(--hot-t,#B5523B)"/><circle cx="25" cy="38" r="6" fill="#fff"/><circle cx="40" cy="38" r="6" fill="#fff"/><circle cx="26" cy="39" r="2.6" fill="#2a2420"/><circle cx="41" cy="39" r="2.6" fill="#2a2420"/><path d="M26 51q6 4 12 0" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="56" cy="14" r="12" fill="#F4C26B" stroke="#2a2420" stroke-width="2"/><text x="56" y="20" text-anchor="middle" font-size="17" font-weight="900" fill="#2a2420" font-family="sans-serif">?</text></svg></span></h2>
+        <h2 id="t-house" class="chh hstick"><b class="stno">2</b><span class="cht">找出<small>家裡的電費怪獸是哪幾隻</small></span><span class="qstick" aria-hidden="true"><svg viewBox="0 0 70 70"><rect x="12" y="20" width="40" height="42" rx="14" fill="var(--hot-t,#B5523B)"/><circle cx="25" cy="38" r="6" fill="#fff"/><circle cx="40" cy="38" r="6" fill="#fff"/><circle cx="26" cy="39" r="2.6" fill="#2a2420"/><circle cx="41" cy="39" r="2.6" fill="#2a2420"/><path d="M26 51q6 4 12 0" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="56" cy="14" r="12" fill="#F4C26B" stroke="#2a2420" stroke-width="2"/><text x="56" y="20" text-anchor="middle" font-size="17" font-weight="900" fill="#2a2420" font-family="sans-serif">?</text></svg></span></h2>
         <p class="lead">每台電器都是一隻怪獸，越大隻越耗電。點一隻，改成你家的情況，再按「讓它睡覺」看能省多少。</p>
         <button type="button" class="homecard" id="homeCard"><span class="hico" id="homeIco"></span><span class="ht"><i>我家</i><b id="homeT"></b><small id="homeS"></small></span><span class="chev" aria-hidden="true">›</span></button>
         <div class="guess" id="guess"><p id="gq"><b>先猜猜看：</b>這張帳單的期間，你家哪一隻每個月吃最多電？</p><div class="chips" id="guessChips"></div><p class="gres" id="gres" aria-live="polite"></p></div>
@@ -2506,14 +2576,14 @@ html[lang="en"] .view .pgoal li{grid-template-columns:34px 1fr!important}
       </section>
 
       <section class="sec" id="s-share" aria-labelledby="t-share">
-        <h2 id="t-share" style="font-size:var(--fs-h2)" class="hstick"><b class="stno">3</b>一起做：傳給家人、分工<span class="qstick" aria-hidden="true"><svg viewBox="0 0 70 70"><path d="M6 10h34a6 6 0 0 1 6 6v15a6 6 0 0 1-6 6H20l-9 8v-8H6a6 6 0 0 1-6-6V16a6 6 0 0 1 6-6z" transform="translate(2 2)" fill="#7FA77A" stroke="#2a2420" stroke-width="2.2" stroke-linejoin="round"/><path d="M24 31c-6-4-9-7-9-10a4 4 0 0 1 9-1 4 4 0 0 1 9 1c0 3-3 6-9 10z" fill="#fff"/><path d="M40 36h20a6 6 0 0 1 6 6v9a6 6 0 0 1-6 6h-3v7l-8-7h-9a6 6 0 0 1-6-6v-9a6 6 0 0 1 6-6z" fill="#F4C26B" stroke="#2a2420" stroke-width="2.2" stroke-linejoin="round"/><circle cx="44" cy="46.5" r="2" fill="#2a2420"/><circle cx="50" cy="46.5" r="2" fill="#2a2420"/><circle cx="56" cy="46.5" r="2" fill="#2a2420"/></svg></span></h2>
+        <h2 id="t-share" class="chh hstick"><b class="stno">3</b><span class="cht">一起做<small>傳給家人，每人負責一件</small></span><span class="qstick" aria-hidden="true"><svg viewBox="0 0 70 70"><path d="M6 10h34a6 6 0 0 1 6 6v15a6 6 0 0 1-6 6H20l-9 8v-8H6a6 6 0 0 1-6-6V16a6 6 0 0 1 6-6z" transform="translate(2 2)" fill="#7FA77A" stroke="#2a2420" stroke-width="2.2" stroke-linejoin="round"/><path d="M24 31c-6-4-9-7-9-10a4 4 0 0 1 9-1 4 4 0 0 1 9 1c0 3-3 6-9 10z" fill="#fff"/><path d="M40 36h20a6 6 0 0 1 6 6v9a6 6 0 0 1-6 6h-3v7l-8-7h-9a6 6 0 0 1-6-6v-9a6 6 0 0 1 6-6z" fill="#F4C26B" stroke="#2a2420" stroke-width="2.2" stroke-linejoin="round"/><circle cx="44" cy="46.5" r="2" fill="#2a2420"/><circle cx="50" cy="46.5" r="2" fill="#2a2420"/><circle cx="56" cy="46.5" r="2" fill="#2a2420"/></svg></span></h2>
         <p class="lead">把結果傳到家庭群組，全家看到同一份數字，就能一起決定先從哪台省。</p>
         <div class="msh"><a class="mk mline-line" id="mLine" href="#" target="_blank" rel="noopener">傳到 LINE</a><button type="button" class="pill" id="mShare">其他分享方式</button><button type="button" class="pill" id="mCopy">複製文字</button></div>
         <a class="nextone" href="#challenge" data-route="challenge"><span><b>分配省電小任務</b><small>六件設定一次就一直省的事，分給家人負責</small></span><i aria-hidden="true">›</i></a>
       </section>
 
       <section class="sec" id="s-next" aria-labelledby="t-next">
-        <h2 id="t-next" style="font-size:var(--fs-h2)" class="hstick"><b class="stno">4</b>下期回來比<span class="qstick" aria-hidden="true"><svg viewBox="0 0 70 70"><rect x="8" y="12" width="44" height="44" rx="7" fill="#fff" stroke="#2a2420" stroke-width="2.2"/><path d="M8 19a7 7 0 0 1 7-7h30a7 7 0 0 1 7 7v6H8z" fill="var(--hot-t,#B5523B)"/><path d="M19 7v10M41 7v10" stroke="#2a2420" stroke-width="3" stroke-linecap="round"/><rect x="16" y="34" width="7" height="15" rx="2" fill="#2a2420" opacity=".75"/><rect x="28" y="40" width="7" height="9" rx="2" fill="#7FA77A"/><circle cx="54" cy="52" r="11" fill="#7FA77A" stroke="#2a2420" stroke-width="2.2"/><path d="M49 52l4 4 7-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></h2>
+        <h2 id="t-next" class="chh hstick"><b class="stno">4</b><span class="cht">下期回來比<small>記下這期，下張帳單來了再比</small></span><span class="qstick" aria-hidden="true"><svg viewBox="0 0 70 70"><rect x="8" y="12" width="44" height="44" rx="7" fill="#fff" stroke="#2a2420" stroke-width="2.2"/><path d="M8 19a7 7 0 0 1 7-7h30a7 7 0 0 1 7 7v6H8z" fill="var(--hot-t,#B5523B)"/><path d="M19 7v10M41 7v10" stroke="#2a2420" stroke-width="3" stroke-linecap="round"/><rect x="16" y="34" width="7" height="15" rx="2" fill="#2a2420" opacity=".75"/><rect x="28" y="40" width="7" height="9" rx="2" fill="#7FA77A"/><circle cx="54" cy="52" r="11" fill="#7FA77A" stroke="#2a2420" stroke-width="2.2"/><path d="M49 52l4 4 7-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></h2>
         <p class="lead">記下這期度數，下張帳單來了就知道有沒有省。比去年同一期每少用 1 度，台電的節電獎勵回饋 0.6 元。</p>
         <a class="nextone" href="#history" data-route="history"><span><b>記下這期帳單</b><small>記兩期以上，就看得出有沒有變少</small></span><i aria-hidden="true">›</i></a>
       </section>
@@ -3934,7 +4004,7 @@ var Basics={bind:function(){$('v-basics').addEventListener('click',function(e){v
     var g=e.target.closest&&e.target.closest('[data-bgo]');if(g)Guide.jump(g.dataset.bgo,g.dataset.bto||null)})}};
 
 /* ===== v9.10 feedback ===== */
-var SITE_VER='9.44 (dah-v65)';
+var SITE_VER='9.45 (dah-v66)';
 /* Google Form: paste the form's "get pre-filled link" here, with these exact sample answers:
    type=TYPE  page=PAGE  text=TEXT  contact=CONTACT  device=DEVICE   (leave empty to hide the button) */
 var FB_FORM='';
@@ -4072,6 +4142,7 @@ I18N_DATA.D['有沒有比較省']=['Did we save?',''];I18N_DATA.D['給爸媽用�
 (function(A){for(var k in A){I18N_DATA.D[k]=[A[k],''];var n=k.replace(/\d+(?:[.,]\d+)*/g,'#');if(n!==k&&!I18N_DATA.D[n])I18N_DATA.D[n]=[A[k],'']}})({"猜電費": "Guess the bill", "一階一階算給你看，猜猜這一家要付多少 ›": "See it worked out step by step — guess this family’s bill ›", "猜電費・小測驗": "Guess the bill", "點開看細節": "Tap for details", "看懂帳單：知道自己在電價第幾階": "Read the bill: know which price step you’re on", "真的省到：設定一次，每天都在省": "Really save: set it once, save every day", "全家一起：每人負責一件": "Do it together: no blaming, share the jobs", "這張帳單的期間，你家哪一隻每個月吃最多電？": "Which monster uses the most each month during this bill?", "2018/4–2022/6 的電價": "Apr 2018–Jun 2022 prices", "2022/7–2023/3 的電價": "Jul 2022–Mar 2023 prices", "2023/4–2024/3 的電價": "Apr 2023–Mar 2024 prices", "2024/4–2025/9 的電價": "Apr 2024–Sep 2025 prices", "現在的電價（2025/10 起）": "current prices (from Oct 2025)"});
 (function(A){for(var k in A)I18N_DATA.D[k]=A[k]})({"全家一起：每人負責一件": ["Together: everyone takes one job", "みんなで：一人ひとつずつ担当"], "。全家的度數是加在一起算的，所以不管是誰用的，多用 1 度都是這個價錢。": [". The whole household’s kWh are added together, so every extra kWh costs this much, whoever uses it.", "。家族全員の使用量を合算するので、誰が使っても1kWh増えるごとにこの単価です。"], "。全家的度數是加在一起算的，所以不管是誰用的，多用 # 度都是這個價錢。": [". The whole household’s kWh are added together, so every extra kWh costs this much, whoever uses it.", "。家族全員の使用量を合算するので、誰が使っても1kWh増えるごとにこの単価です。"], "把結果傳到家庭群組，全家看到同一份數字，就能一起決定先從哪台省。": ["Send the result to your family group so everyone sees the same numbers and can decide together where to start.", "結果を家族グループに送れば、同じ数字を見てどこから節電するか一緒に決められます。"], "想知道是哪一台": ["Want to know which appliance", "どの家電か知りたい"], "整夜反覆加熱保溫，一天約 2 度；因為看不見，最常被忽略。": ["Reheats all night, about 2 kWh a day — easy to overlook because you never see it.", "一晩中加熱をくり返し、1日約2kWh。見えないので見落とされがち。"], "整夜反覆加熱保溫，一天約 # 度；因為看不見，最常被忽略。": ["Reheats all night, about # kWh a day — easy to overlook because you never see it.", "一晩中加熱をくり返し、1日約2kWh。見えないので見落とされがち。"], "夏天最大的一隻。能省多少，要看溫度設幾度、冷氣用了幾年。": ["The biggest one in summer. How much you can save depends on the temperature setting and how old the AC is.", "夏いちばんの大物。どれだけ節約できるかは設定温度と年数しだい。"], "全家的電是加在一起算的：全家一起用到第幾階，多用的每 1 度就照那一階的價錢算。": ["The whole household’s use is added together: whatever step the family reaches, each extra kWh is charged at that step’s price.", "家族全員の使用量を合算します。家族で到達した段の単価が、追加の1kWhごとにかかります。"], "全家的電是加在一起算的：全家一起用到第幾階，多用的每 # 度就照那一階的價錢算。": ["The whole household’s use is added together: whatever step the family reaches, each extra kWh is charged at that step’s price.", "家族全員の使用量を合算します。家族で到達した段の単価が、追加の1kWhごとにかかります。"], "。所以每多用 1 度，付的都是你家到達的那一階的價錢。": [". So every extra kWh is charged at the step your home has reached.", "。だから追加の1kWhは、到達した段の単価になります。"], "。所以每多用 # 度，付的都是你家到達的那一階的價錢。": [". So every extra kWh is charged at the step your home has reached.", "。だから追加の1kWhは、到達した段の単価になります。"], "省電靠一個人提醒很累，分給全家一起做就輕鬆多了。": ["Reminding everyone on your own is tiring — sharing the jobs makes saving easy.", "一人で注意し続けるのは大変。家族で分担すればラクになります。"], "全家一年大約能省多少錢，還有每個人負責了哪幾件。六件都完成，就一起去吃火鍋。": ["Roughly how much the family saves a year, and who took which jobs. Finish all six and go out for hotpot together.", "家族で1年にどれくらい節約できるか、誰がどれを担当したか。6つ全部できたら、みんなで鍋を食べに行こう。"], "設定一次就一直省的事": ["Set up once, keep saving", "一度設定すればずっと節約"], "做成一張卡片傳到家庭群組，比用講的更容易記住。": ["A card in the family group sticks better than just saying it.", "カードにして家族グループに送れば、口で言うより覚えてもらえます。"], "發現問題或有建議，都可以告訴我。": ["Found a problem or have an idea? Tell me here.", "不具合やご意見があれば教えてください。"], "錯字、數字不對、按了沒反應，或想要什麼功能，都可以寫在這裡。": ["Typos, wrong numbers, buttons that don’t work, or features you’d like — write it here.", "誤字、数字の誤り、反応しないボタン、ほしい機能などを書いてください。"], "已經在省電的怪獸": ["Monsters already saving power", "もう節電中のモンスター"], "可能最吃電的": ["Probably using the most", "いちばん電気を使っていそう"], "或直接輸入：": ["Or type it:", "直接入力："], "確定": ["OK", "OK"], "這就是我們做這個網站的原因。": ["That’s why we made this site.", "これが、このサイトを作った理由です。"], "給爸媽用，和其他頁面": ["For parents, and other pages", "親向け・その他のページ"], "去「猜電費・小測驗」玩玩看": ["Try it in “Guess the bill & quiz”", "「電気代クイズ」で試す"], "④ 下期回來比：記下這期帳單": ["④ Compare next time: log this bill", "④ 次回くらべる：今回の請求を記録"], "下期回來比": ["Compare next bill", "次回くらべる"], "傳給家人，分工省電": ["Share it, split the jobs", "家族に送って分担"], "四步驟，從看懂到省下來": ["Four steps, from reading the bill to saving", "読み解いてから節約まで、4ステップ"], "四個步驟": ["Four steps", "4つのステップ"], "看懂": ["Understand", "読み解く"], "找出": ["Find", "見つける"], "一起做": ["Do it together", "みんなで"], "簡單版、資料來源、回報": ["Simple version, sources, feedback", "かんたん版・出典・報告"]});
 (function(A){for(var k in A)I18N_DATA.D[k]=A[k]})({"電費怎麼算": ["How the bill works", "料金の仕組み"], "哪台最吃電": ["Which uses the most", "どれが一番使う？"], "分給家人做": ["Split the jobs", "家族で分担"], "有沒有省到": ["Did you save?", "節約できた？"], "四個步驟": ["Four steps", "4つのステップ"], "點這裡選日期": ["Tap to pick a date", "タップして日付を選ぶ"]});
+(function(A){for(var k in A)I18N_DATA.D[k]=A[k]})({"家裡的電費怪獸是哪幾隻": ["Which monsters use the most", "どのモンスターが電気を食う？"], "傳給家人，每人負責一件": ["Share it — everyone takes one job", "家族に送って一人ひとつ担当"], "記下這期，下張帳單來了再比": ["Log this bill, compare when the next one comes", "今回を記録して、次の請求で比べる"], "照電費單填三樣東西": ["Fill in three things from your bill", "請求書から3つ入力"]});
 I18N_DATA.D["住宅累進電價：# 年 # 月 # 日起的現行電價，網站另外收錄 # 年 # 月以來的歷次舊電價，可以算 # 年以後的帳單（台電）；租屋電費：# 年 # 月 # 日起新簽租約，每度不得超過電費單「當期每度平均電價」（內政部）；# 住宅平均每月用電非夏月 # 度、夏月 # 度（台電）；熱水瓶每天約 # 度、定時約省 #%；# 年以上冰箱每月約 # 度、一級能效約 # 度；儲熱式電熱水器待機每年約 # 度；機上盒待機每年約 # 度；冷氣每調高 #°C 約省 #%（以上台電公開資料）；住宅電力排碳係數每度 # 公斤（經濟部能源署，# 年度）；節電獎勵每度 # 元，#/#/# 前登錄；汰舊換新補助每台 # 元，#/#/# 前購買。家電數字為估算，僅供家人討論。"]=["Residential tiered prices: current prices from # Oct # (the site also includes every earlier price version since # #, so bills from # onward can be priced) (Taipower); renters: for leases from 15 Jul #, the per-kWh charge can’t exceed the bill’s average price per kWh (Ministry of the Interior); # average home use # kWh/month outside summer, # in summer (Taipower); hot-water dispenser about # kWh/day, timer saves about #%; fridge over # years about # kWh/month vs # for top efficiency; storage water heater standby about # kWh/year; set-top box standby about # kWh/year; each #°C higher on the AC saves about #% (all Taipower public data); residential emission factor # kg/kWh (Energy Administration, #); saving reward NT$# per kWh, sign up by #/#/#; replacement subsidy NT$# per unit, buy by #/#/#. Appliance figures are estimates for family discussion.",''];
 var I18N={lang:'zh',li:0,
   set:function(lang){this.lang=lang==='en'?'en':'zh';this.li=this.lang==='en'?0:1;
