@@ -1,6 +1,6 @@
 // 離線快取：第一次開啟後，沒有網路也能使用
 // 網頁本身（HTML）先上網拿最新版，連不上或太慢（4 秒）才用快取，避免看到舊版
-const CACHE='dah-v69';
+const CACHE='dah-v70';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./data/taipower.json'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>Promise.all(CORE.map(u=>c.add(new Request(u,{cache:'reload'})).catch(()=>{})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
